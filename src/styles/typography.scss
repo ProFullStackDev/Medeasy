@@ -14,3 +14,14 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.NavBar {
+  &__upper-links {
+    font-weight: bold;
+    font-size: 1.8rem;
+  }
+  &__upper-other-cart--count {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+}

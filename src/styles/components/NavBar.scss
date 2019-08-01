@@ -1,0 +1,71 @@
+@import '../colors.scss';
+.NavBar {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  & .container {
+    display: flex;
+    align-items: center;
+  }
+  &__upper {
+    height: 9.5rem;
+    background: $medeasy-grey-color;
+    &-logo {
+      padding: 0 40px 0 20px;
+    }
+    &-links {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      text-transform: uppercase;
+      & a { 
+        height: 100%; 
+        display: flex; 
+        align-items: center;
+        padding: 0 25px;
+        transition: color, background-color .3s;
+        &.active, &:hover {
+          background: $medeasy-green-color;
+          color: $white-color;
+        }
+      }
+    }
+    &-other {
+      margin-left: auto;
+      margin-right: 1.3rem;
+      text-transform: capitalize;
+      display: flex;
+      align-items: center;
+      &-auth {
+        margin-right: 3.2rem;
+      }
+      &-cart {
+        position: relative;
+        margin-right: 20px;
+        cursor: pointer;
+        display: flex;
+        &--count {
+          right: 0;
+          top: -5px;
+          width: 20px;
+          height: 20px;
+          text-align: center;
+          line-height: 20px;
+          background: $medeasy-green-color;
+          border-radius: 50%;
+          color: white;
+          position: absolute;
+        }
+      }
+      &-contact {
+        display: flex;
+        align-items: center;
+
+      }
+    }
+  }
+  &__lower {
+    
+  }
+}
