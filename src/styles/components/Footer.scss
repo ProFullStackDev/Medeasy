@@ -1,0 +1,26 @@
+@import '../colors';
+.Footer {
+  color: $white-color;
+  height: 13.5rem;
+  background: $medeasy-green-color;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 30px 0;
+  &__nav {
+    text-transform: uppercase;
+    &-link {
+      &:not(:last-child) {
+        margin-right: 10rem;
+      }
+    }
+  }
+  &__copyright {
+    display: flex;
+    justify-content: center;
+  }
+}
