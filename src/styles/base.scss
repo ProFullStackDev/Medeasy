@@ -1,0 +1,13 @@
+*, *::after,*::before {
+  margin: 0; 
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  & .App {
+    min-height: 100vh;
+    max-width: 144rem;
+    margin: 0 auto;
+  }
+}
