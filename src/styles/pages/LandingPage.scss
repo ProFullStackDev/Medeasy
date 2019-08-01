@@ -1,0 +1,23 @@
+@import '../colors.scss';
+
+.LandingPage {
+  &__welcome {
+    display: flex;
+    justify-content: space-between;
+    &--carousel {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 15px;
+      align-items: center;
+      width: 88rem;
+      height: 40rem;
+    }
+  }
+  &__helpform {
+    flex: 1;
+    margin-left: 6.8rem;
+    &-title {
+      text-align: center;
+    }
+  }
+}

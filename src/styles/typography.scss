@@ -10,6 +10,15 @@ body, input {
   -moz-osx-font-smoothing: grayscale;
 }
 
+h2 {
+  font-size: 2.5rem;
+  font-weight: normal;
+}
+
+label {
+  font-size: 1.4rem;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
