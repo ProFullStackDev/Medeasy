@@ -1,8 +1,10 @@
 import React from 'react'
-const CustomButton = props => {
+import '../styles/components/CustomButton.scss'
+
+const CustomButton = ({ isSubmitButton, children, fontSize }) => {
   return (
-    <button type={props.isSubmitButton ? 'submit' : ''} className='CustomButton'>
-      {props.value}
+    <button style={{ fontSize, padding: `${isSubmitButton ? '1.5rem 2.5rem' : '1rem 2rem' }` }} type={isSubmitButton ? 'submit' : ''} className='CustomButton'>
+      {children}
     </button>
   )
 }

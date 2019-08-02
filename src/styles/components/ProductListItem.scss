@@ -1,0 +1,15 @@
+@import '../colors';
+.ProductListItem {
+  display: flex;
+  flex-direction: column;
+  border-radius: 1rem;
+  box-shadow: 0 0 4px $medeasy-shadow-color;
+  padding: 1rem 1.2rem;
+  &__image {
+    max-width: 11.5rem;
+    margin-bottom: 1.5rem;
+  }
+  &__image, .CustomButton {
+    align-self: center;
+  }
+}

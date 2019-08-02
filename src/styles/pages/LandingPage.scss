@@ -2,6 +2,7 @@
 
 .LandingPage {
   min-height: 80vh;
+  margin-bottom: 8rem;
   &__welcome {
     display: flex;
     justify-content: space-between;
@@ -14,6 +15,7 @@
       height: 40rem;
     }
   }
+
   &__helpform {
     flex: 1;
     margin-left: 6.8rem;
@@ -54,15 +56,18 @@
         color: white;
       }
     }
-    input[type='submit'] {
-      border-color: none;
-      background: $medeasy-green-color;
-      color: $white-color;
-      width: 17.2rem;
-      margin: 0 auto;
-      text-align: center;
-      padding-right: 1.3rem;
+    .CustomButton {
       margin-top: 2.7rem;
+      position: relative;
+      left: 50%;
+      transform: translate(-50%);
+    }
+  }
+
+  &__featured-products {
+    margin-top: 2.5rem;
+    & .ProductList {
+      margin-top: 2.3rem;
     }
   }
 }

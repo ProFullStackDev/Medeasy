@@ -1,0 +1,10 @@
+@import '../colors';
+.CustomButton {
+  color: $white-color;
+  background: $medeasy-green-color;
+  text-align: center;
+  border: none;
+  border-radius: .5rem;
+  cursor: pointer;
+  outline: none;
+}
