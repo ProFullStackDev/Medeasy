@@ -23,4 +23,12 @@ body {
     margin: 0 auto;
     height: 100%;
   }
+  input, textarea {
+    background: transparent;
+    border: none;
+    display: block;
+    padding: 1rem 0;
+    padding-left: 1.3rem;
+    border-radius: .5rem;
+  }
 }

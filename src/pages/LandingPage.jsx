@@ -19,11 +19,11 @@ const LandingPage = (props) => {
           </h2>
           <form className='LandingPage__helpform-form'>
             <label htmlFor='name'>Name</label>
-            <input type='text' id='name' name='name' />
+            <input type='text' id='name' name='name' value='Rashmi P Nayak'/>
             <label htmlFor='phnumber'>Phone Number</label>
             <input id='phnumber' type='tel' name='phoneNumber'/>
             <label htmlFor='message'>Message</label>
-            <input id='message' type='text'/>
+            <textarea id='message' value='Requesting Callback'/>
             <input type='submit' value='Request Callback' />
           </form>
         </div>

@@ -1,6 +1,7 @@
 @import '../colors.scss';
 
 .LandingPage {
+  min-height: 80vh;
   &__welcome {
     display: flex;
     justify-content: space-between;
@@ -16,8 +17,52 @@
   &__helpform {
     flex: 1;
     margin-left: 6.8rem;
+    margin-right: 3.5rem;
     &-title {
       text-align: center;
+      margin-bottom: 2.7rem;
+    }
+    label {
+      display: block;
+      &:not(:first-child) {
+        margin-top: 2rem;
+      }
+    }
+    input, textarea {
+      width: 100%;
+      resize: none;
+      outline: none;
+      margin-top: 4px;
+      border: 1px solid $medeasy-border-grey-color;
+      transition: border .3s ease;
+      &:hover, &:focus {
+        border-color: $medeasy-green-color;
+      }
+    }
+    textarea { min-height: 7.7rem; }
+    input#phnumber {
+      position: relative;
+      &::before {
+        display: block;
+        content: '+1';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 10%;
+        height: 100%;
+        background: $medeasy-green-color;
+        color: white;
+      }
+    }
+    input[type='submit'] {
+      border-color: none;
+      background: $medeasy-green-color;
+      color: $white-color;
+      width: 17.2rem;
+      margin: 0 auto;
+      text-align: center;
+      padding-right: 1.3rem;
+      margin-top: 2.7rem;
     }
   }
 }
