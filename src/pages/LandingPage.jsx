@@ -28,6 +28,9 @@ const LandingPage = (props) => {
           </form>
         </div>
       </div>
+      <div className='LandingPage__featured-products'>
+        
+      </div>
     </section>
   )
 }
