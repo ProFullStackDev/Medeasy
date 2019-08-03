@@ -17,9 +17,6 @@ const HealthConditions = (props) => {
         <li className='HealthConditions__list--item'>
           <p className='title'>Obesity</p>
           <span>Phenetermine</span>
-          <span>Phenetermine</span>
-          <span>Phenetermine</span>
-          <span>Phenetermine</span>
         </li>
         <li className='HealthConditions__list--item'>
           <p className='title'>Blood Pressure</p>
