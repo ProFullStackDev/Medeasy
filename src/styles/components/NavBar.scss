@@ -3,10 +3,12 @@
   display: flex;
   flex-direction: column;
   flex: 1;
+  
   & .container {
     display: flex;
     align-items: center;
   }
+
   &__upper {
     height: 9.5rem;
     background: $medeasy-grey-color;
@@ -31,6 +33,7 @@
         }
       }
     }
+
     &-other {
       margin-left: auto;
       margin-right: 1.3rem;
@@ -42,11 +45,12 @@
       }
       &-cart {
         position: relative;
-        margin-right: 2rem;
+        margin-right: 3rem;
         cursor: pointer;
         display: flex;
         &--count {
-          right: 0;
+          position: absolute;
+          right: -1rem;
           top: -5px;
           width: 2rem;
           height: 2rem;
@@ -55,20 +59,19 @@
           background: $medeasy-green-color;
           border-radius: 50%;
           color: white;
-          position: absolute;
         }
       }
       &-contact {
         display: flex;
         align-items: center;
-
       }
     }
   }
+
   &__lower {
     height: 7.5rem;
     background: $medeasy-green-color;
-    .container { 
+    &.container { 
       justify-content: space-between;
       padding: 0 2rem;
     }
@@ -77,12 +80,14 @@
       color: white;
     }
     &--category {
+      cursor: pointer;
       & span { margin-right: 1.5rem; }
       &:not(:last-child) { margin-right: 3.5rem }
       display: flex;
       align-items: center;
     }
     &--search {
+      margin-left: auto;
       display: flex;
       width: 49rem;
       border: 1px solid $medeasy-grey-color;
@@ -98,15 +103,19 @@
         flex: 1;
         display: flex;
         justify-content: space-between;
-        & input {
+        & input[type='text'] {
           height: 100%;
-          width: 90%;
+          width: 100%;
           border: none;
           outline: none;
           background: none;
           padding: 1rem 2rem;
           font-size: 1.6rem;
           color: white;
+        }
+        & input[type='image'] {
+          margin-right: 1rem;
+          outline: none;
         }
         & img { cursor: pointer }
       }

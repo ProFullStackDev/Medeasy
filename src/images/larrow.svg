@@ -1,9 +1,13 @@
-<svg width="30px" height="30px" viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" font-family="LastResort, .LastResort" font-size="30" font-weight="normal">
-        <g id="Landing-Page" transform="translate(-30.000000, -373.000000)" fill="#F5ECEC">
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="17px" height="31px" viewBox="0 0 17 31" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 56.3 (81716) - https://sketch.com -->
+    <title>Arrow-left - simple-line-icons</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" font-family="simple-line-icons" font-size="30" font-weight="normal">
+        <g id="Landing-Page" transform="translate(-34.000000, -370.000000)" fill="#F5ECEC">
             <g id="Slide-Show" transform="translate(22.000000, 185.000000)">
-                <text id="">
-                    <tspan x="6" y="211"></tspan>
+                <text id="Arrow-left---simple-line-icons">
+                    <tspan x="6" y="214"></tspan>
                 </text>
             </g>
         </g>

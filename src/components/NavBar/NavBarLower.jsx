@@ -1,8 +1,9 @@
 import React from 'react'
+import downArrowBlack from '../../images/downArrowBlack.svg'
 import downArrowImg from '../../images/downarrow.svg'
 import searchImg from '../../images/search.svg'
 
-const NavBarLower = (props) => {
+const NavBarLower = props => {
   return (
     <div className='NavBar__lower'>
       <div className='container'>
@@ -27,16 +28,16 @@ const NavBarLower = (props) => {
         <div className='NavBar__lower--search'>
           <div className='NavBar__lower--search-allcats'>
             <span>All Categories</span>
-            <img src={downArrowImg} alt='down-arrow' />
+            <img src={downArrowBlack} alt='down-arrow' />
           </div>
-          <div className='NavBar__lower--search-text'>
-            <input />
-            <img src={searchImg} alt='search' />
-          </div>
+          <form className='NavBar__lower--search-text'>
+            <input type='text' />
+            <input type='image' src={searchImg} alt='Search fr'/>
+          </form>
         </div>
       </div>
     </div>
   )
 }
- 
-export default NavBarLower;
+
+export default NavBarLower

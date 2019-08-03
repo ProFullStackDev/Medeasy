@@ -19,7 +19,10 @@ const WelcomeSection = props => {
           <label htmlFor='name'>Name</label>
           <input type='text' id='name' name='name' value='Rashmi P Nayak'/>
           <label htmlFor='phnumber'>Phone Number</label>
-          <input id='phnumber' type='tel' name='phoneNumber'/>
+          <div className='LandingPage__helpform-form--phone'>
+            <div className='LandingPage__helpform-form--phone-code'>+1</div>
+            <input id='phnumber' type='tel' name='phoneNumber'/>
+          </div>
           <label htmlFor='message'>Message</label>
           <textarea id='message' value='Requesting Callback'/>
           <CustomButton isSubmitButton fontSize='1.6rem'>Request Callback</CustomButton>

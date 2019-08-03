@@ -27,7 +27,7 @@ const products = [
 const BestSellerSection = props => {
   return (
     <div className='LandingPage__best-products'>
-      <h3 className='LandingPage__best-products--title'>Featured Products</h3>
+      <h3 className='LandingPage__best-products--title'>Best Sellers</h3>
       <ProductList products={products} />
     </div>
   )

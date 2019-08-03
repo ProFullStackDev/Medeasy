@@ -24,7 +24,7 @@ const NavBarUpper = (props) => {
             <span className='NavBar__upper-other-cart--count'>3</span>
           </div>
           <Link to='/contact' className='NavBar__upper-other-contact'>
-            <img alt='contact-img' src={contactImg} />
+            <img alt='contact-img' src={contactImg} style={{ marginRight: '.5rem' }} />
             Contact us
           </Link>
         </div>

@@ -13,6 +13,9 @@
       align-items: center;
       width: 88rem;
       height: 40rem;
+      & img {
+        cursor: pointer;
+      }
     }
   }
 
@@ -42,19 +45,26 @@
       }
     }
     textarea { min-height: 7.7rem; }
-    input#phnumber {
-      position: relative;
-      &::before {
-        display: block;
-        content: '+1';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 10%;
-        height: 100%;
+    &-form--phone {
+      display: flex;
+      margin-top: 4px;
+      &-code {
         background: $medeasy-green-color;
-        color: white;
+        display: flex;
+        color: $white-color;
+        align-items: center;
+        justify-content: center;
+        padding: 0 1.5rem;
+        border-top-left-radius: .5rem;
+        border-bottom-left-radius: .5rem;
       }
+    }
+    input#phnumber {
+      flex: 1;
+      margin-top: 0;
+      position: relative;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
     }
     .CustomButton {
       margin-top: 2.7rem;
