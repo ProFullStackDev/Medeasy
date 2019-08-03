@@ -28,4 +28,4 @@ const HealthConditions = (props) => {
   )
 }
  
-export default HealthConditions;
+export default HealthConditions

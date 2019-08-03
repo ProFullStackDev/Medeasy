@@ -3,7 +3,7 @@ import React from 'react'
 import Adhd from './Adhd'
 import AnxietySeizure from './AnxietySeizure'
 import PainKillers from './PainKillers'
-import HealthConditions from './HealthConditions'
+import HealthConditions from './healthConditions'
 // Images
 import downArrowBlack from '../../images/downArrowBlack.svg'
 import downArrowImg from '../../images/downarrow.svg'
