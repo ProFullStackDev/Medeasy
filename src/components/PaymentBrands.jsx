@@ -13,7 +13,7 @@ const PaymentBrands = props => {
     <div className='PaymentBrands'>
       <img className='PaymentBrands__cardTouch' src={cardTouch} alt='card-touch' />
       <div className='PaymentBrands__cards'>
-        <h1 className='PaymentBrands__cards--title' style={ { fontSize: 40, fontWeight: 'normal' }}>Buy Easy, Pay Easy. We Aceept</h1>
+        <h1 className='PaymentBrands__cards--title' style={ { fontSize: 40, fontWeight: 'normal' }}>Buy Easy, Pay Easy. We Accept</h1>
         <div className='PaymentBrands__cards--images'>
           <img className='PaymentBrands__cards--images--1' src={masterCard} alt='mastercard' />
           <img className='PaymentBrands__cards--images--2' src={americanExpress} alt='american-express' />

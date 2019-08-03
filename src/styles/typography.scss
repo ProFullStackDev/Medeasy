@@ -38,6 +38,10 @@ code {
   &__lower--categories {
     font-size: 1.8rem;
   }
+  & .dropdown .title {
+    font-weight: bold;
+    font-size: 1.8rem;
+  }
 }
 
 input, textarea, .CustomButton {

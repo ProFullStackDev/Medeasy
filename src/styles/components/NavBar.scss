@@ -76,15 +76,24 @@
       padding: 0 2rem;
     }
     &--categories {
+      height: 100%;
       display: flex;
       color: white;
     }
     &--category {
-      cursor: pointer;
+      position: relative;
       & span { margin-right: 1.5rem; }
       &:not(:last-child) { margin-right: 3.5rem }
       display: flex;
       align-items: center;
+      
+      &:hover {
+        cursor: pointer;
+        .dropdown {
+          display: flex;
+          opacity: 1;
+        }
+      }
     }
     &--search {
       margin-left: auto;
@@ -94,7 +103,7 @@
       border-radius: .5rem;
       &-allcats {
         background: $medeasy-grey-color;
-        padding: 1.5rem 1rem;
+        padding: 1rem;
         display: flex;
         & span { margin-right: 1rem }
         & img { cursor: pointer }

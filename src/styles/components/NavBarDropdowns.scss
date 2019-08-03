@@ -1,0 +1,66 @@
+@import '../colors';
+
+.dropdown {
+  position: absolute;
+  left: 0;
+  top: 7.5rem;
+  background: $medeasy-grey-color;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity .2s;
+  color: $black-color;
+  & .title { color: $medeasy-title-color; }
+  padding: 3rem 3.5rem;
+}
+
+.Adhd, .PainKillers {
+  &__list-item:not(:last-child) {
+    margin-bottom: 1.5rem;
+  }
+}
+
+.AnxietySeizure {
+  align-items: flex-start;
+  &__left, &__right {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    &-list--item {
+      .title {
+        margin-bottom: 1rem;
+      }
+      display: flex;
+      flex-direction: column;
+    }
+    &-list--item:not(:last-child) {
+      margin-bottom: 2rem;
+    }
+  }
+  &__right-list { padding-left: 4rem }
+  &__left-list {
+    padding-right: 3rem;
+    border-right: 1px solid #C5C3C3;
+  }
+}
+
+.HealthConditions {
+  width: 25rem;
+  &__list {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    &--item {
+      .title {
+        margin-bottom: 1rem;
+      }
+      display: flex;
+      flex-direction: column;
+      &:not(:last-child) {
+        margin-bottom: 2rem;
+      }
+    }
+  }
+}
+
