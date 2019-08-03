@@ -1,0 +1,26 @@
+@import '../colors';
+.PaymentBrands {
+  max-width: 127.5rem;
+  margin: 3.5rem auto;
+  background: $medeasy-green-color;
+  padding-top: 1.5rem;
+  position: relative;
+  display: flex;
+  &__cardTouch {
+    position: relative;
+    bottom: 0;
+    margin-left: 8rem;
+  }
+  &__cards {
+    margin-left: 6rem;
+    margin-bottom: 2.5rem;
+    align-self: center;
+    &--title {
+      color: $white-color;
+      margin-bottom: 2.5rem;
+    }
+    &--images img:not(:last-child) {
+      margin-right: 5.3rem;
+    }
+  }
+}

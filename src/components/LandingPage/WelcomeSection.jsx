@@ -22,7 +22,7 @@ const WelcomeSection = props => {
           <input id='phnumber' type='tel' name='phoneNumber'/>
           <label htmlFor='message'>Message</label>
           <textarea id='message' value='Requesting Callback'/>
-          <CustomButton isSubmitButton fontSize='1.6rem'>Requesting Callback</CustomButton>
+          <CustomButton isSubmitButton fontSize='1.6rem'>Request Callback</CustomButton>
         </form>
       </div>
     </div>

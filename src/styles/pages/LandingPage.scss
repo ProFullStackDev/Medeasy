@@ -64,7 +64,7 @@
     }
   }
 
-  &__featured-products {
+  &__featured-products, &__best-products {
     margin-top: 2.5rem;
     & .ProductList {
       margin-top: 2.3rem;
