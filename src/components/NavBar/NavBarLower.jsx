@@ -1,9 +1,9 @@
 import React from 'react'
 // Components
-import Adhd from '../NavBar/Adhd'
-import AnxietySeizure from '../NavBar/AnxietySeizure'
-import PainKillers from '../NavBar/PainKillers'
-import HealthConditions from '../NavBar/HealthConditions'
+import Adhd from './Adhd'
+import AnxietySeizure from './AnxietySeizure'
+import PainKillers from './PainKillers'
+import HealthConditions from './HealthConditions'
 // Images
 import downArrowBlack from '../../images/downArrowBlack.svg'
 import downArrowImg from '../../images/downarrow.svg'

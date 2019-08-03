@@ -13,7 +13,7 @@ const NavBarUpper = (props) => {
         </div>
         <nav className='NavBar__upper-links'>
           <NavLink exact to='/' activeClassName='active'>Home</NavLink>
-          <NavLink exact to='/about-us' activeClassName='active'>About Us</NavLink>
+          <NavLink exact to='/about' activeClassName='active'>About Us</NavLink>
           <NavLink exact to='/customer' activeClassName='active'>Customer Service</NavLink>
           <NavLink exact to='/privacy' activeClassName='active'>Privacy Policy</NavLink>
         </nav>

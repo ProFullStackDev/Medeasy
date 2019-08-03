@@ -14,7 +14,7 @@ function App() {
       <div className='container' style={{ padding: '1.5rem 2.2rem' }}>
         <Switch>
           <Route exact path='/' component={LandingPage} />
-          <Route exact path='/about-us' render={() => <h1>Hi</h1>} />
+          <Route exact path='/about' render={() => <h1>Hi</h1>} />
           <Route exact path='/customer' render={() => <h1>Hi</h1>} />
           <Route exact path='/privacy' render={() => <h1>Hi</h1>} />
           <Redirect to='/' />
