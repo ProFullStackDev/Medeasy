@@ -4,6 +4,7 @@ import NavBar from './components/NavBar/NavBar'
 import Footer from './components/Footer'
 // Pages
 import LandingPage from './pages/LandingPage'
+import ProductDetailPage from './pages/ProductDetailPage';
 // React-router
 import { Switch, Route, Redirect } from 'react-router-dom'
 
@@ -17,6 +18,7 @@ function App() {
           <Route exact path='/about' render={() => <h1>Hi</h1>} />
           <Route exact path='/customer' render={() => <h1>Hi</h1>} />
           <Route exact path='/privacy' render={() => <h1>Hi</h1>} />
+          <Route exact path='/product/:name' component={ProductDetailPage} />
           <Redirect to='/' />
         </Switch>
       </div>

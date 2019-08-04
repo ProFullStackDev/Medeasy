@@ -1,0 +1,33 @@
+@import '../colors';
+
+.ProductImageCarousel {
+  flex-basis: 55rem;
+  &__main {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    &--img {
+      min-width: 38rem;
+      height: 38rem;
+    }
+  }
+  &__otherimgs {
+    display: flex;
+    margin-top: 6rem;
+    justify-content: flex-start;
+    &--img {
+      border: 3px solid transparent;
+      transition: border .2s ease;
+      width: 11.5rem;
+      height: 11.5rem;
+      &:not(:last-child) {
+        margin-right: 3rem;
+      }
+      &:hover, &.activeImg {
+        cursor: pointer;
+        border-color: $medeasy-green-color;
+      }
+      & img { width: 100%; height: 100%; }
+    }
+  }
+}
