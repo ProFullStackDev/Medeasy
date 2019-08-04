@@ -62,6 +62,7 @@
     display: flex;
     justify-content: flex-start;
     &-button {
+      cursor: pointer;
       border: none;
       outline: none;
       padding: 2rem 3rem;

@@ -1,5 +1,5 @@
 import React from 'react'
-import star from '../images/star.svg'
+import starWhite from '../images/starWhite.svg'
 
 const Rating = ({ rating }) => {
 
@@ -14,7 +14,7 @@ const Rating = ({ rating }) => {
     <div className='Rating' style={{ ...ratingStyles, background }}>
       <span className='Rating__rating'>
         { rating }
-        <img style={{ marginLeft: '5px' }} src={ star } alt='rating-star' />
+        <img style={{ marginLeft: '5px' }} src={ starWhite } alt='rating-star' />
       </span>
     </div>
   )

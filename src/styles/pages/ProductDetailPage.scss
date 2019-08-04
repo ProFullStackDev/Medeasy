@@ -1,7 +1,74 @@
+@import '../colors';
 .ProductDetailPage {
   padding: 3.5rem 6.5rem;
   &__informations {
     display: flex;
     justify-content: space-between;
+  }
+  &__othertabs {
+    margin-top: 5rem;
+    width: 100%;
+    &-tabs {
+      display: flex;
+      justify-content: flex-start;
+      z-index: 2;
+      &--tab {
+        padding: 2rem 6.5rem;
+        box-shadow: 2px -2px 5px -1px #d9d5d5;
+        background: $medeasy-green-color;
+        color: $white-color;
+        border-color: transparent;
+        transition: all .3s ease;
+        &:hover, &.activeTab {
+          &.descriptiontab {
+            box-shadow: 2px -2px 5px -1px #d9d5d5;
+          }
+          &.reviewtab {
+            box-shadow: -2px -2px 5px -1px #d9d5d5;
+          }
+          cursor: pointer;
+          background: $white-color;
+          color: $black-color;
+        }
+        
+      }
+    }
+    &-reviews, &-description {
+      padding: 2.7rem 4.2rem;
+      width: 100%;
+      box-shadow: 0 0 5px 2px #d9d5d5;
+    }
+    &-reviews {
+      &-createreview-title,
+      &-allreviews-title { color: #979393; }
+      &-createreview {
+        &-ratings {
+          margin-top: 2rem;
+          display: flex; 
+          align-items: center; 
+          & span { 
+            margin-right: 1.1rem; 
+          }
+          &--stars img { &:hover { cursor: pointer; } &:not(:last-child) { margin-right: 5px; } }
+        }
+        & form {
+          & textarea {
+            margin-top: 2rem;
+            width: 100%;
+            resize: none;
+            outline: none;
+            min-height: 16rem;
+            border: 1px solid #dcd9d9;
+            &::placeholder { color: #bbb7b7 } 
+          }
+          & .CustomButton {
+            margin-top: 2.5rem;
+          }
+        }
+      }
+      &-allreviews {
+        margin-top: 3.5rem;
+      }
+    }
   }
 }

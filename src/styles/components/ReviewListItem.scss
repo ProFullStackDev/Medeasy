@@ -1,0 +1,25 @@
+.ReviewListItem {
+  padding: 3.5rem 0;
+  &:not(:last-child) {
+    border-bottom: 1px solid #ddd9d9;
+  }
+  &__details {
+    display: flex;
+    align-items: flex-start;
+    &-user {
+      display: flex;
+      flex-direction: column;
+      &--date { margin-top: 1px; color: #979793 }
+    }
+    img { margin-left: 3.5rem; }
+  }
+  &__ratings {
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    & .Rating { margin-left: 1rem; }
+  }
+  &__rating {
+    margin-top: 1.5rem;
+  }
+}
