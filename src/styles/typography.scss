@@ -57,6 +57,7 @@ input, textarea, .CustomButton {
 .ProductInformation {
   &__detail--name, &__rates--price-final { font-size: 4.5rem; font-weight: bold; }
   &__rates--price-original { font-size: 2rem; }
+  &__buttons-button { font-size: 3rem; font-family: 'PT Sans Caption', sans-serif; }
 }
 
 .CustomBadge {

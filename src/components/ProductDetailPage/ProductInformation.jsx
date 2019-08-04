@@ -61,6 +61,10 @@ const ProductInformation = props => {
         </div>
         <Assurances />
       </div>
+      <div className='ProductInformation__buttons'>
+        <button className='ProductInformation__buttons-button ProductInformation__buttons-addcart'>Add to Cart</button>
+        <button className='ProductInformation__buttons-button ProductInformation__buttons-buy'>Buy Now</button>
+      </div>
     </div>
   )
 }

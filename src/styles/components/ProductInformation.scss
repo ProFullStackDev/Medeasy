@@ -57,4 +57,23 @@
       }
     }
   }
+  &__buttons {
+    margin-top: 3.5rem;
+    display: flex;
+    justify-content: flex-start;
+    &-button {
+      border: none;
+      outline: none;
+      padding: 2rem 3rem;
+      color: $white-color;
+      border-radius: 1rem;
+    }
+    &-addcart {
+      background: $medeasy-green-color;
+      margin-right: 3rem;
+    }
+    &-buy {
+      background: $medeasy-orange;
+    }
+  }
 }
