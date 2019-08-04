@@ -34,6 +34,7 @@
       }
     }
     &-reviews, &-description {
+      min-height: 75rem;
       padding: 2.7rem 4.2rem;
       width: 100%;
       box-shadow: 0 0 5px 2px #d9d5d5;
@@ -68,6 +69,25 @@
       }
       &-allreviews {
         margin-top: 3.5rem;
+      }
+    }
+    &-description {
+      color: #535151;
+      &--secondary { margin: 3.5rem 0; }
+      &--sideeffects {
+        &-title, &-warning { color: #979393; }
+        &-list {
+          margin-top: 1.5rem;
+          li { display: flex; align-items: center; &:not(:last-child) { margin-bottom: 1rem; } }
+          &-dot {
+            display: inline-block;
+            width: 7px;
+            height: 8px;
+            background: #000;
+            border-radius: 50%;
+            margin-right: 1.5rem;
+          }
+        }
       }
     }
   }

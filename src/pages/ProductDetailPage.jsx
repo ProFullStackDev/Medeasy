@@ -12,7 +12,7 @@ import star from '../images/star.svg'
 
 const ProductDetailPage = (props) => {
 
-  const [isReviews, setIsReviews] = useState(true)
+  const [isReviews, setIsReviews] = useState(false)
   const [ratingMessage, setRatingMessage] = useState('')
   const handleChange = event => setRatingMessage(event.target.value)
 
@@ -27,7 +27,7 @@ const ProductDetailPage = (props) => {
           <div onClick={() => setIsReviews(true)} className={`ProductDetailPage__othertabs-tabs--tab reviewtab ${ isReviews ? 'activeTab' : ''}`}>Reviews</div>
           <div onClick={() => setIsReviews(false)} className={`ProductDetailPage__othertabs-tabs--tab descriptiontab ${ isReviews ? '' : 'activeTab' }`}>Description</div>
         </div>
-        { 
+        {  /* Decide later to put in a seperate component or not */
           isReviews && 
           <div className='ProductDetailPage__othertabs-reviews'>
             <section className='ProductDetailPage__othertabs-reviews-createreview'>
@@ -56,10 +56,38 @@ const ProductDetailPage = (props) => {
             </section>
           </div>
         }
-        { 
+        { /* Decide later to put in a seperate component or not */
           !isReviews && 
           <div className='ProductDetailPage__othertabs-description'>
-            
+            <p className='ProductDetailPage__othertabs-description--primary'>
+              This combination medication is used to treat attention deficit hyperactivity disorder - ADHD. It works by changing the amounts of certain natural substances in the brain. Amphetamine/dextroamphetamine belongs to a class of drugs known as stimulants. It can help increase your ability to pay attention, stay focused on an activity, and control behavior problems. It may also help you to organize your tasks and improve listening skills.
+            </p>
+            <p className='ProductDetailPage__othertabs-description--secondary'>
+              This drug is also used to treat a certain sleeping disorder (narcolepsy) to help you stay awake during the day. It should not be used to treat tiredness or to hold off sleep in people who do not have a sleep disorder.
+            </p>
+            <div className='ProductDetailPage__othertabs-description--sideeffects'>
+              <span style={{ fontSize: '2rem', marginBottom: '1.5rem' }} className='ProductDetailPage__othertabs-description--sideeffects-title'>
+                Side Effects
+              </span>
+              { /* This side effects list must come in dynamically */}
+              <ul className='ProductDetailPage__othertabs-description--sideeffects-list'>
+                <li><span className='ProductDetailPage__othertabs-description--sideeffects-list-dot'></span><span>Loss of appetite</span></li>
+                <li><span className='ProductDetailPage__othertabs-description--sideeffects-list-dot'></span><span>Weight loss</span></li>
+                <li><span className='ProductDetailPage__othertabs-description--sideeffects-list-dot'></span><span>Dry mouth</span></li>
+                <li><span className='ProductDetailPage__othertabs-description--sideeffects-list-dot'></span><span>Stomach upset or ache</span></li>
+                <li><span className='ProductDetailPage__othertabs-description--sideeffects-list-dot'></span><span>Nausea or vomiting</span></li>
+                <li><span className='ProductDetailPage__othertabs-description--sideeffects-list-dot'></span><span>Dizziness</span></li>
+                <li><span className='ProductDetailPage__othertabs-description--sideeffects-list-dot'></span><span>Headache</span></li>
+                <li><span className='ProductDetailPage__othertabs-description--sideeffects-list-dot'></span><span>Diarrhea</span></li>
+                <li><span className='ProductDetailPage__othertabs-description--sideeffects-list-dot'></span><span>Fever</span></li>
+                <li><span className='ProductDetailPage__othertabs-description--sideeffects-list-dot'></span><span>Nervousness</span></li>
+                <li><span className='ProductDetailPage__othertabs-description--sideeffects-list-dot'></span><span>Trouble sleeping</span></li>
+                <li><span className='ProductDetailPage__othertabs-description--sideeffects-list-dot'></span><span>High Blood Pressure</span></li>
+              </ul>
+              <span style={{ fontSize: '1.8rem', marginTop: '1.5rem', display: 'inline-block' }} className='ProductDetailPage__othertabs-description--sideeffects-warning'>
+                *If any of these effects persist or worsen, tell your doctor promptly.
+              </span>
+            </div>
           </div>
         }
       </div>
