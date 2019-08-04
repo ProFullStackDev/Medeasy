@@ -1,0 +1,20 @@
+@import '../colors';
+.CustomBadge {
+  border-radius: 5px;
+  color: $medeasy-border-light-grey-color;
+  border: 1px solid $medeasy-border-light-grey-color;
+  min-width: 8.5rem;
+  height: 4.3rem;
+  padding: 1.5rem 2.5rem;
+  transition: all .4s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover, &.activeBadge {
+    cursor: pointer;
+    color: $white-color;
+    background: $medeasy-green-color;
+    border-color: transparent;
+  }
+}

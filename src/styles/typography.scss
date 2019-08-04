@@ -53,3 +53,16 @@ input, textarea, .CustomButton {
 .Footer {
   font-weight: bold;
 }
+
+.ProductInformation {
+  &__detail--name, &__rates--price-final { font-size: 4.5rem; font-weight: bold; }
+  &__rates--price-original { font-size: 2rem; }
+}
+
+.CustomBadge {
+  font-size: 1.8rem;
+}
+
+.Assurances span {
+  font-size: 1.2rem;
+}

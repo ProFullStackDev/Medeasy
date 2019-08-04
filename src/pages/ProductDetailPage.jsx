@@ -9,7 +9,7 @@ const ProductDetailPage = (props) => {
     <div className='ProductDetailPage'>
       <div className='ProductDetailPage__informations'>
         <ProductImageCarousel />
-        
+        <ProductInformation />
       </div>
     </div>
   )

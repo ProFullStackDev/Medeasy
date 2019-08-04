@@ -1,0 +1,14 @@
+.Assurances {
+  margin-left: 4rem;
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-column-gap: 2rem;
+  &__assurance {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    flex-direction: column;
+    span { margin-top: 1rem; }
+  }
+}

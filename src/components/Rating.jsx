@@ -14,7 +14,7 @@ const Rating = ({ rating }) => {
     <div className='Rating' style={{ ...ratingStyles, background }}>
       <span className='Rating__rating'>
         { rating }
-        <img src={ star } alt='rating-star' />
+        <img style={{ marginLeft: '5px' }} src={ star } alt='rating-star' />
       </span>
     </div>
   )
@@ -23,7 +23,8 @@ const Rating = ({ rating }) => {
 const ratingStyles = {
   padding: '5px',
   borderRadius: '5px',
-  fontSize: '2rem'
+  fontSize: '2rem',
+  color: 'white'
 }
  
 export default Rating
