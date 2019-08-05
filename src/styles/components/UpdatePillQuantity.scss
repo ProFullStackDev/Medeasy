@@ -1,0 +1,25 @@
+.UpdatePillQuantity {
+  min-width: 70.3rem;
+  min-height: 34.1rem;
+  padding: 6rem 3rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 1rem 4px #dcdcdc;
+  &__pills {
+    margin: 5rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    & .CustomBadge {
+      &:not(:last-child) {
+        margin-right: 2.5rem;
+      }
+    }
+  }
+  &__buttons {
+    display: flex;
+    justify-content: flex-end;
+    & .CustomButton:nth-child(1) {
+      margin-right: 3.5rem;
+    }
+  }
+}

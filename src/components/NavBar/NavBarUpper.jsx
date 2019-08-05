@@ -19,10 +19,12 @@ const NavBarUpper = (props) => {
         </nav>
         <div className='NavBar__upper-other'>
           <span className='NavBar__upper-other-auth'><Link to='/login'>Login</Link> | <Link to='/register'>Signup</Link></span>
-          <div className='NavBar__upper-other-cart'>
-            <img alt='cart-img' className='NavBar__upper-other-cart--image' src={cartImg} />
-            <span className='NavBar__upper-other-cart--count'>3</span>
-          </div>
+          <Link to='/cart'>
+            <div className='NavBar__upper-other-cart'>
+              <img alt='cart-img' className='NavBar__upper-other-cart--image' src={cartImg} />
+              <span className='NavBar__upper-other-cart--count'>3</span>
+            </div>
+          </Link>
           <Link to='/contact' className='NavBar__upper-other-contact'>
             <img alt='contact-img' src={contactImg} style={{ marginRight: '.5rem' }} />
             Contact us
