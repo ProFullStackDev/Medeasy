@@ -1,10 +1,16 @@
-.UpdatePillQuantity {
+.UpdateModal {
+  position: absolute;
+  background: white;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   min-width: 70.3rem;
   min-height: 34.1rem;
   padding: 6rem 3rem;
   border-radius: 1rem;
   box-shadow: 0 0 1rem 4px #dcdcdc;
-  &__pills {
+  &__badges {
     margin: 5rem 0;
     display: flex;
     align-items: center;

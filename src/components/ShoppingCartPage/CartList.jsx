@@ -39,14 +39,11 @@ const dummyCartProducts = [
   }
 ]
 
-const CartList = props => {
-  console.log(dummyCartProducts)
+const CartList = ({ decideModalState }) => {
   return (
     <div className='CartList'>
       {/* Loop here for all the products */}
-      <CartListItem product={dummyCartProducts[0]} />
-      <CartListItem product={dummyCartProducts[1]} />
-      <CartListItem product={dummyCartProducts[2]} />
+      { dummyCartProducts.map(product => <CartListItem decideModalState={decideModalState} key={product.id} product={product} />)}
     </div>
   )
 }

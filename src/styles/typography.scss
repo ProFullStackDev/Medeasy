@@ -76,3 +76,7 @@ input, textarea, .CustomButton {
 .CartListItem {
   &__price--final { font-size: 3rem; }
 }
+
+.ShoppingCartPage {
+  &__main--price-amount-value { font-size: 3rem; }
+}

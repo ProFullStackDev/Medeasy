@@ -1,5 +1,6 @@
 .ShoppingCartPage {
   margin-top: 2.5rem;
+
   &__title {
     display: flex;
     align-items: center;
@@ -12,13 +13,40 @@
     margin: 6rem 0;
     &--price {
       align-self: flex-end;
-      &-subtotal-title, &-amount-title, &-savings-title {
-        margin-right: 8rem;
-        color: #979797;
+      &-subtotal, &-amount, &-savings {
+        &.ShoppingCartPage__main--general:not(:last-child) {
+          margin-bottom: 5px;
+        }
+        display: flex;
+        align-items: center;
+        &-title {
+          text-align: center;
+          margin-right: 8rem;
+          color: #979797;
+        }
+      }
+      &-amount-value {
+        display: flex;
+        align-items: center;
+        & img { margin-left: 1.5rem; }
       }
     }
-    &--general-title:not(:last-child) {
-      margin-bottom: 2.8rem;
+    &--ctas {
+      margin-top: 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      & .CustomButton:nth-child(2) {
+        margin-left: auto;
+        margin-right: 2.5rem;
+      }
+      &-back {
+        display: flex;
+        align-items: center;
+        & img {
+          margin-right: 1.5rem;
+        }
+      }
     }
   }
 }
