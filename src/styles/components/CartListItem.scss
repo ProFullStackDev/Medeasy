@@ -1,0 +1,29 @@
+@import '../colors';
+.CartListItem {
+  padding: 1.5rem 0;
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  &__tabletimage {
+    max-width: 16.6rem;
+  }
+  &__details {
+    &-name { color: #000; }
+    &-distributor { 
+      color: $medeasy-green-color !important; 
+      margin-top: 1.3rem;
+    }
+  }
+  &__dosage, &__quantity {
+    display: flex;
+    align-items: center;
+  }
+  &__price {
+    &--prev { margin-top: 5px; }
+    &--discount { color: $medeasy-green-color; }
+  }
+  img[alt='editbtn'] {
+    margin-left: 1rem;
+  }
+}

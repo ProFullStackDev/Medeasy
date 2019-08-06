@@ -72,3 +72,7 @@ input, textarea, .CustomButton {
 .Assurances span {
   font-size: 1.2rem;
 }
+
+.CartListItem {
+  &__price--final { font-size: 3rem; }
+}
