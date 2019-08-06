@@ -22,12 +22,12 @@ const ShoppingCartPage = props => {
         <CartList />
         <div className='ShoppingCartPage__main--price'>
           <div className='ShoppingCartPage__main--price-subtotal'>
-            <span className='ShoppingCartPage__main--price-subtotal-title'>Subtotal:</span>
+            <span className='ShoppingCartPage__main--price-subtotal-title ShoppingCartPage__main--general-title'>Subtotal:</span>
             {/* Price must be dynamic */}
             <span className='ShoppingCartPage__main--price-subtotal-value'>$960</span>
           </div>
           <div className='ShoppingCartPage__main--price-amount'>
-            <span className='ShoppingCartPage__main--price-amount-title'>You Pay:</span>
+            <span className='ShoppingCartPage__main--price-amount-title ShoppingCartPage__main--general-title'>You Pay:</span>
             {/* Price must be dynamic */}
             <span className='ShoppingCartPage__main--price-amount-value'>$750
               {/* This must be dynamic coz of uncertainty in delivery */}
@@ -35,7 +35,7 @@ const ShoppingCartPage = props => {
             </span>
           </div>
           <div className='ShoppingCartPage__main--price-savings'>
-            <span className='ShoppingCartPage__main--price-savings-title'>You Save:</span>
+            <span className='ShoppingCartPage__main--price-savings-title ShoppingCartPage__main--general-title'>You Save:</span>
             {/* Price must be dynamic */}
             <span className='ShoppingCartPage__main--price-savings-value'>$210</span>
           </div>
