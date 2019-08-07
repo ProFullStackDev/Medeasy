@@ -1,14 +1,16 @@
 import React from 'react'
+import '../styles/components/CustomRadioButton.scss'
 
-const CustomRadioButton = ({ selected, text }) => {
+const CustomRadioButton = ({ mode, onClick, noName, selected, text }) => {
+  const handleClick = event => onClick(event.target.closest('.CustomRadioButton').dataset.mode)
   return (
-    <div className='CustomRadioButton'>
-      <div className='CustomRadioButton__circle'>
+    <div data-mode={mode} className='CustomRadioButton' onClick={handleClick}>
+      <div onClick={handleClick}  className='CustomRadioButton__circle'>
         <div className={`CustomRadioButton__circle-active ${selected ? 'glow' : ''}`}></div>
       </div>
-      <p className='CustomRadioButton__text'>{ text }</p>
+      { !noName && <p className='CustomRadioButton__text'>{ text }</p> }
     </div>
   )
 }
 
-export default CustomRadioButton
+export default CustomRadioButton;

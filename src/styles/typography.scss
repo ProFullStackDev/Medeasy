@@ -92,3 +92,7 @@ input, textarea, .CustomButton {
     font-weight: bold;
   }
 }
+
+.AccountPhase {
+  &__guest--info { font-size: 1.8rem; }
+}

@@ -3,12 +3,15 @@ import React, {useState} from 'react'
 import UpdateModal from '../components/UpdateModal'
 import CheckoutProgress from '../components/CheckoutPage/CheckoutProgress'
 import OrderSummary from '../components/CheckoutPage/OrderSummary'
-// React router
-import { Switch, Route } from 'react-router-dom'
+import AccountPhase from '../components/CheckoutPage/AccountPhase'
 import '../styles/pages/CheckoutPage.scss'
 
 const CheckoutPage = ({ changeOverlayState }) => {
-  const [progressStop, setProgressStop] = useState('account')
+  // CheckoutProgress stepNumber
+  const [stepNumber, setStepNumber] = useState(1)
+  // 4 step phase state
+  const [progressPhase, setProgressPhase] = useState('account')
+  // edit btn toggle state
   const [isQuantityClicked, setIsQuantityClicked] = useState(false)
 
   // Toggling the UpdateModal Component
@@ -27,9 +30,9 @@ const CheckoutPage = ({ changeOverlayState }) => {
     <div className='CheckoutPage'>
       { isQuantityClicked && <UpdateModal disableOverlay={disableOverlay}  title='Update Dosage' values={['5mg', '10mg']}/> }
       <div className='CheckoutPage__left'>
-        <CheckoutProgress stepNumber={2} />
+        <CheckoutProgress stepNumber={stepNumber} />
         { /* Four stages are present here. The state changes based on the clicks */ }
-        
+        <AccountPhase />
       </div>
       <div className='CheckoutPage__right'>
         <OrderSummary updateModalState={updateModalState} />

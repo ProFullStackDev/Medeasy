@@ -4,7 +4,7 @@ import '../styles/components/CustomFormElement.scss'
 const CustomFormElement = ({ placeholder, noStyle, noLabel, isTextArea, onChange, labelName, name, type, id, value }) => {
   return (
     <div className='CustomFormElement' style={ !noStyle ? { marginBottom: '1.5rem' } : null }>
-      { !noLabel && <label htmlFor={id}>Name</label> }
+      { !noLabel && <label htmlFor={id}>{labelName}</label> }
       { !isTextArea ? <input placeholder={placeholder} onChange={onChange} name={name} type={type} id={id} value={value} /> :
         <textarea placeholder={placeholder} onChange={onChange} name={name} id={id} value={value} />
       }

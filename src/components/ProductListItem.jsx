@@ -12,7 +12,7 @@ const ProductListItem = ({ product: { imageUrl, name, price, id }, history}) => 
         <span className='ProductListItem__details--count' style={{ fontSize: '1rem' }}>Pack of 50 Tablets</span>
         <h3 className='ProductListItem__details--price'>${ price }</h3>
       </div>
-      <CustomButton fontSize='1.4rem'>Buy Now</CustomButton>
+      <Link to={`/product/${name.toLowerCase().replace(' ', '-')}`}><CustomButton fontSize='1.4rem'>Buy Now</CustomButton></Link>
     </div>
   )
 }
