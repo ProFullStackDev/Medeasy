@@ -5,6 +5,7 @@ import '../styles/pages/ProductDetailPage.scss'
 import ProductImageCarousel from '../components/ProductDetailPage/ProductImageCarousel'
 import ProductInformation from '../components/ProductDetailPage/ProductInformation'
 import CustomButton from '../components/CustomButton'
+import CustomFormElement from '../components/CustomFormElement'
 import ReviewListItem from '../components/ProductDetailPage/ReviewListItem'
 
 // images
@@ -43,7 +44,7 @@ const ProductDetailPage = (props) => {
                 </div>
               </div>
               <form>
-                <textarea onChange={handleChange} value={ratingMessage} placeholder='Write Something about your experience with this product...' />
+                <CustomFormElement noLabel isTextArea onChange={handleChange} value={ratingMessage} placeholder='Write Something about your experience with this product...' />
                 <CustomButton isSubmit fontSize='2.5rem'>Submit Review</CustomButton>
               </form>
             </section>
@@ -69,7 +70,7 @@ const ProductDetailPage = (props) => {
               <span style={{ fontSize: '2rem', marginBottom: '1.5rem' }} className='ProductDetailPage__othertabs-description--sideeffects-title'>
                 Side Effects
               </span>
-              { /* This side effects list must come in dynamically */}
+              { /* This side effects list must come in dynamically */ }
               <ul className='ProductDetailPage__othertabs-description--sideeffects-list'>
                 <li><span className='ProductDetailPage__othertabs-description--sideeffects-list-dot'></span><span>Loss of appetite</span></li>
                 <li><span className='ProductDetailPage__othertabs-description--sideeffects-list-dot'></span><span>Weight loss</span></li>

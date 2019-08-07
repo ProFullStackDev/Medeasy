@@ -1,7 +1,17 @@
 .CheckoutPage {
   display: flex;
+  margin-top: 2rem;
   justify-content: space-between;
   &__left {
+    padding-left: 2.8rem;
+    padding-right: 5rem;
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    .CheckoutProgress {
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+    }
   }
 }

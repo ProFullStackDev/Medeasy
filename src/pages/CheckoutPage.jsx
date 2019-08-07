@@ -3,16 +3,20 @@ import React, {useState} from 'react'
 import UpdateModal from '../components/UpdateModal'
 import CheckoutProgress from '../components/CheckoutPage/CheckoutProgress'
 import OrderSummary from '../components/CheckoutPage/OrderSummary'
+// React router
+import { Switch, Route } from 'react-router-dom'
 import '../styles/pages/CheckoutPage.scss'
 
 const CheckoutPage = ({ changeOverlayState }) => {
-
+  const [progressStop, setProgressStop] = useState('account')
   const [isQuantityClicked, setIsQuantityClicked] = useState(false)
+
   // Toggling the UpdateModal Component
   const updateModalState = () => {
     setIsQuantityClicked(true)
     changeOverlayState(true)
   }
+
   // Toggling the overlay
   const disableOverlay = () => {
     setIsQuantityClicked(false)
@@ -24,6 +28,8 @@ const CheckoutPage = ({ changeOverlayState }) => {
       { isQuantityClicked && <UpdateModal disableOverlay={disableOverlay}  title='Update Dosage' values={['5mg', '10mg']}/> }
       <div className='CheckoutPage__left'>
         <CheckoutProgress stepNumber={2} />
+        { /* Four stages are present here. The state changes based on the clicks */ }
+        
       </div>
       <div className='CheckoutPage__right'>
         <OrderSummary updateModalState={updateModalState} />

@@ -60,7 +60,7 @@ const ShoppingCartPage = ({ changeOverlayState }) => {
             <span>Continue Shopping</span>
           </Link>
           <CustomButton fontSize='2.5rem' specialBgColor='#d44a4a'>Clear Cart</CustomButton>
-          <Link to='/checkout'><CustomButton fontSize='2.5rem'>Checkout</CustomButton></Link>
+          <Link to='/checkout/account'><CustomButton fontSize='2.5rem'>Checkout</CustomButton></Link>
         </div>
       </div>
     </div>

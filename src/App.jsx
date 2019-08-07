@@ -27,7 +27,7 @@ function App() {
           <Route exact path='/privacy' render={() => <h1>Hi</h1>} />
           <Route exact path='/product/:name' component={ProductDetailPage} />
           <Route exact path='/cart' render={routeParams => <ShoppingCartPage {...routeParams} changeOverlayState={decideOverlayState} />} />
-          <Route exact path='/checkout' render={routeParams => <CheckoutPage {...routeParams} changeOverlayState={decideOverlayState} />} />
+          <Route exact path='/checkout/account' render={routeParams => <CheckoutPage {...routeParams} changeOverlayState={decideOverlayState} />} />
           <Redirect to='/' />
         </Switch>
       </div>

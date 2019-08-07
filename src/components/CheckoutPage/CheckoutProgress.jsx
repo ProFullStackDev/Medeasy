@@ -16,10 +16,10 @@ const CheckoutProgress = ({ stepNumber }) => {
         <div className={`circle ${stepNumber === 4 ? 'progressed' : '' }`}></div>
       </div>
       <div className="titles">
-        <h3 className='title1'>Account</h3>
-        <h3 className='title2'>Billing & Shipping</h3>
-        <h3 className='title3'>Payment</h3>
-        <h3 className='title4'>Review</h3>
+        <h3 className='title1 title'>Account</h3>
+        <h3 className='title2 title'>Billing & Shipping</h3>
+        <h3 className='title3 title'>Payment</h3>
+        <h3 className='title4 title'>Review</h3>
       </div>
     </div>
   )
