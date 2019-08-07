@@ -32,7 +32,8 @@ const CheckoutPage = ({ changeOverlayState }) => {
       <div className='CheckoutPage__left'>
         <CheckoutProgress stepNumber={stepNumber} />
         { /* Four stages are present here. The state changes based on the clicks */ }
-        <AccountPhase />
+        { /* Show this component only if there is no user in state */ }
+        { progressPhase === 'account' && <AccountPhase /> }
       </div>
       <div className='CheckoutPage__right'>
         <OrderSummary updateModalState={updateModalState} />
