@@ -13,10 +13,11 @@ import norton from './images/assurances/norton.png'
 import CheckoutPage from './pages/CheckoutPage';
 function App() {
   const [overLayStatus, setOverlayStatus] = useState(false)
+  // Toggling the overlay
   const decideOverlayState = overlayState => setOverlayStatus(overlayState)
   return (
     <div className="App">
-      { overLayStatus && <div style={{ position: 'absolute', minHeight: '100%', minWidth: '100%', background: 'rgba(192, 192, 192, .6)', zIndex: '1' }} className='App__overlay'></div> }
+      { overLayStatus && <div style={{ position: 'absolute', minHeight: '100%', minWidth: '100%', background: 'rgba(192, 192, 192, .6)', zIndex: '3' }} className='App__overlay'></div> }
       <NavBar />
       <div className='container' style={{ padding: '1.5rem 2.2rem' }}>
         <Switch>
@@ -25,8 +26,8 @@ function App() {
           <Route exact path='/customer' render={() => <h1>Hi</h1>} />
           <Route exact path='/privacy' render={() => <h1>Hi</h1>} />
           <Route exact path='/product/:name' component={ProductDetailPage} />
-          <Route exact path='/cart' render={(routeParams) => <ShoppingCartPage {...routeParams} changeOverlayState={decideOverlayState} />} />
-          <Route exact path='/checkout' component={CheckoutPage} />
+          <Route exact path='/cart' render={routeParams => <ShoppingCartPage {...routeParams} changeOverlayState={decideOverlayState} />} />
+          <Route exact path='/checkout' render={routeParams => <CheckoutPage {...routeParams} changeOverlayState={decideOverlayState} />} />
           <Redirect to='/' />
         </Switch>
       </div>

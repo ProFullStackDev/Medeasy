@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
 import '../../styles/components/OrderSummary.scss'
+
+// Components
 import OrderPillListItem from './OrderPillListItem'
 import CustomButton from '../CustomButton'
 import CustomFormElement from '../CustomFormElement'
 import PricesBreakDown from '../CheckoutPage/PricesBreakDown'
+
 // Dummy data for cart
 import tablet1 from '../../images/tablet1.png'
 import tablet4 from '../../images/tablet4.png'
@@ -41,14 +44,15 @@ const dummyCartProducts = [
   }
 ]
 
-const OrderSummary = props => {
+const OrderSummary = ({ updateModalState }) => {
+  // Coupon code state and making a controlled component
   const [couponCode, setCouponCode] = useState('')
   const handleChange = event => setCouponCode(event.target.value)
   return (
     <div className='OrderSummary'>
       <p className='OrderSummary__title'>Order Summary</p>
       <div className='OrderSummary__allproducts'>
-        { dummyCartProducts.map(product => <OrderPillListItem product={product} key={product.id} />) }
+        { dummyCartProducts.map(product => <OrderPillListItem updateModalState={updateModalState} product={product} key={product.id} />) }
       </div>
       <div className='OrderSummary__coupon'>
         <p className='OrderSummary__coupon-title'>Discount / Coupon Code</p>

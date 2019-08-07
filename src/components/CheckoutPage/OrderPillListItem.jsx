@@ -3,7 +3,7 @@ import closeBtn from '../../images/closeBtn.svg'
 import editBtn from '../../images/editBtn.svg'
 
 import '../../styles/components/OrderPillListItem.scss'
-const OrderPillListItem = ({product: { tabletImage, tabletName, distributor, selectedDosage, quantity, discountedPrice, originalPrice } }) => {
+const OrderPillListItem = ({updateModalState, product: { tabletImage, tabletName, distributor, selectedDosage, quantity, discountedPrice, originalPrice } }) => {
   return (
     <div className='OrderPillListItem'>
       { /* This button should delete the item */ }
@@ -15,7 +15,7 @@ const OrderPillListItem = ({product: { tabletImage, tabletName, distributor, sel
         <span style={{ color: '#979797' }} className='OrderPillListItem__tablet-details--distributor-quantity'>
           { quantity } Pills
           { /* This should trigger the modal */ }
-          <img src={editBtn} alt='edit-btn' />
+          <img src={editBtn} alt='edit-btn' onClick={updateModalState} />
         </span>
       </div>
       <div className='OrderPillListItem__tablet-price'>
