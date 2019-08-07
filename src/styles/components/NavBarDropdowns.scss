@@ -1,6 +1,7 @@
 @import '../colors';
 
 .dropdown {
+  z-index: 2;
   position: absolute;
   left: 0;
   top: 7.5rem;

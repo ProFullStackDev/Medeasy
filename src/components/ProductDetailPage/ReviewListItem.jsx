@@ -1,6 +1,6 @@
 import React from 'react'
 import Rating from '../Rating'
-import verifiedBuyerBadge from '../../images/verified.svg'
+import verifiedBuyerBadge from '../../images/verified.png'
 import '../../styles/components/ReviewListItem.scss'
 
 const ReviewListItem = ({ name, date, rating, review }) => {

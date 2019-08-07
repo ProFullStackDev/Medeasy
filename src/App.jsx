@@ -10,6 +10,7 @@ import ShoppingCartPage from './pages/ShoppingCartPage'
 import { Switch, Route, Redirect } from 'react-router-dom'
 // assets 
 import norton from './images/assurances/norton.png'
+import CheckoutPage from './pages/CheckoutPage';
 function App() {
   const [overLayStatus, setOverlayStatus] = useState(false)
   const decideOverlayState = overlayState => setOverlayStatus(overlayState)
@@ -25,6 +26,7 @@ function App() {
           <Route exact path='/privacy' render={() => <h1>Hi</h1>} />
           <Route exact path='/product/:name' component={ProductDetailPage} />
           <Route exact path='/cart' render={(routeParams) => <ShoppingCartPage {...routeParams} changeOverlayState={decideOverlayState} />} />
+          <Route exact path='/checkout' component={CheckoutPage} />
           <Redirect to='/' />
         </Switch>
         <img src={norton} alt='norton' style={{ position: 'absolute', bottom: '15rem', right: '2.5rem' }}/>

@@ -1,0 +1,48 @@
+@import '../colors';
+.CheckoutProgress {
+  margin: 3.2rem 0;
+  .lines,
+  .circles,
+  .titles{
+    display: flex;
+    justify-content: space-between;
+  }
+  .line1,
+  .line2,
+  .line3 {
+    height: .6rem;
+    flex: 1;
+    background: $medeasy-grey-color;
+    position: relative;
+  }
+
+  .line1 {
+    border-top-left-radius: .3rem;
+    border-bottom-left-radius: .3rem;
+  }
+
+  .line3 {
+    border-top-right-radius: .3rem;
+    border-bottom-right-radius: .3rem;
+  }
+
+  .titles{ margin-top: 2.5rem; }
+  .title2{
+    margin-left: -2rem;
+  }
+  .circle {
+    box-sizing: content-box;
+    margin-top: -1.2rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    background: $medeasy-grey-color;
+    border: .2rem solid $medeasy-grey-color;
+    border-radius: 50%;
+    z-index: 2;
+  }
+
+  .progressed {
+    background: $medeasy-green-color;
+  }
+
+}
