@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-import '../../styles/OrderSummary.scss'
+import '../../styles/components/OrderSummary.scss'
 import OrderPillListItem from './OrderPillListItem'
 import CustomButton from '../CustomButton'
-import fullfiled from '../../images/assurances/fullfiled.png'
+import CustomFormElement from '../CustomFormElement'
+import PricesBreakDown from '../CheckoutPage/PricesBreakDown'
 // Dummy data for cart
 import tablet1 from '../../images/tablet1.png'
 import tablet4 from '../../images/tablet4.png'
@@ -52,42 +53,12 @@ const OrderSummary = props => {
       <div className='OrderSummary__coupon'>
         <p className='OrderSummary__coupon-title'>Discount / Coupon Code</p>
         <form className='OrderSummary__coupon-form' onSubmit={() => console.log('Do something here')}>
-          <input type='text' onChange={handleChange} value={couponCode} />
+          <CustomFormElement noStyle noLabel type='text' onChange={handleChange} value={couponCode} />
           <CustomButton isSubmitButton fontSize='1.8rem'>Apply</CustomButton>
         </form>
       </div>
-      <div className='OrderSummary__prices'>
-        <div className='OrderSummary__prices-subtotal OrderSummary__prices--general'>
-          <span className='OrderSummary__prices-subtotal-title'>Subtotal:</span>
-          {/* Price must be dynamic */}
-          <span className='OrderSummary__prices-subtotal-value'>$960.0</span>
-        </div>
-        <div className='OrderSummary__prices-savings OrderSummary__prices--general'>
-          <span className='OrderSummary__prices-savings-title'>Discount:</span>
-          {/* Price must be dynamic */}
-          <span className='OrderSummary__prices-savings-value'>$210</span>
-        </div>
-        <div className='OrderSummary__prices-tax OrderSummary__prices--general'>
-          <span className='OrderSummary__prices-tax-title'>Tax:</span>
-          {/* Price must be dynamic */}
-          <span className='OrderSummary__prices-tax-value'>$0.0</span>
-        </div>
-        <div className='OrderSummary__prices-shipping OrderSummary__prices--general'>
-          <span className='OrderSummary__prices-shipping-title'>Discount:</span>
-          {/* Price must be dynamic */}
-          <span className='OrderSummary__prices-shipping-value'>
-            $0.0
-            <img src={fullfiled} alt='fullfiled-assurance' />
-          </span>
-        </div>
-        <div className='OrderSummary__prices-total OrderSummary__prices--general'>
-          <span className='OrderSummary__prices-total-title'>You Pay:</span>
-          {/* Price must be dynamic */}
-          <span className='OrderSummary__prices-total-value'>$750.0
-            {/* This must be dynamic coz of uncertainty in delivery charge */}
-          </span>
-        </div>
-      </div>
+      { /* Here the total price should come */ }
+      <PricesBreakDown />
     </div>
   )
 }

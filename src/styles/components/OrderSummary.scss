@@ -1,3 +1,24 @@
+@import '../colors';
 .OrderSummary {
-  
+  min-width: 50rem;
+  padding: 1rem 3rem;
+  border-left: 1px solid rgba($medeasy-border-light-grey-color, .2);
+  &__allproducts, &__coupon {
+    border-bottom: 1px solid #EFE8E8;
+  }
+  &__coupon {
+    padding: 2.7rem 0;
+    &-title {
+      margin-bottom: 2rem;
+    }
+    &-form {
+      display: flex;
+      align-items: center;
+      & .CustomButton {
+        margin-left: 2.5rem;
+        padding: 1rem 2.5rem !important;
+      }
+      & { margin: 0 }
+    }
+  }
 }

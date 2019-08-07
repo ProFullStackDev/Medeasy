@@ -1,10 +1,16 @@
 import React from 'react'
-import '../styles/pages/CheckoutPage.scss'
 import CheckoutProgress from '../components/CheckoutPage/CheckoutProgress'
+import OrderSummary from '../components/CheckoutPage/OrderSummary'
+import '../styles/pages/CheckoutPage.scss'
 const CheckoutPage = props => {
   return (
     <div className='CheckoutPage'>
-      <CheckoutProgress stepNumber={2} />
+      <div className='CheckoutPage__left'>
+        <CheckoutProgress stepNumber={2} />
+      </div>
+      <div className='CheckoutPage__right'>
+        <OrderSummary />
+      </div>
     </div>
   )
 }

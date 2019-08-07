@@ -1,0 +1,15 @@
+.PricesBreakDown {
+  padding: 2.7rem 0;
+  img { max-height: 2rem; }
+  &--general {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+  }
+  &-subtotal-value, &-savings-value, &-tax-value, &-total-value {
+    margin-right: 12rem;
+  }
+  &-shipping {
+    &-value { display: flex; align-items: center; & img { margin-left: 1rem; } }
+  }
+}

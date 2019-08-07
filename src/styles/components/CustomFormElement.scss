@@ -1,0 +1,28 @@
+@import '../colors';
+
+.CustomFormElement {
+  width: 100%;
+  label {
+    display: block;
+    &:not(:first-child) {
+      margin-top: 2rem;
+    }
+  }
+  input, textarea {
+    background: transparent;
+    border: none;
+    display: block;
+    padding: 1rem 1.3rem;
+    border-radius: .5rem;
+    width: 100%;
+    resize: none;
+    outline: none;
+    margin-top: 4px;
+    border: 1px solid $medeasy-border-grey-color;
+    transition: border .3s ease;
+    &:hover, &:focus {
+      border-color: $medeasy-green-color;
+    }
+  }
+  textarea { min-height: 7.7rem; }
+}

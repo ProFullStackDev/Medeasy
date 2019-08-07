@@ -11,6 +11,14 @@ body {
     min-height: 100vh;
     margin: 0 auto;
     font-size: 1.6rem;
+    &__secure {
+      padding: 1.7rem 2.5rem;
+      width: 100%;
+      min-height: 10.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
   }
   ul, ol {
     list-style: none;
@@ -23,13 +31,5 @@ body {
     max-width: 144rem;
     margin: 0 auto;
     height: 100%;
-  }
-  input, textarea {
-    background: transparent;
-    border: none;
-    display: block;
-    padding: 1rem 0;
-    padding-left: 1.3rem;
-    border-radius: .5rem;
   }
 }

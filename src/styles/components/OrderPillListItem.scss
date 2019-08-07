@@ -1,3 +1,34 @@
 .OrderPillListItem {
-  
+  img { cursor: pointer; }
+  width: 100%;
+  position: relative;
+  display: flex;
+  margin: 3rem 0;
+  justify-content: space-between;
+  align-items: center;
+  &__closebtn {
+    max-width: 2.5rem;
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+  }
+  &__tablet {
+    &-img { max-width: 12rem }
+    &-details {
+      display: flex;
+      flex-direction: column;
+      margin-right: auto;
+      margin-left: 1rem;
+      &--distributor-quantity {
+        display: flex;
+        margin-top: 1.7rem;
+        align-items: center;
+        & img { margin-left: 1rem; }
+      }
+    }
+    &-price {
+      align-self: flex-end;
+      margin-bottom: 1.5rem;
+    }
+  }
 }

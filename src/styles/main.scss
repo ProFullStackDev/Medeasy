@@ -2,3 +2,23 @@
 @import 'typography';
 @import 'base';
 
+@font-face {
+  font-family: 'Ant Icon';
+  src: url('../fonts/anticon.ttf') format('truetype')
+}
+@font-face {
+  font-family: 'Font Awesome';
+  src: url('../fonts/FontAwesome.otf') format('otf')
+}
+@font-face {
+  font-family: 'Ion Icons';
+  src: url('../fonts/ionicons.ttf') format('truetype')
+}
+@font-face {
+  font-family: 'Material';
+  src: url('../fonts/material.ttf') format('truetype')
+}
+@font-face {
+  font-family: 'Simple Line Icons';
+  src: url('../fonts/Simple-Line-Icons.ttf') format('truetype')
+}

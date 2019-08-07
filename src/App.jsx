@@ -29,7 +29,9 @@ function App() {
           <Route exact path='/checkout' component={CheckoutPage} />
           <Redirect to='/' />
         </Switch>
-        <img src={norton} alt='norton' style={{ position: 'absolute', bottom: '15rem', right: '2.5rem' }}/>
+      </div>
+      <div className='App__secure'>
+        <img src={norton} alt='norton'/>
       </div>
       <Footer />
     </div>

@@ -1,0 +1,7 @@
+.CheckoutPage {
+  display: flex;
+  justify-content: space-between;
+  &__left {
+    flex: 1;
+  }
+}

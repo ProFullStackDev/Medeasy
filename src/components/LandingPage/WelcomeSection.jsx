@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
-import CustomButton from '../components/../CustomButton'
+import CustomButton from '../CustomButton'
+import CustomFormElement from '../CustomFormElement'
+// Images
 import larrow from '../../images/larrow.svg'
 import rarrow from '../../images/rarrow.svg'
 import carouselImg from '../../images/carouselimg.png'
@@ -32,15 +34,14 @@ class WelcomeSection extends Component {
             Want us to call you back ?
           </h2>
           <form className='LandingPage__helpform-form' onSubmit={ this.handleSubmit }>
-            <label htmlFor='name'>Name</label>
-            <input onChange={this.handleChange} name='name' type='text' id='name' value={name} />
+            <CustomFormElement lebelName='Name' onChange={this.handleChange} name='name' type='text' id='name' value={name} />
             <label htmlFor='phnumber'>Phone Number</label>
-            <div className='LandingPage__helpform-form--phone'>
+            <div className='LandingPage__helpform-form--phone' style={{ marginBottom: '1.5rem' }}>
               <div className='LandingPage__helpform-form--phone-code'>+1</div>
-              <input value={phNumber} onChange={this.handleChange} name='phNumber' id='phnumber' type='tel' />
+              <CustomFormElement noStyle noLabel value={phNumber} onChange={this.handleChange} name='phNumber' id='phnumber' type='tel' />
             </div>
             <label htmlFor='message'>Message</label>
-            <textarea value={message} onChange={this.handleChange} name='message' id='message' />
+            <CustomFormElement noLabel isTextArea value={message} onChange={this.handleChange} name='message' id='message' />
             <CustomButton isSubmitButton fontSize='1.6rem'>Request Callback</CustomButton>
           </form>
         </div>

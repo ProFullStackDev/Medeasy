@@ -1,24 +1,4 @@
 @import url('https://fonts.googleapis.com/css?family=PT+Sans+Caption&display=swap');
-@font-face {
-  font-family: 'Ant Icon';
-  src: url('../fonts/anticon.ttf') format('ttf')
-}
-@font-face {
-  font-family: 'Font Awesome';
-  src: url('../fonts/FontAwesome.otf') format('otf')
-}
-@font-face {
-  font-family: 'Ion Icons';
-  src: url('../fonts/ionicons.ttf') format('ttf')
-}
-@font-face {
-  font-family: 'Material';
-  src: url('../fonts/material.ttf') format('ttf')
-}
-@font-face {
-  font-family: 'Simple Line Icons';
-  src: url('../fonts/Simple-Line-Icons.ttf') format('ttf')
-}
 
 html {
   font-size: 62.5%;
@@ -103,5 +83,11 @@ input, textarea, .CustomButton {
 
 .OrderSummary {
   &__title { font-size: 2.2rem }
-  &__prices-total { font-size: 2.2rem; font-weight: bold; }
+}
+
+.PricesBreakDown {
+  &-total {
+    font-size: 2.2rem; 
+    font-weight: bold;
+  }
 }
