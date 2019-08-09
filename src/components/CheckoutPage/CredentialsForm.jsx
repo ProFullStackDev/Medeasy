@@ -8,6 +8,7 @@ class CredentialsForm extends Component {
     // These might be filled by guest
     // Or if the user is already logged in means,
     // It must get prefilled
+    // IMPORTATNT THIS STATE WOULD BE IN REDUX
     this.state = {
       // Billing address
       firstName: '',
@@ -25,13 +26,18 @@ class CredentialsForm extends Component {
       faxNumber: '',
     }
     this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleChange (event) { this.setState({ [event.target.name]: event.target.value })}
+  handleSubmit (event) {
+    event.preventDefault()
+    console.log(this.state)
+  }
 
   render () {
     return (
-      <form style={{ marginTop: '3.5rem', width: '50%' }} className='BillingPhase__billing-form'>
+      <form data-type={this.props.type} onSubmit={this.handleSubmit} style={{ marginTop: '3.5rem', width: '50%' }} className='BillingPhase__billing-form'>
         <div className='BillingPhase__form-names BillingPhase__form-half'>
           <CustomFormElement labelName='First Name' type='text' value={this.state.firstName} onChange={this.handleChange} name='firstName' />
           <CustomFormElement labelName='Middle Name' type='text' value={this.state.middleName} onChange={this.handleChange} name='middleName' />

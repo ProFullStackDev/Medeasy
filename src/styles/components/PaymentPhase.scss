@@ -1,0 +1,16 @@
+.PaymentPhase {
+  &__types {
+    margin: 3rem 0;
+    display: flex;
+    justify-content: space-between;
+  }
+  &__payment-form {
+    &-three {
+      display: flex;
+      justify-content: space-between;
+      .CustomFormElement {
+        width: 30%;
+      }
+    }
+  }
+}

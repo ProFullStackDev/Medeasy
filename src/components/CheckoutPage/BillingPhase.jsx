@@ -11,13 +11,25 @@ class BillingPhase extends Component {
     this.state = {
       // Delivery address mode (defaulted to ship to same address)
       mode: 'yes',
+      // These state might be in redux .. Just keepin it temporarily
+      shippingAddress: {},
+      billingAddress: {}
     }
     this.handleChange = this.handleChange.bind(this)
+    this.handleClick = this.handleClick.bind(this)
     this.changeMode = this.changeMode.bind(this)
+    // Actions related to these also might be in seperate reducer
+  }
+
+  // Redux state must flow to the backend
+  // Both billing reducer and shipping reducer
+  handleClick (event) {
   }
 
   handleChange (event) { this.setState({ [event.target.name]: event.target.value })}
   changeMode (mode) { this.setState({ mode }) }
+  saveShippingAddress (addressObj) { }
+  saveBillingAddress (addressObj) { }
 
   render () {
     return (
@@ -33,6 +45,7 @@ class BillingPhase extends Component {
           <h2 className='BillingPhase__title'>Shipping Address</h2>
           <CredentialsForm />
         </> }
+        <CustomButton onClick={this.handleClick} fontSize='1.8rem'>Continue</CustomButton>
       </div>
     )
   }
