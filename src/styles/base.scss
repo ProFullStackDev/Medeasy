@@ -1,3 +1,4 @@
+@import './colors';
 *, *::after,*::before {
   margin: 0; 
   padding: 0;
@@ -23,9 +24,19 @@ body {
   ul, ol {
     list-style: none;
   }
+  label {
+    color: $medeasy-label-color;
+  }
   a, a:visited, a:active, a:link {
     text-decoration: none;
     color: inherit;
+  }
+  input[type=number]::-webkit-inner-spin-button, 
+  input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0; 
   }
   .container {
     max-width: 144rem;

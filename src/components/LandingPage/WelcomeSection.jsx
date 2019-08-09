@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import CustomButton from '../CustomButton'
 import CustomFormElement from '../CustomFormElement'
+import PhoneFormElement from '../PhoneFormElement'
 // Images
 import larrow from '../../images/larrow.svg'
 import rarrow from '../../images/rarrow.svg'
@@ -34,12 +35,8 @@ class WelcomeSection extends Component {
             Want us to call you back ?
           </h2>
           <form className='LandingPage__helpform-form' onSubmit={ this.handleSubmit }>
-            <CustomFormElement lebelName='Name' onChange={this.handleChange} name='name' type='text' id='name' value={name} />
-            <label htmlFor='phnumber'>Phone Number</label>
-            <div className='LandingPage__helpform-form--phone' style={{ marginBottom: '1.5rem' }}>
-              <div className='LandingPage__helpform-form--phone-code'>+1</div>
-              <CustomFormElement noStyle noLabel value={phNumber} onChange={this.handleChange} name='phNumber' id='phnumber' type='tel' />
-            </div>
+            <CustomFormElement labelName='Name' onChange={this.handleChange} name='name' type='text' id='name' value={name} />
+            <PhoneFormElement value={phNumber} onChange={this.handleChange} />
             <label htmlFor='message'>Message</label>
             <CustomFormElement noLabel isTextArea value={message} onChange={this.handleChange} name='message' id='message' />
             <CustomButton isSubmitButton fontSize='1.6rem'>Request Callback</CustomButton>

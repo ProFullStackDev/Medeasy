@@ -1,0 +1,25 @@
+@import '../colors';
+.PhoneFormElement {
+  display: flex;
+  margin-top: 4px;
+  &-code {
+    background: $medeasy-green-color;
+    display: flex;
+    color: $white-color;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1.5rem;
+    border-top-left-radius: .5rem;
+    border-bottom-left-radius: .5rem;
+  }
+  .CustomFormElement {
+    input#phnumber {
+      flex: 1;
+      margin-top: 0;
+      position: relative;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+    margin-left: 0 !important;
+  }
+}

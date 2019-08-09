@@ -93,6 +93,10 @@ input, textarea, .CustomButton {
   }
 }
 
+.AccountPhase__title, .BillingPhase__title, .PaymentPhase__title, .ReviewPhase__title {
+  font-size: 2.2rem;
+}
+
 .AccountPhase {
   &__guest--info { font-size: 1.8rem; }
 }

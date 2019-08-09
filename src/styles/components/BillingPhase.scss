@@ -1,0 +1,15 @@
+.BillingPhase {
+  &__radio-btns {
+    margin-top: 2rem;
+    margin-bottom: 4rem;
+    display: flex;
+    & .CustomRadioButton:nth-child(2) {
+      margin-left: 4rem;
+    }
+  }
+  &__form-half {
+    display: flex;
+    justify-content: space-between;
+    & .CustomFormElement:nth-child(2) { margin-left: 1rem }
+  }
+}

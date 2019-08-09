@@ -3,14 +3,17 @@ import React, {useState} from 'react'
 import UpdateModal from '../components/UpdateModal'
 import CheckoutProgress from '../components/CheckoutPage/CheckoutProgress'
 import OrderSummary from '../components/CheckoutPage/OrderSummary'
+// 4 Phases components
 import AccountPhase from '../components/CheckoutPage/AccountPhase'
+import BillingPhase from '../components/CheckoutPage/BillingPhase'
+
 import '../styles/pages/CheckoutPage.scss'
 
 const CheckoutPage = ({ changeOverlayState }) => {
   // CheckoutProgress stepNumber
-  const [stepNumber, setStepNumber] = useState(1)
+  const [stepNumber, setStepNumber] = useState(2)
   // 4 step phase state
-  const [progressPhase, setProgressPhase] = useState('account')
+  const [progressPhase, setProgressPhase] = useState('address')
   // edit btn toggle state
   const [isQuantityClicked, setIsQuantityClicked] = useState(false)
 
@@ -34,6 +37,7 @@ const CheckoutPage = ({ changeOverlayState }) => {
         { /* Four stages are present here. The state changes based on the clicks */ }
         { /* Show this component only if there is no user in state */ }
         { progressPhase === 'account' && <AccountPhase /> }
+        { progressPhase === 'address' && <BillingPhase /> }
       </div>
       <div className='CheckoutPage__right'>
         <OrderSummary updateModalState={updateModalState} />

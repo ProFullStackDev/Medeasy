@@ -38,7 +38,7 @@ class AccountPhase extends Component {
     const { authMode, mode, email, password, cPassword, rEmail, rPassword, fName, mName, lName, } = this.state
     return (
       <div className='AccountPhase'>
-        <h2 className='AccountPhase__title' style={{ fontSize: '2.2rem' }}>Account</h2>
+        <h2 className='AccountPhase__title'>Account</h2>
         <div className='AccountPhase__radio-btns'>
           <CustomRadioButton mode='user' onClick={ this.changeMode } text='Login / Register' selected={ mode === 'user' }/>
           <CustomRadioButton mode='guest' onClick={ this.changeMode } text='Checkout as Guest' selected={ mode === 'guest' }/>
