@@ -24,6 +24,8 @@ class BillingPhase extends Component {
   // Redux state must flow to the backend
   // Both billing reducer and shipping reducer
   handleClick (event) {
+    // Save these details to the database (if the user is logged in these values must be prefilled)
+    this.props.onClick(this.props.step)
   }
 
   handleChange (event) { this.setState({ [event.target.name]: event.target.value })}

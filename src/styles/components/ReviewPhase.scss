@@ -1,0 +1,34 @@
+.ReviewPhase {
+  img { cursor: pointer; }
+  &__details {
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid #EFE8E8;
+    padding: 3.2rem 0;
+    &-shipping, &-billing, &-authentication {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+      padding: 0 3.2rem;
+      &--title { margin-bottom: 1.5rem; }
+      & p:not(:last-child) {
+        margin-bottom: 5px;
+      }
+    }
+    &-shipping {
+      border-left: 1px solid #EFE8E8;
+      border-right: 1px solid #EFE8E8;
+    }
+  }
+  &__summary {
+    margin-top: 3.5rem;
+    .SummaryListItem:not(:last-child) {
+      margin-bottom: 2rem;
+    }
+  }
+  .PricesBreakDown {
+    width: 30%;
+    margin: 3.5rem 10% 0 auto;
+  }
+}

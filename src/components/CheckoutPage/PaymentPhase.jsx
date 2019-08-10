@@ -23,10 +23,16 @@ class PaymentPhase extends Component {
     }
     this.selectPaymentType = this.selectPaymentType.bind(this)
     this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   selectPaymentType (paymentType) { this.setState({paymentType}) }
   handleChange (event) { this.setState({ [event.target.name]: event.target.value })}
+  handleSubmit (event) {
+    event.preventDefault()
+    // Process the payment here (again it is uncertain whether we choose or braintree chooses)
+    this.props.onClick(this.props.step)
+  }
 
   render () {
     const { name, expMonth, expYear, cardNumber, cvv } = this.state
@@ -40,13 +46,13 @@ class PaymentPhase extends Component {
         </div>
         <h2 className='PaymentPhase__title'>Credit Card Information</h2>
         { /* This will get replaced or not by Braintree API */ }
-        <form className='PaymentPhase__payment-form' style={{ width: '50%', marginTop: '3rem' }}>
+        <form className='PaymentPhase__payment-form' style={{ width: '50%', marginTop: '3rem' }} onSubmit={ this.handleSubmit }>
           <CustomFormElement labelName='Name on Card' type='text' value={name} name='name' onChange={this.handleChange} />
-          <CustomFormElement placeholder='XXXX-XXXX-XXXX-XXXX' labelName='Name on Card' type='number' value={cardNumber} name='cardNumber' onChange={this.handleChange} />
+          <CustomFormElement required placeholder='XXXX-XXXX-XXXX-XXXX' labelName='Name on Card' type='number' value={cardNumber} name='cardNumber' onChange={this.handleChange} />
           <div className='PaymentPhase__payment-form-three'>
-            <CustomFormElement placeholder='123' labelName='CVV' type='password' value={cvv} name='cvv' onChange={this.handleChange} />
-            <CustomFormElement placeholder='MM' labelName='Exp. Month' type='number' pattern="[0-9]*" value={expMonth} name='expMonth' onChange={this.handleChange} />
-            <CustomFormElement placeholder='YY' labelName='Exp. Year' type='number' pattern="[0-9]*" value={expYear} name='expYear' onChange={this.handleChange} />
+            <CustomFormElement required placeholder='123' labelName='CVV' type='password' value={cvv} name='cvv' onChange={this.handleChange} />
+            <CustomFormElement required placeholder='MM' labelName='Exp. Month' type='number' pattern="[0-9]*" value={expMonth} name='expMonth' onChange={this.handleChange} />
+            <CustomFormElement required placeholder='YY' labelName='Exp. Year' type='number' pattern="[0-9]*" value={expYear} name='expYear' onChange={this.handleChange} />
           </div>
           <CustomButton isSubmitButton fontSize='1.8rem'>Pay Now</CustomButton>
         </form>       

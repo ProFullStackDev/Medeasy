@@ -1,0 +1,17 @@
+@import '../colors';
+
+.SummaryListItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  &__dosage, &__quantity {
+    display: flex;
+    align-items: center;
+    img { margin-left: 2rem;  }
+  }
+  &__price {
+    display: flex;
+    &-original { margin-left: 8px; display: flex; flex-direction: column; }
+  }
+  &__product-distributor, &__price-original--discount { color: $medeasy-green-color; }
+}
