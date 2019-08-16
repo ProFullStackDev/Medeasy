@@ -1,0 +1,26 @@
+@import '../colors';
+.CustomCheckBox {
+  display: flex;
+  align-items: center;
+  &__check {
+    cursor: pointer;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 8px;
+    border: 1px solid $medeasy-green-color;
+    transition: all .2s ease-in-out;
+    background: transparent;
+    svg tspan {
+      fill: $medeasy-green-color;
+      transition: fill .2s ease-in-out;
+    }
+    &:hover, &.activated {
+      background: $medeasy-green-color;
+      svg tspan { fill: #fff; }
+    }
+  }
+}

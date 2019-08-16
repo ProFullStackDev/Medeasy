@@ -4,7 +4,9 @@ import medeasyLogo from '../../images/medeasy-logo.png'
 import { ReactComponent as CartIcon } from '../../images/cart.svg'
 import { ReactComponent as ContactIcon } from '../../images/contactus.svg'
 
-const NavBarUpper = (props) => {
+const NavBarUpper = ({ onClick }) => {
+  // Triggering the login / register Modal
+  const handleClick = event => onClick(event.target.dataset.authmode)
   return (
     <div className='NavBar__upper'>
       <div className='container'>
@@ -18,7 +20,9 @@ const NavBarUpper = (props) => {
           <NavLink exact to='/privacy' activeClassName='active'>Privacy Policy</NavLink>
         </nav>
         <div className='NavBar__upper-other'>
-          <span className='NavBar__upper-other-auth'><Link to='/login'>Login</Link> | <Link to='/register'>Signup</Link></span>
+          <span className='NavBar__upper-other-auth'>
+            <span onClick={ handleClick } style={{ cursor: 'pointer' }} data-authmode='login'>Login</span> | <span onClick={ handleClick } style={{ cursor: 'pointer' }} data-authmode='register'>Signup</span>
+          </span>
           <Link to='/cart'>
             <div className='NavBar__upper-other-cart'>
               <CartIcon alt='cart-img' className='NavBar__upper-other-cart--image' />

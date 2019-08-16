@@ -36,16 +36,48 @@
     background: #fff;
     position: relative;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    svg { cursor: pointer; }
+    svg[alt='close-btn-grey'] {
+      position: absolute;
+      top: 2rem;
+      right: 2rem;
+    }
     &-loginform, &-registerform {
       width: 100%;
       .CustomFormElement {
         margin-bottom: 2.7rem !important;
       }
+      .CustomButton {
+        width: 100%;
+        margin-top: 3.5rem;
+        padding-top: 2rem !important;
+        padding-bottom: 2rem !important;
+      }
+    }
+    &-loginform {
       input:not([type='submit']) {
         padding-top: 2rem;
         padding-bottom: 2rem;
+      }
+      &--split {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+    &-registerform {
+      input:not([type='submit']) {
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
+      }
+      .CustomButton { margin-top: 0rem }
+      &--half {
+        display: flex;
+        justify-content: space-between;
+        & .CustomFormElement:nth-child(2) { margin-left: 1rem }
       }
     }
   }
