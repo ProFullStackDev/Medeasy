@@ -106,7 +106,7 @@
         padding: 1rem;
         display: flex;
         & span { margin-right: 1rem }
-        & img { cursor: pointer }
+        & svg { cursor: pointer; align-self: center; }
       }
       &-text {
         flex: 1;
@@ -122,11 +122,12 @@
           font-size: 1.6rem;
           color: white;
         }
-        & input[type='image'] {
+        svg {
           margin-right: 1rem;
           outline: none;
+          cursor: pointer;
+          align-self: center;
         }
-        & img { cursor: pointer }
       }
     }
   }

@@ -3,8 +3,8 @@ import CustomButton from '../CustomButton'
 import CustomFormElement from '../CustomFormElement'
 import PhoneFormElement from '../PhoneFormElement'
 // Images
-import larrow from '../../images/larrow.svg'
-import rarrow from '../../images/rarrow.svg'
+import { ReactComponent as LeftArrow } from '../../images/larrow.svg'
+import { ReactComponent as RightArrow } from '../../images/rarrow.svg'
 import carouselImg from '../../images/carouselimg.png'
 
 class WelcomeSection extends Component {
@@ -27,8 +27,8 @@ class WelcomeSection extends Component {
     return (
       <div className='LandingPage__welcome'>
         <div className='LandingPage__welcome--carousel' style={{ backgroundImage: `url(${carouselImg})` }}>
-          <img src={larrow} className='LandingPage__welcome--carousel-left' alt='left' />
-          <img src={rarrow} className='LandingPage__welcome--carousel-left' alt='right' />
+          <LeftArrow className='LandingPage__welcome--carousel-left' alt='left' />
+          <RightArrow className='LandingPage__welcome--carousel-left' alt='right' />
         </div>
         <div className='LandingPage__helpform'>
           <h2 className='LandingPage__helpform-title'>

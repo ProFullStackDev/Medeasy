@@ -5,9 +5,9 @@ import AnxietySeizure from './AnxietySeizure'
 import PainKillers from './PainKillers'
 import HealthConditions from './healthConditions'
 // Images
-import downArrowBlack from '../../images/downArrowBlack.svg'
-import downArrowImg from '../../images/downarrow.svg'
-import searchImg from '../../images/search.svg'
+import { ReactComponent as DownArrowBlackIcon } from '../../images/downArrowBlack.svg'
+import { ReactComponent as DownArrowIcon } from '../../images/downarrow.svg'
+import { ReactComponent as SearchIcon } from '../../images/search.svg'
 
 const NavBarLower = props => {
   return (
@@ -16,33 +16,33 @@ const NavBarLower = props => {
         <ul className='NavBar__lower--categories'>
           <li className='NavBar__lower--category'>
             <span>ADHD</span>
-            <img src={downArrowImg} alt='down-arrow' />
+            <DownArrowIcon alt='down-arrow' />
             <Adhd />
           </li>
           <li className='NavBar__lower--category'>
             <span>Anxiety & Seizure</span>
-            <img src={downArrowImg} alt='down-arrow' />
+            <DownArrowIcon alt='down-arrow' />
             <AnxietySeizure />
           </li>
           <li className='NavBar__lower--category'>
             <span>Pain Killers</span>
-            <img src={downArrowImg} alt='down-arrow' />
+            <DownArrowIcon alt='down-arrow' />
             <PainKillers />
           </li> 
           <li className='NavBar__lower--category'>
             <span>Health Conditions</span>
-            <img src={downArrowImg} alt='down-arrow' />
+            <DownArrowIcon alt='down-arrow' />
             <HealthConditions />
           </li>
         </ul>
         <div className='NavBar__lower--search'>
           <div className='NavBar__lower--search-allcats'>
             <span>All Categories</span>
-            <img src={downArrowBlack} alt='down-arrow' />
+            <DownArrowBlackIcon alt='down-arrow' />
           </div>
           <form className='NavBar__lower--search-text'>
             <input type='text' />
-            <input type='image' src={searchImg} alt='Search fr'/>
+            <SearchIcon alt='Search fr' />
           </form>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import React from 'react'
-import editBtn from '../../images/editBtn.svg'
-import cardImg from '../../images/visa.svg'
+import { ReactComponent as EditBtnIcon } from '../../images/editBtn.svg'
+import { ReactComponent as VisaIcon } from '../../images/visa.svg'
 import SummaryListItem from './SummaryListItem'
 import PricesBreakDown from './PricesBreakDown'
 import '../../styles/components/ReviewPhase.scss'
@@ -33,7 +33,7 @@ const ReviewPhase = (props) => {
       <div className='ReviewPhase__details'>
         <div className='ReviewPhase__details-billing'>
         { /* Editing here is absolute craze ... After payment only confirmation must show up */}
-          <h2 className='ReviewPhase__details-billing--title' style={{ fontSize: '2rem' }}>Bill To <img src={editBtn} alt='edit-btn' /></h2>
+          <h2 className='ReviewPhase__details-billing--title' style={{ fontSize: '2rem' }}>Bill To <EditBtnIcon alt='edit-btn'/></h2>
           <div className='ReviewPhase__details-billing--address' style={{ color: '#787878' }}>
             <p className='ReviewPhase__details-billing--address-name'>James Newman</p>
             <p className='ReviewPhase__details-billing--address-phonenumber'>124-198-123</p>
@@ -43,7 +43,7 @@ const ReviewPhase = (props) => {
           </div>
         </div>
         <div className='ReviewPhase__details-shipping'>
-          <h2 className='ReviewPhase__details-shipping--title' style={{ fontSize: '2rem' }}>Ship To <img src={editBtn} alt='edit-btn' /></h2>
+          <h2 className='ReviewPhase__details-shipping--title' style={{ fontSize: '2rem' }}>Ship To <EditBtnIcon alt='edit-btn'/></h2>
           <div className='ReviewPhase__details-shipping--address' style={{ color: '#787878' }}>
             <p className='ReviewPhase__details-shipping--address-name'>James Newman</p>
             <p className='ReviewPhase__details-shipping--address-phonenumber'>124-198-123</p>
@@ -53,11 +53,11 @@ const ReviewPhase = (props) => {
           </div>
         </div>
         <div className='ReviewPhase__details-authentication'>
-          <h2 className='ReviewPhase__details-authentication--title' style={{ fontSize: '2rem' }}>Payment Info <img src={editBtn} alt='edit-btn' /></h2>
+          <h2 className='ReviewPhase__details-authentication--title' style={{ fontSize: '2rem' }}>Payment Info <EditBtnIcon alt='edit-btn'/></h2>
           <div className='ReviewPhase__details-authentication--card' style={{ color: '#787878' }}>
             <p className='ReviewPhase__details-authentication--card-name'>James Newman</p>
             { /* This card img should be dynamic */ }
-            <img className='ReviewPhase__details-authentication--card-type' src={cardImg} alt='cardImg' style={{ marginBottom: '5px' }}/>
+            <VisaIcon className='ReviewPhase__details-authentication--card-type' alt='cardImg' style={{ marginBottom: '5px' }}/>
             <p className='ReviewPhase__details-authentication--card-number'>VISA 4713</p>
             <p className='ReviewPhase__details-authentication--card-expiry'>06 / 21</p>
             <p className='ReviewPhase__details-authentication--card-country'>USA</p>

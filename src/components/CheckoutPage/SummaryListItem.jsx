@@ -1,6 +1,6 @@
 import React from 'react'
-import editBtn from '../../images/editBtn.svg'
-import closeBtn from '../../images/closeBtn.svg'
+import { ReactComponent as EditBtnIcon } from '../../images/editBtn.svg'
+import { ReactComponent as CloseBtnIcon } from '../../images/closeBtn.svg'
 import '../../styles/components/SummaryListItem.scss'
 const SummaryListItem = (props) => {
   const { tabletName, distributor, selectedDosage, quantity, discountedPrice, originalPrice } = props.product
@@ -13,10 +13,10 @@ const SummaryListItem = (props) => {
         <span style={{ fontSize: '1.2rem' }} className='SummaryListItem__product-distributor'>{ distributor }</span>
       </div>
       <span className='SummaryListItem__dosage'>
-        { `${selectedDosage} mg` } <img src={editBtn} alt='editbtn' />
+        { `${selectedDosage} mg` } <EditBtnIcon alt='editbtn' />
       </span>
       <span className='SummaryListItem__quantity'>
-        { `${quantity} Pills` } <img src={editBtn} alt='editbtn' />
+        { `${quantity} Pills` } <EditBtnIcon alt='editbtn' />
       </span>
       <div className='SummaryListItem__price'>
         { /* Discount is calculated */ }
@@ -26,7 +26,7 @@ const SummaryListItem = (props) => {
           <span className='SummaryListItem__price-original--discount' style={{ fontSize: '1rem' }}>20% off</span>
         </p>
       </div>
-      <img style={{ cursor: 'pointer' }} alt='delete-product' src={closeBtn} />
+      <CloseBtnIcon style={{ cursor: 'pointer' }} alt='delete-product' />
     </div>
   )
 }

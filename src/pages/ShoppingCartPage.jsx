@@ -5,8 +5,8 @@ import UpdateModal from '../components/UpdateModal'
 import CustomButton from '../components/CustomButton'
 import CartList from '../components/ShoppingCartPage/CartList'
 // images
-import cartLarge from '../images/cartLarge.svg'
-import back from '../images/back.svg'
+import { ReactComponent as CartLargeIcon } from '../images/cartLarge.svg'
+import { ReactComponent as BackIcon } from '../images/back.svg'
 import fullfiled from '../images/assurances/fullfiled.png' // Show this only if the product is fullfiled for free delivery
 // Other
 import { Link } from 'react-router-dom'
@@ -29,7 +29,7 @@ const ShoppingCartPage = ({ changeOverlayState }) => {
       { isDosageClicked && <UpdateModal disableOverlay={disableOverlay} title='Update Pill Quantity' values={['50 Pills', '100 Pills', '150 Pills', '200 Pills']}/> }
       { isQuantityClicked && <UpdateModal disableOverlay={disableOverlay}  title='Update Dosage' values={['5mg', '10mg']}/> }
       <h1 className='ShoppingCartPage__title'>
-        <img className='ShoppingCartPage__title--img' src={cartLarge} alt='cart-large'/> 
+        <CartLargeIcon alt='cart-large' className='ShoppingCartPage__title--img' />
         <span className='ShoppingCartPage__title--name'>Shopping Cart</span>
       </h1>
       <div className='ShoppingCartPage__main'>
@@ -56,7 +56,7 @@ const ShoppingCartPage = ({ changeOverlayState }) => {
         </div>
         <div className='ShoppingCartPage__main--ctas'>
           <Link to='/' className='ShoppingCartPage__main--ctas-back'>
-            <img src={back} alt='back-btn'/>
+            <BackIcon alt='back-btn' />
             <span>Continue Shopping</span>
           </Link>
           <CustomButton fontSize='2.5rem' specialBgColor='#d44a4a'>Clear Cart</CustomButton>

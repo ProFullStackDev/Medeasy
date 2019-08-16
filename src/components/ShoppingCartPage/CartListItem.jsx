@@ -1,6 +1,6 @@
 import React from 'react'
-import editBtn from '../../images/editBtn.svg'
-import closeBtn from '../../images/closeBtn.svg'
+import { ReactComponent as EditBtnIcon } from '../../images/editBtn.svg'
+import { ReactComponent as CloseBtnIcon } from '../../images/closeBtn.svg'
 import '../../styles/components/CartListItem.scss'
 
 
@@ -14,11 +14,11 @@ const CartListItem = ({ decideModalState, product: { tabletImage, tabletName, di
       </div>
       <div className='CartListItem__dosage'>
         <span className='CartListItem__dosage-value'>{selectedDosage}mg</span>
-        <img src={editBtn} alt='editbtn' onClick={() => decideModalState('dosage')} />
+        <span onClick={() => decideModalState('dosage')}><EditBtnIcon alt='editbtn'/></span>
       </div>
       <div className='CartListItem__quantity'>
         <span className='CartListItem__quantity-value'>{quantity} Pills</span>
-        <img src={editBtn} alt='editbtn' onClick={() => decideModalState('quantity')} />
+        <span onClick={() => decideModalState('quantity')}><EditBtnIcon alt='editbtn'/></span>
       </div>
       <div className='CartListItem__price'>
         <p className='CartListItem__price--final'>{ discountedPrice }</p>
@@ -28,7 +28,7 @@ const CartListItem = ({ decideModalState, product: { tabletImage, tabletName, di
           <span className='CartListItem__price--discount'>20% off</span>
         </div>
       </div>
-      <img className='CartListItem__delete' src={closeBtn} alt='delete-item' />
+      <span><CloseBtnIcon alt='delete-item' className='CartListItem__delete' /></span>
     </div>
   )
 }

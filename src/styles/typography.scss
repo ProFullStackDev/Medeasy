@@ -100,3 +100,11 @@ input, textarea, .CustomButton {
 .AccountPhase {
   &__guest--info { font-size: 1.8rem; }
 }
+
+.LoginRegisterModal {
+  &__left-title{
+    &--content {
+      font-size: 3rem;
+    }
+  }
+}

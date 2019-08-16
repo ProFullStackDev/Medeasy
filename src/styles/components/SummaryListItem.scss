@@ -7,7 +7,7 @@
   &__dosage, &__quantity {
     display: flex;
     align-items: center;
-    img { margin-left: 2rem;  }
+    svg { cursor: pointer; margin-left: 2rem; display: flex;  }
   }
   &__price {
     display: flex;

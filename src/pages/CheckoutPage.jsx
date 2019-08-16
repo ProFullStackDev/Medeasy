@@ -13,9 +13,9 @@ import '../styles/pages/CheckoutPage.scss'
 
 const CheckoutPage = ({ changeOverlayState }) => {
   // CheckoutProgress stepNumber
-  const [stepNumber, setStepNumber] = useState(1)
+  const [stepNumber, setStepNumber] = useState(4)
   // 4 step phase state
-  const [progressPhase, setProgressPhase] = useState('account')
+  const [progressPhase, setProgressPhase] = useState('review')
   // edit btn toggle state
   const [isQuantityClicked, setIsQuantityClicked] = useState(false)
 

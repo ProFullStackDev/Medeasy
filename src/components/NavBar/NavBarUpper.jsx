@@ -1,8 +1,8 @@
 import React from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import medeasyLogo from '../../images/medeasy-logo.png'
-import cartImg from '../../images/cart.svg'
-import contactImg from '../../images/contactus.svg'
+import { ReactComponent as CartIcon } from '../../images/cart.svg'
+import { ReactComponent as ContactIcon } from '../../images/contactus.svg'
 
 const NavBarUpper = (props) => {
   return (
@@ -21,12 +21,12 @@ const NavBarUpper = (props) => {
           <span className='NavBar__upper-other-auth'><Link to='/login'>Login</Link> | <Link to='/register'>Signup</Link></span>
           <Link to='/cart'>
             <div className='NavBar__upper-other-cart'>
-              <img alt='cart-img' className='NavBar__upper-other-cart--image' src={cartImg} />
+              <CartIcon alt='cart-img' className='NavBar__upper-other-cart--image' />
               <span className='NavBar__upper-other-cart--count'>3</span>
             </div>
           </Link>
           <Link to='/contact' className='NavBar__upper-other-contact'>
-            <img alt='contact-img' src={contactImg} style={{ marginRight: '.5rem' }} />
+            <ContactIcon alt='contact' style={{ marginRight: '.5rem' }} />
             Contact us
           </Link>
         </div>

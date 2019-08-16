@@ -1,7 +1,5 @@
 @import 'colors';
 @import 'typography';
-@import 'base';
-
 @font-face {
   font-family: 'Ant Icon';
   src: url('../fonts/anticon.ttf') format('truetype')
@@ -11,14 +9,15 @@
   src: url('../fonts/FontAwesome.otf') format('otf')
 }
 @font-face {
-  font-family: 'Ion Icons';
+  font-family: 'Ionicons';
   src: url('../fonts/ionicons.ttf') format('truetype')
 }
 @font-face {
-  font-family: 'Material';
+  font-family: 'material';
   src: url('../fonts/material.ttf') format('truetype')
 }
 @font-face {
-  font-family: 'Simple Line Icons';
+  font-family: 'simple-line-icons';
   src: url('../fonts/Simple-Line-Icons.ttf') format('truetype')
 }
+@import 'base';

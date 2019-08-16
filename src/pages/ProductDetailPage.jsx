@@ -9,7 +9,7 @@ import CustomFormElement from '../components/CustomFormElement'
 import ReviewListItem from '../components/ProductDetailPage/ReviewListItem'
 
 // images
-import star from '../images/star.svg'
+import { ReactComponent as StarIcon } from '../images/star.svg'
 
 const ProductDetailPage = (props) => {
 
@@ -36,11 +36,11 @@ const ProductDetailPage = (props) => {
               <div className='ProductDetailPage__othertabs-reviews-createreview-ratings'>
                 <span style={{ fontSize: '2rem' }}>Your Rating:</span>
                 <div className='ProductDetailPage__othertabs-reviews-createreview-ratings--stars'>
-                  <img src={star} alt='star'/>
-                  <img src={star} alt='star'/>
-                  <img src={star} alt='star'/>
-                  <img src={star} alt='star'/>
-                  <img src={star} alt='star'/>
+                  <span><StarIcon alt='star' /></span>
+                  <span><StarIcon alt='star' /></span>
+                  <span><StarIcon alt='star' /></span>
+                  <span><StarIcon alt='star' /></span>
+                  <span><StarIcon alt='star' /></span>
                 </div>
               </div>
               <form>

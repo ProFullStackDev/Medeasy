@@ -50,7 +50,7 @@
           & span { 
             margin-right: 1.1rem; 
           }
-          &--stars img { &:hover { cursor: pointer; } &:not(:last-child) { margin-right: 5px; } }
+          &--stars svg { &:hover { cursor: pointer; } &:not(:last-child) { margin-right: 5px; } }
         }
         & form {
           & textarea {

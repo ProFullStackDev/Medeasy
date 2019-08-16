@@ -1,0 +1,52 @@
+@import '../colors';
+.LoginRegisterModal {
+  z-index: 4;
+  width: 110rem; 
+  height: 71.5rem; 
+  border-radius: 2rem;
+  display: flex;
+  position: fixed;
+  overflow: hidden;
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%, -50%);
+  &__left, &__right {
+    flex: 1;
+  }
+  &__left {
+    padding: 3rem;
+    background: #E1F3F0;
+    &-title {
+      display: inline-block;
+      &--content {
+        display: flex;
+      }
+      &--bar {
+        margin-top: 1rem;
+        width: 55%;
+        height: 5px;
+        background: #68A1AC;
+      }
+    }
+    &-image { margin-top: 7rem; }
+  }
+  &__right {
+    padding-left: 6.5rem;
+    padding-right: 6.5rem;
+    background: #fff;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &-loginform, &-registerform {
+      width: 100%;
+      .CustomFormElement {
+        margin-bottom: 2.7rem !important;
+      }
+      input:not([type='submit']) {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+      }
+    }
+  }
+}

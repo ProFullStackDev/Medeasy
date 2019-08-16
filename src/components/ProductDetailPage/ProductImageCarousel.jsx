@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import '../../styles/components/ProductImageCarousel.scss'
-import lArrowBlack from '../../images/larrowBlack.svg'
-import rArrowBlack from '../../images/rarrowBlack.svg'
+import { ReactComponent as LeftArrowBlackIcon } from '../../images/larrowBlack.svg'
+import { ReactComponent as RightArrowBlackIcon } from '../../images/rarrowBlack.svg'
 // Temporary images
 import tablet1 from '../../images/tablet1.png'
 import tablet2 from '../../images/tablet2.png'
@@ -34,9 +34,9 @@ class ProductImageCarousel extends Component {
     return (
       <div className='ProductImageCarousel'>
         <div className='ProductImageCarousel__main'>
-          <img onClick={ this.decrementImg } style={{ cursor: 'pointer' }} src={lArrowBlack} alt='left-arrow' />
+          <span onClick={ this.decrementImg }><LeftArrowBlackIcon style={{ cursor: 'pointer' }} alt='left-arrow' /></span>
           <img src={images[this.state.imageNumber]} alt='tablet-main' className='ProductImageCarousel__main--img'/>
-          <img onClick={ this.incrementImg } style={{ cursor: 'pointer' }} src={rArrowBlack} alt='right-arrow' />
+          <span onClick={ this.incrementImg }><RightArrowBlackIcon style={{ cursor: 'pointer' }} alt='right-arrow' /></span>
         </div>
         <div className='ProductImageCarousel__otherimgs'>
           <div onClick={ this.handleClick } data-imgnumber='0' className={`ProductImageCarousel__otherimgs--img ${this.state.imageNumber === 0 ? 'activeImg' : ''}`}>
