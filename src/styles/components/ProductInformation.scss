@@ -1,4 +1,6 @@
 @import '../colors';
+@import '../mixins';
+
 .ProductInformation {
   margin-left: 3rem;
   flex: 1;
@@ -37,6 +39,7 @@
   }
   &__rates {
     margin-top: 4rem;
+    @include desktop { margin-top: 3rem; }
     display: flex;
     align-items: center;
     &--price {
@@ -59,6 +62,7 @@
   }
   &__buttons {
     margin-top: 3.5rem;
+    @include desktop { margin-top: 3rem; }
     display: flex;
     justify-content: flex-start;
     &-button {

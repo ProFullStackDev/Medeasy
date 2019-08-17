@@ -1,4 +1,5 @@
 @import './colors';
+@import './mixins';
 *, *::after,*::before {
   margin: 0; 
   padding: 0;
@@ -40,6 +41,7 @@ body {
   }
   .container {
     max-width: 144rem;
+    @include desktop { max-width: 1140px; }
     margin: 0 auto;
     height: 100%;
   }

@@ -1,7 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=PT+Sans+Caption&display=swap');
-
+@import './mixins';
 html {
   font-size: 62.5%;
+  @include desktop {
+    font-size: 55%;
+  }
 }
 
 body, input {
@@ -31,6 +34,10 @@ code {
   &__upper-links {
     font-weight: bold;
     font-size: 1.8rem;
+    @media only screen and (max-width: 79.69em) {
+      font-size: 1.6rem;
+    }
+    @media only screen and (max-width: 65.6em) { font-size: 1.4rem; }
   }
   &__upper-other-cart--count {
     font-size: 1.2rem;
@@ -38,6 +45,7 @@ code {
   }
   &__lower--categories {
     font-size: 1.8rem;
+    @media only screen and (max-width: 65.6em) { font-size: 1.6rem; }
   }
   & .dropdown .title {
     font-weight: bold;
@@ -56,9 +64,11 @@ input, textarea, .CustomButton {
 }
 
 .ProductInformation {
-  &__detail--name, &__rates--price-final { font-size: 4.5rem; font-weight: bold; }
-  &__rates--price-original { font-size: 2rem; }
-  &__buttons-button { font-size: 3rem; font-family: 'PT Sans Caption', sans-serif; }
+  &__detail--name, &__rates--price-final { font-size: 4.5rem; font-weight: bold;
+    @include desktop { font-size: 4rem; }
+  }
+  &__rates--price-original { font-size: 2rem; @include desktop { font-size: 1.75rem; } }
+  &__buttons-button { font-size: 2rem; font-family: 'PT Sans Caption', sans-serif; }
 }
 
 .ProductDetailPage {

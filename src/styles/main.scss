@@ -1,5 +1,7 @@
 @import 'colors';
+@import 'mixins';
 @import 'typography';
+
 @font-face {
   font-family: 'Ant Icon';
   src: url('../fonts/anticon.ttf') format('truetype')
@@ -20,4 +22,5 @@
   font-family: 'simple-line-icons';
   src: url('../fonts/Simple-Line-Icons.ttf') format('truetype')
 }
+
 @import 'base';

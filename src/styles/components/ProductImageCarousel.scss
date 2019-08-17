@@ -1,4 +1,5 @@
 @import '../colors';
+@import '../mixins';
 
 .ProductImageCarousel {
   flex-basis: 55rem;
@@ -9,6 +10,7 @@
     &--img {
       min-width: 38rem;
       height: 38rem;
+      @include desktop { min-width: 30rem; height: 30rem; }
     }
     span {
       align-self: center;
