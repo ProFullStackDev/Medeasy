@@ -7,6 +7,7 @@ import LoginRegisterModal from './components/LoginRegisterModal/LoginRegisterMod
 import LandingPage from './pages/LandingPage'
 import ProductDetailPage from './pages/ProductDetailPage'
 import ShoppingCartPage from './pages/ShoppingCartPage'
+import ProfilePage from './pages/ProfilePage'
 // React-router
 import { Switch, Route, Redirect } from 'react-router-dom'
 // Assets
@@ -49,6 +50,7 @@ function App() {
           <Route exact path='/about' render={() => <h1>Hi</h1>} />
           <Route exact path='/customer' render={() => <h1>Hi</h1>} />
           <Route exact path='/privacy' render={() => <h1>Hi</h1>} />
+          <Route exact path='/profile' component={ProfilePage} />
           <Route exact path='/product/:name' component={ProductDetailPage} />
           <Route exact path='/cart' render={routeParams => <ShoppingCartPage {...routeParams} changeOverlayState={decideOverlayState} />} />
           <Route exact path='/checkout/account' render={routeParams => <CheckoutPage {...routeParams} changeOverlayState={decideOverlayState} />} />

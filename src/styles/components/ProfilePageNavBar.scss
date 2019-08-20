@@ -1,0 +1,40 @@
+@import '../colors';
+
+.ProfilePageNavBar {
+  color: #4A4A4A;
+  min-height: 60.6rem;
+  flex-basis: 38.8rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 .5rem 1px rgba(#000, .1);
+  padding: 3.5rem 0;
+  &__profile-title, &__orders-title, &__payment-title {
+    margin-left: 2rem;
+    margin-bottom: 2.3rem;
+  }
+  & > div:not(:last-child) {
+    margin-bottom: 6rem;
+  }
+  li, p {
+    padding: 1.5rem 3rem;
+    cursor: pointer;
+    position: relative;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    transition: background-color .3s ease-in;
+    &::before {
+      content: '';
+      height: 100%;
+      width: .5rem;
+      position: absolute;
+      top: 0;
+      left: 0;
+      transition: background-color .3s ease-in;
+    }
+    & span { margin-left: 1rem; }
+    &:hover, .activeProfileTab {
+      background: #f2f2f2;
+      &::before { background: $medeasy-green-color; }
+    }
+  }
+}

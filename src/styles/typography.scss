@@ -118,3 +118,14 @@ input, textarea, .CustomButton {
     }
   }
 }
+
+.ProfilePageNavBar {
+  li, p { font-size: 1.8rem }
+  &__profile-tile, &__orders-title, &__payment-title {
+    font-size: 2.2rem;
+  }
+}
+
+.ProfilePageDisplay {
+  &__phase-title { font-size: 2.2rem; color: #000; }
+}
