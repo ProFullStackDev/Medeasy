@@ -1,0 +1,26 @@
+.AddressChangeMain {
+  &__intro {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__alladdresses {
+    margin-top: 6rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 3rem;
+  }
+
+  &__noaddress {
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    &-text { margin-top: 2rem; color: #ababab; }
+  }
+}

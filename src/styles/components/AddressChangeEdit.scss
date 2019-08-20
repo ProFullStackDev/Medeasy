@@ -1,0 +1,32 @@
+.AddressChangeEdit {
+  max-width: 65%;
+  &__badges, &__form {
+    margin-left: 5rem;
+  }
+  &__badges {
+    margin-bottom: 3rem;
+    display: flex;
+    & .CustomBadge {
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+      &:not(:last-child) {
+        margin-right: 2rem;
+      }
+    }
+  }
+  &__form {
+    &-half {
+      display: flex;
+      justify-content: space-between;
+      & .CustomFormElement:nth-child(2) { margin-left: 4rem }
+    }
+    &-buttons {
+      margin-top: 4rem;
+      display: flex;
+      justify-content: flex-end;
+      & .CustomButton:nth-child(2) {
+        margin-left: 3.5rem;
+      }
+    }
+  }
+}

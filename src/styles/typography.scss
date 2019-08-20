@@ -127,5 +127,10 @@ input, textarea, .CustomButton {
 }
 
 .ProfilePageDisplay {
-  &__phase-title { font-size: 2.2rem; color: #000; }
+  &__phase-title { font-size: 2.2rem; color: #000; margin-bottom: 3rem; }
+}
+
+.AddressListItem {
+  p { font-size: 1.4rem; }
+  &__intro-name { font-size: 1.8rem }
 }

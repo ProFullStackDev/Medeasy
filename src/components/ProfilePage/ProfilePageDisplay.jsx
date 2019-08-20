@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import AddressChangeController from './AddressChange/AddressChangeController'
+import ChangePasswordController from './ChangePassword/ChangePasswordController'
 
 class ProfilePageDisplay extends Component {
   constructor (props) {
@@ -9,13 +10,16 @@ class ProfilePageDisplay extends Component {
   render () {
     return (
       <div className='ProfilePageDisplay' style={ profilePageDisplayStyles }>
-        <AddressChangeController /
+        { /* Depends on what the user clicks in the navbar */ }
+        {/* <AddressChangeController /> */}
+        <ChangePasswordController />
       </div>
     )
   }
 }
 
 const profilePageDisplayStyles = {
+  position: 'relative',
   flex: 1,
   marginLeft: '4rem',
   minHeight: '65.4rem',

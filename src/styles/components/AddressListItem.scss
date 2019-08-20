@@ -1,0 +1,21 @@
+@import '../colors';
+
+.AddressListItem {
+  padding: 1.3rem;
+  background: transparent;
+  color: $medeasy-mild-black-color;
+  border: 1px solid $medeasy-green-color;
+  border-radius: .5rem;
+  &__intro {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    & span {
+      cursor: pointer;
+      &:nth-child(2) { margin-left: 1rem; }
+    }
+  }
+  & p {
+    line-height: 22px;
+  }
+}
