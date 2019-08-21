@@ -3,6 +3,15 @@ import { Link, NavLink } from 'react-router-dom'
 import medeasyLogo from '../../images/medeasy-logo.png'
 import { ReactComponent as CartIcon } from '../../images/cart.svg'
 import { ReactComponent as ContactIcon } from '../../images/contactus.svg'
+import { ReactComponent as UserIcon } from '../../images/user.svg'
+import { ReactComponent as DownArrowBlackIcon } from '../../images/downArrowBlack.svg'
+import { ReactComponent as BagIcon } from '../../images/bag.svg'
+import { ReactComponent as LogoutIcon } from '../../images/logout.svg'
+
+// This checks for the user object 
+// for swapping out Login Register to Dropdown
+// For now I am putting just dummy data
+const user = {name: 'Han Solo'}
 
 const NavBarUpper = ({ onClick }) => {
   // Triggering the login / register Modal
@@ -21,7 +30,17 @@ const NavBarUpper = ({ onClick }) => {
         </nav>
         <div className='NavBar__upper-other'>
           <span className='NavBar__upper-other-auth'>
-            <span onClick={ handleClick } style={{ cursor: 'pointer' }} data-authmode='login'>Login</span> | <span onClick={ handleClick } style={{ cursor: 'pointer' }} data-authmode='register'>Signup</span>
+            {/* <span onClick={ handleClick } style={{ cursor: 'pointer' }} data-authmode='login'>Login</span>&nbsp;|&nbsp;<span onClick={ handleClick } style={{ cursor: 'pointer' }} data-authmode='register'>Signup</span> */}
+            <React.Fragment>
+              <span style={{ display: 'flex', alignItems: 'center' }}>
+                <UserIcon />&nbsp;&nbsp;{ user.name }&nbsp;&nbsp;<DownArrowBlackIcon id='downarrow'/>
+              </span>
+              <ul className='NavBar__upper-other-auth-user'>
+                <Link to='/profile'><li><UserIcon /><span>Profile</span></li></Link>
+                <Link to='/orders'><li><BagIcon /><span>My Orders</span></li></Link>
+                <Link to='/logout'><li><LogoutIcon /><span>Logout</span></li></Link>
+              </ul>
+            </React.Fragment>
           </span>
           <Link to='/cart'>
             <div className='NavBar__upper-other-cart'>

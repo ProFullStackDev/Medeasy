@@ -1,21 +1,20 @@
-import React, { Component } from 'react'
+import React from 'react'
 import AddressChangeController from './AddressChange/AddressChangeController'
 import ChangePasswordController from './ChangePassword/ChangePasswordController'
 
-class ProfilePageDisplay extends Component {
-  constructor (props) {
-    super(props)
-    this.state = {}
+const ProfilePageDisplay = ({ currentMode }) => {
+  let mode = null
+  switch (currentMode) {
+    case 'manageAddress': mode = <AddressChangeController />; break
+    case 'changePassword': mode = <ChangePasswordController />; break
+    default: break
   }
-  render () {
-    return (
-      <div className='ProfilePageDisplay' style={ profilePageDisplayStyles }>
-        { /* Depends on what the user clicks in the navbar */ }
-        {/* <AddressChangeController /> */}
-        <ChangePasswordController />
-      </div>
-    )
-  }
+  return (
+    <div className='ProfilePageDisplay' style={ profilePageDisplayStyles }>
+      { /* Depends on what the user clicks in the navbar */ }
+      { mode }
+    </div>
+  )
 }
 
 const profilePageDisplayStyles = {

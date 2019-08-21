@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import '../../../styles/components/AddressChangeMain.scss'
 import CustomButton from '../../CustomButton'
 import AddressListItem from './AddressListItem'
@@ -42,32 +42,35 @@ const addresses = {
   }
 }
 
-const AddressChangeMain = props => {
+const AddressChangeMain = ({ changeEditMode }) => {
+  const handleClick = () => {
+    // Change to edit mode
+    changeEditMode(true)
+  }
   return (
     <div className='AddressChangeMain'>
       <div className='AddressChangeMain__intro'>
         <h2 className='ProfilePageDisplay__phase-title'>Manage Addresses</h2>
-        <CustomButton fontSize='1.8rem' specialBgColor='#f8931a'>
+        <CustomButton onClick={ handleClick } fontSize='1.8rem' specialBgColor='#f8931a'>
           <PlusIcon /><span style={{ marginLeft: '1rem' }}>Add New Address</span>
         </CustomButton>
       </div>
       {/* If the addresses are present means show them */}
-      
-      <div className='AddressChangeMain__alladdresses'>
-        { /* If home is present then put .. Repeat the same for all the address types */ }
-        { Object.keys(addresses.home).length > 0 && <AddressListItem addressObj={addresses.home} /> }
-        { Object.keys(addresses.work).length > 0 && <AddressListItem addressObj={addresses.work} /> }
-        { Object.keys(addresses.other).length > 0 && <AddressListItem addressObj={addresses.other} /> }
-      </div>
-
-      { /* Else just show the no address block */ }
-      
-      {/* <div className='AddressChangeMain__noaddress'>
-        <NoAddressIcon />
-        <p className='AddressChangeMain__noaddress-text'>
-        You don’t have any saved addresses.<br/>Add one to speed up your checkout process.
-        </p>
-      </div> */}
+      { Object.keys(addresses).length > 0 ? 
+        <div className='AddressChangeMain__alladdresses'>
+          { /* If home is present then put .. Repeat the same for all the address types */ }
+          { Object.keys(addresses.home).length > 0 && <AddressListItem addressObj={addresses.home} /> }
+          { Object.keys(addresses.work).length > 0 && <AddressListItem addressObj={addresses.work} /> }
+          { Object.keys(addresses.other).length > 0 && <AddressListItem addressObj={addresses.other} /> }
+        </div> :
+        /* Else just show the no address block */
+        <div className='AddressChangeMain__noaddress'>
+          <NoAddressIcon />
+          <p className='AddressChangeMain__noaddress-text'>
+          You don’t have any saved addresses.<br/>Add one to speed up your checkout process.
+          </p>
+        </div>
+      }
     </div>
   )
 }

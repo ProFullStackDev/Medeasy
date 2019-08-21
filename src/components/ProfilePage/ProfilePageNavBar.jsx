@@ -8,14 +8,15 @@ import { ReactComponent as CreditCardIcon } from '../../images/ccsmall.svg'
 import { ReactComponent as BitCoinIcon } from '../../images/bitLogo.svg'
 import { ReactComponent as PayPalIcon } from '../../images/paypalLogo.svg'
 
-const ProfilePageNavBar = props => {
+const ProfilePageNavBar = ({ currentMode, setCurrentMode }) => {
   // Selected mode for navbar
-  const [selectedMode, setSelectedMode] = useState('')
+  const [selectedMode, setSelectedMode] = useState(currentMode)
   // Trigger the active
   const handleClick = event => {
-    setSelectedMode(event.target.closest('li').dataset.mode)
+    const mode = event.target.closest('li').dataset.mode
+    setSelectedMode(mode)
     // Passing the mode back to the main Profile page
-    
+    setCurrentMode(mode)
   }
   return (
     <div className='ProfilePageNavBar'>
@@ -26,7 +27,7 @@ const ProfilePageNavBar = props => {
             <GpsIcon />
             <span>Manage Addresses</span>
           </li>
-          <li onClick={handleClick} data-mode='changePass' className={`ProfilePageNavBar__profile-list--item ${ selectedMode === 'changePass' ? 'activeProfileTab' : '' }`}>
+          <li onClick={handleClick} data-mode='changePassword' className={`ProfilePageNavBar__profile-list--item ${ selectedMode === 'changePass' ? 'activeProfileTab' : '' }`}>
             <LockIcon />
             <span>Change Password</span>
           </li>

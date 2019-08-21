@@ -1,9 +1,12 @@
 import React from 'react'
 import '../styles/components/CustomBadge.scss'
 
-const CustomBadge = ({ badgeValue }) => {
+const CustomBadge = ({ badgeValue, selected, onClick }) => {
+  const handleClick = () => {
+    onClick(badgeValue)
+  }
   return (
-    <div className='CustomBadge'>
+    <div onClick={handleClick} className={`CustomBadge ${selected ? 'activeBadge': ''}`}>
       {badgeValue}
     </div>
   )
