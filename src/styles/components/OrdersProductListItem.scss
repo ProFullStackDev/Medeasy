@@ -1,0 +1,20 @@
+.OrdersProductListItem {
+  color: #000;
+  display: flex;
+  justify-content: space-between;
+  margin: 2.5rem 0;
+  &-details {
+    display: flex;
+    & img {
+      width: 6rem;
+      height: 6.4rem;
+    }
+    & div { margin-left: 1rem; }
+  }
+  &-price {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-end;
+    text-align: right;
+  }
+}

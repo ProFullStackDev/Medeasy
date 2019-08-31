@@ -14,7 +14,7 @@ import { ReactComponent as LogoutIcon } from '../../images/logout.svg'
 const user = {name: 'Han Solo'}
 
 const NavBarUpper = ({ onClick }) => {
-  // Triggering the login / register Modal
+  // Triggering the login / register Modal ( When user is not logged in )
   const handleClick = event => onClick(event.target.dataset.authmode)
   return (
     <div className='NavBar__upper'>
@@ -30,17 +30,21 @@ const NavBarUpper = ({ onClick }) => {
         </nav>
         <div className='NavBar__upper-other'>
           <span className='NavBar__upper-other-auth'>
-            {/* <span onClick={ handleClick } style={{ cursor: 'pointer' }} data-authmode='login'>Login</span>&nbsp;|&nbsp;<span onClick={ handleClick } style={{ cursor: 'pointer' }} data-authmode='register'>Signup</span> */}
-            <React.Fragment>
-              <span style={{ display: 'flex', alignItems: 'center' }}>
-                <UserIcon />&nbsp;&nbsp;{ user.name }&nbsp;&nbsp;<DownArrowBlackIcon id='downarrow'/>
-              </span>
-              <ul className='NavBar__upper-other-auth-user'>
-                <Link to='/profile'><li><UserIcon /><span>Profile</span></li></Link>
-                <Link to='/orders'><li><BagIcon /><span>My Orders</span></li></Link>
-                <Link to='/logout'><li><LogoutIcon /><span>Logout</span></li></Link>
-              </ul>
-            </React.Fragment>
+            { !user ? 
+                <React.Fragment>
+                  <span onClick={ handleClick } style={{ cursor: 'pointer' }} data-authmode='login'>Login</span>&nbsp;|&nbsp;<span onClick={ handleClick } style={{ cursor: 'pointer' }} data-authmode='register'>Signup</span> 
+                </React.Fragment> 
+              : <React.Fragment>
+                  <span style={{ display: 'flex', alignItems: 'center' }}>
+                    <UserIcon />&nbsp;&nbsp;{ user.name }&nbsp;&nbsp;<DownArrowBlackIcon id='downarrow'/>
+                  </span>
+                  <ul className='NavBar__upper-other-auth-user'>
+                    <Link to='/profile'><li><UserIcon /><span>Profile</span></li></Link>
+                    <Link to='/orders'><li><BagIcon /><span>My Orders</span></li></Link>
+                    <Link to='/logout'><li><LogoutIcon /><span>Logout</span></li></Link>
+                  </ul>
+                </React.Fragment>
+            }
           </span>
           <Link to='/cart'>
             <div className='NavBar__upper-other-cart'>

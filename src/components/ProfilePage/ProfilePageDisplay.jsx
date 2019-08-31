@@ -1,12 +1,14 @@
 import React from 'react'
 import AddressChangeController from './AddressChange/AddressChangeController'
 import ChangePasswordController from './ChangePassword/ChangePasswordController'
+import OrdersController from './Orders/OrdersController'
 
 const ProfilePageDisplay = ({ currentMode }) => {
   let mode = null
   switch (currentMode) {
     case 'manageAddress': mode = <AddressChangeController />; break
     case 'changePassword': mode = <ChangePasswordController />; break
+    case 'orders': mode = <OrdersController />; break
     default: break
   }
   return (
