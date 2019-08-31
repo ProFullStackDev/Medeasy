@@ -2,6 +2,7 @@ import React from 'react'
 import AddressChangeController from './AddressChange/AddressChangeController'
 import ChangePasswordController from './ChangePassword/ChangePasswordController'
 import OrdersController from './Orders/OrdersController'
+import CreditCardController from './Payment/CreditCardController'
 
 const ProfilePageDisplay = ({ currentMode }) => {
   let mode = null
@@ -9,6 +10,7 @@ const ProfilePageDisplay = ({ currentMode }) => {
     case 'manageAddress': mode = <AddressChangeController />; break
     case 'changePassword': mode = <ChangePasswordController />; break
     case 'orders': mode = <OrdersController />; break
+    case 'creditCard': mode = <CreditCardController />; break
     default: break
   }
   return (

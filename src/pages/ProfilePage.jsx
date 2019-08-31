@@ -5,7 +5,7 @@ import ProfilePageDisplay from '../components/ProfilePage/ProfilePageDisplay'
 import '../styles/pages/ProfilePage.scss'
 
 const ProfilePage = props => {
-  const [profileSubState, setProfileSubState] = useState('orders')
+  const [profileSubState, setProfileSubState] = useState('creditCard')
   const handleSubStateChange = mode => setProfileSubState(mode)
   return (
     <div className='ProfilePage'>
