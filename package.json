@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "compile": "npm run build --prefix client",
-    "start": "npm start --prefix client"
+    "start": "npm start --prefix client",
+    "server": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -19,6 +20,7 @@
   "homepage": "https://github.com/sunguru98/Medeasy#readme",
   "dependencies": {
     "axios": "^0.19.0",
+    "dotenv": "^8.1.0",
     "express": "^4.17.1",
     "express-validator": "^6.2.0",
     "mongoose": "^5.7.1"
