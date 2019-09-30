@@ -1,6 +1,7 @@
 const { Schema, model } = require('mongoose')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const Profile = require('./Profile')
 
 const userSchema = new Schema({
   email: { type: String, required: true },
@@ -45,6 +46,11 @@ userSchema.pre('save', async function (next) {
     const hashedPassword = await bcrypt.hash(this.password, 10)
     this.password = hashedPassword
   }
+  next()
+})
+
+userSchema.pre('remove', async function (next) {
+  await Profile.deleteOne({ user: this._id })
   next()
 })
 

@@ -5,18 +5,20 @@ const profileSchema = new Schema({
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
   middleName: String,
-  addresses: [{
-    type: { type: String, required: true },
-    addressLine1: { type: String, required: true },
-    addressLine2: String,
-    city: { type: String, required: true },
-    state: { type: String, required: true },
-    isAdmin: { type: Boolean, default: false },
-    postalCode: { type: Number, default: true },
-    country: { type: String, default: 'United States of America' },
-    phNumber: { type: Number, required: true },
-    faxNumber: Number
-  }]
+  addresses: {
+    type: [{
+      mode: { type: String, required: true },
+      addressLine1: { type: String, required: true },
+      addressLine2: String,
+      city: { type: String, required: true },
+      state: { type: String, required: true },
+      postalCode: { type: Number, required: true },
+      country: { type: String, default: 'United States of America' },
+      phNumber: { type: Number, required: true },
+      faxNumber: Number
+    }],
+    required: true
+  }
 }, { timestamps: true })
 
 profileSchema.methods = {

@@ -11,7 +11,9 @@ const port = process.env.PORT || 9998
 // Middlewares and routers integration
 if (process.env.NODE_ENVIRONMENT === 'development') app.use(morgan('dev'))
 app.use(express.json())
+
 app.use('/api/user', require('./routes/userRouter'))
+app.use('/api/profile', require('./routes/profileRoutes'))
 
 
 app.post('/', (req, res) => {
