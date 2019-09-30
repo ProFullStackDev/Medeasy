@@ -9,6 +9,9 @@ class AddressChangeEdit extends Component {
   constructor (props) {
     super(props)
     this.state = {
+      fName: '',
+      lName: '',
+      mName: '',
       addressType: '',
       address1: '',
       address2: '',
@@ -55,6 +58,11 @@ class AddressChangeEdit extends Component {
           <CustomBadge onClick={this.selectAddressType} selected={this.state.addressType === 'Other'} badgeValue='Other' />
         </div>
         <form className='AddressChangeEdit__form' onSubmit={this.handleSubmit}>
+          <div className='AddressChangeEdit__form-half'>
+            <CustomFormElement onChange={ this.handleChange } labelName='First Name' type='text' name='fName' value={this.state.fName} />
+            <CustomFormElement onChange={ this.handleChange } labelName='Middle Name' type='text' name='mName' value={this.state.mName} />
+          </div>
+          <CustomFormElement onChange={ this.handleChange } labelName='Last Name' type='text' name='lName' value={this.state.lName} />
           <CustomFormElement onChange={ this.handleChange } labelName='Address Line 1' type='text' name='address1' value={this.state.address1} />
           <CustomFormElement onChange={ this.handleChange } labelName='Address Line 2' type='text' name='address2' value={this.state.address2} />
           <div className='AddressChangeEdit__form-half'>
