@@ -16,7 +16,8 @@ app.use(express.json())
 app.use('/api/user', require('./routes/userRouter'))
 app.use('/api/profile', require('./routes/profileRoutes'))
 app.use('/api/cart', require('./routes/cartRoutes'))
-app.use('/api/product', require('./routes/productRoutes'))
+app.use('/api/products', require('./routes/productRoutes'))
+app.use('/api/categories', require('./routes/categoryRoutes'))
 
 app.post('/', (req, res) => {
   res.send(req.body)

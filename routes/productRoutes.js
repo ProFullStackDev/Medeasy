@@ -5,7 +5,7 @@ const multer = require('multer')
 const authenticate = require('../middleware/authenticate')
 const isAdmin = require('../middleware/isAdmin')
 const { createProduct, fetchAllProducts, fetchAllProductsByCategory, fetchProductById, updateProductById, deleteProductById } = require('../controllers/productController')
-const { storage, limits, fileFilter } = require('../utils/mutlerUtils')
+const { storage, limits, fileFilter } = require('../utils/multerUtils')
 
 const upload = multer({ storage, limits, fileFilter })
 const router = Router()

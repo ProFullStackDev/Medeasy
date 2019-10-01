@@ -8,7 +8,6 @@ module.exports = {
 
   // Create a new product
   createProduct: async (req, res) => {
-    console.log(req.files)
     const errors = validationResult(req)
     if (!errors.isEmpty()) return res.status(400).send({ statusCode: 400, message: errors.array() })
     if (req.files.length < 3) return res.status(400).send({ statusCode: 400, message: 'Minimum 3 images required' })
