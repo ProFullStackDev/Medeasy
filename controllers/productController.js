@@ -3,6 +3,7 @@ const path = require('path')
 const fs = require('fs-extra')
 const { validationResult } = require('express-validator')
 const Product = require('../models/Product')
+const prepareProductObject = require('../utils/prepareProductObj')
 
 module.exports = {
 
@@ -17,15 +18,18 @@ module.exports = {
       const filePaths = req.files.map(file => `/${file.path}`)
       if (await Product.findOne({ name: req.body.name }))
         return res.status(400).send({ statusCode: 400, message: 'Product already exists' })
-      let product = new Product(req.body)
-      product.user = req.user._id
+
+      const productObj = prepareProductObject(req.body)
+
+      let product = new Product(productObj)
+      product.admin = req.user._id
       product.category = categoryId
-      product.photos = product.photos.concat(filePaths)
+      product.photos = filePaths
       await product.save()
-      product = await product.populate('user', ['name']).populate('category', ['name']).execPopulate()
+      product = await product.populate('admin', ['name']).populate('category', ['name']).execPopulate()
       res.status(201).send({ statusCode: 201, product })
     } catch (err) {
-      console.log(err.message)
+      console.log(err.message, err)
       if (err.name === 'CastError') return res.status(400).send({ statusCode: 400, message: 'Invalid Product Id' })
       res.status(500).send({ statusCode: 500, message: 'Server Error'})
     }
@@ -35,7 +39,7 @@ module.exports = {
   fetchAllProducts: async (req, res) => {
     const searchQuery = req.query.search || ''
     try {
-      const products = await Product.find({ name: {$regex: '^' + searchQuery , $options: 'i'} }).populate('category', ['name'])
+      const products = await Product.find({ name: {$regex: '^' + searchQuery , $options: 'i'}, stockAvailable: true }).select('-admin').populate('category', ['name'])
       if (!products || !products.length) return res.status(404).send({ statusCode: 404, message: 'No products are found' })
       res.send({ statusCode: 200, products })
     } catch (err) {
@@ -85,19 +89,20 @@ module.exports = {
       const filePaths = req.files.map(file => `/${file.path}`)
       const originalFileNames = req.files.map(file => file.originalname)
 
-      let oldProduct = await Product.findOne({ user: req.user._id, _id: productId })
-      let product = await Product.findOneAndUpdate({ user: req.user._id, _id: productId }, { $set: req.body }, { new: true })
+      let oldProduct = await Product.findOne({ admin: req.user._id, _id: productId })
+      let product = await Product.findOneAndUpdate({ admin: req.user._id, _id: productId }, { $set: prepareProductObject(req.body) }, { new: true })
 
       if (oldProduct.name !== product.name) {
         const pathName1 = path.join(__dirname, `../uploads/${oldProduct.name}`)
         await fs.remove(pathName1)
       }
       
-      const pathName2 = path.join(__dirname, `../uploads/${req.body.name}`)
+      const pathName2 = path.join(__dirname, `../uploads/${product.name}`)
+      console.log(pathName2)
       fs.readdir(pathName2, (err, files) => {
         files.forEach(file => {
           if (!originalFileNames.includes(file)) {
-            fs.unlink(path.join(__dirname, `../uploads/${req.body.name}/${file}`), () => {})
+            fs.unlink(path.join(__dirname, `../uploads/${product.name}/${file}`), () => {})
           }
         })
       })
@@ -106,7 +111,7 @@ module.exports = {
       product.photos = filePaths
       await product.save()
       product = await product.populate('user', ['name']).populate('category', ['name']).execPopulate()
-      res.send({ statusCode: 200, product })
+      res.status(202).send({ statusCode: 202, product })
     } catch (err) {
       console.log(err)
       if (err.name === 'CastError') return res.status(400).send({ statusCode: 400, message: 'Invalid Product Id' })

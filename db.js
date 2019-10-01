@@ -5,5 +5,7 @@ mongoose.connect(process.env.MONGODB_URI.replace('<password>', process.env.MONGO
   useCreateIndex: true,
   useFindAndModify: false,
   useUnifiedTopology: true
-}, conn => console.log('Database connected successfully'))
+}, conn => {
+  console.log('Database connected successfully')
+})
 

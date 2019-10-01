@@ -17,7 +17,8 @@ router.post('/:categoryId', authenticate, isAdmin, upload.array('product-image',
   check('name', 'Name is required').not().isEmpty(),
   check('description', 'Description is required').not().isEmpty(),
   check('price', 'Price is required').not().isEmpty(),
-  check('totalQuantity', 'Total quantity is required').not().isEmpty()
+  check('dosages', 'Dosages is required').not().isEmpty(),
+  check('quantities', 'Quantities is required').not().isEmpty()
 ], createProduct)
 
 // @route - GET /api/products/
@@ -35,14 +36,15 @@ router.get('/category/:categoryId', fetchAllProductsByCategory)
 // @method - Public
 router.get('/:productId', fetchProductById)
 
-// @route - PUT /api/products/:productId
+// @route - PATCH /api/products/:productId
 // @desc - Update a product
 // @method - Private (Both Auth and Admin)
 router.put('/:productId', authenticate, isAdmin, upload.array('product-image', 3), [
   check('name', 'Name is required').not().isEmpty(),
   check('description', 'Description is required').not().isEmpty(),
   check('price', 'Price is required').not().isEmpty(),
-  check('totalQuantity', 'Total quantity is required').not().isEmpty()
+  check('dosages', 'Dosages is required').not().isEmpty(),
+  check('quantities', 'Quantities is required').not().isEmpty()
 ], updateProductById)
 
 // @route - DELETE /api/products/:productId
