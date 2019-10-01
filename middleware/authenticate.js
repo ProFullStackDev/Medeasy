@@ -7,7 +7,7 @@ const authenticate = async (req, res, next) => {
     if (!accessToken) throw new Error('No token')
     accessToken = accessToken.replace('Bearer ', '')
     const payload = await jwt.verify(accessToken, process.env.JWT_SECRET_KEY)
-    const user = await User.findOne({ _id: payload.id, accessToken })
+    const user = await User.findOne({ _id: payload.id, accessToken }).select('-password').select('-__v')
     if (!user) throw new Error('No user')
     req.user = user
     req.accessToken = accessToken

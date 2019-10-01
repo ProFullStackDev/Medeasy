@@ -18,6 +18,7 @@ app.use('/api/profile', require('./routes/profileRoutes'))
 app.use('/api/cart', require('./routes/cartRoutes'))
 app.use('/api/products', require('./routes/productRoutes'))
 app.use('/api/categories', require('./routes/categoryRoutes'))
+app.use('/api/reviews', require('./routes/reviewRoutes'))
 
 app.post('/', (req, res) => {
   res.send(req.body)

@@ -16,7 +16,7 @@ const userSchema = new Schema({
 userSchema.statics = {
   authenticateUser: async (email, password) => {
     // Checking whether user's email exists
-    const user = await User.findOne({ email })
+    const user = await User.findOne({ email }).select('-isAdmin')
     if (!user) throw new Error('Incorrect credentials')
     // Verifying passwords are same
     const isMatched = await bcrypt.compare(password, user.password)

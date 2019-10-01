@@ -98,5 +98,21 @@ module.exports = {
     } catch (err) {
       if (err.name === 'CastError') return res.status(400).send({ statusCode: 400, message: 'Invalid cart id' })
     }
+  },
+
+  // Return total amount from cart
+  returnTotalAmount: async (req, res) => {
+    const { cartId } = req.params
+    try {
+      if (!cartId) return res.status(400).send({ statusCode: 400, message: 'Cart Id not found' })
+      const cart = await Cart.findById(cartId)
+      if (!cart) return res.status(404).send({ statusCode: 404, message: 'Cart not found' })
+      const totalPrice = cart.products.reduce((acc, product) => acc + parseInt(product.subTotal), 0)
+      res.status(202).send({ statusCode: 202, totalPrice })
+    } catch (err) {
+      console.error(err)
+      if (err.name === 'CastError') return res.status(400).send({ statusCode: 400, message: 'Invalid Cart Id' })
+      res.status(500).send({ statusCode: 500, message: 'Server Error' })
+    }
   }
 }

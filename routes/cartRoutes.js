@@ -2,7 +2,7 @@ const { Router } = require('express')
 const router = Router()
 const { check } = require('express-validator')
 
-const { generateCartId, addProductToCart, getProductsByCartId, updateProductQuantity, deleteProductFromCart } = require('../controllers/cartController')
+const { generateCartId, addProductToCart, getProductsByCartId, updateProductQuantity, deleteProductFromCart, returnTotalAmount } = require('../controllers/cartController')
 
 // @route - GET /api/cart/generateId
 // @desc - Generate Cart ID
@@ -45,5 +45,10 @@ router.delete('/:cartId', [
   check('itemId', 'Item id must be a Mongo Id').isMongoId(),
 ],
 deleteProductFromCart)
+
+// @route - GET /api/cart/total/:cartId
+// @desc - Get total price from cart
+// @method - Public
+router.get('/total/:cartId', returnTotalAmount)
 
 module.exports = router
