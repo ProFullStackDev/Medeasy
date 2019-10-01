@@ -3,6 +3,7 @@ const { Schema, model } = require('mongoose')
 const productSchema = new Schema({
   name: { type: String, trim: true, required: true },
   description: { type: String, trim: true, required: true },
+  sideEffects: [String],
   price: { type: Object, required: true },
   category: { type: Schema.Types.ObjectId, ref: 'category' },
   admin: { type: Schema.Types.ObjectId, ref: 'user' },

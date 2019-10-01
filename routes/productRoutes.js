@@ -16,6 +16,7 @@ const router = Router()
 router.post('/:categoryId', authenticate, isAdmin, upload.array('product-image', 3), [
   check('name', 'Name is required').not().isEmpty(),
   check('description', 'Description is required').not().isEmpty(),
+  check('sideEffects', 'Side Effects is required').not().isEmpty(),
   check('price', 'Price is required').not().isEmpty(),
   check('dosages', 'Dosages is required').not().isEmpty(),
   check('quantities', 'Quantities is required').not().isEmpty()
@@ -42,6 +43,7 @@ router.get('/:productId', fetchProductById)
 router.put('/:productId', authenticate, isAdmin, upload.array('product-image', 3), [
   check('name', 'Name is required').not().isEmpty(),
   check('description', 'Description is required').not().isEmpty(),
+  check('sideEffects', 'Side Effects is required').not().isEmpty(),
   check('price', 'Price is required').not().isEmpty(),
   check('dosages', 'Dosages is required').not().isEmpty(),
   check('quantities', 'Quantities is required').not().isEmpty()

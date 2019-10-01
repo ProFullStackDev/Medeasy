@@ -41,9 +41,9 @@ module.exports = {
     try {
       const products = await Product.find({ name: {$regex: '^' + searchQuery , $options: 'i'}, stockAvailable: true }).select('-admin').populate('category', ['name'])
       if (!products || !products.length) return res.status(404).send({ statusCode: 404, message: 'No products are found' })
-      res.send({ statusCode: 200, products })
+      res.send({ statusCode: 200, count: products.length, products })
     } catch (err) {
-      console.log(err)
+      console.log(err.message)
       res.status(500).send({ statusCode: 500, message: 'Server Error' })
     }
   },
