@@ -9,7 +9,7 @@ const app = express()
 const port = process.env.PORT || 9998
 
 // Middlewares
-if (process.env.NODE_ENVIRONMENT === 'development') app.use(morgan('dev'))
+if (process.env.NODE_ENV === 'development') app.use(morgan('dev'))
 app.use(express.json())
 
 // All routes
@@ -19,10 +19,9 @@ app.use('/api/cart', require('./routes/cartRoutes'))
 app.use('/api/products', require('./routes/productRoutes'))
 app.use('/api/categories', require('./routes/categoryRoutes'))
 app.use('/api/reviews', require('./routes/reviewRoutes'))
+app.use('/api/orders', require('./routes/orderRoutes'))
+app.use('/api/payments', require('./routes/paymentRoutes'))
 
-app.post('/', (req, res) => {
-  res.send(req.body)
-})
 
 app.listen(port, () => console.log('Server listening on port', port))
 
