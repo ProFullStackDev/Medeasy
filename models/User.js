@@ -32,6 +32,7 @@ userSchema.methods = {
     delete user.password
     delete user.accessToken
     delete user.__v
+    delete user.isAdmin
     return user
   },
   generateToken: async function () {

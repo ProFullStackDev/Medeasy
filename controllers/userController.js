@@ -23,17 +23,19 @@ module.exports = {
 
   addGuestUser: async (req, res) => {
     try {
+      const errors = validationResult(req)
+      if (!errors.isEmpty()) return res.status(400).send({ statusCode: 400, message: errors.array() })
       let guest = await Guest.findOne({ email: req.body.email })
       if (guest) guest = await Guest.findOneAndUpdate({ email: req.body.email }, { $set: req.body }, { new: true })
       else guest = await Guest.create(req.body)
       res.send({ statusCode: 200, guest: guest._doc })
     } catch (err) {
+      console.log(err.message)
       res.status(500).send({ statusCode: 500, message: 'Server Error' })
     }
   },
   
   signInUser: async (req, res) => {
-    console.log('asds')
     const { email, password } = req.body
     try {
       const user = await User.authenticateUser(email, password)
