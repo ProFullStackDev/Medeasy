@@ -5,8 +5,11 @@ const ordersSchema = new Schema({
   mode: { type: String, required: true, enum: ['user', 'guest'] },
   cart: { type: Schema.Types.ObjectId, required: true, ref: 'cart' },
   razorpay_order_id: String,
+  coinbase_order_code: String,
   razorpay_signature: String,
   razorpay_payment_id: String,
+  paypal_order_id: String,
+  paypal_capture_id: String,
   method: { type: String, default: 'card' },
   status: { type: 'String', default: 'Pending' },
   products: [{
@@ -22,7 +25,8 @@ const ordersSchema = new Schema({
     price: String,
     quantity: Number,
     subTotal: String
-  }]
+  }],
+  totalAmount: Number
 })
 
 ordersSchema.methods = {

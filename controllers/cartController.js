@@ -36,7 +36,7 @@ module.exports = {
         cart.products.push(productObj)
       else
         cart.products[productIndex] = productObj
-  
+
       await cart.save()
       res.send({ statusCode: 201, cart })
     } catch (err) {

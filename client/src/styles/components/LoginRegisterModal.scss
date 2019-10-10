@@ -1,5 +1,11 @@
 @import '../colors';
+
 .LoginRegisterModal {
+  &-wrapper {
+    width: 100vw;
+    height: 100vh;
+    background: $medeasy-green-color;
+  }
   z-index: 4;
   width: 110rem; 
   height: 71.5rem; 

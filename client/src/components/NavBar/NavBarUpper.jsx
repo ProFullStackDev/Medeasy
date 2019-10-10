@@ -11,7 +11,7 @@ import { ReactComponent as LogoutIcon } from '../../images/logout.svg'
 // This checks for the user object 
 // for swapping out Login Register to Dropdown
 // For now I am putting just dummy data
-const user = {name: 'Han Solo'}
+const user = null
 
 const NavBarUpper = ({ onClick }) => {
   // Triggering the login / register Modal ( When user is not logged in )

@@ -13,7 +13,7 @@ if (process.env.NODE_ENV === 'development') app.use(morgan('dev'))
 app.use(express.json())
 
 // All routes
-app.use('/api/user', require('./routes/userRouter'))
+app.use('/api/user', require('./routes/userRoutes'))
 app.use('/api/profile', require('./routes/profileRoutes'))
 app.use('/api/cart', require('./routes/cartRoutes'))
 app.use('/api/products', require('./routes/productRoutes'))

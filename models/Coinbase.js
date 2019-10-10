@@ -1,7 +1,17 @@
 const { Schema, model } = require('mongoose')
 
 const coinbaseSchema = new Schema({
-
+  status: { type: String, required: true },
+  _id: { type: String, required: true },
+  code: { type: String, required: true },
+  primaryPaymentValue: { 
+    amount: String,
+    currency: String
+  },
+  localPrimaryPaymentValue: {
+    amount: String,
+    currency: String
+  }
 })
 
 coinbaseSchema.methods = {

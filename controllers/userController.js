@@ -63,6 +63,18 @@ module.exports = {
       console.error(err)
       res.status(500).send({ statusCode: 500, message: 'Server Error' })
     }
+  },
+
+  signInAdminUser: async (req, res) => {
+    const { email, password } = req.body
+    try {
+      const user = await User.authenticateUser(email, password)
+      if (!user.isAdmin) return res.status(403).send({ statusCode: 403, message: 'You are not an admin' })
+      const accessToken = await user.generateToken()
+      res.send({ statusCode: 200, user, accessToken: `Bearer ${accessToken}`, expiresIn: '12h' })   
+    } catch (err) {
+      res.status(500).send({ statusCode: 500, message: 'Server Error' })
+    }
   }
   
 }

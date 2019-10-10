@@ -1,0 +1,5 @@
+export default {
+  SET_USER: 'SET_USER',
+  SET_USER_LOADING: 'SET_USER_LOADING',
+  CLEAR_USER: 'CLEAR_USER'
+}

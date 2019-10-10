@@ -18,7 +18,7 @@ const ProductDetailPage = (props) => {
   const handleChange = event => setRatingMessage(event.target.value)
 
   return (
-    <div className='ProductDetailPage'>
+    <section className='ProductDetailPage'>
       <div className='ProductDetailPage__informations'>
         <ProductImageCarousel />
         <ProductInformation />
@@ -92,7 +92,7 @@ const ProductDetailPage = (props) => {
           </div>
         }
       </div>
-    </div>
+    </section>
   )
 }
  

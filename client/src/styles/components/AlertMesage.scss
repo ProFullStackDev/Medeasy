@@ -1,0 +1,15 @@
+@import '../colors';
+
+.AlertMessage {
+  width: 100%;
+  color: $white-color;
+  border-radius: .5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem 0;
+  margin-bottom: 2rem;
+  
+  &.success { background: $medeasy-green-color }
+  &.danger { background: $medeasy-cancel-btn-color }
+}

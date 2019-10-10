@@ -44,7 +44,7 @@ const CheckoutPage = ({ changeOverlayState }) => {
   }
 
   return (
-    <div className='CheckoutPage'>
+    <section className='CheckoutPage'>
       { isQuantityClicked && <UpdateModal disableOverlay={disableOverlay}  title='Update Dosage' values={['5mg', '10mg']}/> }
       <div className='CheckoutPage__left'>
         <CheckoutProgress stepNumber={stepNumber} />
@@ -63,7 +63,7 @@ const CheckoutPage = ({ changeOverlayState }) => {
         <OrderSummary updateModalState={updateModalState} />
       </div>
       }
-    </div>
+    </section>
   )
 }
 

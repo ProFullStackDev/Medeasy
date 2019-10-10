@@ -22,7 +22,7 @@ const environment = () => {
   return new SandboxEnvironment(clientId, clientSecret) // sanbox
 }
 
-async const prettyPrint = (jsonData, pre = '') => {
+const prettyPrint = async (jsonData, pre = '') => {
   let pretty = ''
   const capitalize = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase()

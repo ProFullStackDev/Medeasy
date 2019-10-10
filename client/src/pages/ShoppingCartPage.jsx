@@ -24,7 +24,7 @@ const ShoppingCartPage = ({ changeOverlayState }) => {
     changeOverlayState(false)
   }
   return (
-    <div className='ShoppingCartPage'>
+    <section className='ShoppingCartPage'>
       { /* Show modal when update button is clicked */ }
       { isDosageClicked && <UpdateModal disableOverlay={disableOverlay} title='Update Pill Quantity' values={['50 Pills', '100 Pills', '150 Pills', '200 Pills']}/> }
       { isQuantityClicked && <UpdateModal disableOverlay={disableOverlay}  title='Update Dosage' values={['5mg', '10mg']}/> }
@@ -63,7 +63,7 @@ const ShoppingCartPage = ({ changeOverlayState }) => {
           <Link to='/checkout/account'><CustomButton fontSize='2.5rem'>Checkout</CustomButton></Link>
         </div>
       </div>
-    </div>
+    </section>
   )
 }
 

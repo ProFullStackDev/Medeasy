@@ -8,10 +8,10 @@ const ProfilePage = props => {
   const [profileSubState, setProfileSubState] = useState('creditCard')
   const handleSubStateChange = mode => setProfileSubState(mode)
   return (
-    <div className='ProfilePage'>
+    <section className='ProfilePage'>
       <ProfilePageNavBar setCurrentMode={handleSubStateChange} currentMode={profileSubState} />
       <ProfilePageDisplay currentMode={profileSubState} />
-    </div>
+    </section>
   )
 }
 
