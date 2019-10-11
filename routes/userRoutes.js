@@ -41,7 +41,7 @@ router.get('/', [check('email', 'Email is required').not().isEmpty(), check('pas
 // @route - GET /api/user/admin
 // @desc - Login a admin user
 // @method - Public
-router.get('/', [check('email', 'Email is required').not().isEmpty(), check('password', 'Password is required').not().isEmpty()], signInAdminUser)
+router.get('/admin', [check('email', 'Email is required').not().isEmpty(), check('password', 'Password is required').not().isEmpty()], signInAdminUser)
 
 // @route - PATCH /api/user/password
 // @desc - Change User Password

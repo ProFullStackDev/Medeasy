@@ -16,11 +16,11 @@ const userSchema = new Schema({
 userSchema.statics = {
   authenticateUser: async (email, password) => {
     // Checking whether user's email exists
-    const user = await User.findOne({ email }).select('-isAdmin')
+    const user = await User.findOne({ email })
     if (!user) throw new Error('Incorrect credentials')
     // Verifying passwords are same
     const isMatched = await bcrypt.compare(password, user.password)
-    if (!isMatched) throw new Error('Incorrect Credentials') 
+    if (!isMatched) throw new Error('Incorrect credentials') 
     // If the passwords are matched means return the user
     return user
   }

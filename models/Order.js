@@ -1,4 +1,5 @@
 const { Schema, model } = require('mongoose')
+const Cart = require('./Cart')
 
 const ordersSchema = new Schema({
   user: { type: Schema.Types.ObjectId, required: true, refPath: 'mode' },
@@ -36,6 +37,11 @@ ordersSchema.methods = {
     return order
   }
 }
+
+ordersSchema.pre('save', async function (next) {
+  if (this.status === 'Success') await Cart.findByIdAndDelete(this.cart)
+  next()
+})
 
 const Order = model('order', ordersSchema)
 module.exports = Order

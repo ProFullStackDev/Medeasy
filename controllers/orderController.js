@@ -14,9 +14,11 @@ module.exports = {
       let order = await Order.findOne({ cart: cartId })
       if (order) return res.send({ statusCode: 200, orderId: order._id })
       const cart = await Cart.findById(cartId)
-      let user = await User.findById(userId)
+      let user
       if (mode === 'guest')
-        user = await Guest.findById(guestId)
+        user = await Guest.findById(userId)
+      else
+        user = await User.findById(userId)
       if (!user) return res.status(404).send({ statusCode: 404, message: 'User not found' })
       const totalAmount = cart.products.reduce((acc, product) => parseInt(acc) + parseInt(product.subTotal), 0)
       const orderObj = { cart: cart._id, user: user._id, products: cart.products, mode, totalAmount }
@@ -69,7 +71,7 @@ module.exports = {
 
   fetchOrders: async (req, res) => {
     try {
-      const orders = await Order.find({})
+      const orders = await Order.find({}).populate('user', ['name', 'email'])
       res.send({ statusCode: 200, orders })
     } catch (err) {
       res.status(500).send({ statusCode: 500, message: 'Server Error' })

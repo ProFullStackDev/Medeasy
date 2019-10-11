@@ -1,9 +1,14 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
+
 import CustomFormElement from '../CustomFormElement'
 import CustomButton from '../CustomButton'
 import CustomCheckBox from '../CustomCheckbox'
 
-const LoginModalForm = (props) => {
+import { connect } from 'react-redux'
+import { signInAdmin } from '../../redux/actions/authActions'
+
+const LoginModalForm = ({ isAdmin, signInAdmin }) => {
 
   const [formState, setFormState] = useState({
     email: '',
@@ -15,8 +20,15 @@ const LoginModalForm = (props) => {
   const { email, password, rememberMe } = formState
 
   const handleChange = event => setFormState({ ...formState, [event.target.name]: event.target.value })
+  
   // Login
-  const handleSubmit = event => {}
+  const handleSubmit = event => {
+    event.preventDefault()
+    // If the isAdmin prop is true means, sign in admin
+    if (isAdmin) signInAdmin(formState)
+    // Else do normal signin
+  }
+  
   const changeRememberMeState = () => setFormState({ ...formState, rememberMe: !rememberMe })
   
   return (
@@ -33,4 +45,9 @@ const LoginModalForm = (props) => {
 
 }
 
-export default LoginModalForm;
+LoginModalForm.propTypes = {
+  isAdmin: PropTypes.bool.isRequired,
+  signInAdmin: PropTypes.func.isRequired
+}
+
+export default connect(null, { signInAdmin })(LoginModalForm)

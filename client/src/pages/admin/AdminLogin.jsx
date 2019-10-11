@@ -4,7 +4,13 @@ import medeasyAuth from '../../images/medeasy-auth.svg'
 import formGraphic from '../../images/form-graphic.svg'
 import AlertMessage from '../../components/AlertMessage'
 
-const AdminLogin = () => {
+// Redux
+import { connect } from 'react-redux'
+import { createStructuredSelector } from 'reselect'
+import { selectAuthUser } from '../../redux/selectors/authSelectors'
+
+
+const AdminLogin = ({ user }) => {
   return (
     <div className='LoginRegisterModal-wrapper'>
       <div className='LoginRegisterModal'>
@@ -20,11 +26,15 @@ const AdminLogin = () => {
         </div>
         <div className='LoginRegisterModal__right'>
           <AlertMessage message='Alert message' alertType='danger'/>
-          <LoginModalForm />
+          <LoginModalForm isAdmin />
         </div>
       </div>
     </div>
   )
 }
 
-export default AdminLogin
+const mapStateToProps = createStructuredSelector({
+  user: selectAuthUser
+})
+
+export default connect(mapStateToProps)(AdminLogin)

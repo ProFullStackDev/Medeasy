@@ -6,8 +6,9 @@ const {
   createRazorpayOrder,
   createPaypalOrder,
   createPaypalCharge,
-  createCoinbaseCharge,
-  verifyCoinbaseCharge
+  createCoinbaseOrder,
+  storeCoinbaseCharge,
+  createCoinbaseCharge
 } = require('../controllers/paymentController')
 
 // @route - POST /api/payments/razorpay/order
@@ -94,11 +95,11 @@ router.post(
   createPaypalCharge
 )
 
-// @route - POST /api/payments/coinbase/charge
-// @desc - Charge a payment on coinbase
+// @route - POST /api/payments/coinbase/order
+// @desc - Charge a coinbase order
 // @method - Public
 router.post(
-  '/coinbase/charge',
+  '/coinbase/order',
   [
     check('orderId', 'Order id is required')
       .not()
@@ -113,12 +114,22 @@ router.post(
       { min: 3, max: 3 }
     )
   ],
-  createCoinbaseCharge
+  createCoinbaseOrder
 )
 
 // @route - POST /api/payments/coinbase/webhooks
 // @desc - Webhook for coinbase payment status
 // @method - Public
-router.post('/coinbase/webhooks', verifyCoinbaseCharge)
+router.post('/coinbase/webhooks', storeCoinbaseCharge)
+
+// @route - POST /api/payments/coinbase/charge
+// @desc - Webhook for coinbase payment status
+// @method - Public
+router.post('/coinbase/charge', [
+  check('userId', 'User Id is required').not().isEmpty(),
+  check('mode', 'Mode is required').not().isEmpty(),
+  check('chargeCode', 'Coinbase Charge code is required').not().isEmpty()
+],
+createCoinbaseCharge)
 
 module.exports = router

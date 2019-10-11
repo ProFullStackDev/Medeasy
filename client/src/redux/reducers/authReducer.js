@@ -9,9 +9,13 @@ const initiaState = {
 export default (state = initiaState, action) => {
   const { type, payload } = action
   switch (type) {
-    case SET_USER: return { ...state, user: payload }
-    case SET_USER_LOADING: return { ...state, userLoading: payload }
-    case CLEAR_USER: return { user: null, userLoading: false }
-    default: return state
+    case SET_USER:
+      return { ...state, user: payload }
+    case SET_USER_LOADING:
+      return { ...state, userLoading: payload }
+    case CLEAR_USER:
+      return { user: null, userLoading: false }
+    default:
+      return state
   }
 }

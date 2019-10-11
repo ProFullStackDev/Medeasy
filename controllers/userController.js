@@ -42,7 +42,7 @@ module.exports = {
       const accessToken = await user.generateToken()
       res.send({ statusCode: 200, user, accessToken: `Bearer ${accessToken}`, expiresIn: '12h' })
     } catch (err) {
-      console.log(err.message)
+      console.log(err, err.message)
       res.status(401).send({ statusCode: 401, message: err.message })
     }
   },
@@ -73,6 +73,7 @@ module.exports = {
       const accessToken = await user.generateToken()
       res.send({ statusCode: 200, user, accessToken: `Bearer ${accessToken}`, expiresIn: '12h' })   
     } catch (err) {
+      if (err.message === 'Incorrect credentials') return res.status(401).send({ statusCode: 401, message: err.message })
       res.status(500).send({ statusCode: 500, message: 'Server Error' })
     }
   }
