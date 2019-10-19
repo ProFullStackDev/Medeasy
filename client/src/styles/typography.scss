@@ -105,6 +105,16 @@ input, textarea, .CustomButton {
   }
 }
 
+.AdminCard {
+  &__title { font-size: 2.5rem; font-weight: bold; }
+  &__value { font-size: 6rem } 
+}
+
+.AdminModal {
+  &__title { font-size: 2.5rem; font-weight: bold; text-transform: uppercase; }
+  &__subtitle { font-size: 2rem; font-weight: bold; } 
+}
+
 .AccountPhase__title, .BillingPhase__title, .PaymentPhase__title, .ReviewPhase__title {
   font-size: 2.2rem;
 }

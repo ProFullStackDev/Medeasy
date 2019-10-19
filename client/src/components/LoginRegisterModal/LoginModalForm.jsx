@@ -8,7 +8,7 @@ import CustomCheckBox from '../CustomCheckbox'
 import { connect } from 'react-redux'
 import { signInAdmin } from '../../redux/actions/authActions'
 
-const LoginModalForm = ({ isAdmin, signInAdmin }) => {
+const LoginModalForm = ({ isAdmin, signInAdmin, history }) => {
 
   const [formState, setFormState] = useState({
     email: '',
@@ -25,7 +25,7 @@ const LoginModalForm = ({ isAdmin, signInAdmin }) => {
   const handleSubmit = event => {
     event.preventDefault()
     // If the isAdmin prop is true means, sign in admin
-    if (isAdmin) signInAdmin(formState)
+    if (isAdmin) signInAdmin(formState, history)
     // Else do normal signin
   }
   

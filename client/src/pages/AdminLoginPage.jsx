@@ -1,17 +1,19 @@
 import React from 'react'
-import LoginModalForm from '../../components/LoginRegisterModal/LoginModalForm'
-import medeasyAuth from '../../images/medeasy-auth.svg'
-import formGraphic from '../../images/form-graphic.svg'
-import AlertMessage from '../../components/AlertMessage'
+import LoginModalForm from '../components/LoginRegisterModal/LoginModalForm'
+import medeasyAuth from '../images/medeasy-auth.svg'
+import formGraphic from '../images/form-graphic.svg'
+import AlertMessage from '../components/AlertMessage'
 
 // Redux
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { selectAuthUser } from '../../redux/selectors/authSelectors'
+import { selectAuthUser } from '../redux/selectors/authSelectors'
+
+import { Redirect } from 'react-router-dom'
 
 
 const AdminLogin = ({ user }) => {
-  return (
+  return user ? <Redirect to='/admin/dashboard'/> :(
     <div className='LoginRegisterModal-wrapper'>
       <div className='LoginRegisterModal'>
         <div className='LoginRegisterModal__left'>

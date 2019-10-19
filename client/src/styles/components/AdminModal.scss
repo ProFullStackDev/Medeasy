@@ -1,0 +1,14 @@
+.AdminModal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 55rem;
+  height: 34.5rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 0 .6rem #333;
+
+  &__buttons .CustomButton:last-child {
+    margin-left: 10rem;
+  }
+}

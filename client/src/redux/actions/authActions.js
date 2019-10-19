@@ -1,22 +1,29 @@
 import axios from 'axios'
 import actionTypes from '../actionTypes'
 import { alertUser } from './alertActions.js'
-const {} = actionTypes
+const { SET_USER, SET_ACCESS_TOKEN } = actionTypes
 
 export const signInAdmin = ({
   email,
   password,
   rememberMe
-}) => async dispatch => {
-  console.log('Fired')
+}, history) => async dispatch => {
   try {
-    const { data } = await axios.get('/api/user/admin', {
-      data: { email, password }
-    })
-    console.log(data, `${rememberMe ? 'localStorage' : 'sessionStorage'}`)
+    // Sign in
+    const { data: { user, accessToken } } = await axios.post('/api/user/admin', { email, password })
+    // Store the user
+    dispatch({ type: SET_USER, payload: user })
+    dispatch({ type: SET_ACCESS_TOKEN, payload: accessToken })
+    // If user selects remember me means, store in localStorage, else in sessionStorage
+    if (rememberMe)
+      localStorage.setItem('auth', JSON.stringify({ user, accessToken }))
+    else 
+      sessionStorage.setItem('auth', JSON.stringify({ user, accessToken }))
+    // Push to Dashboard
+    history.push('/admin/dashboard')
   } catch (err) {
+    console.log(err)
     const errorMessage = err.response.data.message
-    console.log(errorMessage)
     if (Array.isArray(errorMessage))
       errorMessage.forEach(message =>
         dispatch(alertUser(message.msg, 'danger'))

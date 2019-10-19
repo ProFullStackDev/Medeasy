@@ -1,0 +1,23 @@
+.AdminSlider {
+  height: 30px;
+  width: 60px;
+  background: #ddd;
+  border-radius: 100px;
+  position: relative;
+  cursor: pointer;
+
+  &__circle {
+    pointer-events: none;
+    height: 100%;
+    width: 30px;
+    border-radius: 50%;
+    position: absolute;
+    background: red;
+    top: 0;
+    transition: transform .15s ease-in;
+    &.active {
+      background: green;
+      transform: translateX(100%);
+    }
+  }
+}
