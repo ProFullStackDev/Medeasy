@@ -21,6 +21,7 @@ app.use('/api/categories', require('./routes/categoryRoutes'))
 app.use('/api/reviews', require('./routes/reviewRoutes'))
 app.use('/api/orders', require('./routes/orderRoutes'))
 app.use('/api/payments', require('./routes/paymentRoutes'))
+app.use('/api/coupons', require('./routes/couponRoutes'))
 
 
 app.listen(port, () => console.log('Server listening on port', port))

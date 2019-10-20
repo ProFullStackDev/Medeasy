@@ -1,10 +1,12 @@
 .AdminDashboardPage {
   display: flex;
   &__main-content {
+    background: #EDEDED;
     padding: 2rem;
     flex: 1;
     display: flex;
     align-items: center;
+    justify-content: center;
     position: relative;
   }
   &__hamburger {
@@ -19,5 +21,12 @@
     position: absolute;
     top: 2rem;
     right: 3rem;
+  }
+  // Home page
+  &__home {
+    margin: 0 4rem;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
   }
 }

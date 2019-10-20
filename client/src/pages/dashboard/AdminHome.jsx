@@ -1,11 +1,25 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import AdminCard from '../../components/AdminPage/AdminCard'
 
-const AdminHome = () => {
+import { connect } from 'react-redux'
+import { createStructuredSelector } from 'reselect'
+import { fetchAllProducts } from '../../redux/actions/inventoryActions'
+
+const AdminHome = ({ fetchAllProducts }) => {
+  useEffect(() => {
+    fetchAllProducts()
+  }, [])
   return (
-    <div>
-      
+    <div className='AdminDashboardPage__home'>
+      <AdminCard title='Total Products' value={20} btnRequired btnText='View Products' btnLink='products' />
+      <AdminCard title='Total Orders' value={30} btnRequired btnText='View Orders' btnLink='orders' />
+      <AdminCard title='Total Sales' value={1234} />
     </div>
   )
 }
 
-export default AdminHome
+const mapStateToProps = createStructuredSelector({
+
+})
+
+export default connect(mapStateToProps, { fetchAllProducts })(AdminHome)

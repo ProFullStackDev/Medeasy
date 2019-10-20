@@ -14,6 +14,8 @@ export const signInAdmin = ({
     // Store the user
     dispatch({ type: SET_USER, payload: user })
     dispatch({ type: SET_ACCESS_TOKEN, payload: accessToken })
+    // Set axios header here
+    axios.defaults.headers.common['Authorization'] = accessToken
     // If user selects remember me means, store in localStorage, else in sessionStorage
     if (rememberMe)
       localStorage.setItem('auth', JSON.stringify({ user, accessToken }))

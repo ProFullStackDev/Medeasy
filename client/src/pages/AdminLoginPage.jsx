@@ -12,7 +12,7 @@ import { selectAuthUser } from '../redux/selectors/authSelectors'
 import { Redirect } from 'react-router-dom'
 
 
-const AdminLogin = ({ user }) => {
+const AdminLogin = ({ user, history }) => {
   return user ? <Redirect to='/admin/dashboard'/> :(
     <div className='LoginRegisterModal-wrapper'>
       <div className='LoginRegisterModal'>
@@ -28,7 +28,7 @@ const AdminLogin = ({ user }) => {
         </div>
         <div className='LoginRegisterModal__right'>
           <AlertMessage message='Alert message' alertType='danger'/>
-          <LoginModalForm isAdmin />
+          <LoginModalForm isAdmin history={history} />
         </div>
       </div>
     </div>

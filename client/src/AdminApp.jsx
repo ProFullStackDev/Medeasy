@@ -6,10 +6,10 @@ import AdminDashboardPage from './pages/AdminDashboardPage'
 
 const AdminApp = () => {
   return (
-    <>
+    <Switch>
       <Route exact path='/admin' component={ AdminLoginPage } />
       <Route path='/admin/dashboard' component={ AdminDashboardPage } />
-    </>
+    </Switch>
   )
 }
 
