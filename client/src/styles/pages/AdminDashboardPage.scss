@@ -1,0 +1,23 @@
+.AdminDashboardPage {
+  display: flex;
+  &__main-content {
+    padding: 2rem;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+  &__hamburger {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    cursor: pointer;
+  }
+  &__user {
+    font-size: 2.5rem;
+    font-weight: bold;
+    position: absolute;
+    top: 2rem;
+    right: 3rem;
+  }
+}

@@ -38,10 +38,10 @@ router.post('/guest', [
 // @method - Public
 router.get('/', [check('email', 'Email is required').not().isEmpty(), check('password', 'Password is required').not().isEmpty()], signInUser)
 
-// @route - GET /api/user/admin
+// @route - POST /api/user/admin
 // @desc - Login a admin user
 // @method - Public
-router.get('/admin', [check('email', 'Email is required').not().isEmpty(), check('password', 'Password is required').not().isEmpty()], signInAdminUser)
+router.post('/admin', [check('email', 'Email is required').not().isEmpty(), check('password', 'Password is required').not().isEmpty()], signInAdminUser)
 
 // @route - PATCH /api/user/password
 // @desc - Change User Password

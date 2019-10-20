@@ -53,6 +53,10 @@ code {
   }
 }
 
+.AdminNavBar {
+  &__links { font-size: 2rem; font-weight: bold; }
+}
+
 .AlertMessage { font-size: 1.6rem }
 
 input, textarea, .CustomButton {

@@ -1,19 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Route, Redirect } from 'react-router-dom'
-import AdminCard from '../components/AdminCard'
-import AdminModal from '../components/AdminModal'
-import AdminSlider from '../components/AdminSlider'
+import AdminNavBar from '../components/AdminPage/AdminNavBar'
+import { ReactComponent as Hamburger } from '../images/hamburger.svg'
 
-const AdminDashboardPage = ({ match: { url } }) => {
-  console.log(url)
+import '../styles/pages/AdminDashboardPage.scss'
+
+const AdminDashboardPage = ({ match: { url }, history }) => {
+  const [navBarState, setNavBarState] = useState(true)
   return (
     <div className='AdminDashboardPage'>
-      <h1>Dashboard</h1>
-      <AdminCard title='Total Products' value={30} btnRequired btnText='View products' />
-      <AdminModal title='Confirm deletion' subTitle='Are you sure that you want to delete this product ?' />
-      <AdminSlider />
-      <Route exact path={`${url}`} render={renderProps => <h1>Home</h1>} />
-      <Route path={`${url}/route1`} render={renderProps => <h2>Route 1</h2>} />
+      <AdminNavBar history={history} url={url} navBarState={navBarState} />
+      <div className="AdminDashboardPage__main-content">
+        <span className='AdminDashboardPage__hamburger' onClick={() => setNavBarState(!navBarState)}><Hamburger style={{ width: '2.5rem', height: '2.5rem' }}/></span>
+        <span className='AdminDashboardPage__user'>Harish Akira</span>
+        <Route exact path={`${url}`} render={() => <h1>asd</h1>} />
+        <Route path={`${url}/products`} render={() => <h1>s</h1>} />
+      </div>
     </div>
   )
 }
