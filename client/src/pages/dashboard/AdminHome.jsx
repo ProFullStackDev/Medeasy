@@ -1,25 +1,30 @@
 import React, { useEffect } from 'react'
 import AdminCard from '../../components/AdminPage/AdminCard'
+import Spinner from '../../components/Spinner'
 
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { fetchAllProducts } from '../../redux/actions/inventoryActions'
+import { fetchInventory } from '../../redux/actions/inventoryActions'
 
-const AdminHome = ({ fetchAllProducts }) => {
+import { selectInventoryCoupons, selectInventoryOrders, selectInventoryProducts } from '../../redux/selectors/inventorySelectors'
+
+const AdminHome = ({ fetchInventory, products, orders, coupons }) => {
   useEffect(() => {
-    fetchAllProducts()
+    if (!products || !orders || !coupons) fetchInventory()
   }, [])
-  return (
+  return !orders || !products ? <Spinner /> : (
     <div className='AdminDashboardPage__home'>
-      <AdminCard title='Total Products' value={20} btnRequired btnText='View Products' btnLink='products' />
-      <AdminCard title='Total Orders' value={30} btnRequired btnText='View Orders' btnLink='orders' />
-      <AdminCard title='Total Sales' value={1234} />
+      <AdminCard title='Total Products' value={products.length} btnRequired btnText='View Products' btnLink='products' />
+      <AdminCard title='Total Orders' value={orders.length} btnRequired btnText='View Orders' btnLink='orders' />
+      <AdminCard title='Total Sales' value={orders.reduce((acc, order) => acc += order.totalAmount, 0)} />
     </div>
   )
 }
 
 const mapStateToProps = createStructuredSelector({
-
+  products: selectInventoryProducts,
+  coupons: selectInventoryCoupons,
+  orders: selectInventoryOrders
 })
 
-export default connect(mapStateToProps, { fetchAllProducts })(AdminHome)
+export default connect(mapStateToProps, { fetchInventory })(AdminHome)

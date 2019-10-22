@@ -12,12 +12,12 @@ export default (state = initialState, action) => {
   switch (type) {
     case SET_USER:
       return { ...state, user: payload }
+    case CLEAR_USER:
+      return { user: null, accessToken: null, userLoading: false }
     case SET_ACCESS_TOKEN:
       return { ...state, accessToken: payload }
     case SET_USER_LOADING:
       return { ...state, userLoading: payload }
-    case CLEAR_USER:
-      return { user: null, userLoading: false }
     default:
       return state
   }

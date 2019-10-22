@@ -4,7 +4,7 @@ const multer = require('multer')
 
 const authenticate = require('../middleware/authenticate')
 const isAdmin = require('../middleware/isAdmin')
-const { createProduct, fetchAllProducts, fetchAllProductsByCategory, fetchProductById, updateProductById, deleteProductById } = require('../controllers/productController')
+const { updateProductAvailability, createProduct, fetchAllProducts, fetchAllProductsByCategory, fetchProductById, updateProductById, deleteProductById } = require('../controllers/productController')
 const { storage, limits, fileFilter } = require('../utils/multerUtils')
 
 const upload = multer({ storage, limits, fileFilter })
@@ -37,7 +37,7 @@ router.get('/category/:categoryId', fetchAllProductsByCategory)
 // @method - Public
 router.get('/:productId', fetchProductById)
 
-// @route - PATCH /api/products/:productId
+// @route - PUT /api/products/:productId
 // @desc - Update a product
 // @method - Private (Both Auth and Admin)
 router.put('/:productId', authenticate, isAdmin, upload.array('product-image', 3), [
@@ -48,6 +48,11 @@ router.put('/:productId', authenticate, isAdmin, upload.array('product-image', 3
   check('dosages', 'Dosages is required').not().isEmpty(),
   check('quantities', 'Quantities is required').not().isEmpty()
 ], updateProductById)
+
+// @route - PATCH /api/products/available/:productId
+// @desc - Update a product's availability
+// @method - Private (Both Auth and Admin)
+router.patch('/available/:productId', check('status', 'Status is required').not().isEmpty(), updateProductAvailability)
 
 // @route - DELETE /api/products/:productId
 // @desc - Delete a product

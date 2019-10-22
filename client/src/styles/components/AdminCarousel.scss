@@ -1,0 +1,24 @@
+@import '../colors';
+
+.AdminCarousel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &__circles {display: flex; margin: 0 1rem; }
+  &__circle {
+    color: $medeasy-green-color;
+    background: #EFEFEF;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 3rem;
+    height: 3rem;
+    &:not(:last-child) { margin-right: 1rem; }
+    &:hover, &.active {
+      cursor: pointer;
+      color: white;
+      background: $medeasy-green-color;
+    }
+  }
+}

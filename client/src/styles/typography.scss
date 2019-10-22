@@ -82,8 +82,19 @@ input, textarea, .CustomButton {
   &__othertabs-description { font-size: 1.8rem;  &--primary, &--secondary { line-height: 2.5rem; } }
 }
 
+.AdminDashboardPage {
+  &__products-table {
+    & thead { font-size: 2rem; font-weight: bold; }
+  }
+}
+
 .CustomBadge {
   font-size: 1.8rem;
+}
+
+.AdminCarousel {
+  font-size: 1.2rem;
+  font-weight: bold;
 }
 
 .Assurances span {

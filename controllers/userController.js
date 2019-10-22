@@ -76,6 +76,18 @@ module.exports = {
       if (err.message === 'Incorrect credentials') return res.status(401).send({ statusCode: 401, message: err.message })
       res.status(500).send({ statusCode: 500, message: 'Server Error' })
     }
+  },
+
+  logoutUser: async (req, res) => {
+    try {
+      const user = req.user
+      user.accessToken = null
+      await user.save()
+      res.status(202).send({ statusCode: 202, message: 'User logged out successfully' })
+    } catch (err) {
+      console.error(err.message)
+      res.status(500).send({ statusCode: 500, message: 'Server Error' })
+    }
   }
-  
+
 }

@@ -5,7 +5,7 @@ const couponSchema = new Schema({
   type: { type: String, required: true },
   value: { type: Number, required: true },
   description: { type: String, required: true }
-})
+}, { timestamps: true })
 
 couponSchema.methods = {
   toJSON: function () {

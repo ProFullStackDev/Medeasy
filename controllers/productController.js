@@ -39,7 +39,7 @@ module.exports = {
   fetchAllProducts: async (req, res) => {
     const searchQuery = req.query.search || ''
     try {
-      const products = await Product.find({ name: {$regex: '^' + searchQuery , $options: 'i'}, stockAvailable: true }).select('-admin').populate('category', ['name'])
+      const products = await Product.find({ name: {$regex: '^' + searchQuery , $options: 'i'}}).select('-admin').populate('category', ['name'])
       if (!products || !products.length) return res.status(404).send({ statusCode: 404, message: 'No products are found' })
       res.send({ statusCode: 200, count: products.length, products })
     } catch (err) {
@@ -114,6 +114,25 @@ module.exports = {
       res.status(202).send({ statusCode: 202, product })
     } catch (err) {
       console.log(err)
+      if (err.name === 'CastError') return res.status(400).send({ statusCode: 400, message: 'Invalid Product Id' })
+      res.status(500).send({ statusCode: 500, message: 'Server Error' })
+    }
+  },
+
+  // Update a product's availability
+  updateProductAvailability: async (req, res) => {
+    const errors = validationResult(req)
+    if (!errors.isEmpty()) return res.status(400).send({ statusCode: 400, message: errors.array()})
+    const { productId } = req.params
+    if (!productId) return res.status(400).send({ statusCode: 400, message: 'Product Id not found' })
+    try {
+      const { status } = req.body
+      const product = await Product.findById(productId).populate('user', ['name']).populate('category', ['name'])
+      product.stockAvailable = status
+      await product.save()
+      res.status(202).send({ statusCode: 202, product })
+    } catch (err) {
+      console.log(err.message)
       if (err.name === 'CastError') return res.status(400).send({ statusCode: 400, message: 'Invalid Product Id' })
       res.status(500).send({ statusCode: 500, message: 'Server Error' })
     }

@@ -2,7 +2,7 @@ const { check } = require('express-validator')
 const { Router } = require('express')
 const authenticate = require('../middleware/authenticate')
 const router = Router()
-const { createNewUser, addGuestUser, signInUser, changeUserPassword, signInAdminUser } = require('../controllers/userController')
+const { logoutUser, createNewUser, addGuestUser, signInUser, changeUserPassword, signInAdminUser } = require('../controllers/userController')
 
 // @route - POST /api/user
 // @desc - Add a new user
@@ -47,5 +47,10 @@ router.post('/admin', [check('email', 'Email is required').not().isEmpty(), chec
 // @desc - Change User Password
 // @method - Private (Auth)
 router.patch('/password', authenticate, changeUserPassword)
+
+// @route - DELETE /api/user/password
+// @desc - Logout
+// @method - Private (Auth)
+router.delete('/password', authenticate, logoutUser)
 
 module.exports = router
