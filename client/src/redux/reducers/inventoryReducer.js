@@ -8,7 +8,8 @@ const {
 	CLEAR_CATEGORIES,
 	CLEAR_ORDERS,
 	CLEAR_COUPONS,
-	CLEAR_INVENTORY
+	CLEAR_INVENTORY,
+	SET_INVENTORY_LOADING
 } = actionTypes
 
 const initialState = {
@@ -38,6 +39,8 @@ export default (state = initialState, action) => {
 			return { ...state, orders: payload }
 		case SET_COUPONS:
 			return { ...state, coupons: payload }
+		case SET_INVENTORY_LOADING:
+			return { ...state, loading: payload }
 		case CLEAR_INVENTORY:
 			return {
 				categories: null,

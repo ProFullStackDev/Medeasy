@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react'
 
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { selectInventoryCategories } from '../../redux/selectors/inventorySelectors'
-import { fetchAllCategories } from '../../redux/actions/inventoryActions'
+import { selectInventoryCategories, selectInventoryLoading } from '../../redux/selectors/inventorySelectors'
+import { fetchAllCategories, addProduct } from '../../redux/actions/inventoryActions'
 
 import CustomButton from '../../components/CustomButton'
 import CustomFormElement from '../../components/CustomFormElement'
@@ -11,7 +11,7 @@ import Spinner from '../../components/Spinner'
 
 import emptyImage from '../../images/empty.jpg'
 
-const AdminCreateProduct = ({ categories, fetchAllCategories }) => {
+const AdminCreateProduct = ({ history, loading, categories, fetchAllCategories, addProduct }) => {
 	useEffect(() => {
 		fetchAllCategories()
 		return
@@ -28,7 +28,7 @@ const AdminCreateProduct = ({ categories, fetchAllCategories }) => {
 		prices: ''
 	})
 
-	const [fileErrorMessages, setFileErrorMessages] = useState([])
+  const [fileErrorMessages, setFileErrorMessages] = useState([])
 
 	const {
 		name,
@@ -42,8 +42,19 @@ const AdminCreateProduct = ({ categories, fetchAllCategories }) => {
 	} = formState
 
 	const handleSubmit = event => {
-		event.preventDefault()
-		console.log('File Submitting')
+    event.preventDefault()
+    const data = new FormData()
+    data.append('name', name)
+    data.append('description', description)
+    data.append('dosages', dosages)
+    data.append('price', prices)
+    data.append('quantities', quantities)
+    data.append('sideEffects', sideEffects)
+    data.append('product-image', productImages[0])
+    data.append('product-image', productImages[1])
+    data.append('product-image', productImages[2])
+    
+    addProduct(data, category, history)
 	}
 
 	const storeImages = files => {
@@ -105,7 +116,7 @@ const AdminCreateProduct = ({ categories, fetchAllCategories }) => {
 		document.querySelector('#file').click()
 	}
 
-	return !categories ? (
+	return !categories || loading ? (
 		<Spinner />
 	) : (
 		<div className="AdminDashboardPage__product-form">
@@ -211,7 +222,7 @@ const AdminCreateProduct = ({ categories, fetchAllCategories }) => {
 						: null}
 
 					<CustomButton
-						disabled={!productImages.length ? true : false}
+						disabled={productImages.length < 3 ? true : false}
 						extraStyle={{ width: '100%' }}
 						isSubmitButton
 					>
@@ -254,11 +265,11 @@ const AdminCreateProduct = ({ categories, fetchAllCategories }) => {
 					<p>
 						Dosages:{' '}
 						{dosages.includes(',') ? (
-							<ul>
+							<>
 								{dosages.split(',').map((effect, index) => (
 									<li key={index}>{effect} mg</li>
 								))}
-							</ul>
+							</>
 						) : (
 							dosages + ' mg'
 						)}
@@ -266,11 +277,11 @@ const AdminCreateProduct = ({ categories, fetchAllCategories }) => {
 					<p>
 						Quantities:{' '}
 						{quantities.includes(',') ? (
-							<ul>
+							<>
 								{quantities.split(',').map((effect, index) => (
 									<li key={index}>{effect} Pills</li>
 								))}
-							</ul>
+							</>
 						) : (
 							quantities + ' Pills'
 						)}
@@ -278,7 +289,7 @@ const AdminCreateProduct = ({ categories, fetchAllCategories }) => {
 					<p>
 						Prices:{' '}
 						{prices.includes(',') ? (
-							<ul>
+							<>
 								{prices.split(',').map((price, index) => (
 									<li key={index}>
 										{dosages.split(',')[Math.floor(index / quantities.split(',').length)] +
@@ -286,7 +297,7 @@ const AdminCreateProduct = ({ categories, fetchAllCategories }) => {
 											quantities.split(',')[Math.floor(index % quantities.split(',').length)] + 'Pills -> ' + price + '$'}
 									</li>
 								))}
-							</ul>
+							</>
 						) : (
 							prices
 						)}
@@ -294,11 +305,11 @@ const AdminCreateProduct = ({ categories, fetchAllCategories }) => {
 					<p>
 						Side Effects:{' '}
 						{sideEffects.includes(',') ? (
-							<ul>
+							<>
 								{sideEffects.split(',').map((effect, index) => (
 									<li key={index}>{effect}</li>
 								))}
-							</ul>
+							</>
 						) : (
 							sideEffects
 						)}
@@ -311,10 +322,11 @@ const AdminCreateProduct = ({ categories, fetchAllCategories }) => {
 }
 
 const mapStateToProps = createStructuredSelector({
-	categories: selectInventoryCategories
+	categories: selectInventoryCategories,
+	loading: selectInventoryLoading
 })
 
 export default connect(
 	mapStateToProps,
-	{ fetchAllCategories }
+	{ fetchAllCategories, addProduct }
 )(AdminCreateProduct)

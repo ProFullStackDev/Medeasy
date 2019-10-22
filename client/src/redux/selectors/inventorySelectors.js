@@ -19,3 +19,8 @@ export const selectInventoryCategories = createSelector(
 	[selectInventory],
 	inventory => inventory.categories
 )
+
+export const selectInventoryLoading = createSelector(
+	[selectInventory],
+	inventory => inventory.loading
+)

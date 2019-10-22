@@ -20,6 +20,7 @@ module.exports = {
         return res.status(400).send({ statusCode: 400, message: 'Product already exists' })
 
       const productObj = prepareProductObject(req.body)
+      if (!productObj) return res.status(400).send({ statusCode: 400, message: 'Bad request on Price upload' })
 
       let product = new Product(productObj)
       product.admin = req.user._id
@@ -98,7 +99,7 @@ module.exports = {
       }
       
       const pathName2 = path.join(__dirname, `../uploads/${product.name}`)
-      console.log(pathName2)
+      
       fs.readdir(pathName2, (err, files) => {
         files.forEach(file => {
           if (!originalFileNames.includes(file)) {
