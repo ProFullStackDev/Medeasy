@@ -1,13 +1,16 @@
 @import url('https://fonts.googleapis.com/css?family=PT+Sans+Caption&display=swap');
 @import './mixins';
+
 html {
   font-size: 62.5%;
+
   @include desktop {
     font-size: 55%;
   }
 }
 
-body, input {
+body,
+input {
   font-family: 'PT Sans Caption', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -18,8 +21,14 @@ h2 {
   font-weight: normal;
 }
 
-h3 { font-size: 1.8rem; font-weight: normal; }
-h3.title { font-size: 1.4rem !important; }
+h3 {
+  font-size: 1.8rem;
+  font-weight: normal;
+}
+
+h3.title {
+  font-size: 1.4rem !important;
+}
 
 label {
   font-size: 1.4rem;
@@ -34,19 +43,29 @@ code {
   &__upper-links {
     font-weight: bold;
     font-size: 1.8rem;
+
     @media only screen and (max-width: 79.69em) {
       font-size: 1.6rem;
     }
-    @media only screen and (max-width: 65.6em) { font-size: 1.4rem; }
+
+    @media only screen and (max-width: 65.6em) {
+      font-size: 1.4rem;
+    }
   }
+
   &__upper-other-cart--count {
     font-size: 1.2rem;
     font-weight: bold;
   }
+
   &__lower--categories {
     font-size: 1.8rem;
-    @media only screen and (max-width: 65.6em) { font-size: 1.6rem; }
+
+    @media only screen and (max-width: 65.6em) {
+      font-size: 1.6rem;
+    }
   }
+
   & .dropdown .title {
     font-weight: bold;
     font-size: 1.8rem;
@@ -54,12 +73,19 @@ code {
 }
 
 .AdminNavBar {
-  &__links { font-size: 2rem; font-weight: bold; }
+  &__links {
+    font-size: 2rem;
+    font-weight: bold;
+  }
 }
 
-.AlertMessage { font-size: 1.6rem }
+.AlertMessage {
+  font-size: 1.6rem
+}
 
-input, textarea, .CustomButton {
+input,
+textarea,
+.CustomButton {
   font-size: 1.6rem;
   font-family: 'PT Sans Caption', sans-serif;
   font-weight: normal;
@@ -70,21 +96,58 @@ input, textarea, .CustomButton {
 }
 
 .ProductInformation {
-  &__detail--name, &__rates--price-final { font-size: 4.5rem; font-weight: bold;
-    @include desktop { font-size: 4rem; }
+
+  &__detail--name,
+  &__rates--price-final {
+    font-size: 4.5rem;
+    font-weight: bold;
+
+    @include desktop {
+      font-size: 4rem;
+    }
   }
-  &__rates--price-original { font-size: 2rem; @include desktop { font-size: 1.75rem; } }
-  &__buttons-button { font-size: 2rem; font-family: 'PT Sans Caption', sans-serif; }
+
+  &__rates--price-original {
+    font-size: 2rem;
+
+    @include desktop {
+      font-size: 1.75rem;
+    }
+  }
+
+  &__buttons-button {
+    font-size: 2rem;
+    font-family: 'PT Sans Caption', sans-serif;
+  }
 }
 
 .ProductDetailPage {
-  &__othertabs-tabs { font-size: 2.5rem; }
-  &__othertabs-description { font-size: 1.8rem;  &--primary, &--secondary { line-height: 2.5rem; } }
+  &__othertabs-tabs {
+    font-size: 2.5rem;
+  }
+
+  &__othertabs-description {
+    font-size: 1.8rem;
+
+    &--primary,
+    &--secondary {
+      line-height: 2.5rem;
+    }
+  }
 }
 
 .AdminDashboardPage {
   &__products-table {
-    & thead { font-size: 2rem; font-weight: bold; }
+    & thead {
+      font-size: 2rem;
+      font-weight: bold;
+    }
+  }
+
+  &__main-content h2 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
   }
 }
 
@@ -102,44 +165,69 @@ input, textarea, .CustomButton {
 }
 
 .CartListItem {
-  &__price--final { font-size: 3rem; }
+  &__price--final {
+    font-size: 3rem;
+  }
 }
 
 .ShoppingCartPage {
-  &__main--price-amount-value { font-size: 3rem; }
+  &__main--price-amount-value {
+    font-size: 3rem;
+  }
 }
 
 .OrderSummary {
-  &__title { font-size: 2.2rem }
+  &__title {
+    font-size: 2.2rem
+  }
 }
 
 .PricesBreakDown {
   &-total {
-    font-size: 2.2rem; 
+    font-size: 2.2rem;
     font-weight: bold;
   }
 }
 
 .AdminCard {
-  &__title { font-size: 2.5rem; font-weight: bold; }
-  &__value { font-size: 6rem } 
+  &__title {
+    font-size: 2.5rem;
+    font-weight: bold;
+  }
+
+  &__value {
+    font-size: 6rem
+  }
 }
 
 .AdminModal {
-  &__title { font-size: 2.5rem; font-weight: bold; text-transform: uppercase; }
-  &__subtitle { font-size: 2rem; font-weight: bold; } 
+  &__title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  &__subtitle {
+    font-size: 2rem;
+    font-weight: bold;
+  }
 }
 
-.AccountPhase__title, .BillingPhase__title, .PaymentPhase__title, .ReviewPhase__title {
+.AccountPhase__title,
+.BillingPhase__title,
+.PaymentPhase__title,
+.ReviewPhase__title {
   font-size: 2.2rem;
 }
 
 .AccountPhase {
-  &__guest--info { font-size: 1.8rem; }
+  &__guest--info {
+    font-size: 1.8rem;
+  }
 }
 
 .LoginRegisterModal {
-  &__left-title{
+  &__left-title {
     &--content {
       font-size: 3rem;
     }
@@ -147,17 +235,33 @@ input, textarea, .CustomButton {
 }
 
 .ProfilePageNavBar {
-  li, p { font-size: 1.8rem }
-  &__profile-tile, &__orders-title, &__payment-title {
+
+  li,
+  p {
+    font-size: 1.8rem
+  }
+
+  &__profile-tile,
+  &__orders-title,
+  &__payment-title {
     font-size: 2.2rem;
   }
 }
 
 .ProfilePageDisplay {
-  &__phase-title { font-size: 2.2rem; color: #000; margin-bottom: 3rem; }
+  &__phase-title {
+    font-size: 2.2rem;
+    color: #000;
+    margin-bottom: 3rem;
+  }
 }
 
 .AddressListItem {
-  p { font-size: 1.4rem; }
-  &__intro-name { font-size: 1.8rem }
+  p {
+    font-size: 1.4rem;
+  }
+
+  &__intro-name {
+    font-size: 1.8rem
+  }
 }

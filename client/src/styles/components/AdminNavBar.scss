@@ -2,7 +2,7 @@
 
 .AdminNavBar {
   flex-basis: 20%;
-  height: 100vh;
+  min-height: 100vh;
   background: $medeasy-green-color;
   transition: all .3s ease;
   &.closed {

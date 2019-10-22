@@ -1,7 +1,10 @@
+@import '../colors';
+
 .AdminDashboardPage {
   width: 100%;
   position: relative;
   display: flex;
+
   &__main-content {
     background: #EDEDED;
     padding: 2rem;
@@ -11,12 +14,14 @@
     justify-content: center;
     position: relative;
   }
+
   &__hamburger {
     position: absolute;
     top: 2rem;
     left: 2rem;
     cursor: pointer;
   }
+
   &__user {
     font-size: 2.5rem;
     font-weight: bold;
@@ -24,6 +29,7 @@
     top: 2rem;
     right: 3rem;
   }
+
   & .AlertMessage {
     width: 40%;
     margin: 0 auto;
@@ -32,7 +38,12 @@
     top: 15%;
     transform: translateX(-50%);
   }
-  &__home, &__products, &__coupons, &__orders {
+
+  &__home,
+  &__products,
+  &__product-form,
+  &__coupons,
+  &__orders {
     margin: 0 4rem;
     width: 100%;
   }
@@ -53,27 +64,140 @@
     display: flex;
     justify-content: space-between;
   }
+
   // Products Page
   &__products {
     border-radius: 1rem;
-    &-info { margin-bottom: 3rem; display: flex; justify-content: space-between; }
+
+    &-info {
+      margin-bottom: 3rem;
+      display: flex;
+      justify-content: space-between;
+    }
+
     &-table {
       padding: 4rem 1.5rem;
       background: #fff;
       position: relative;
       width: 100%;
       text-align: center;
-      td.checkmark { display: flex; justify-content: center;}
-      & thead tr th { padding-bottom: 2.5rem; }
-      & tbody tr:not(:last-child) {
-        & td { padding-bottom: 3rem; }
+
+      td.checkmark {
+        display: flex;
+        justify-content: center;
       }
-      & tfoot h1 { padding-top: 7rem; }
+
+      & thead tr th {
+        padding-bottom: 2.5rem;
+      }
+
+      & tbody tr:not(:last-child) {
+        & td {
+          padding-bottom: 3rem;
+        }
+      }
+
+      & tfoot h1 {
+        padding-top: 7rem;
+      }
     }
 
     & .AdminCarousel {
       margin-top: 8rem;
     }
+  }
 
+  // Create product page
+  &__product-form {
+    display: flex;
+
+    &--left {
+      flex: 1;
+      padding-right: 2rem;
+      border-right: 1px solid #bbb;
+
+      &__file {
+        margin-bottom: 1.5rem;
+      }
+
+      & form {
+
+        .CustomFormElement input,
+        .CustomFormElement textarea {
+          border-color: #aaa;
+
+          &:hover,
+          &:focus {
+            border-color: $medeasy-green-color;
+          }
+        }
+
+        margin-top: 2rem;
+
+        & select {
+          cursor: pointer;
+          margin-bottom: 1.5rem;
+          padding: 1rem;
+          font-family: 'PT Sans Caption', sans-serif;
+          border: none;
+          background: $medeasy-green-color;
+          color: white;
+          -moz-appearance: none;
+          /* Firefox */
+          -webkit-appearance: none;
+          /* Safari and Chrome */
+          appearance: none;
+          background-image:
+            linear-gradient(45deg, transparent 50%, white 50%),
+            linear-gradient(135deg, white 50%, transparent 50%),
+            linear-gradient(to right, $medeasy-green-color, $medeasy-green-color);
+          background-position: calc(100% - 20px) calc(1em + 2px),
+            calc(100% - 15px) calc(1em + 2px),
+            100% 0;
+          background-size: 5px 5px,
+            5px 5px,
+            .25rem, .25rem;
+          background-repeat: no-repeat;
+        }
+      }
+
+      small {
+        display: block;
+        margin-top: -1rem;
+        margin-bottom: 2rem;
+        font-weight: bold;
+      }
+    }
+
+    & button[type='submit']:disabled {
+      cursor: not-allowed;
+      background: #aaa;
+    }
+
+    &--right {
+      padding-left: 2rem;
+      flex: 1;
+
+      &__images {
+        margin: 2rem 0;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      &__image {
+        flex-basis: 25%;
+        min-height: 10rem;
+      }
+
+      &__info {
+        margin-top: 1rem;
+        border-radius: .5rem;
+        width: 100%;
+        background: white;
+        padding: 1.5rem;
+        & p:not(:last-child) { margin-bottom: 2rem }
+        & p { font-weight: bold; word-wrap: break-word; word-break: break-all;}
+      }
+    }
   }
 }

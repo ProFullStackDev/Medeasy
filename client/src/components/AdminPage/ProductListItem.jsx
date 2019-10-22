@@ -2,7 +2,6 @@ import React from 'react'
 import AdminSlider from './AdminSlider'
 import CustomButton from '../../components/CustomButton'
 import { connect } from 'react-redux'
-import { createStructuredSelector } from 'reselect'
 import { alertModal } from '../../redux/actions/alertActions'
 
 const ProductListItem = ({

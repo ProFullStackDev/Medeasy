@@ -39,7 +39,7 @@ module.exports = {
   fetchAllProducts: async (req, res) => {
     const searchQuery = req.query.search || ''
     try {
-      const products = await Product.find({ name: {$regex: '^' + searchQuery , $options: 'i'}}).select('-admin').populate('category', ['name'])
+      const products = await Product.find({ name: {$regex: '^' + searchQuery , $options: 'i'}}).select('-admin').populate('category', ['name']).sort('-createdAt')
       if (!products || !products.length) return res.status(404).send({ statusCode: 404, message: 'No products are found' })
       res.send({ statusCode: 200, count: products.length, products })
     } catch (err) {

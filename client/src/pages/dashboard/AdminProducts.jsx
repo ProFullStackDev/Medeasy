@@ -12,30 +12,42 @@ import ProductList from '../../components/AdminPage/ProductList'
 import AdminCarousel from '../../components/AdminPage/AdminCarousel'
 
 const AdminProducts = ({ products, fetchAllProducts, onClick }) => {
-  // If there are no products on state, means fetch them
-  useEffect(() => {
-    if (!products) fetchAllProducts()
-  }, [products, fetchAllProducts])
+	// If there are no products on state, means fetch them
+	useEffect(() => {
+		if (!products) fetchAllProducts()
+	}, [products, fetchAllProducts])
 
-  const [pageNumber, setPageNumber] = useState(1)
-  const handleClick = page => setPageNumber(page)
-  
-  return !products ? <Spinner /> : (
-    <div className='AdminDashboardPage__products'>
-      <div className="AdminDashboardPage__products-info">
-        <p style={{ fontSize: '2.5rem', fontWeight: 'bold' }}>
-          ALL PRODUCTS
-        </p>
-        <Link to='/admin/dashboard/add-product'><CustomButton>Add product</CustomButton></Link>
-      </div>
-      <ProductList onClick={onClick} products={products.slice((pageNumber - 1) * 10, 10 * pageNumber)} />
-      <AdminCarousel onClick={handleClick} totalPages={Math.ceil(products.length / 10)} currentPageNumber={pageNumber} />
-    </div>
-  )
+	const [pageNumber, setPageNumber] = useState(1)
+	const handleClick = page => setPageNumber(page)
+
+	return !products ? (
+		<Spinner />
+	) : (
+		<div className="AdminDashboardPage__products">
+			<div className="AdminDashboardPage__products-info">
+				<h2>ALL PRODUCTS</h2>
+				<Link to="/admin/dashboard/add-product">
+					<CustomButton>Add product</CustomButton>
+				</Link>
+			</div>
+			<ProductList
+				onClick={onClick}
+				products={products.slice((pageNumber - 1) * 10, 10 * pageNumber)}
+			/>
+			<AdminCarousel
+				onClick={handleClick}
+				totalPages={Math.ceil(products.length / 10)}
+				currentPageNumber={pageNumber}
+			/>
+		</div>
+	)
 }
 
 const mapStateToProps = createStructuredSelector({
-  products: selectInventoryProducts 
+	products: selectInventoryProducts
 })
 
-export default connect(mapStateToProps, { fetchAllProducts })(AdminProducts)
+export default connect(
+	mapStateToProps,
+	{ fetchAllProducts }
+)(AdminProducts)
