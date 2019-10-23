@@ -7,6 +7,7 @@ import AdminProducts from './dashboard/AdminProducts'
 import AdminOrders from './dashboard/AdminOrders'
 import AdminCoupons from './dashboard/AdminCoupons'
 import AdminCreateProduct from './dashboard/AdminCreateProduct'
+import AdminEditProduct from './dashboard/AdminEditProduct'
 import AlertMessage from '../components/AlertMessage'
 import AdminModal from '../components/AdminPage/AdminModal'
 
@@ -38,6 +39,7 @@ const AdminDashboardPage = ({ user, match: { url }, history }) => {
         <Route path={`${url}/orders`} component={AdminOrders} />
         <Route path={`${url}/coupons`} component={AdminCoupons} />
         <Route path={`${url}/add-product`} component={AdminCreateProduct} />
+        <Route path={`${url}/edit-product/:productId`} component={AdminEditProduct} />
       </div>
     </div>
   )

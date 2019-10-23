@@ -1,7 +1,7 @@
 import React from 'react'
 import '../styles/components/CustomFormElement.scss'
 
-const CustomFormElement = ({ max, maxLength, required, pattern, placeholder, noStyle, noLabel, isTextArea, onChange, labelName, name, type, id, value }) => {
+const CustomFormElement = ({ maxLength, required, pattern, placeholder, noStyle, noLabel, isTextArea, onChange, labelName, name, type, id, value }) => {
   return (
     <div className='CustomFormElement' style={ !noStyle ? { marginBottom: '1.5rem' } : null }>
       { !noLabel && <label htmlFor={id}>{labelName}</label> }

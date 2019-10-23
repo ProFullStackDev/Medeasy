@@ -27,8 +27,8 @@ router.post('/:categoryId', authenticate, isAdmin, upload.array('product-image',
 // @method - Public
 router.get('/', fetchAllProducts)
 
-// @route - GET /api/products/
-// @desc - Fetch all products
+// @route - GET /api/products/category/:categoryId
+// @desc - Fetch all products of a certain category
 // @method - Public
 router.get('/category/:categoryId', fetchAllProductsByCategory)
 

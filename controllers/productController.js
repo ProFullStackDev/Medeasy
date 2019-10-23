@@ -15,7 +15,8 @@ module.exports = {
     const { categoryId } = req.params
     if (!categoryId) return res.status(400).send({ statusCode: 400, message: 'Invalid Category Id' })
     try {
-      const filePaths = req.files.map(file => `/${file.path}`)
+      const filePaths = req.files.map(file => `/${file.path.replace(/\\/g, '/')}`)
+      console.log(filePaths)
       if (await Product.findOne({ name: req.body.name }))
         return res.status(400).send({ statusCode: 400, message: 'Product already exists' })
 
@@ -87,7 +88,7 @@ module.exports = {
     if (!productId) return res.status(400).send({ statusCode: 400, message: 'Product Id not found' })
     try {
 
-      const filePaths = req.files.map(file => `/${file.path}`)
+      const filePaths = req.files.map(file => `/${file.path.replace(/\\/g, '/')}`)
       const originalFileNames = req.files.map(file => file.originalname)
 
       let oldProduct = await Product.findOne({ admin: req.user._id, _id: productId })

@@ -1,7 +1,7 @@
 module.exports = reqBodyObj => {
   // Preparing the product object
   const { name, description, price, quantities, dosages, sideEffects, stockAvailable } = reqBodyObj
-  const prices = price.split(',')
+  const prices = price.includes(',') ? price.split(',') : [price]
   const productObj = { name, description, price: null, quantities: [], dosages: [], sideEffects: [], stockAvailable }
   productObj.dosages = dosages.includes(',') ? dosages.split(',') : [dosages]
   productObj.quantities = quantities.includes(',') ? quantities.split(',') : [quantities]

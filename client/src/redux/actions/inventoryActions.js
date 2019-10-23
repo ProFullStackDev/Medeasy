@@ -3,7 +3,8 @@ import axios from 'axios'
 import { alertUser } from './alertActions'
 
 const {
-	SET_PRODUCTS,
+  SET_PRODUCTS,
+  SET_PRODUCT,
 	SET_COUPONS,
 	SET_ORDERS,
 	SET_CATEGORIES,
@@ -98,6 +99,17 @@ export const fetchAllProducts = () => async dispatch => {
 	}
 }
 
+export const fetchProductById = productId => async dispatch => {
+  try {
+    const { data: { product } } = await axios.get(`/api/products/${productId}`)
+    dispatch({ type: SET_PRODUCT, payload: product })
+    return product
+  } catch (err) {
+    const errorMessage = err.response.data.message
+    dispatch(alertUser(errorMessage, 'danger'))
+  }
+}
+
 export const changeProductAvailableState = (
 	productId,
 	status
@@ -114,9 +126,9 @@ export const addProduct = (formData, categoryId, history) => async dispatch => {
 	try {
     dispatch({ type: SET_INVENTORY_LOADING, payload: true })
 		await axios.post(`/api/products/${categoryId}`, formData)
+		dispatch({ type: CLEAR_PRODUCTS })
     history.push('/admin/dashboard/products')
     dispatch(alertUser('Product created successfully', 'success'))
-    
 	} catch (err) {
 		const errorMessage = err.response.data.message
 		if (Array.isArray(errorMessage))
@@ -127,7 +139,23 @@ export const addProduct = (formData, categoryId, history) => async dispatch => {
 	} finally { dispatch({ type: SET_INVENTORY_LOADING, payload: false }) }
 }
 
-export const updateProduct = product => async dispatch => {}
+export const updateProduct = (formData, productId, history) => async dispatch => {
+	try {
+    dispatch({ type: SET_INVENTORY_LOADING, payload: true })
+		await axios.put(`/api/products/${productId}`, formData)
+		dispatch({ type: CLEAR_PRODUCTS })
+    history.push('/admin/dashboard/products')
+    dispatch(alertUser('Product updated successfully', 'success'))
+    
+	} catch (err) {
+		const errorMessage = err.response.data.message
+		if (Array.isArray(errorMessage))
+			errorMessage.forEach(message =>
+				dispatch(alertUser(message.msg, 'danger'))
+			)
+		else dispatch(alertUser(errorMessage, 'danger'))
+	} finally { dispatch({ type: SET_INVENTORY_LOADING, payload: false }) }
+}
 
 export const deleteProduct = productId => async dispatch => {
 	try {

@@ -3,6 +3,7 @@ import AdminSlider from './AdminSlider'
 import CustomButton from '../../components/CustomButton'
 import { connect } from 'react-redux'
 import { alertModal } from '../../redux/actions/alertActions'
+import { Link } from 'react-router-dom'
 
 const ProductListItem = ({
 	onClick,
@@ -10,9 +11,12 @@ const ProductListItem = ({
 	product: { _id, name, dosages, quantities, stockAvailable },
 	index
 }) => {
-
 	const handleClick = () => {
-		const modalObj = { title: 'CONFIRM DELETION', subTitle: 'Are you sure that you want to delete this product', extraInfo: { id: _id } }
+		const modalObj = {
+			title: 'CONFIRM DELETION',
+			subTitle: 'Are you sure that you want to delete this product',
+			extraInfo: { id: _id }
+		}
 		alertModal(modalObj)
 		onClick(true)
 	}
@@ -27,14 +31,16 @@ const ProductListItem = ({
 				<AdminSlider productId={_id} checked={stockAvailable} />
 			</td>
 			<td>
+				<Link to={`/admin/dashboard/edit-product/${_id}`}>
+					<CustomButton
+						extraStyle={{ padding: '.5rem 2rem' }}
+						specialBgColor="#F8931A"
+					>
+						Edit
+					</CustomButton>
+				</Link>
 				<CustomButton
-					extraStyle={{ padding: '.5rem 2rem' }}
-					specialBgColor="#F8931A"
-				>
-					Edit
-				</CustomButton>
-				<CustomButton
-          onClick={handleClick}
+					onClick={handleClick}
 					extraStyle={{ padding: '.5rem 2rem', marginLeft: '1.5rem' }}
 					specialBgColor="#D44A4A"
 				>
@@ -45,4 +51,7 @@ const ProductListItem = ({
 	)
 }
 
-export default connect(null, { alertModal })(ProductListItem)
+export default connect(
+	null,
+	{ alertModal }
+)(ProductListItem)

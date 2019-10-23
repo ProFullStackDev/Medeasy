@@ -1,6 +1,7 @@
 import actionTypes from '../actionTypes'
 const {
 	SET_PRODUCTS,
+	SET_PRODUCT,
 	SET_COUPONS,
 	SET_ORDERS,
 	SET_CATEGORIES,
@@ -14,6 +15,7 @@ const {
 
 const initialState = {
 	products: null,
+	product: null,
 	orders: null,
 	coupons: null,
 	categories: null,
@@ -25,6 +27,8 @@ export default (state = initialState, action) => {
 	switch (type) {
 		case SET_PRODUCTS:
 			return { ...state, products: payload }
+		case SET_PRODUCT:
+			return { ...state, product: payload }
 		case SET_CATEGORIES:
 			return { ...state, categories: payload }
 		case CLEAR_CATEGORIES:
@@ -45,6 +49,7 @@ export default (state = initialState, action) => {
 			return {
 				categories: null,
 				products: null,
+				product: null,
 				orders: null,
 				coupons: null,
 				loading: false
