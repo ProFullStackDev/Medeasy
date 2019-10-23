@@ -79,7 +79,7 @@ const AdminEditProduct = ({
 		const promises = urls.map(
 			url =>
 				new Promise(async resolve => {
-					const imageName = url.split('/')[2]
+					const imageName = url.split('/')[3]
 					const imageExtension = imageName.split('.')[1]
 					const mimeType =
 						imageExtension === 'jpg' || 'jpeg' ? 'image/jpeg' : 'image/png'

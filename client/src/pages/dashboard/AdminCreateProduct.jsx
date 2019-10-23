@@ -2,8 +2,14 @@ import React, { useState, useEffect } from 'react'
 
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { selectInventoryCategories, selectInventoryLoading } from '../../redux/selectors/inventorySelectors'
-import { fetchAllCategories, addProduct } from '../../redux/actions/inventoryActions'
+import {
+	selectInventoryCategories,
+	selectInventoryLoading
+} from '../../redux/selectors/inventorySelectors'
+import {
+	fetchAllCategories,
+	addProduct
+} from '../../redux/actions/inventoryActions'
 
 import CustomButton from '../../components/CustomButton'
 import CustomFormElement from '../../components/CustomFormElement'
@@ -11,7 +17,13 @@ import Spinner from '../../components/Spinner'
 
 import emptyImage from '../../images/empty.jpg'
 
-const AdminCreateProduct = ({ history, loading, categories, fetchAllCategories, addProduct }) => {
+const AdminCreateProduct = ({
+	history,
+	loading,
+	categories,
+	fetchAllCategories,
+	addProduct
+}) => {
 	useEffect(() => {
 		fetchAllCategories()
 		return
@@ -28,7 +40,7 @@ const AdminCreateProduct = ({ history, loading, categories, fetchAllCategories, 
 		prices: ''
 	})
 
-  const [fileErrorMessages, setFileErrorMessages] = useState([])
+	const [fileErrorMessages, setFileErrorMessages] = useState([])
 
 	const {
 		name,
@@ -42,19 +54,19 @@ const AdminCreateProduct = ({ history, loading, categories, fetchAllCategories, 
 	} = formState
 
 	const handleSubmit = event => {
-    event.preventDefault()
-    const data = new FormData()
-    data.append('name', name)
-    data.append('description', description)
-    data.append('dosages', dosages)
-    data.append('price', prices)
-    data.append('quantities', quantities)
-    data.append('sideEffects', sideEffects)
-    data.append('product-image', productImages[0])
-    data.append('product-image', productImages[1])
-    data.append('product-image', productImages[2])
-    
-    addProduct(data, category, history)
+		event.preventDefault()
+		const data = new FormData()
+		data.append('name', name)
+		data.append('description', description)
+		data.append('dosages', dosages)
+		data.append('price', prices)
+		data.append('quantities', quantities)
+		data.append('sideEffects', sideEffects)
+		data.append('product-image', productImages[0])
+		data.append('product-image', productImages[1])
+		data.append('product-image', productImages[2])
+
+		addProduct(data, category, history)
 	}
 
 	const storeImages = files => {
@@ -105,7 +117,10 @@ const AdminCreateProduct = ({ history, loading, categories, fetchAllCategories, 
 					event.target.value = null
 				}
 			})
-			setFormState({ ...formState, productImages: Array.from(event.target.files) })
+			setFormState({
+				...formState,
+				productImages: Array.from(event.target.files)
+			})
 			storeImages(Array.from(event.target.files))
 		}
 	}
@@ -292,9 +307,16 @@ const AdminCreateProduct = ({ history, loading, categories, fetchAllCategories, 
 							<>
 								{prices.split(',').map((price, index) => (
 									<li key={index}>
-										{dosages.split(',')[Math.floor(index / quantities.split(',').length)] +
+										{dosages.split(',')[
+											Math.floor(index / quantities.split(',').length)
+										] +
 											'mg: ' +
-											quantities.split(',')[Math.floor(index % quantities.split(',').length)] + 'Pills -> ' + price + '$'}
+											quantities.split(',')[
+												Math.floor(index % quantities.split(',').length)
+											] +
+											'Pills -> ' +
+											price +
+											'$'}
 									</li>
 								))}
 							</>

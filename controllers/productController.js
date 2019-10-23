@@ -91,6 +91,8 @@ module.exports = {
       const filePaths = req.files.map(file => `/${file.path.replace(/\\/g, '/')}`)
       const originalFileNames = req.files.map(file => file.originalname)
 
+      console.log(originalFileNames)
+
       let oldProduct = await Product.findOne({ admin: req.user._id, _id: productId })
       let product = await Product.findOneAndUpdate({ admin: req.user._id, _id: productId }, { $set: prepareProductObject(req.body) }, { new: true })
 

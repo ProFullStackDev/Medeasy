@@ -140,6 +140,7 @@ export const addProduct = (formData, categoryId, history) => async dispatch => {
 }
 
 export const updateProduct = (formData, productId, history) => async dispatch => {
+	console.log(Array.from(formData))
 	try {
     dispatch({ type: SET_INVENTORY_LOADING, payload: true })
 		await axios.put(`/api/products/${productId}`, formData)
