@@ -8,6 +8,8 @@ import AdminOrders from './dashboard/AdminOrders'
 import AdminCoupons from './dashboard/AdminCoupons'
 import AdminCreateProduct from './dashboard/AdminCreateProduct'
 import AdminEditProduct from './dashboard/AdminEditProduct'
+import AdminCouponForm from './dashboard/AdminCouponForm'
+import AdminCategoriesForm from './dashboard/AdminCategoriesForm'
 import AlertMessage from '../components/AlertMessage'
 import AdminModal from '../components/AdminPage/AdminModal'
 
@@ -36,10 +38,14 @@ const AdminDashboardPage = ({ user, match: { url }, history }) => {
         <AlertMessage />
         <Route exact path={`${url}`} component={AdminHome} />
         <Route path={`${url}/products`} render={routeProps => <AdminProducts {...routeProps} onClick={boolVal => setModalState(boolVal)} />} />
-        <Route path={`${url}/orders`} component={AdminOrders} />
-        <Route path={`${url}/coupons`} component={AdminCoupons} />
+        <Route path={`${url}/orders`} render={routeProps => <AdminOrders {...routeProps} onClick={boolVal => setModalState(boolVal)} />} />
+        <Route path={`${url}/coupons`} render={routeProps => <AdminCoupons {...routeProps} onClick={boolVal => setModalState(boolVal)} />} />
+        <Route path={`${url}/add-product`} component={AdminCreateProduct} />
+        <Route path={`${url}/add-coupon`} component={AdminCreateProduct} />
         <Route path={`${url}/add-product`} component={AdminCreateProduct} />
         <Route path={`${url}/edit-product/:productId`} component={AdminEditProduct} />
+        <Route path={`${url}/edit-coupon/:couponId`} component={AdminCouponForm} />
+        <Route path={`${url}/edit-category/:categoryId`} component={AdminCouponForm} />
       </div>
     </div>
   )

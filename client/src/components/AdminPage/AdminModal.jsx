@@ -5,9 +5,9 @@ import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { selectAlertModal } from '../../redux/selectors/alertSelectors'
 import { removeModal } from '../../redux/actions/alertActions'
-import { deleteProduct } from '../../redux/actions/inventoryActions'
+import { deleteProduct, deleteCoupon, deleteCategory } from '../../redux/actions/inventoryActions'
 
-const AdminModal = ({ modal, onClick, removeModal, deleteProduct }) => {
+const AdminModal = ({ modal, onClick, removeModal, deleteProduct, deleteCoupon, deleteCategory }) => {
   
   const handleClick = () => {
     onClick(false)
@@ -15,7 +15,12 @@ const AdminModal = ({ modal, onClick, removeModal, deleteProduct }) => {
   }
   
   const handleDelete = async () => {
-    await deleteProduct(modal.extraInfo.id)
+    switch (modal.extraInfo.relation) {
+      case 'product': await deleteProduct(modal.extraInfo.id); break
+      case 'coupon': await deleteCoupon(modal.extraInfo.id); break;
+      case 'category': await deleteCategory(modal.extraInfo.id); break;
+      default: break;
+    }
     onClick(false)
     removeModal()
   }
@@ -36,4 +41,4 @@ const mapStateToProps = createStructuredSelector({
   modal: selectAlertModal
 })
 
-export default connect(mapStateToProps, { removeModal, deleteProduct })(AdminModal)
+export default connect(mapStateToProps, { removeModal, deleteProduct, deleteCoupon, deleteCategory })(AdminModal)

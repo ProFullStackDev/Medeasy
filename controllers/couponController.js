@@ -2,6 +2,7 @@ const { validationResult } = require('express-validator')
 const Coupon = require('../models/Coupon')
 
 module.exports = {
+
   createCoupon: async (req, res) => {
     const errors = validationResult(req)
     if (!errors.isEmpty()) return res.status(400).send({ statusCode: 400, message: errors.array() })
@@ -22,6 +23,21 @@ module.exports = {
       res.send({ statusCode: 200, coupons })
     } catch (err) {
       console.error(err.message)
+      res.status(500).send({ statusCode: 500, message: 'Server Error' })
+    }
+  },
+
+  deleteCouponById: async (req, res) => {
+    const errors = validationResult(req)
+    if (!errors.isEmpty()) return res.status(400).send({ statusCode: 400, message: errors.array() })
+    try {
+      const couponId = req.params.couponId
+      if (!couponId) return res.status(400).send({ statusCode: 400, message: 'Coupon Id required' })
+      const coupon = await Coupon.findByIdAndDelete(couponId)
+      if (!coupon) return res.status(404).send({ statusCode: 404, message: 'Coupon does not exist' })
+      res.status(202).send({ statusCode: 202, coupon })
+    } catch (err) {
+      console.log(err.message)
       res.status(500).send({ statusCode: 500, message: 'Server Error' })
     }
   }

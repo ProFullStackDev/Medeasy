@@ -4,7 +4,13 @@ const couponSchema = new Schema({
   name: { type: String, required: true },
   type: { type: String, required: true },
   value: { type: Number, required: true },
-  description: { type: String, required: true }
+  description: { type: String, required: true },
+  expiresAt: { 
+    type: Date, 
+    required: true, 
+    min: `${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()}`,
+    max: `${new Date().getFullYear() + 1}-12-31`
+  }
 }, { timestamps: true })
 
 couponSchema.methods = {

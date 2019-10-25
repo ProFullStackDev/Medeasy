@@ -8,7 +8,9 @@ const {
 	SET_COUPONS,
 	SET_ORDERS,
 	SET_CATEGORIES,
-  CLEAR_PRODUCTS,
+	CLEAR_PRODUCTS,
+	CLEAR_CATEGORIES,
+	CLEAR_COUPONS,
   SET_INVENTORY_LOADING
 } = actionTypes
 
@@ -36,6 +38,16 @@ export const fetchAllCategories = () => async dispatch => {
 				dispatch(alertUser(message.msg, 'danger'))
 			)
 		else dispatch(alertUser(errorMessage, 'danger'))
+	}
+}
+
+export const deleteCategory = categoryId => async dispatch => {
+	try {
+		await axios.delete(`/api/categories/${categoryId}`)
+		dispatch({ type: CLEAR_CATEGORIES })
+	} catch (err) {
+		const errorMessage = err.response.data.message
+		dispatch(alertUser(errorMessage, 'danger'))
 	}
 }
 
@@ -76,6 +88,16 @@ export const fetchAllCoupons = () => async dispatch => {
 				dispatch(alertUser(message.msg, 'danger'))
 			)
 		else dispatch(alertUser(errorMessage, 'danger'))
+	}
+}
+
+export const deleteCoupon = couponId => async dispatch => {
+	try {
+		await axios.delete(`/api/coupons/${couponId}`)
+		dispatch({ type: CLEAR_COUPONS })
+	} catch (err) {
+		const errorMessage = err.response.data.message
+		dispatch(alertUser(errorMessage, 'danger'))
 	}
 }
 

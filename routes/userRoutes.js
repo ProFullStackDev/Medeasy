@@ -1,6 +1,7 @@
 const { check } = require('express-validator')
 const { Router } = require('express')
 const authenticate = require('../middleware/authenticate')
+const isAdmin = require('../middleware/isAdmin')
 const router = Router()
 const { logoutUser, createNewUser, addGuestUser, signInUser, changeUserPassword, signInAdminUser } = require('../controllers/userController')
 
@@ -52,5 +53,10 @@ router.patch('/password', authenticate, changeUserPassword)
 // @desc - Logout
 // @method - Private (Auth)
 router.delete('/password', authenticate, logoutUser)
+
+// @route - GET /api/user/verify/admin
+// @desc - Verify JWT 
+// @method - Private (Auth)
+router.get('/verify', authenticate, isAdmin, (req, res) => res.sendStatus(200))
 
 module.exports = router
