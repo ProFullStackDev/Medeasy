@@ -6,6 +6,7 @@ import AdminHome from './dashboard/AdminHome'
 import AdminProducts from './dashboard/AdminProducts'
 import AdminOrders from './dashboard/AdminOrders'
 import AdminCoupons from './dashboard/AdminCoupons'
+import AdminCategories from './dashboard/AdminCategories'
 import AdminCreateProduct from './dashboard/AdminCreateProduct'
 import AdminEditProduct from './dashboard/AdminEditProduct'
 import AdminCouponForm from './dashboard/AdminCouponForm'
@@ -40,12 +41,14 @@ const AdminDashboardPage = ({ user, match: { url }, history }) => {
         <Route path={`${url}/products`} render={routeProps => <AdminProducts {...routeProps} onClick={boolVal => setModalState(boolVal)} />} />
         <Route path={`${url}/orders`} render={routeProps => <AdminOrders {...routeProps} onClick={boolVal => setModalState(boolVal)} />} />
         <Route path={`${url}/coupons`} render={routeProps => <AdminCoupons {...routeProps} onClick={boolVal => setModalState(boolVal)} />} />
+        <Route path={`${url}/categories`} render={routeProps => <AdminCategories {...routeProps} onClick={boolVal => setModalState(boolVal)} />} />
         <Route path={`${url}/add-product`} component={AdminCreateProduct} />
-        <Route path={`${url}/add-coupon`} component={AdminCreateProduct} />
+        <Route path={`${url}/add-coupon`} component={AdminCouponForm} />
+        <Route path={`${url}/add-category`} component={AdminCategoriesForm} />
         <Route path={`${url}/add-product`} component={AdminCreateProduct} />
         <Route path={`${url}/edit-product/:productId`} component={AdminEditProduct} />
         <Route path={`${url}/edit-coupon/:couponId`} component={AdminCouponForm} />
-        <Route path={`${url}/edit-category/:categoryId`} component={AdminCouponForm} />
+        <Route path={`${url}/edit-category/:categoryId`} component={AdminCategoriesForm} />
       </div>
     </div>
   )

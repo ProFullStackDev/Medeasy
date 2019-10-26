@@ -1,21 +1,21 @@
 import React from 'react'
-import AdminSlider from './AdminSlider'
 import CustomButton from '../../components/CustomButton'
+
 import { connect } from 'react-redux'
 import { alertModal } from '../../redux/actions/alertActions'
 import { Link } from 'react-router-dom'
 
-const ProductListItem = ({
+const CategoryListItem = ({
 	onClick,
 	alertModal,
-	product: { _id, name, dosages, quantities, stockAvailable },
+	category: { _id, name, type, value, expiryDate },
 	index
 }) => {
 	const handleClick = () => {
 		const modalObj = {
 			title: 'CONFIRM DELETION',
-			subTitle: 'Are you sure that you want to delete this product ?',
-			extraInfo: { id: _id, relation: 'product' }
+			subTitle: 'Are you sure that you want to delete this category ?',
+			extraInfo: { id: _id, relation: 'category' }
 		}
 		alertModal(modalObj)
 		onClick(true)
@@ -25,13 +25,8 @@ const ProductListItem = ({
 		<tr>
 			<td>{index + 1}</td>
 			<td>{name}</td>
-			<td>{dosages.join(', ')}</td>
-			<td>{quantities.join(', ')}</td>
-			<td className="checkmark">
-				<AdminSlider productId={_id} checked={stockAvailable} />
-			</td>
-			<td>
-				<Link to={`/admin/dashboard/edit-product/${_id}`}>
+			<td style={{ paddingLeft: '2rem' }}>
+				<Link to={`/admin/dashboard/edit-category/${_id}`}>
 					<CustomButton
 						extraStyle={{ padding: '.5rem 2rem' }}
 						specialBgColor="#F8931A"
@@ -54,4 +49,4 @@ const ProductListItem = ({
 export default connect(
 	null,
 	{ alertModal }
-)(ProductListItem)
+)(CategoryListItem)

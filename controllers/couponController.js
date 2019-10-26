@@ -38,6 +38,37 @@ module.exports = {
       res.status(202).send({ statusCode: 202, coupon })
     } catch (err) {
       console.log(err.message)
+      if (err.name === 'CastError') return res.status(400).send({ statusCode: 400, message: 'Invalid Coupon Id' })
+      res.status(500).send({ statusCode: 500, message: 'Server Error' })
+    }
+  },
+
+  fetchCouponById: async (req, res) => {
+    const errors = validationResult(req)
+    if (!errors.isEmpty()) return res.status(400).send({ statusCode: 400, message: errors.array() })
+    try {
+      const couponId = req.params.couponId
+      if (!couponId) return res.status(400).send({ statusCode: 400, message: 'Coupon Id required' })
+      const coupon = await Coupon.findById(couponId)
+      if (!coupon) return res.status(404).send({ statusCode: 404, message: 'Coupon does not exist' })
+      res.send({ statusCode: 202, coupon })
+    } catch (err) {
+      if (err.name === 'CastError') return res.status(400).send({ statusCode: 400, message: 'Invalid Coupon Id' })
+      res.status(500).send({ statusCode: 500, message: 'Server Error' })
+    }
+  },
+
+  updateCouponById: async (req, res) => {
+    const errors = validationResult(req)
+    if (!errors.isEmpty()) return res.status(400).send({ statusCode: 400, message: errors.array() })
+    try {
+      const couponId = req.params.couponId
+      if (!couponId) return res.status(400).send({ statusCode: 400, message: 'Coupon Id required' })
+      const coupon = await Coupon.findByIdAndUpdate(req.body)
+      if (!coupon) return res.status(404).send({ statusCode: 404, message: 'Coupon does not exist' })
+      res.send({ statusCode: 202, coupon })
+    } catch (err) {
+      if (err.name === 'CastError') return res.status(400).send({ statusCode: 400, message: 'Invalid Coupon Id' })
       res.status(500).send({ statusCode: 500, message: 'Server Error' })
     }
   }

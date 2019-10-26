@@ -1,13 +1,15 @@
 import axios from 'axios'
 import actionTypes from '../actionTypes'
 import { alertUser } from './alertActions.js'
+import history from '../createHistory'
+
 const { SET_USER, SET_ACCESS_TOKEN, CLEAR_INVENTORY, CLEAR_USER } = actionTypes
 
 export const signInAdmin = ({
   email,
   password,
   rememberMe
-}, history) => async dispatch => {
+}) => async dispatch => {
   try {
     // Sign in
     const { data: { user, accessToken } } = await axios.post('/api/user/admin', { email, password })
@@ -21,8 +23,6 @@ export const signInAdmin = ({
     sessionStorage.setItem('auth', JSON.stringify({ user, accessToken }))
     // Push to Dashboard
     setTimeout(() => history.push('/admin/dashboard'), 100)
-    // Set axios header here
-    axios.defaults.headers.common['Authorization'] = accessToken
   } catch (err) {
     console.log(err)
     const errorMessage = err.response.data.message
@@ -34,15 +34,15 @@ export const signInAdmin = ({
   }
 }
 
-export const logoutAdmin = history => async dispatch => {
+export const logout = (message = 'Logged out successfully !') => async (dispatch, state) => {
   try {
+    axios.put('/api/user/password', { accessToken: state().auth.accessToken })
     dispatch({ type: CLEAR_INVENTORY })
     dispatch({ type: CLEAR_USER })
     localStorage.removeItem('auth')
     sessionStorage.removeItem('auth')
-    axios.delete('/api/user/password')
     history.push('/admin')
-    dispatch(alertUser('Logged out !', 'danger'))
+    dispatch(alertUser(message, 'danger'))
   } catch (err) {
     const errorMessage = err.response.data.message
     dispatch(alertUser(errorMessage, 'danger'))

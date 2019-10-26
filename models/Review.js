@@ -9,7 +9,7 @@ const reviewSchema = new Schema({
     validate (value) { if (value > 5 && value < 0) throw new Error('Rating must be within 0 to 5') }
   },
   text: { type: String, required: true }
-})
+}, { timestamps: true })
 
 reviewSchema.methods = {
   toJSON: function () {

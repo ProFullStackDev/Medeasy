@@ -80,7 +80,10 @@ module.exports = {
 
   logoutUser: async (req, res) => {
     try {
-      const user = req.user
+      const errors = validationResult(req)
+      if (!errors.isEmpty()) return res.status(400).send({ statusCode: 400, message: errors.array() })
+      const { accessToken } = req.body
+      const user = await User.findOne({ accessToken: accessToken.replace('Bearer ', '') })
       user.accessToken = null
       await user.save()
       res.status(202).send({ statusCode: 202, message: 'User logged out successfully' })

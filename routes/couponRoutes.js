@@ -3,7 +3,7 @@ const router = Router()
 const { check } = require('express-validator')
 const authenticate = require('../middleware/authenticate')
 const isAdmin = require('../middleware/isAdmin')
-const { createCoupon, fetchAllCoupons, deleteCouponById } = require('../controllers/couponController')
+const { createCoupon, fetchAllCoupons, deleteCouponById, fetchCouponById, updateCouponById } = require('../controllers/couponController')
 
 // @route - POST api/coupons
 // @desc - Create a new coupon
@@ -21,6 +21,22 @@ createCoupon)
 // @desc - Get all coupons
 // @method - Private (Both Auth and Admin)
 router.get('/', authenticate, isAdmin, fetchAllCoupons)
+
+// @route - GET api/coupons/:couponId
+// @desc - Get coupon by ID
+// @method - Private (Both Auth and Admin)
+router.get('/:couponId', authenticate, isAdmin, fetchCouponById)
+
+// @route - PUT api/coupons/:couponId
+// @desc - Update a coupon by ID
+// @method - Private (Both Auth and Admin)
+router.put('/:couponId', authenticate, isAdmin, [
+  check('name', 'Name is required').not().isEmpty(),
+  check('type', 'Type is required').not().isEmpty(),
+  check('description', 'Description is required').not().isEmpty(),
+  check('value', 'Value is required').not().isEmpty(),
+  check('expiresAt', 'Expiry Date is required').not().isEmpty()
+], updateCouponById)
 
 // @route - DELETE api/coupons/:couponId
 // @desc - Delete a coupon by ID

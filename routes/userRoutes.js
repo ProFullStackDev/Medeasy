@@ -49,14 +49,14 @@ router.post('/admin', [check('email', 'Email is required').not().isEmpty(), chec
 // @method - Private (Auth)
 router.patch('/password', authenticate, changeUserPassword)
 
-// @route - DELETE /api/user/password
+// @route - PUT /api/user/password
 // @desc - Logout
-// @method - Private (Auth)
-router.delete('/password', authenticate, logoutUser)
+// @method - Public
+router.put('/password', check('accessToken', 'Access Token is required').not().isEmpty(), logoutUser)
 
 // @route - GET /api/user/verify/admin
-// @desc - Verify JWT 
-// @method - Private (Auth)
-router.get('/verify', authenticate, isAdmin, (req, res) => res.sendStatus(200))
+// @desc - Verify JWT for Admin
+// @method - Private (Auth and Admin)
+router.get('/verify/admin', authenticate, isAdmin, (req, res) => res.sendStatus(200))
 
 module.exports = router

@@ -32,6 +32,7 @@ module.exports = {
       if (!categoryId) return res.status(400).send({ statusCode: 400, message: 'Category Id not found' })
       const category = await Category.findById(categoryId)
       if (!category) return res.status(404).send({ statusCode: 404, message: 'Category not found' })
+      res.send({ statusCode: 200, category })
     } catch (err) {
       if (err.name === 'CastError') return res.status(400).send({ statusCode: 400, message: 'Invalid Category Id' })
       console.error(err.message)
@@ -45,6 +46,7 @@ module.exports = {
       if (!categoryId) return res.status(400).send({ statusCode: 400, message: 'Category Id not found' })
       const category = await Category.findByIdAndUpdate(categoryId, { $set: req.body }, { new: true })
       if (!category) return res.status(404).send({ statusCode: 404, message: 'Category not found' })
+      res.send({ statusCode: 200, category })
     } catch (err) {
       if (err.name === 'CastError') return res.status(400).send({ statusCode: 400, message: 'Invalid Category Id' })
       console.error(err.message)

@@ -1,21 +1,22 @@
 import React from 'react'
-import AdminSlider from './AdminSlider'
 import CustomButton from '../../components/CustomButton'
+
 import { connect } from 'react-redux'
 import { alertModal } from '../../redux/actions/alertActions'
 import { Link } from 'react-router-dom'
+import Moment from 'react-moment'
 
-const ProductListItem = ({
+const CouponListItem = ({
 	onClick,
 	alertModal,
-	product: { _id, name, dosages, quantities, stockAvailable },
+	coupon: { _id, name, type, value, expiryDate },
 	index
 }) => {
 	const handleClick = () => {
 		const modalObj = {
 			title: 'CONFIRM DELETION',
-			subTitle: 'Are you sure that you want to delete this product ?',
-			extraInfo: { id: _id, relation: 'product' }
+			subTitle: 'Are you sure that you want to delete this coupon ?',
+			extraInfo: { id: _id, relation: 'coupon' }
 		}
 		alertModal(modalObj)
 		onClick(true)
@@ -25,13 +26,11 @@ const ProductListItem = ({
 		<tr>
 			<td>{index + 1}</td>
 			<td>{name}</td>
-			<td>{dosages.join(', ')}</td>
-			<td>{quantities.join(', ')}</td>
-			<td className="checkmark">
-				<AdminSlider productId={_id} checked={stockAvailable} />
-			</td>
+			<td>{type}</td>
+			<td>{value} {type === 'percent' ? '%' : '$'}</td>
+			<td><Moment format='DD-MM-YYYY'>{expiryDate}</Moment></td>
 			<td>
-				<Link to={`/admin/dashboard/edit-product/${_id}`}>
+				<Link to={`/admin/dashboard/edit-coupon/${_id}`}>
 					<CustomButton
 						extraStyle={{ padding: '.5rem 2rem' }}
 						specialBgColor="#F8931A"
@@ -54,4 +53,4 @@ const ProductListItem = ({
 export default connect(
 	null,
 	{ alertModal }
-)(ProductListItem)
+)(CouponListItem)

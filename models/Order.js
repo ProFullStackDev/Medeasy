@@ -28,7 +28,7 @@ const ordersSchema = new Schema({
     subTotal: String
   }],
   totalAmount: Number
-})
+}, { timestamps: true })
 
 ordersSchema.methods = {
   toJSON: function () {

@@ -14,9 +14,9 @@ const AdminHome = ({ fetchInventory, products, orders, coupons }) => {
   }, [fetchInventory])
   return !orders || !products ? <Spinner /> : (
     <div className='AdminDashboardPage__home'>
-      <AdminCard title='Total Products' value={products.length} btnRequired btnText='View Products' btnLink='products' />
-      <AdminCard title='Total Orders' value={orders.length} btnRequired btnText='View Orders' btnLink='orders' />
-      <AdminCard title='Total Sales' value={orders.reduce((acc, order) => acc += order.totalAmount, 0)} />
+      <AdminCard title='Total Products' value={products.length.toString()} btnRequired btnText='View Products' btnLink='products' />
+      <AdminCard title='Total Orders' value={orders.length.toString()} btnRequired btnText='View Orders' btnLink='orders' />
+      <AdminCard title='Total Sales' value={orders.reduce((acc, order) => acc += order.totalAmount, 0) + '$'} />
     </div>
   )
 }

@@ -3,40 +3,40 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { selectInventoryProducts } from '../../redux/selectors/inventorySelectors'
-import { fetchAllProducts } from '../../redux/actions/inventoryActions'
+import { selectInventoryCoupons } from '../../redux/selectors/inventorySelectors'
+import { fetchAllCoupons } from '../../redux/actions/inventoryActions'
 
 import Spinner from '../../components/Spinner'
 import CustomButton from '../../components/CustomButton'
-import ProductList from '../../components/AdminPage/ProductList'
+import CouponsList from '../../components/AdminPage/CouponsList'
 import AdminCarousel from '../../components/AdminPage/AdminCarousel'
 
-const AdminProducts = ({ products, fetchAllProducts, onClick }) => {
-	// If there are no products on state, means fetch them
+const AdminCoupons = ({ coupons, fetchAllCoupons, onClick }) => {
+	// If there are no Coupons on state, means fetch them
 	useEffect(() => {
-		if (!products) fetchAllProducts()
-	}, [products, fetchAllProducts])
+		if (!coupons) fetchAllCoupons()
+	}, [coupons, fetchAllCoupons])
 
 	const [pageNumber, setPageNumber] = useState(1)
 	const handleClick = page => setPageNumber(page)
 
-	return !products ? (
+	return !coupons ? (
 		<Spinner />
 	) : (
-		<div className="AdminDashboardPage__products">
-			<div className="AdminDashboardPage__products-info">
-				<h2>ALL PRODUCTS</h2>
-				<Link to="/admin/dashboard/add-product">
-					<CustomButton>Add product</CustomButton>
+		<div className="AdminDashboardPage__coupons">
+			<div className="AdminDashboardPage__coupons-info">
+				<h2>ALL Coupons</h2>
+				<Link to="/admin/dashboard/add-coupon">
+					<CustomButton>Add Coupon</CustomButton>
 				</Link>
 			</div>
-			<ProductList
+			<CouponsList
 				onClick={onClick}
-				products={products.slice((pageNumber - 1) * 10, 10 * pageNumber)}
+				coupons={coupons.slice((pageNumber - 1) * 10, 10 * pageNumber)}
 			/>
 			<AdminCarousel
 				onClick={handleClick}
-				totalPages={Math.ceil(products.length / 10)}
+				totalPages={Math.ceil(coupons.length / 10)}
 				currentPageNumber={pageNumber}
 			/>
 		</div>
@@ -44,10 +44,10 @@ const AdminProducts = ({ products, fetchAllProducts, onClick }) => {
 }
 
 const mapStateToProps = createStructuredSelector({
-	products: selectInventoryProducts
+	coupons: selectInventoryCoupons
 })
 
 export default connect(
 	mapStateToProps,
-	{ fetchAllProducts }
-)(AdminProducts)
+	{ fetchAllCoupons }
+)(AdminCoupons)

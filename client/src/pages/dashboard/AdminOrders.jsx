@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react'
 
-import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { selectInventoryOrders } from '../../redux/selectors/inventorySelectors'
 import { fetchAllOrders } from '../../redux/actions/inventoryActions'
 
 import Spinner from '../../components/Spinner'
-import CustomButton from '../../components/CustomButton'
-import ProductList from '../../components/AdminPage/ProductList'
+import OrdersList from '../../components/AdminPage/OrdersList'
 import AdminCarousel from '../../components/AdminPage/AdminCarousel'
 
 const Adminorders = ({ orders, fetchAllOrders, onClick }) => {
@@ -26,14 +24,8 @@ const Adminorders = ({ orders, fetchAllOrders, onClick }) => {
 		<div className="AdminDashboardPage__orders">
 			<div className="AdminDashboardPage__orders-info">
 				<h2>ALL orders</h2>
-				<Link to="/admin/dashboard/add-order">
-					<CustomButton>Add product</CustomButton>
-				</Link>
 			</div>
-			<ProductList
-				onClick={onClick}
-				orders={orders.slice((pageNumber - 1) * 10, 10 * pageNumber)}
-			/>
+			<OrdersList orders={orders.slice((pageNumber - 1) * 10, 10 * pageNumber)}/>
 			<AdminCarousel
 				onClick={handleClick}
 				totalPages={Math.ceil(orders.length / 10)}

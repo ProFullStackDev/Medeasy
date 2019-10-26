@@ -3,8 +3,10 @@ const {
 	SET_PRODUCTS,
 	SET_PRODUCT,
 	SET_COUPONS,
+	SET_COUPON,
 	SET_ORDERS,
 	SET_CATEGORIES,
+	SET_CATEGORY,
 	CLEAR_PRODUCTS,
 	CLEAR_CATEGORIES,
 	CLEAR_ORDERS,
@@ -18,7 +20,9 @@ const initialState = {
 	product: null,
 	orders: null,
 	coupons: null,
+	coupon: null,
 	categories: null,
+	category: null,
 	loading: false
 }
 
@@ -31,6 +35,8 @@ export default (state = initialState, action) => {
 			return { ...state, product: payload }
 		case SET_CATEGORIES:
 			return { ...state, categories: payload }
+		case SET_CATEGORY:
+			return { ...state, category: payload }
 		case CLEAR_CATEGORIES:
 			return { ...state, categories: null }
 		case CLEAR_PRODUCTS:
@@ -43,6 +49,8 @@ export default (state = initialState, action) => {
 			return { ...state, orders: payload }
 		case SET_COUPONS:
 			return { ...state, coupons: payload }
+		case SET_COUPON:
+			return { ...state, coupon: payload }
 		case SET_INVENTORY_LOADING:
 			return { ...state, loading: payload }
 		case CLEAR_INVENTORY:
@@ -52,6 +60,7 @@ export default (state = initialState, action) => {
 				product: null,
 				orders: null,
 				coupons: null,
+				coupon: null,
 				loading: false
 			}
 		default:

@@ -20,7 +20,7 @@ const cartSchema = new Schema({
     quantity: Number,
     subTotal: String
   }]
-})
+}, { timestamps: true })
 
 cartSchema.methods = {
   toJSON: function () {

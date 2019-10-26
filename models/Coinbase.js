@@ -17,7 +17,7 @@ const coinbaseSchema = new Schema({
     amount: String,
     currency: String
   }
-})
+}, { timestamps: true })
 
 coinbaseSchema.methods = {
   toJSON: function () {

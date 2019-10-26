@@ -120,47 +120,6 @@
         margin-bottom: 1.5rem;
       }
 
-      & form {
-
-        .CustomFormElement input,
-        .CustomFormElement textarea {
-          border-color: #aaa;
-
-          &:hover,
-          &:focus {
-            border-color: $medeasy-green-color;
-          }
-        }
-
-        margin-top: 2rem;
-
-        & select {
-          cursor: pointer;
-          margin-bottom: 1.5rem;
-          padding: 1rem;
-          font-family: 'PT Sans Caption', sans-serif;
-          border: none;
-          background: $medeasy-green-color;
-          color: white;
-          -moz-appearance: none;
-          /* Firefox */
-          -webkit-appearance: none;
-          /* Safari and Chrome */
-          appearance: none;
-          background-image:
-            linear-gradient(45deg, transparent 50%, white 50%),
-            linear-gradient(135deg, white 50%, transparent 50%),
-            linear-gradient(to right, $medeasy-green-color, $medeasy-green-color);
-          background-position: calc(100% - 20px) calc(1em + 2px),
-            calc(100% - 15px) calc(1em + 2px),
-            100% 0;
-          background-size: 5px 5px,
-            5px 5px,
-            .25rem, .25rem;
-          background-repeat: no-repeat;
-        }
-      }
-
       small {
         display: block;
         margin-top: -1rem;
@@ -198,6 +157,58 @@
         & p:not(:last-child) { margin-bottom: 2rem }
         & p { font-weight: bold; word-wrap: break-word; word-break: break-all;}
       }
+    }
+  }
+
+  & form {
+
+    .CustomFormElement input,
+    .CustomFormElement textarea {
+      border-color: #aaa;
+
+      &:hover,
+      &:focus {
+        border-color: $medeasy-green-color;
+      }
+    }
+
+    margin-top: 2rem;
+
+    & select {
+      cursor: pointer;
+      width: 20%;
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      font-family: 'PT Sans Caption', sans-serif;
+      border: none;
+      background: $medeasy-green-color;
+      color: white;
+      -moz-appearance: none;
+      /* Firefox */
+      -webkit-appearance: none;
+      /* Safari and Chrome */
+      appearance: none;
+      background-image:
+        linear-gradient(45deg, transparent 50%, white 50%),
+        linear-gradient(135deg, white 50%, transparent 50%),
+        linear-gradient(to right, $medeasy-green-color, $medeasy-green-color);
+      background-position: calc(100% - 20px) calc(1em + 2px),
+        calc(100% - 15px) calc(1em + 2px),
+        100% 0;
+      background-size: 5px 5px,
+        5px 5px,
+        .25rem, .25rem;
+      background-repeat: no-repeat;
+    }
+
+    & input[type='date'] {
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      border: 1px solid #bbb;
+      background: transparent;
+      transition: all .3s ease;
+
+      &:hover { border-color: $medeasy-green-color; cursor: pointer; }
     }
   }
 }

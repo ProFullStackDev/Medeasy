@@ -22,9 +22,19 @@ export const selectInventoryCoupons = createSelector(
 	inventory => inventory.coupons
 )
 
+export const selectInventoryCoupon = createSelector(
+	[selectInventory],
+	inventory => inventory.coupon
+)
+
 export const selectInventoryCategories = createSelector(
 	[selectInventory],
 	inventory => inventory.categories
+)
+
+export const selectInventoryCategory = createSelector(
+	[selectInventory],
+	inventory => inventory.category
 )
 
 export const selectInventoryLoading = createSelector(

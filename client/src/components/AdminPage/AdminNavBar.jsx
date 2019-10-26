@@ -5,11 +5,11 @@ import medeasyLogo from '../../images/medeasy-logo.png'
 import '../../styles/components/AdminNavBar.scss'
 
 import { connect } from 'react-redux'
-import { logoutAdmin } from '../../redux/actions/authActions'
+import { logout } from '../../redux/actions/authActions'
 
-const AdminNavBar = ({ history, url, navBarState, logoutAdmin }) => {
+const AdminNavBar = ({ url, navBarState, logout }) => {
 
-  const handleClick = () => logoutAdmin(history)
+  const handleClick = () => logout()
 
   return (
     <nav className={`AdminNavBar ${!navBarState ? 'closed' : ''}`}>
@@ -18,10 +18,11 @@ const AdminNavBar = ({ history, url, navBarState, logoutAdmin }) => {
         <NavLink to={`${url}/products`} className='AdminNavBar__link' activeClassName='active'>Products</NavLink>
         <NavLink to={`${url}/coupons`} className='AdminNavBar__link' activeClassName='active'>Coupons</NavLink>
         <NavLink to={`${url}/orders`} className='AdminNavBar__link' activeClassName='active'>Orders</NavLink>
+        <NavLink to={`${url}/categories`} className='AdminNavBar__link' activeClassName='active'>Catgeories</NavLink>
         <li onClick={handleClick} className='AdminNavBar__link'>Logout</li>
       </ul>
     </nav>
   )
 }
 
-export default connect(null, { logoutAdmin })(AdminNavBar)
+export default connect(null, { logout })(AdminNavBar)

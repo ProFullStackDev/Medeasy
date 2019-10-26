@@ -17,7 +17,7 @@ const AdminCard = ({ title, value, btnRequired, btnText, btnLink }) => {
 
 AdminCard.propTypes = {
   title: PropTypes.string.isRequired,
-  value: PropTypes.number.isRequired,
+  value: PropTypes.string.isRequired,
   btnRequired: PropTypes.bool,
   btnText: PropTypes.string
 }

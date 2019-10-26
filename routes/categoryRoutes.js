@@ -28,11 +28,11 @@ router.get('/:categoryId', fetchCategoryById)
 // @route - PUT /api/categories/:categoryId
 // @desc - Update Category
 // @method - Private (Auth and isAdmin)
-router.post('/:categoryId', authenticate, isAdmin, updateCategoryById)
+router.put('/:categoryId', authenticate, isAdmin, updateCategoryById)
 
 // @route - DELETE /api/categories/:categoryId
 // @desc - Delete Category
 // @method - Private (Auth and isAdmin)
-router.post('/:categoryId', authenticate, isAdmin, deleteCategoryById)
+router.delete('/:categoryId', authenticate, isAdmin, deleteCategoryById)
 
 module.exports = router
