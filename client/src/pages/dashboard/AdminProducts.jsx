@@ -21,7 +21,7 @@ const AdminProducts = ({ products, fetchAllProducts, onClick }) => {
 	const handleClick = page => setPageNumber(page)
 
 	return !products ? (
-		<Spinner />
+		<Spinner white={false} />
 	) : (
 		<div className="AdminDashboardPage__products">
 			<div className="AdminDashboardPage__products-info">

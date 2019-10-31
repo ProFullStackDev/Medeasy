@@ -3,10 +3,10 @@ import NavBarUpper from './NavBarUpper'
 import NavBarLower from './NavBarLower'
 import '../../styles/components/NavBar.scss'
 
-const NavBar = ({ onClick }) => {
+const NavBar = () => {
   return (
     <header className='NavBar'>
-      <NavBarUpper onClick={onClick} />
+      <NavBarUpper />
       <NavBarLower />
     </header>
   )

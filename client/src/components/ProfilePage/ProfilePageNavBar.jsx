@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { NavLink } from 'react-router-dom'
 
 import '../../styles/components/ProfilePageNavBar.scss'
 import { ReactComponent as GpsIcon } from '../../images/gpspin.svg'
@@ -8,53 +9,44 @@ import { ReactComponent as CreditCardIcon } from '../../images/ccsmall.svg'
 import { ReactComponent as BitCoinIcon } from '../../images/bitLogo.svg'
 import { ReactComponent as PayPalIcon } from '../../images/paypalLogo.svg'
 
-const ProfilePageNavBar = ({ currentMode, setCurrentMode }) => {
-  // Selected mode for navbar
-  const [selectedMode, setSelectedMode] = useState(currentMode)
-  // Trigger the active
-  const handleClick = event => {
-    const mode = event.target.closest('li').dataset.mode
-    setSelectedMode(mode)
-    // Passing the mode back to the main Profile page
-    setCurrentMode(mode)
-  }
+const ProfilePageNavBar = () => {
   return (
     <div className='ProfilePageNavBar'>
       <div className='ProfilePageNavBar__profile'>
         <h2 className='ProfilePageNavBar__profile-title'>Profile</h2>
         <ul className='ProfilePageNavBar__profile-list'>
-          <li onClick={handleClick} data-mode='manageAddress' className={`ProfilePageNavBar__profile-list--item ${ selectedMode === 'manageAddress' ? 'activeProfileTab' : '' }`}>
+          <NavLink to='/profile/address' className='ProfilePageNavBar__profile-list--item' activeClassName='activeProfileTab'>
             <GpsIcon />
             <span>Manage Addresses</span>
-          </li>
-          <li onClick={handleClick} data-mode='changePassword' className={`ProfilePageNavBar__profile-list--item ${ selectedMode === 'changePass' ? 'activeProfileTab' : '' }`}>
+          </NavLink>
+          <NavLink to='/profile/password-change' className='ProfilePageNavBar__profile-list--item' activeClassName='activeProfileTab'>
             <LockIcon />
             <span>Change Password</span>
-          </li>
+          </NavLink>
         </ul>
       </div>
       <div className='ProfilePageNavBar__orders'>
         <h2 className='ProfilePageNavBar__orders-title'>My Orders</h2>
-        <li onClick={handleClick} data-mode='orders' className={`ProfilePageNavBar__orders-item ${ selectedMode === 'orders' ? 'activeProfileTab' : '' }`}>
+        <NavLink to='/profile/orders' className='ProfilePageNavBar__profile-list--item' activeClassName='activeProfileTab'>
           <HandBagIcon />
           <span>Orders</span>
-        </li>
+        </NavLink >
       </div>
       <div className='ProfilePageNavBar__payment'>
         <h2 className='ProfilePageNavBar__payment-title'>Payment Methods</h2>
         <ul className='ProfilePageNavBar__payment-list'>
-          <li onClick={handleClick} data-mode='creditCard' className={`ProfilePageNavBar__payment-list--item ${ selectedMode === 'creditCard' ? 'activeProfileTab' : '' }`}>
+          <NavLink to='/profile/card' className='ProfilePageNavBar__profile-list--item' activeClassName='activeProfileTab'>
             <CreditCardIcon />
             <span>Credit Card</span>
-          </li>
-          <li onClick={handleClick} data-mode='bitCoin' className={`ProfilePageNavBar__payment-list--item ${ selectedMode === 'bitCoin' ? 'activeProfileTab' : '' }`}>
+          </NavLink>
+          <NavLink to='/profile/bitcoin' className='ProfilePageNavBar__profile-list--item' activeClassName='activeProfileTab'>
             <BitCoinIcon />
             <span>Bit Coin</span>
-          </li>
-          <li onClick={handleClick} data-mode='paypal' className={`ProfilePageNavBar__payment-list--item ${ selectedMode === 'paypal' ? 'activeProfileTab' : '' }`}>
+          </NavLink>
+          <NavLink to='/profile/paypal' className='ProfilePageNavBar__profile-list--item' activeClassName='activeProfileTab'>
             <PayPalIcon />
             <span>PayPal</span>
-          </li>
+          </NavLink>
         </ul>
       </div>
     </div>

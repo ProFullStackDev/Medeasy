@@ -9,7 +9,7 @@ import { logout } from '../../redux/actions/authActions'
 
 const AdminNavBar = ({ url, navBarState, logout }) => {
 
-  const handleClick = () => logout()
+  const handleClick = () => logout(true)
 
   return (
     <nav className={`AdminNavBar ${!navBarState ? 'closed' : ''}`}>

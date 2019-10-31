@@ -132,7 +132,7 @@ const AdminCreateProduct = ({
 	}
 
 	return !categories || loading ? (
-		<Spinner />
+		<Spinner white={false} />
 	) : (
 		<div className="AdminDashboardPage__product-form">
 			<div className="AdminDashboardPage__product-form--left">

@@ -11,8 +11,8 @@ import { selectInventoryCoupons, selectInventoryOrders, selectInventoryProducts 
 const AdminHome = ({ fetchInventory, products, orders, coupons }) => {
   useEffect(() => {
     if (!products || !orders || !coupons) fetchInventory()
-  }, [fetchInventory])
-  return !orders || !products ? <Spinner /> : (
+  })
+  return !orders || !products ? <Spinner white={false} /> : (
     <div className='AdminDashboardPage__home'>
       <AdminCard title='Total Products' value={products.length.toString()} btnRequired btnText='View Products' btnLink='products' />
       <AdminCard title='Total Orders' value={orders.length.toString()} btnRequired btnText='View Orders' btnLink='orders' />

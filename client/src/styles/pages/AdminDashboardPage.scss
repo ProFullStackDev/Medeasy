@@ -68,6 +68,7 @@
   // Products Page
   &__products, &__coupons, &__orders, &__categories {
     border-radius: 1rem;
+    min-width: 80%;
 
     &-info {
       margin-bottom: 3rem;

@@ -19,7 +19,7 @@ const Adminorders = ({ orders, fetchAllOrders, onClick }) => {
 	const handleClick = page => setPageNumber(page)
 
 	return !orders ? (
-		<Spinner />
+		<Spinner white={false} />
 	) : (
 		<div className="AdminDashboardPage__orders">
 			<div className="AdminDashboardPage__orders-info">

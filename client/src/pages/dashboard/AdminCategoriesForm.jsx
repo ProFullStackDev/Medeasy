@@ -59,9 +59,9 @@ const AdminCategoriesForm = ({
 		setFormState({ ...formState, [event.target.name]: event.target.value })
 
 	return loading ? (
-		<Spinner />
+		<Spinner white={false} />
 	) : url === `/admin/dashboard/edit-category/${categoryId}` && !category ? (
-		<Spinner />
+		<Spinner white={false} />
 	) : (
 		<div style={{ width: '80%' }} className="AdminDashboardPage__category-form">
 			<h2>{pageTitle}</h2>

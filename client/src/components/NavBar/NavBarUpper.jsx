@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link, NavLink } from 'react-router-dom'
+
 import medeasyLogo from '../../images/medeasy-logo.png'
 import { ReactComponent as CartIcon } from '../../images/cart.svg'
 import { ReactComponent as ContactIcon } from '../../images/contactus.svg'
@@ -8,14 +9,15 @@ import { ReactComponent as DownArrowBlackIcon } from '../../images/downArrowBlac
 import { ReactComponent as BagIcon } from '../../images/bag.svg'
 import { ReactComponent as LogoutIcon } from '../../images/logout.svg'
 
-// This checks for the user object 
-// for swapping out Login Register to Dropdown
-// For now I am putting just dummy data
-const user = null
+import { connect } from 'react-redux'
+import { createStructuredSelector } from 'reselect'
+import { logout } from '../../redux/actions/authActions'
+import { selectAuthUser } from '../../redux/selectors/authSelectors'
 
-const NavBarUpper = ({ onClick }) => {
-  // Triggering the login / register Modal ( When user is not logged in )
-  const handleClick = event => onClick(event.target.dataset.authmode)
+const NavBarUpper = ({ logout, user }) => {
+
+  const logoutUser = () => logout()
+
   return (
     <div className='NavBar__upper'>
       <div className='container'>
@@ -32,16 +34,17 @@ const NavBarUpper = ({ onClick }) => {
           <span className='NavBar__upper-other-auth'>
             { !user ? 
                 <React.Fragment>
-                  <span onClick={ handleClick } style={{ cursor: 'pointer' }} data-authmode='login'>Login</span>&nbsp;|&nbsp;<span onClick={ handleClick } style={{ cursor: 'pointer' }} data-authmode='register'>Signup</span> 
+                  <Link to='/login' style={{ cursor: 'pointer' }}>Login</Link>&nbsp;|&nbsp;
+                  <Link to='/register' style={{ cursor: 'pointer' }}>Signup</Link> 
                 </React.Fragment> 
               : <React.Fragment>
                   <span style={{ display: 'flex', alignItems: 'center' }}>
                     <UserIcon />&nbsp;&nbsp;{ user.name }&nbsp;&nbsp;<DownArrowBlackIcon id='downarrow'/>
                   </span>
                   <ul className='NavBar__upper-other-auth-user'>
-                    <Link to='/profile'><li><UserIcon /><span>Profile</span></li></Link>
-                    <Link to='/orders'><li><BagIcon /><span>My Orders</span></li></Link>
-                    <Link to='/logout'><li><LogoutIcon /><span>Logout</span></li></Link>
+                    <Link to='/profile/address'><li><UserIcon /><span>Profile</span></li></Link>
+                    <Link to='/profile/orders'><li><BagIcon /><span>My Orders</span></li></Link>
+                    <li onClick={logoutUser}><LogoutIcon /><span>Logout</span></li>
                   </ul>
                 </React.Fragment>
             }
@@ -62,4 +65,8 @@ const NavBarUpper = ({ onClick }) => {
   )
 }
  
-export default NavBarUpper
+const mapStateToProps = createStructuredSelector({
+  user: selectAuthUser
+})
+
+export default connect(mapStateToProps, { logout })(NavBarUpper)

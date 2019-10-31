@@ -21,7 +21,7 @@ const AdminCategories = ({ categories, fetchAllCategories, onClick }) => {
 	const handleClick = page => setPageNumber(page)
 
 	return !categories ? (
-		<Spinner />
+		<Spinner white={false} />
 	) : (
 		<div className="AdminDashboardPage__categories">
 			<div className="AdminDashboardPage__categories-info">

@@ -21,7 +21,7 @@ const AdminCoupons = ({ coupons, fetchAllCoupons, onClick }) => {
 	const handleClick = page => setPageNumber(page)
 
 	return !coupons ? (
-		<Spinner />
+		<Spinner white={false} />
 	) : (
 		<div className="AdminDashboardPage__coupons">
 			<div className="AdminDashboardPage__coupons-info">

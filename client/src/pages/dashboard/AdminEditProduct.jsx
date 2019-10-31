@@ -181,7 +181,7 @@ const AdminEditProduct = ({
 	}
 
 	return !categories || loading || !product ? (
-		<Spinner />
+		<Spinner white={false} />
 	) : (
 		<div
 			style={{ marginTop: '12rem' }}
