@@ -1,9 +1,11 @@
 const User = require('../models/User')
 const Guest = require('../models/Guest')
-const nodeMailer = require('nodemailer')
+
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 const { validationResult } = require('express-validator')
+
+const transporter = require('../utils/mailTransporter')
 
 module.exports = {
 	createNewUser: async (req, res) => {
@@ -116,15 +118,7 @@ module.exports = {
 			if (user.isAdmin)
 				return res.status(403).send({ statusCode: 403, message: 'Forbidden' })
 			// Create email transporter (Change with Medeasy's)
-			const transporter = nodeMailer.createTransport({
-				host: process.env.EMAIL_HOST,
-				port: 465,
-				secure: true,
-				auth: {
-					user: process.env.EMAIL_ID,
-					pass: process.env.EMAIL_PASSWORD
-				}
-			})
+			
 
 			// Generate token (expires at 15 minutes)
 			const jwtSecret = user._id + '-' + new Date(user.createdAt).getTime()
