@@ -1,20 +1,16 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { Route, withRouter } from 'react-router-dom'
 import AddressChangeMain from './AddressChangeMain'
 import AddressChangeEdit from './AddressChangeEdit'
 
-const AddressChangeController = props => {
-  // Whether user has clicked address edit or add
-  const [editMode, setEditMode] = useState(false)
-  // Changing the edit mode
-  const changeEditMode = modeBoolean => setEditMode(modeBoolean) 
+const AddressChangeController = ({ match: { url } }) => {
   return (
     <React.Fragment>
-      { /* Either It must display all addresses, or it must show the edit page */ }
-      { editMode ? <AddressChangeEdit changeEditMode={changeEditMode} /> 
-        : <AddressChangeMain changeEditMode={changeEditMode} />
-      }
+      <Route exact path={`${url}`} component={AddressChangeMain} />
+      <Route exact path={`${url}/create`} component={AddressChangeEdit} />
+      <Route exact path={`${url}/edit/:addressId`} component={AddressChangeEdit} />
     </React.Fragment>
   ) 
 }
 
-export default AddressChangeController
+export default withRouter(AddressChangeController)

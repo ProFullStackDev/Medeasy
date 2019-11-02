@@ -21,6 +21,7 @@ const {
 router.post(
 	'/register',
 	[
+		check('name', 'Name is required'),
 		check('email', 'Email is required')
 			.not()
 			.isEmpty(),

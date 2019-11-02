@@ -12,14 +12,14 @@ module.exports = {
 		const errors = validationResult(req)
 		if (!errors.isEmpty())
 			return res.status(400).send({ statusCode: 400, message: errors.array() })
-		const { email, password } = req.body
+		const { email, password, name } = req.body
 		try {
 			let user = await User.findOne({ email })
 			if (user)
 				return res
 					.status(400)
 					.send({ statusCode: 400, message: 'Email already exists' })
-			user = await User.create({ email, password })
+			user = await User.create({ email, password, name })
 			const accessToken = await user.generateToken()
 			res.send({
 				statusCode: 200,
@@ -137,7 +137,7 @@ module.exports = {
 				from: process.env.EMAIL_ID,
 				to: requestedEmail,
 				envelope: {
-					from: 'MEDEASY <webdevdesign@sundeepcharan.com>',
+					from: `MEDEASY <${process.env.EMAIL_ID}>`,
 					to: requestedEmail
 				},
 				subject: 'Password reset Email',

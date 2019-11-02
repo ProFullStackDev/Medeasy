@@ -39,7 +39,7 @@ const NavBarUpper = ({ logout, user }) => {
                 </React.Fragment> 
               : <React.Fragment>
                   <span style={{ display: 'flex', alignItems: 'center' }}>
-                    <UserIcon />&nbsp;&nbsp;{ user.name }&nbsp;&nbsp;<DownArrowBlackIcon id='downarrow'/>
+                    <UserIcon />&nbsp;&nbsp;{ user.name.split(' ').length > 1 ? user.name.split(' ')[0] : user.name }&nbsp;&nbsp;<DownArrowBlackIcon id='downarrow'/>
                   </span>
                   <ul className='NavBar__upper-other-auth-user'>
                     <Link to='/profile/address'><li><UserIcon /><span>Profile</span></li></Link>

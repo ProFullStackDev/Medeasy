@@ -8,7 +8,11 @@ import { connect } from 'react-redux'
 import { logout } from './redux/actions/authActions'
 import { Route, Switch } from 'react-router-dom'
 
-const App = ({ logout }) => {
+import { createStructuredSelector } from 'reselect'
+import { selectAuthAccessToken } from './redux/selectors/authSelectors'
+
+const App = ({ logout, accessToken }) => {
+  if (accessToken) axios.defaults.headers.common['Authorization'] = accessToken
 	// Logout if unathuorised access means
 	axios.interceptors.response.use(
 		res => res,
@@ -41,7 +45,11 @@ const App = ({ logout }) => {
 			)}
 */
 
+const mapStateToProps = createStructuredSelector({
+  accessToken: selectAuthAccessToken
+})
+
 export default connect(
-	null,
+	mapStateToProps,
 	{ logout }
 )(App)

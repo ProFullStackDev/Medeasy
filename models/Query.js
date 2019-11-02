@@ -4,7 +4,7 @@ const querySchema = new Schema({
   name: { type: String, required: true },
   phoneNumber: { type: String, required: true },
   message: { type: String, required: true }
-})
+}, { timestamps: true })
 
 querySchema.methods.toJSON = function () {
   const query = this.toObject()

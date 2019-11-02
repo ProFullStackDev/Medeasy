@@ -15,7 +15,7 @@ const Footer = (props) => {
       </nav>
       <div className='Footer__copyright'>
         <CopyrightIcon alt='copyright' />
-        <span className='Footer__copyright--text'>2019 <Link to='/'><span style={{ color: '#1b6355' }}>MedEasy</span></Link>. All Rights Reserved</span>
+        <span className='Footer__copyright--text'>2019 <Link to='/'><span style={{ color: '#1b6355' }}>MedEasy.</span></Link>&nbsp;&nbsp;All Rights Reserved</span>
       </div>
     </div>
   )

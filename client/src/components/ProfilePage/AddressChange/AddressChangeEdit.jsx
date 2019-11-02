@@ -1,90 +1,85 @@
-import React, {Component} from 'react'
-import '../../../styles/components/AddressChangeEdit.scss'
+import React, { useState } from 'react'
+import { connect } from 'react-redux'
+import { addUserAddress } from '../../../redux/actions/profileActions'
+import { Link } from 'react-router-dom'
+
 import PhoneFormElement from '../../PhoneFormElement'
 import CustomFormElement from '../../CustomFormElement'
 import CustomBadge from '../../CustomBadge'
 import CustomButton from '../../CustomButton'
+import AlertMessage from '../../AlertMessage'
+import Spinner from '../../Spinner'
 
-class AddressChangeEdit extends Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      fName: '',
-      lName: '',
-      mName: '',
-      addressType: '',
-      address1: '',
-      address2: '',
-      city: '',
-      state: '',
-      postalCode: '',
-      country: '',
-      phNumber: '',
-      faxNumber: '',
-    }
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleChange = this.handleChange.bind(this)
-    this.handleClick = this.handleClick.bind(this)
-    this.selectAddressType = this.selectAddressType.bind(this)
-  }
+import '../../../styles/components/AddressChangeEdit.scss'
 
-  selectAddressType (addressType) {
-    this.setState({ addressType })
-  }
+const AddressChangeEdit = ({ addUserAddress, loading }) => {
+  const [formState, setFormState] = useState({
+    fName: '',
+    lName: '',
+    mName: '',
+    mode: '',
+    address1: '',
+    address2: '',
+    city: '',
+    state: '',
+    postalCode: '',
+    country: 'United States of America',
+    phNumber: '',
+    faxNumber: '',
+  })
 
-  handleChange (event) {
-    this.setState({ [event.target.name]: event.target.value })
-  }
+  const { fName, lName, mName, mode, address1 : addressLine1, address2 : addressLine2, city, state, postalCode, country, phNumber, faxNumber } = formState
 
-  handleClick () {
-    this.props.changeEditMode(false)
-  }
+  const handleChange = (event) => setFormState({ ...formState, [event.target.name]: event.target.value })
 
-  handleSubmit (event) {
+  const handleSubmit = (event) => {
     event.preventDefault()
-    // This must save the address to the backend
-    console.log('Submitting the addresses')
-    // Then it goes back to display mode
-    this.props.changeEditMode(false)
+    const name = `${fName} ${mName.length > 0 ? mName : ''}${mName ? ' ': ''}${lName}`
+    const profileObj = { name, mode, addressLine1, addressLine2, city, state, postalCode: parseInt(postalCode), country, phNumber: parseInt(phNumber), faxNumber: parseInt(faxNumber) }
+    addUserAddress(profileObj)
   }
 
-  render () {
-    return (
-      <div className='AddressChangeEdit'>
-        <h2 className='ProfilePageDisplay__phase-title'>Add Addresses</h2>
-        <div className='AddressChangeEdit__badges'>
-          <CustomBadge onClick={this.selectAddressType} selected={this.state.addressType === 'Home'} badgeValue='Home' />
-          <CustomBadge onClick={this.selectAddressType} selected={this.state.addressType === 'Work'} badgeValue='Work' />
-          <CustomBadge onClick={this.selectAddressType} selected={this.state.addressType === 'Other'} badgeValue='Other' />
-        </div>
-        <form className='AddressChangeEdit__form' onSubmit={this.handleSubmit}>
-          <div className='AddressChangeEdit__form-half'>
-            <CustomFormElement onChange={ this.handleChange } labelName='First Name' type='text' name='fName' value={this.state.fName} />
-            <CustomFormElement onChange={ this.handleChange } labelName='Middle Name' type='text' name='mName' value={this.state.mName} />
-          </div>
-          <CustomFormElement onChange={ this.handleChange } labelName='Last Name' type='text' name='lName' value={this.state.lName} />
-          <CustomFormElement onChange={ this.handleChange } labelName='Address Line 1' type='text' name='address1' value={this.state.address1} />
-          <CustomFormElement onChange={ this.handleChange } labelName='Address Line 2' type='text' name='address2' value={this.state.address2} />
-          <div className='AddressChangeEdit__form-half'>
-            <CustomFormElement onChange={ this.handleChange } labelName='City' type='text' name='city' value={this.state.city} />
-            <CustomFormElement onChange={ this.handleChange } labelName='State / Province' type='text' name='state' value={this.state.state} />
-          </div>
-          <div className='AddressChangeEdit__form-half'>
-            <CustomFormElement onChange={ this.handleChange } labelName='Zip / Postal Code' type='text' name='postalCode' value={this.state.postalCode} />
-            <CustomFormElement onChange={ this.handleChange } labelName='Country' type='text' name='country' value={this.state.country} />
-          </div>
-          <div className='AddressChangeEdit__form-half'>
-            <PhoneFormElement onChange={ this.handleChange } value={ this.state.phNumber }/>
-            <CustomFormElement onChange={ this.handleChange } labelName='Fax' type='number' name='faxNumber' value={this.state.faxNumber} />
-          </div>
-          <div className='AddressChangeEdit__form-buttons'>
-            <CustomButton onClick={ this.handleClick } extraStyle={{ minWidth: '15rem', background: 'transparent', border: '1px solid #DDD7D7', color: '#4a4a4a' }} >Cancel</CustomButton>
-            <CustomButton type='submit'>Save Address</CustomButton>
-          </div>
-        </form>
+  return loading ? <Spinner /> : (
+    <div className='AddressChangeEdit'>
+      <h2 style={{ marginBottom: '2rem' }} className='ProfilePageDisplay__phase-title'>Add Address</h2>
+      <AlertMessage />
+      { mode.length === 0 && <h4 style={{ marginBottom: '1.5rem', marginLeft: '5rem', width: '80%' }}>*Please select your address mode*</h4>}
+      <div className='AddressChangeEdit__badges'>
+        <CustomBadge onClick={() => setFormState({ ...formState, mode: 'Home' })} selected={mode === 'Home'} badgeValue='Home' />
+        <CustomBadge onClick={() => setFormState({ ...formState, mode: 'Work' })} selected={mode === 'Work'} badgeValue='Work' />
+        <CustomBadge onClick={() => setFormState({ ...formState, mode: 'Other' })} selected={mode === 'Other'} badgeValue='Other' />
       </div>
-    )
-  }
+      <form className='AddressChangeEdit__form' onSubmit={handleSubmit}>
+        <div className='AddressChangeEdit__form-half'>
+          <CustomFormElement onChange={ handleChange } required labelName='First Name *' type='text' name='fName' value={fName} />
+          <CustomFormElement onChange={ handleChange } labelName='Middle Name' type='text' name='mName' value={mName} />
+        </div>
+        <CustomFormElement onChange={ handleChange } required labelName='Last Name *' type='text' name='lName' value={lName} />
+        <CustomFormElement onChange={ handleChange } required labelName='Address Line 1 *' type='text' name='address1' value={formState.address1} />
+        <CustomFormElement onChange={ handleChange } labelName='Address Line 2' type='text' name='address2' value={formState.address2} />
+        <div className='AddressChangeEdit__form-half'>
+          <CustomFormElement onChange={ handleChange } required labelName='City *' type='text' name='city' value={city} />
+          <CustomFormElement onChange={ handleChange } required labelName='State / Province *' type='text' name='state' value={state} />
+        </div>
+        <div className='AddressChangeEdit__form-half'>
+          <CustomFormElement onChange={ handleChange } required labelName='Zip / Postal Code *' type='number' name='postalCode' value={postalCode} />
+          <CustomFormElement extraStyle={{ pointerEvents: 'none' }} disabled labelName='Country' type='text' readOnly value="United States Of America" />
+        </div>
+        <div className='AddressChangeEdit__form-half'>
+          <PhoneFormElement required onChange={ handleChange } value={ phNumber }/>
+          <CustomFormElement onChange={ handleChange } labelName='Fax' type='number' name='faxNumber' value={faxNumber} />
+        </div>
+        <div className='AddressChangeEdit__form-buttons'>
+          <Link to='/profile/address'><CustomButton extraStyle={{ minWidth: '15rem', background: 'transparent', border: '1px solid #DDD7D7', color: '#4a4a4a' }} >Cancel</CustomButton></Link>
+          <CustomButton type='submit'>Save Address</CustomButton>
+        </div>
+      </form>
+    </div>
+  )
 }
 
-export default AddressChangeEdit
+ const mapStateToProps = (state, otherProps) => ({
+   loading: state.profile.loading
+})
+
+export default connect(mapStateToProps, { addUserAddress })(AddressChangeEdit)

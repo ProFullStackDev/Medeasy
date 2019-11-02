@@ -2,7 +2,35 @@ const { validationResult } = require('express-validator')
 const Profile = require('../models/Profile')
 
 module.exports = {
-  addProfile: async (req, res) => {
+  // addProfile: async (req, res) => {
+  //   const user = req.user
+  //   try {
+  //     const errors = validationResult(req)
+  //     if (!errors.isEmpty())
+  //       return res
+  //         .status(400)
+  //         .send({ statusCode: 400, message: errors.array() })
+  //     let profile = await Profile.findOne({ user: user._id })
+  //     if (profile) {
+  //       profile = await profile.populate('user', ['email']).execPopulate()
+  //       return res.send({ statusCode: 200, profile })
+  //     }
+  //     profile = new Profile({
+  //       firstName: req.body.firstName,
+  //       middleName: req.body.middleName,
+  //       lastName: req.body.lastName,
+  //       addresses: [req.body.shippingAddress, req.body.billingAddress]
+  //     })
+  //     profile.user = user._id
+  //     await profile.save()
+  //     profile = await profile.populate('user', ['email']).execPopulate()
+  //     res.status(201).send({ statusCode: 201, profile })
+  //   } catch (err) {
+  //     console.log(err.message)
+  //     res.status(500).send({ statusCode: 500, message: 'Server Error' })
+  //   }
+  // },
+  addAddress: async (req, res) => {
     const user = req.user
     try {
       const errors = validationResult(req)
@@ -10,26 +38,89 @@ module.exports = {
         return res
           .status(400)
           .send({ statusCode: 400, message: errors.array() })
-      let profile = await Profile.findOne({ user: user._id })
+
+      const { name, mode, addressLine1, addressLine2, city, state, postalCode, country, phNumber, faxNumber } = req.body
+      let profile = await Profile.findOne({ user: user._id }).populate('user', ['name', 'email'])
+      
       if (profile) {
-        profile = await profile.populate('user', ['email']).execPopulate()
+        profile.addresses.push(profileObj)
+        await profile.save()
         return res.send({ statusCode: 200, profile })
       }
-      profile = new Profile({
-        firstName: req.body.firstName,
-        middleName: req.body.middleName,
-        lastName: req.body.lastName,
-        addresses: [req.body.shippingAddress, req.body.billingAddress]
-      })
+
+      const profileObj = { name, mode, addressLine1, addressLine2, city, state, postalCode, country, phNumber: `+1${phNumber}`, faxNumber, addresses: [], cards: [] }
+      profile = new Profile(profileObj)
       profile.user = user._id
+      profile.addresses.push(profileObj)
+      
       await profile.save()
-      profile = await profile.populate('user', ['email']).execPopulate()
+      profile = await profile.populate('user', ['name', 'email']).execPopulate()
       res.status(201).send({ statusCode: 201, profile })
     } catch (err) {
       console.log(err.message)
       res.status(500).send({ statusCode: 500, message: 'Server Error' })
     }
   },
+
+  async addCreditCard (req, res) {
+    const user = req.user
+    try {
+      const errors = validationResult(req)
+      if (!errors.isEmpty())
+        return res
+          .status(400)
+          .send({ statusCode: 400, message: errors.array() })
+
+      const { name, number, expMonth, expYear } = req.body
+      const profile = await Profile.findOne({ user: user._id })
+      if (!profile) res.status(404).send({ statusCode: 404, message: 'Profile not found' })
+
+      let cardSystem = null
+      switch (String(number)[0]) {
+        case '3': cardSystem = 'American Express / Diners Club'; break
+        case '4': cardSystem = 'Visa'; break
+        case '5': cardSystem = 'MasterCard'; break
+        case '6': cardSystem = 'Discover'; break 
+      }
+
+      const creditCardObj = { cardSystem, cardName: name, cardNumber: number, cardExpiryMonth: expMonth, cardExpiryYear: expYear }
+
+      profile.creditCards.push(creditCardObj)
+      await profile.save()
+      res.status(202).send({ statusCode: 202, cards: profile.creditCards })
+
+    } catch (err) {
+      console.log(err)
+      res.status(500).send({ statusCode: 500, message: 'Server Error' })
+    }
+  },
+
+  async fetchCreditCards (req, res) {
+    try {
+      const errors = validationResult(req)
+      if (!errors.isEmpty()) return res.status(400).send({ statusCode: 400, message: errors.array() })
+      const profile = await Profile.findOne({ user: req.user._id })
+      if (!profile) return res.send({ statusCode: 200, cards: [] })
+      res.send({ statusCode: 200, cards: profile.creditCards })
+    } catch (err) {
+      console.log(err)
+      res.status(500).send({ statusCode: 500, message: 'Server Error' })
+    }
+  },
+
+  async fetchAddresses (req, res) {
+    try {
+      const errors = validationResult(req)
+      if (!errors.isEmpty()) return res.status(400).send({ statusCode: 400, message: errors.array() })
+      const profile = await Profile.findOne({ user: req.user._id })
+      if (!profile) return res.send({ statusCode: 200, addresses: [] })
+      res.send({ statusCode: 200, addresses: profile.addresses })
+    } catch (err) {
+      console.log(err)
+      res.status(500).send({ statusCode: 500, message: 'Server Error' })
+    }
+  },
+
   editProfile: async (req, res) => {
     const { addressId } = req.params
     if (!addressId)
