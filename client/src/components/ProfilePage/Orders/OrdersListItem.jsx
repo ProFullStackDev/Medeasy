@@ -2,8 +2,6 @@ import React, { useState } from 'react'
 import { ReactComponent as PlusIcon } from '../../../images/plus-icon.svg'
 import { ReactComponent as MinusIcon } from '../../../images/minus.svg'
 import OrdersProductList from './OrdersProductList'
-import CustomButton from '../../CustomButton'
-import { Link } from 'react-router-dom'
 import '../../../styles/components/OrdersListItem.scss'
 
 
@@ -21,8 +19,6 @@ const OrdersListItem = ({ order }) => {
         </div>
         <div className='OrdersListItem__price'>
           <p className='OrdersListItem__price-value' style={{ color: '4A4A4A', fontSize: '2.2rem' }}>{`$${order.invoiceValue}`}</p>
-          <CustomButton fontSize='1.4rem'>View Order Details</CustomButton>
-          <Link to='/cart'>Get Invoice</Link>
         </div>
       </React.Fragment>
   )

@@ -9,14 +9,13 @@ import { Link } from 'react-router-dom'
 
 import '../../../styles/components/AddressChangeMain.scss'
 import CustomButton from '../../CustomButton'
-import AddressListItem from './AddressListItem'
 import Spinner from '../../Spinner'
+import AddressListItem from './AddressListItem'
 
 import { ReactComponent as NoAddressIcon } from '../../../images/noAddress.svg'
 import { ReactComponent as PlusIcon } from '../../../images/plus.svg'
 
-const AddressChangeMain = ({ changeEditMode, fetchUserAddresses, addresses, loading, match: { url } }) => {
-
+const AddressChangeMain = ({ fetchUserAddresses, addresses, loading, match: { url } }) => {
   useEffect(() => {
     fetchUserAddresses()
   }, [fetchUserAddresses])
@@ -35,9 +34,9 @@ const AddressChangeMain = ({ changeEditMode, fetchUserAddresses, addresses, load
       { addresses.length > 0 ? 
         <div className='AddressChangeMain__alladdresses'>
           { /* If home is present then put .. Repeat the same for all the address types */ }
-          { addresses.find(add => add.mode === 'Home') && <AddressListItem addressObj={addresses.find(add => add.mode === 'Home')} /> }
-          { addresses.find(add => add.mode === 'Work') && <AddressListItem addressObj={addresses.find(add => add.mode === 'Work')} /> }
-          { addresses.find(add => add.mode === 'Other') && <AddressListItem addressObj={addresses.find(add => add.mode === 'Other')} /> }
+          { addresses.find(add => add.mode === 'Home') && <AddressListItem url={url} addressObj={addresses.find(add => add.mode === 'Home')} /> }
+          { addresses.find(add => add.mode === 'Work') && <AddressListItem url={url} addressObj={addresses.find(add => add.mode === 'Work')} /> }
+          { addresses.find(add => add.mode === 'Other') && <AddressListItem url={url} addressObj={addresses.find(add => add.mode === 'Other')} /> }
         </div> :
         /* Else just show the no address block */
         <div className='AddressChangeMain__noaddress'>

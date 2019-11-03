@@ -1,85 +1,49 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+
 import OrdersList from './OrdersList'
-// Temporary data for the orders
-import tablet1 from '../../../images/tablet4.png'
-import tablet2 from '../../../images/tablet5.png'
+import Spinner from '../../Spinner'
+import AlertMessage from '../../AlertMessage'
 
-const orders = [
-  {
-    orderNumber: 10001,
-    products: [{
-      id: 1,
-      name: 'Ambien',
-      dosage: '5mg',
-      distributor: 'Sanofi Aventis',
-      quantity: 50,
-      price: 300,
-      image: tablet1
-    },
-    {
-      id: 2,
-      name: 'Painosoma',
-      dosage: '10mg',
-      distributor: 'Pfizer',
-      quantity: 100,
-      price: 250,
-      image: tablet2
-    }],
-    invoiceValue: 550
-  },
-  {
-    orderNumber: 10002,
-    products: [{
-      id: 1,
-      name: 'Ambien',
-      dosage: '5mg',
-      distributor: 'Sanofi Aventis',
-      quantity: 50,
-      price: 300,
-      image: tablet1
-    },
-    {
-      id: 2,
-      name: 'Painosoma',
-      dosage: '10mg',
-      distributor: 'Pfizer',
-      quantity: 100,
-      price: 250,
-      image: tablet2
-    }],
-    invoiceValue: 550
-  },
-  {
-    orderNumber: 10003,
-    products: [{
-      id: 1,
-      name: 'Ambien',
-      dosage: '5mg',
-      distributor: 'Sanofi Aventis',
-      quantity: 50,
-      price: 300,
-      image: tablet1
-    },
-    {
-      id: 2,
-      name: 'Painosoma',
-      dosage: '10mg',
-      distributor: 'Pfizer',
-      quantity: 100,
-      price: 250,
-      image: tablet2
-    }],
-    invoiceValue: 550
-  }
-]
+import { connect } from 'react-redux'
+import { createStructuredSelector } from 'reselect'
+import { fetchUserOrders } from '../../../redux/actions/profileActions'
+import {
+	selectProfileOrders,
+	selectProfileLoading
+} from '../../../redux/selectors/profileSelectors'
 
-const OrdersController = props => {
-  return (
-    <div className='OrdersController'>
-      <h2 className='ProfilePage__phase-title'>My Orders</h2>
-      <OrdersList orders={orders} />
-    </div>
-  )
+const OrdersController = ({ orders, loading, fetchUserOrders }) => {
+	useEffect(() => {
+		fetchUserOrders()
+	}, [fetchUserOrders])
+
+	return loading ? (
+		<Spinner />
+	) : (
+		<div className="OrdersController">
+			<h2 className="ProfilePage__phase-title">My Orders</h2>
+			<AlertMessage />
+			{orders.length > 0 ? (
+				<OrdersList orders={orders} />
+			) : (
+				<div className="AddressChangeMain__noaddress">
+					<p className="AddressChangeMain__noaddress-text">
+						You don’t have any orders.
+						<br />
+						Feel free to check back once you make an order up.
+					</p>
+				</div>
+			)}
+		</div>
+	)
 }
 
-export default OrdersController
+const mapStateToProps = createStructuredSelector({
+	orders: selectProfileOrders,
+	loading: selectProfileLoading
+})
+
+export default connect(
+	mapStateToProps,
+	{ fetchUserOrders }
+)(OrdersController)

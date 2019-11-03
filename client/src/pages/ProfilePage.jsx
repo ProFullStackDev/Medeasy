@@ -7,7 +7,7 @@ import '../styles/pages/ProfilePage.scss'
 
 const ProfilePage = ({ match: { url } }) => {
 	return (
-		<section className="ProfilePage">
+		<section style={{ marginBottom: '1.5rem' }} className="ProfilePage">
 			<ProfilePageNavBar />
 			<Route
 				path={`${url}/address`}

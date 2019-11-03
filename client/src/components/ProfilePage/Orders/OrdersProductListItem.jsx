@@ -1,5 +1,4 @@
 import React from 'react'
-import CustomButton from '../../CustomButton'
 import '../../../styles/components/OrdersProductListItem.scss'
 
 const OrdersProductListItem = ({ product }) => {
@@ -14,10 +13,7 @@ const OrdersProductListItem = ({ product }) => {
           <p style={{ fontSize: '1.4rem' }}>{`${product.quantity} Pills`}</p>
         </div>
       </div>
-      <div className='OrdersProductListItem-price'>
-        <span style={{ fontSize: '1.6rem', marginBottom: '.2rem' }}>${product.price}</span>
-        <CustomButton fontSize='1.2rem' specialBgColor='#F8931A'>Track Package</CustomButton>
-      </div>
+      <span style={{ fontSize: '1.6rem', marginBottom: '.2rem' }}>${product.price}</span>
     </div>
   )
 }

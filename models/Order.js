@@ -23,11 +23,13 @@ const ordersSchema = new Schema({
       },
       required: true
     },
+    image: String,
     price: String,
     quantity: Number,
     subTotal: String
   }],
-  totalAmount: Number
+  totalAmount: Number,
+  trackingId: { type: String, default: 'nil' }
 }, { timestamps: true })
 
 ordersSchema.methods = {

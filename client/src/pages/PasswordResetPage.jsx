@@ -23,12 +23,9 @@ const PasswordResetPage = ({
 	alertUser,
 	verifyPasswordToken,
 	resetPassword,
-	sendResetPasswordEmail
+	sendResetPasswordEmail,
+	match: { params: { resetToken }}
 }) => {
-	const passwordResetToken = window.location.pathname.replace(
-		'/password/reset/',
-		''
-	)
 	const [verifiedState, setVerifiedState] = useState('')
 	const [formState, setFormState] = useState({
 		newPassword: '',
@@ -40,11 +37,11 @@ const PasswordResetPage = ({
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const status = await verifyPasswordToken(passwordResetToken)
+			const status = await verifyPasswordToken(resetToken)
 			setVerifiedState(status)
 		}
 		fetchData()
-	}, [passwordResetToken, verifyPasswordToken])
+	}, [resetToken, verifyPasswordToken])
 
 	const handleChange = event =>
 		setFormState({ ...formState, [event.target.name]: event.target.value })

@@ -117,7 +117,22 @@ router.post(
 // @route - PATCH /api/user/password/change
 // @desc - Change User Password
 // @method - Private (Auth)
-router.patch('/password', authenticate, changeUserPassword)
+router.patch(
+	'/password/change',
+	authenticate,
+	[
+		check('oldPassword', 'Old Password is required')
+			.not()
+			.isEmpty(),
+		check('newPassword', 'New Password is required')
+			.not()
+			.isEmpty(),
+		check('newPassword', 'New Password should contain minimum 8 characters').isLength({
+			min: 8
+		})
+	],
+	changeUserPassword
+)
 
 // @route - POST /api/user/password/link
 // @desc - Send Password Reset Link
@@ -152,7 +167,10 @@ router.patch(
 		check('newPassword', 'Password is required')
 			.not()
 			.isEmpty(),
-		check('newPassword', 'Password should contain minimum 8 characters').isLength({
+		check(
+			'newPassword',
+			'Password should contain minimum 8 characters'
+		).isLength({
 			min: 8
 		})
 	],

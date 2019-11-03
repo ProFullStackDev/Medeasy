@@ -3,7 +3,7 @@ import actionTypes from '../actionTypes'
 import { alertUser } from './alertActions.js'
 import history from '../createHistory'
 
-const { SET_USER, SET_ACCESS_TOKEN, CLEAR_INVENTORY, CLEAR_USER, CLEAR_PROFILE } = actionTypes
+const { SET_USER, SET_ACCESS_TOKEN, CLEAR_INVENTORY, CLEAR_USER, CLEAR_PROFILE, SET_PROFILE_LOADING } = actionTypes
 
 export const signIn = (
 	{ email, password, rememberMe },
@@ -101,6 +101,22 @@ export const resetPassword = (email, newPassword) => async dispatch => {
 		else dispatch(alertUser(errorMessage, 'danger'))
 		return null
 	}
+}
+
+export const changePassword = (oldPassword, newPassword) => async dispatch => {
+	try {
+		dispatch({ type: SET_PROFILE_LOADING, payload: true })
+		await axios.patch('/api/user/password/change', { oldPassword, newPassword })
+		history.push('/')
+		dispatch(logout(false, 'Logged out for security purposes.'))
+	} catch (err) {
+		const errorMessage = err.response.data.message
+		if (Array.isArray(errorMessage))
+			errorMessage.forEach(message =>
+				dispatch(alertUser(message.msg, 'danger'))
+			)
+		else dispatch(alertUser(errorMessage, 'danger'))
+	} finally { dispatch({ type: SET_PROFILE_LOADING, payload: false }) }
 }
 
 export const logout = (

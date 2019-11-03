@@ -33,7 +33,7 @@ module.exports = {
   changePaymentMethod: async (req, res) => {
     const { orderId } = req.params
     try {
-      if (!orderId) return res.status(400).send({ statusCode: 400, message: 'Order not found' })
+      if (!orderId) return res.status(400).send({ statusCode: 400, message: 'Order Id not found' })
       const errors = validationResult(req)
       if (!errors.isEmpty()) 
         return res.status(400).send({ statusCode: 400, message: errors.array() })
@@ -50,7 +50,7 @@ module.exports = {
   changePaymentStatus: async (req, res) => {
     const { orderId } = req.params
     try {
-      if (!orderId) return res.status(400).send({ statusCode: 400, message: 'Order not found' })
+      if (!orderId) return res.status(400).send({ statusCode: 400, message: 'Order Id not found' })
       const errors = validationResult(req)
       if (!errors.isEmpty()) 
         return res.status(400).send({ statusCode: 400, message: errors.array() })
@@ -69,11 +69,39 @@ module.exports = {
     }
   },
 
+  changeTrackingStatus: async (req, res) => {
+    const { orderId } = req.params
+    try {
+      if (!orderId) return res.status(400).send({ statusCode: 400, message: 'Order Id not found' })
+      const errors = validationResult(req)
+      if (!errors.isEmpty()) 
+        return res.status(400).send({ statusCode: 400, message: errors.array() })
+      const { trackingId } = req.body
+      const order = await Order.findById(orderId)
+      order.trackingId = trackingId
+      await order.save()
+      res.status(202).send({ statusCode: 202, order })
+    } catch (err) {
+      res.status(500).send({ statusCode: 500, message: 'Server Error'})
+    }
+  },
+
   fetchOrders: async (req, res) => {
     try {
       const orders = await Order.find({}).populate('user', ['name', 'email'])
       res.send({ statusCode: 200, orders })
     } catch (err) {
+      res.status(500).send({ statusCode: 500, message: 'Server Error' })
+    }
+  },
+
+  fetchOrdersByUserId: async (req, res) => {
+    const user = req.user
+    try {
+      const orders = await Order.find({ user: user._id })
+      res.send({ statusCode: 200, orders })
+    } catch (err) {
+      console.log(err)
       res.status(500).send({ statusCode: 500, message: 'Server Error' })
     }
   },

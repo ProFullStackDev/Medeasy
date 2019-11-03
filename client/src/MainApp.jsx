@@ -3,6 +3,7 @@ import React, { Fragment, useState } from 'react'
 // Components
 import NavBar from './components/NavBar/NavBar'
 import Footer from './components/Footer'
+import PrivateRoute from './components/PrivateRoute'
 // Pages
 import LandingPage from './pages/LandingPage'
 import ProductDetailPage from './pages/ProductDetailPage'
@@ -36,7 +37,7 @@ const AdminApp = () => {
           <Route exact path='/about' render={() => <h1>About page</h1>} />
           <Route exact path='/customer' render={() => <h1>Customer page</h1>} />
           <Route exact path='/privacy' render={() => <h1>Privacy Policy</h1>} />
-          <Route path='/profile' component={ProfilePage} />
+          <PrivateRoute path='/profile' component={ProfilePage} />
           <Route exact path='/product/:name' component={ProductDetailPage} />
           <Route exact path='/cart' render={routeParams => <ShoppingCartPage {...routeParams} changeOverlayState={decideOverlayState} />} />
           <Route exact path='/checkout/account' render={routeParams => <CheckoutPage {...routeParams} changeOverlayState={decideOverlayState} />} />

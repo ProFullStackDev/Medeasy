@@ -75,24 +75,21 @@ module.exports = {
 	},
 
 	changeUserPassword: async (req, res) => {
-		let user = req.user
-		const { password, newPassword } = req.body
-		if (!password)
-			return res.status(400).send({
-				statusCode: 400,
-				message: 'Old / Current password is required'
-			})
-		if (password === newPassword)
-			return res.status(400).send({ statusCode: 400, message: 'Bad Request' })
+		const errors = validationResult(req)
+		if (!errors.isEmpty())
+			return res.status(400).send({ statusCode: 400, message: errors.array() })
+		const { oldPassword, newPassword } = req.body
+		if (oldPassword === newPassword)
+			return res.status(400).send({ statusCode: 400, message: 'Password should not be as previous one' })
 		try {
-			const isMatched = await bcrypt.compare(password, user.password)
+			const user = await User.findById(req.user._id)
+			const isMatched = await bcrypt.compare(oldPassword, user.password)
 			if (!isMatched)
 				return res
 					.status(401)
-					.send({ statusCode: 401, message: 'Invalid Authentication' })
-			user = await User.findById(user._id)
+					.send({ statusCode: 401, message: 'Incorrect password', method: 'change-password' })
 			user.password = newPassword
-			user = await user.save()
+			await user.save()
 			res
 				.status(202)
 				.send({ statusCode: 202, message: 'Password changed successfully' })

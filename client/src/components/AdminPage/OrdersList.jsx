@@ -8,10 +8,10 @@ const OrdersList = ({ orders }) => {
 				<tr>
 					<th>S.No</th>
 					<th>Order Id</th>
-					<th>Ordered at</th>
 					<th>Ordered by</th>
 					<th>Order Status</th>
 					<th>Order Amount</th>
+					<th>Tracking Id</th>
 				</tr>
 			</thead>
 			<tbody>

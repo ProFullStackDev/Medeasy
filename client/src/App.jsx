@@ -6,7 +6,8 @@ import PasswordResetPage from './pages/PasswordResetPage'
 import axios from 'axios'
 import { connect } from 'react-redux'
 import { logout } from './redux/actions/authActions'
-import { Route, Switch } from 'react-router-dom'
+import { Switch } from 'react-router-dom'
+import PrivateRoute from './components/PrivateRoute'
 
 import { createStructuredSelector } from 'reselect'
 import { selectAuthAccessToken } from './redux/selectors/authSelectors'
@@ -28,7 +29,7 @@ const App = ({ logout, accessToken }) => {
 	return (
 		<div className="App">
 			<Switch>
-				<Route exact path='/password/reset/:resetToken' component={PasswordResetPage} />
+				<PrivateRoute exact path='/password/reset/:resetToken' component={PasswordResetPage} />
 				{window.location.pathname.match(/\/admin/g) ? <AdminApp /> : <MainApp />}
 			</Switch>
 		</div>
