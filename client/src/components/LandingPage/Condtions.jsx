@@ -49,7 +49,7 @@ const Conditions = ({ conditions }) => {
 			<h3 style={titleStyle}>Conditions</h3>
 			<ConditionsContainer>
 				{conditions.map(condition => (
-					<Link key={condition._id} to={`/condition/${condition.name.split(' ').length > 1 ? condition.name.toLowerCase().replace(/ /g, '-') : condition.name.toLowerCase()}`} id={condition._id}>
+					<Link key={condition._id} to={`/condition/${condition._id}`} id={condition._id}>
 						<ConditionItem>{condition.name}</ConditionItem>
 					</Link>
 				))}

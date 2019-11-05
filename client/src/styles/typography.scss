@@ -136,6 +136,15 @@ textarea,
   }
 }
 
+.CategoryProductsPage {
+  &__title {
+    font-weight: bolder;
+    font-size: 3.2rem;
+    text-transform: uppercase;
+    color: black;
+  }
+}
+
 .AdminDashboardPage {
   &__products-table {
     & thead {

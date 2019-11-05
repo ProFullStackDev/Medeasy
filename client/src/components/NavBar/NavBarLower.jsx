@@ -13,13 +13,20 @@ const NavBarLower = ({ conditions, products }) => {
 
   const handleClick = () => {
     document.querySelector('.Conditions').style.display = 'none'
+    document.querySelector('.Conditions').style.opacity = 0
   }
 
   return (
     <div className='NavBar__lower'>
       <div className='container'>
         <ul className='NavBar__lower--categories'>
-          <li className='NavBar__lower--category' onMouseOver={() => document.querySelector('.Conditions').style.display = 'grid'}>
+          <li className='NavBar__lower--category' onMouseLeave={() => {
+            document.querySelector('.Conditions').style.display = 'none'
+            document.querySelector('.Conditions').style.opacity = 0
+          }} onMouseOver={() => { 
+            document.querySelector('.Conditions').style.display = 'grid'
+            document.querySelector('.Conditions').style.opacity = 1
+            }}>
             <span>Conditions</span>
             { conditions && products ? <Fragment><DownArrowIcon alt='down-arrow' />
             <Conditions onClick={ handleClick } /></Fragment> : null}

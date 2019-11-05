@@ -15,6 +15,7 @@ import { Switch, Route, Redirect } from 'react-router-dom'
 // Assets
 import norton from './images/assurances/norton.png'
 import CheckoutPage from './pages/CheckoutPage'
+import CategoryProductsPage from './pages/CategoryProductsPage'
 
 const AdminApp = () => {
 
@@ -38,7 +39,7 @@ const AdminApp = () => {
           <Route exact path='/customer' render={() => <h1>Customer page</h1>} />
           <Route exact path='/privacy' render={() => <h1>Privacy Policy</h1>} />
           <PrivateRoute path='/profile' component={ProfilePage} />
-          <Route exact path='/condition/:name' render={({ match: { params: { name } } }) => <h1>{name}</h1>} />
+          <Route exact path='/condition/:conditionId' component={CategoryProductsPage} />
           <Route exact path='/product/:productId' component={ProductDetailPage} />
           <Route exact path='/cart' render={routeParams => <ShoppingCartPage {...routeParams} changeOverlayState={decideOverlayState} />} />
           <Route exact path='/checkout/account' render={routeParams => <CheckoutPage {...routeParams} changeOverlayState={decideOverlayState} />} />

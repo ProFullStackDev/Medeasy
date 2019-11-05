@@ -25,6 +25,9 @@
   }
 
   &__list {
+    display: flex;
+    flex-direction: column;
+
     &-title {
       cursor: pointer;
       display: inline-block;
@@ -36,6 +39,7 @@
     }
 
     &-item {
+      max-width: 20%;
       &:not(:last-child) {
         margin-bottom: 1.5rem;
       }

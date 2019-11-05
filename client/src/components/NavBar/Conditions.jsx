@@ -14,12 +14,12 @@ const Conditions = ({ products, conditions, onClick }) => {
 			{conditions.map(condition => (
 				<ul key={condition
 				._id} className="Conditions__list">
-					<Link onClick={onClick} to={`/condition/${condition.name.split(' ').length > 1 ? condition.name.toLowerCase().replace(' ', '-') : condition.name.toLowerCase()}`} className="Conditions__list-title">{condition.name}</Link>
+					<Link onClick={onClick} to={`/condition/${condition._id}`} className="Conditions__list-title">{condition.name}</Link>
 					{products
 						.filter(product => product.category._id.toString() === condition._id)
 						.map(product => (
-							<Link onClick={onClick} to={`/product/${product._id}`} key={product._id}>
-								<li className="Conditions__list-item">{product.name}</li>
+							<Link className="Conditions__list-item" onClick={onClick} to={`/product/${product._id}`} key={product._id}>
+								{product.name}
 							</Link>
 						))}
 				</ul>
