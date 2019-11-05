@@ -5,6 +5,7 @@ import history from '../createHistory'
 
 const {
 	SET_PRODUCTS,
+	SET_REVIEWS,
 	SET_PRODUCT,
 	SET_COUPONS,
 	SET_COUPON,
@@ -25,6 +26,11 @@ export const fetchInventory = () => async dispatch => {
 	}, 1)
 }
 
+export const loadHomePage = () => async dispatch => {
+	dispatch(fetchAllProducts())
+	dispatch(fetchAllCategories())
+}
+
 // CATEGORIES RELATED ACTIONS
 
 export const fetchAllCategories = () => async dispatch => {
@@ -34,7 +40,7 @@ export const fetchAllCategories = () => async dispatch => {
 		} = await axios.get('/api/categories')
 		dispatch({ type: SET_CATEGORIES, payload: categories })
 	} catch (err) {
-		
+		console.log(err)
 		const errorMessage = err.response.data.message
 		if (Array.isArray(errorMessage))
 			errorMessage.forEach(message =>
@@ -241,6 +247,8 @@ export const fetchProductById = productId => async dispatch => {
 		dispatch({ type: SET_PRODUCT, payload: product })
 		return product
 	} catch (err) {
+		console.log(err)
+		history.push('/')
 		const errorMessage = err.response.data.message
 		dispatch(alertUser(errorMessage, 'danger'))
 	}
@@ -251,7 +259,11 @@ export const changeProductAvailableState = (
 	status
 ) => async dispatch => {
 	try {
-		await axios.patch(`/api/products/available/${productId}`, { status })
+		const { data: { product } } = await axios.patch(`/api/products/available/${productId}`, { status })
+		const products = JSON.parse(sessionStorage.getItem('products'))
+		const productIndex = products.findIndex(p => p._id.toString() === product._id)
+		products[productIndex] = product
+		dispatch({ type: SET_PRODUCTS, payload: products })
 	} catch (err) {
 		const errorMessage = err.response.data.message
 		dispatch(alertUser(errorMessage, 'danger'))
@@ -304,6 +316,32 @@ export const deleteProduct = productId => async dispatch => {
 	try {
 		await axios.delete(`/api/products/${productId}`)
 		dispatch({ type: CLEAR_PRODUCTS })
+	} catch (err) {
+		const errorMessage = err.response.data.message
+		dispatch(alertUser(errorMessage, 'danger'))
+	}
+}
+
+// REVIEWS RELATED ACTIONS
+
+export const fetchReviewsByProductId = productId => async dispatch => {
+	try {
+		const {
+			data: { reviews }
+		} = await axios.get(`/api/reviews/${productId}`)
+		dispatch({ type: SET_REVIEWS, payload: reviews })
+		return reviews
+	} catch (err) {
+		console.log(err)
+		history.push('/')
+		const errorMessage = err.response.data.message
+		dispatch(alertUser(errorMessage, 'danger'))
+	}
+}
+
+export const addReview = (productId, review) => async dispatch => {
+	try {
+		await axios.post(`/api/reviews/${productId}`, review)
 	} catch (err) {
 		const errorMessage = err.response.data.message
 		dispatch(alertUser(errorMessage, 'danger'))

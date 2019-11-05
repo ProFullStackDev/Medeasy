@@ -49,17 +49,6 @@ module.exports = {
     }
   },
 
-  // Fetch 5 top sold products
-  async fetchTopFiveProducts (req, res) {
-    try {
-      const products = await Product.find({}).sort('-timesSold').limit(5)
-      res.send({ statusCode: 202, products })
-    } catch (err) {
-      console.log(err.message)
-      res.status(500).send({ statusCode: 500, message: 'Server Error' })
-    }
-  },
-
   // Fetch all products by a certain category
   fetchAllProductsByCategory: async (req, res) => {
     const { categoryId } = req.params

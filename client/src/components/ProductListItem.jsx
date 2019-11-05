@@ -3,16 +3,14 @@ import CustomButton from '../components/CustomButton'
 import '../styles/components/ProductListItem.scss'
 import { Link } from 'react-router-dom'
 
-const ProductListItem = ({ product: { imageUrl, name, price, id }, history}) => {
+const ProductListItem = ({ product: { photos, name, price, _id } }) => {
   return (
     <div className='ProductListItem'>
-      <img src={imageUrl} alt='product' className='ProductListItem__image' />
+      <img src={photos[0]} alt='product' className='ProductListItem__image' />
       <div className='ProductListItem__details'>
-        <Link to={`/product/${name.toLowerCase().replace(' ', '-')}`}><p className='ProductListItem__details--title'>{ name }</p></Link>
-        <span className='ProductListItem__details--count' style={{ fontSize: '1rem' }}>Pack of 50 Tablets</span>
-        <h3 className='ProductListItem__details--price'>${ price }</h3>
+        <Link style={{ textAlign: 'center' }} to={`/product/${_id}`}><p className='ProductListItem__details--title'>{ name }</p></Link>
       </div>
-      <Link to={`/product/${name.toLowerCase().replace(' ', '-')}`}><CustomButton fontSize='1.4rem'>Buy Now</CustomButton></Link>
+      <Link style={{ marginTop: '1rem' }} to={`/product/${_id}`}><CustomButton fontSize='1.4rem'>Buy Now</CustomButton></Link>
     </div>
   )
 }

@@ -1,8 +1,9 @@
 import React from 'react'
 const StockStatus = ({ status }) => {
+  console.log(status)
   return (
-    <div className='StockStatus' style={{ ...stockStatusStyles, background: status === 'oos' ? '#d11c1a' : '#19ab2b' }}>
-      <p className='StockStatus__status'>{ status === 'oos' ? 'Out of Stock' : 'In Stock' }</p>
+    <div className='StockStatus' style={{ ...stockStatusStyles, background: !status ? '#d11c1a' : '#19ab2b' }}>
+      <p className='StockStatus__status'>{ !status ? 'Out of Stock' : 'In Stock' }</p>
     </div>
   )
 }

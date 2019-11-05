@@ -1,4 +1,5 @@
 const { Schema, model } = require('mongoose')
+const Review = require('./Review')
 
 const productSchema = new Schema(
 	{
@@ -26,6 +27,10 @@ productSchema.methods = {
 }
 
 productSchema.index({ name: 'text' })
+productSchema.pre('remove', async function (next) {
+	await Review.deleteMany({ product: this._id })
+	next()
+})
 
 const Product = model('product', productSchema)
 module.exports = Product

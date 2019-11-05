@@ -1,5 +1,6 @@
 @import '../colors';
 .ProductDetailPage {
+  min-height: 80vh;
   padding: 3.5rem 6.5rem;
   &__informations {
     display: flex;
@@ -34,7 +35,6 @@
       }
     }
     &-reviews, &-description {
-      min-height: 75rem;
       padding: 2.7rem 4.2rem;
       width: 100%;
       box-shadow: 0 0 5px 2px #d9d5d5;

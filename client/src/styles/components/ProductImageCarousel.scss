@@ -2,14 +2,15 @@
 @import '../mixins';
 
 .ProductImageCarousel {
-  flex-basis: 55rem;
+  flex-basis: 43.9%;
   &__main {
     width: 100%;
+    height: 50%;
     display: flex;
     justify-content: space-between;
     &--img {
-      min-width: 38rem;
-      height: 38rem;
+      display: inline-block;
+      width: 80%;
       @include desktop { min-width: 30rem; height: 30rem; }
     }
     span {
@@ -19,7 +20,7 @@
   &__otherimgs {
     display: flex;
     margin-top: 6rem;
-    justify-content: flex-start;
+    justify-content: center;
     &--img {
       border: 3px solid transparent;
       transition: border .2s ease;

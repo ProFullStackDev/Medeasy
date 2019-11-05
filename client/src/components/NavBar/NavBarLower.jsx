@@ -1,19 +1,28 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 // Components
 import Conditions from './Conditions'
 // Images
 import { ReactComponent as DownArrowIcon } from '../../images/downarrow.svg'
 import { ReactComponent as SearchIcon } from '../../images/search.svg'
 
-const NavBarLower = props => {
+import { connect } from 'react-redux'
+import { createStructuredSelector } from 'reselect'
+import { selectInventoryCategories, selectInventoryProducts } from '../../redux/selectors/inventorySelectors'
+
+const NavBarLower = ({ conditions, products }) => {
+
+  const handleClick = () => {
+    document.querySelector('.Conditions').style.display = 'none'
+  }
+
   return (
     <div className='NavBar__lower'>
       <div className='container'>
         <ul className='NavBar__lower--categories'>
-          <li className='NavBar__lower--category'>
+          <li className='NavBar__lower--category' onMouseOver={() => document.querySelector('.Conditions').style.display = 'grid'}>
             <span>Conditions</span>
-            <DownArrowIcon alt='down-arrow' />
-            <Conditions />
+            { conditions && products ? <Fragment><DownArrowIcon alt='down-arrow' />
+            <Conditions onClick={ handleClick } /></Fragment> : null}
           </li>
           <li className='NavBar__lower--category'>
             <span>Anxiety & Seizure</span>
@@ -36,4 +45,9 @@ const NavBarLower = props => {
   )
 }
 
-export default NavBarLower
+const mapStateToProps = createStructuredSelector({
+  conditions: selectInventoryCategories,
+  products: selectInventoryProducts
+})
+
+export default connect(mapStateToProps)(NavBarLower)

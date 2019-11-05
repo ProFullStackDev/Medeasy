@@ -1,44 +1,36 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import '../../styles/components/NavBarDropdowns.scss'
+import { createStructuredSelector } from 'reselect'
+import { connect } from 'react-redux'
+import {
+	selectInventoryProducts,
+	selectInventoryCategories
+} from '../../redux/selectors/inventorySelectors'
+import '../../styles/components/NavBarDropdown.scss'
 
-const Adhd = (props) => {
-  return (
-    <div className='Conditions'>
-      <ul className='Conditions__list'>
-        <h4 className='Conditions__list-title'>Adhd</h4>
-        <li className='Conditions__list-item'>Adderal</li>
-        <li className='Conditions__list-item'>Modafnil</li>
-        <li className='Conditions__list-item'>Ritalin</li>
-      </ul>
-      <ul className='Conditions__list'>
-        <li className='Conditions__list-item'>Adderal</li>
-        <li className='Conditions__list-item'>Modafnil</li>
-        <li className='Conditions__list-item'>Ritalin</li>
-      </ul>
-      <ul className='Conditions__list'>
-        <li className='Conditions__list-item'>Adderal</li>
-        <li className='Conditions__list-item'>Modafnil</li>
-        <li className='Conditions__list-item'>Ritalin</li>
-      </ul>
-      <ul className='Conditions__list'>
-        <li className='Conditions__list-item'>Adderal</li>
-        <li className='Conditions__list-item'>Modafnil</li>
-        <li className='Conditions__list-item'>Ritalin</li>
-      </ul>
-      <ul className='Conditions__list'>
-        <li className='Conditions__list-item'>Adderal</li>
-        <li className='Conditions__list-item'>Modafnil</li>
-        <li className='Conditions__list-item'>Ritalin</li>
-      </ul>
-      <ul className='Conditions__list'>
-        <li className='Conditions__list-item'>Adderal</li>
-        <li className='Conditions__list-item'>Modafnil</li>
-        <li className='Conditions__list-item'>Ritalin</li>
-      </ul>
-      
-    </div>
-  )
+const Conditions = ({ products, conditions, onClick }) => {
+	return (
+		<div className="Conditions">
+			{conditions.map(condition => (
+				<ul key={condition
+				._id} className="Conditions__list">
+					<Link onClick={onClick} to={`/condition/${condition.name.split(' ').length > 1 ? condition.name.toLowerCase().replace(' ', '-') : condition.name.toLowerCase()}`} className="Conditions__list-title">{condition.name}</Link>
+					{products
+						.filter(product => product.category._id.toString() === condition._id)
+						.map(product => (
+							<Link onClick={onClick} to={`/product/${product._id}`} key={product._id}>
+								<li className="Conditions__list-item">{product.name}</li>
+							</Link>
+						))}
+				</ul>
+			))}
+		</div>
+	)
 }
- 
-export default Adhd;
+
+const mapStateToProps = createStructuredSelector({
+	products: selectInventoryProducts,
+	conditions: selectInventoryCategories
+})
+
+export default connect(mapStateToProps)(Conditions)

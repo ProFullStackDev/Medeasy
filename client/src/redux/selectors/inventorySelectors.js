@@ -7,6 +7,11 @@ export const selectInventoryProducts = createSelector(
 	inventory => inventory.products
 )
 
+export const selectInventoryReviews = createSelector(
+	[selectInventory],
+	inventory => inventory.reviews
+)
+
 export const selectInventoryProduct = createSelector(
 	[selectInventory],
 	inventory => inventory.product

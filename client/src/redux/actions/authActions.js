@@ -3,7 +3,16 @@ import actionTypes from '../actionTypes'
 import { alertUser } from './alertActions.js'
 import history from '../createHistory'
 
-const { SET_USER, SET_ACCESS_TOKEN, CLEAR_INVENTORY, CLEAR_USER, CLEAR_PROFILE, SET_PROFILE_LOADING } = actionTypes
+const {
+	SET_USER,
+	SET_ACCESS_TOKEN,
+	CLEAR_INVENTORY,
+	CLEAR_USER,
+	CLEAR_ORDERS,
+	CLEAR_COUPONS,
+	CLEAR_PROFILE,
+	SET_PROFILE_LOADING
+} = actionTypes
 
 export const signIn = (
 	{ email, password, rememberMe },
@@ -25,7 +34,10 @@ export const signIn = (
 			localStorage.setItem('auth', JSON.stringify({ user, accessToken }))
 		else sessionStorage.setItem('auth', JSON.stringify({ user, accessToken }))
 		// Push to Dashboard
-		setTimeout(() => history.push(isAdmin ? '/admin/dashboard' : '/'), 100)
+		setTimeout(
+			() => (isAdmin ? history.push('/admin/dashboard') : history.goBack()),
+			100
+		)
 	} catch (err) {
 		const errorMessage = err.response.data.message
 		if (Array.isArray(errorMessage))
@@ -116,7 +128,9 @@ export const changePassword = (oldPassword, newPassword) => async dispatch => {
 				dispatch(alertUser(message.msg, 'danger'))
 			)
 		else dispatch(alertUser(errorMessage, 'danger'))
-	} finally { dispatch({ type: SET_PROFILE_LOADING, payload: false }) }
+	} finally {
+		dispatch({ type: SET_PROFILE_LOADING, payload: false })
+	}
 }
 
 export const logout = (
@@ -125,7 +139,11 @@ export const logout = (
 ) => async (dispatch, state) => {
 	try {
 		axios.put('/api/user/password', { accessToken: state().auth.accessToken })
-		dispatch({ type: CLEAR_INVENTORY })
+		if (isAdmin) dispatch({ type: CLEAR_INVENTORY })
+		else {
+			dispatch({ type: CLEAR_COUPONS })
+			dispatch({ type: CLEAR_ORDERS })
+		}
 		dispatch({ type: CLEAR_USER })
 		dispatch({ type: CLEAR_PROFILE })
 		localStorage.removeItem('auth')

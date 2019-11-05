@@ -38,7 +38,8 @@ const AdminApp = () => {
           <Route exact path='/customer' render={() => <h1>Customer page</h1>} />
           <Route exact path='/privacy' render={() => <h1>Privacy Policy</h1>} />
           <PrivateRoute path='/profile' component={ProfilePage} />
-          <Route exact path='/product/:name' component={ProductDetailPage} />
+          <Route exact path='/condition/:name' render={({ match: { params: { name } } }) => <h1>{name}</h1>} />
+          <Route exact path='/product/:productId' component={ProductDetailPage} />
           <Route exact path='/cart' render={routeParams => <ShoppingCartPage {...routeParams} changeOverlayState={decideOverlayState} />} />
           <Route exact path='/checkout/account' render={routeParams => <CheckoutPage {...routeParams} changeOverlayState={decideOverlayState} />} />
           <Redirect to='/' />

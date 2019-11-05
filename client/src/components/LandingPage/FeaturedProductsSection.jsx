@@ -39,7 +39,7 @@ const products = [
 const FeaturedProductsSection = props => {
   return (
     <div className='LandingPage__featured-products'>
-      <h3 className='LandingPage__featured-products--title'>Featured Products</h3>
+      <h3 style={{ textAlign: 'center', color: 'white', background: '#7ac7b8', fontWeight: 'normal', padding: '.5rem', borderRadius: '2rem', width: '20%', margin: '2.5rem auto', cursor: 'default' }} className='LandingPage__featured-products--title'>Featured Products</h3>
       <ProductList products={products} />
     </div>
   )

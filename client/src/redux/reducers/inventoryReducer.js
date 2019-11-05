@@ -1,6 +1,7 @@
 import actionTypes from '../actionTypes'
 const {
 	SET_PRODUCTS,
+	SET_REVIEWS,
 	SET_PRODUCT,
 	SET_COUPONS,
 	SET_COUPON,
@@ -16,12 +17,13 @@ const {
 } = actionTypes
 
 const initialState = {
-	products: null,
+	products: JSON.parse(sessionStorage.getItem('products')) || null,
+	reviews: null,
 	product: null,
 	orders: null,
 	coupons: null,
 	coupon: null,
-	categories: null,
+	categories: JSON.parse(sessionStorage.getItem('categories')) || null,
 	category: null,
 	loading: false
 }
@@ -30,16 +32,22 @@ export default (state = initialState, action) => {
 	const { type, payload } = action
 	switch (type) {
 		case SET_PRODUCTS:
+			sessionStorage.setItem('products', JSON.stringify(payload))
 			return { ...state, products: payload }
+		case SET_REVIEWS:
+			return { ...state, reviews: payload }
 		case SET_PRODUCT:
 			return { ...state, product: payload }
 		case SET_CATEGORIES:
+			sessionStorage.setItem('categories', JSON.stringify(payload))
 			return { ...state, categories: payload }
 		case SET_CATEGORY:
 			return { ...state, category: payload }
 		case CLEAR_CATEGORIES:
+			sessionStorage.removeItem('categories')
 			return { ...state, categories: null }
 		case CLEAR_PRODUCTS:
+			sessionStorage.removeItem('products')
 			return { ...state, products: null }
 		case CLEAR_ORDERS:
 			return { ...state, orders: null }
@@ -56,6 +64,7 @@ export default (state = initialState, action) => {
 		case CLEAR_INVENTORY:
 			return {
 				categories: null,
+				reviews: null,
 				products: null,
 				product: null,
 				orders: null,
