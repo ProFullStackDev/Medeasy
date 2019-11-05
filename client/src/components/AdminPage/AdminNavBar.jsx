@@ -18,7 +18,7 @@ const AdminNavBar = ({ url, navBarState, logout }) => {
         <NavLink to={`${url}/products`} className='AdminNavBar__link' activeClassName='active'>Products</NavLink>
         <NavLink to={`${url}/coupons`} className='AdminNavBar__link' activeClassName='active'>Coupons</NavLink>
         <NavLink to={`${url}/orders`} className='AdminNavBar__link' activeClassName='active'>Orders</NavLink>
-        <NavLink to={`${url}/categories`} className='AdminNavBar__link' activeClassName='active'>Catgeories</NavLink>
+        <NavLink to={`${url}/categories`} className='AdminNavBar__link' activeClassName='active'>Conditions</NavLink>
         <li onClick={handleClick} className='AdminNavBar__link'>Logout</li>
       </ul>
     </nav>

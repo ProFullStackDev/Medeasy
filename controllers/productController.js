@@ -42,8 +42,18 @@ module.exports = {
     const searchQuery = req.query.search || ''
     try {
       const products = await Product.find({ name: {$regex: '^' + searchQuery , $options: 'i'}}).select('-admin').populate('category', ['name']).sort('-createdAt')
-      if (!products || !products.length) return res.status(404).send({ statusCode: 404, message: 'No products are found' })
       res.send({ statusCode: 200, count: products.length, products })
+    } catch (err) {
+      console.log(err.message)
+      res.status(500).send({ statusCode: 500, message: 'Server Error' })
+    }
+  },
+
+  // Fetch 5 top sold products
+  async fetchTopFiveProducts (req, res) {
+    try {
+      const products = await Product.find({}).sort('-timesSold').limit(5)
+      res.send({ statusCode: 202, products })
     } catch (err) {
       console.log(err.message)
       res.status(500).send({ statusCode: 500, message: 'Server Error' })

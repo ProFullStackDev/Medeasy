@@ -131,8 +131,8 @@
       
       &:hover {
         cursor: pointer;
-        .dropdown {
-          display: flex;
+        .Conditions {
+          display: grid;
           opacity: 1;
         }
       }
@@ -163,6 +163,9 @@
           padding: 1rem 2rem;
           font-size: 1.6rem;
           color: white;
+          &::placeholder {
+            color: white;
+          }
         }
         svg {
           margin-right: 1rem;

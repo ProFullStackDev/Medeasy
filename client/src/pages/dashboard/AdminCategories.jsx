@@ -25,9 +25,9 @@ const AdminCategories = ({ categories, fetchAllCategories, onClick }) => {
 	) : (
 		<div className="AdminDashboardPage__categories">
 			<div className="AdminDashboardPage__categories-info">
-				<h2>ALL categories</h2>
+				<h2>ALL Conditions</h2>
 				<Link to="/admin/dashboard/add-category" style={{ marginLeft: '3rem' }}>
-					<CustomButton>Add Category</CustomButton>
+					<CustomButton>Add Condtion</CustomButton>
 				</Link>
 			</div>
 			<CategoriesList

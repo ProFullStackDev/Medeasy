@@ -1,6 +1,7 @@
 import actionTypes from '../actionTypes'
 import axios from 'axios'
 import { alertUser } from './alertActions'
+import history from '../createHistory'
 
 const {
 	SET_PRODUCTS,
@@ -57,13 +58,13 @@ export const fetchCategoryById = categoryId => async dispatch => {
 	}
 }
 
-export const addCategory = (formState, history) => async dispatch => {
+export const addCategory = formState => async dispatch => {
 	try {
 		dispatch({ type: SET_INVENTORY_LOADING, payload: true })
 		await axios.post('/api/categories', formState)
 		dispatch({ type: CLEAR_CATEGORIES })
 		history.push('/admin/dashboard/categories')
-		dispatch(alertUser('Category Created Successfully', 'success'))
+		dispatch(alertUser('Condition Created Successfully', 'success'))
 	} catch (err) {
 		const errorMessage = err.response.data.message
 		dispatch(alertUser(errorMessage, 'danger'))
@@ -74,7 +75,6 @@ export const addCategory = (formState, history) => async dispatch => {
 
 export const updateCategory = (
 	formState,
-	history,
 	categoryId
 ) => async dispatch => {
 	try {
@@ -82,7 +82,7 @@ export const updateCategory = (
 		await axios.put(`/api/categories/${categoryId}`, formState)
 		dispatch({ type: CLEAR_CATEGORIES })
 		history.push('/admin/dashboard/categories')
-		dispatch(alertUser('Category Updated Successfully', 'success'))
+		dispatch(alertUser('Condition Updated Successfully', 'success'))
 	} catch (err) {
 		console.log(err.response.data)
 		const errorMessage = err.response.data.message
@@ -110,6 +110,20 @@ export const fetchAllOrders = () => async dispatch => {
 			data: { orders }
 		} = await axios.get('/api/orders')
 		dispatch({ type: SET_ORDERS, payload: orders })
+	} catch (err) {
+		const errorMessage = err.response.data.message
+		if (Array.isArray(errorMessage))
+			errorMessage.forEach(message =>
+				dispatch(alertUser(message.msg, 'danger'))
+			)
+		else dispatch(alertUser(errorMessage, 'danger'))
+	}
+}
+
+export const addTrackingId = (trackingId, orderId) => async dispatch => {
+	try {
+		await axios.patch(`/api/orders/track/${orderId}`, { trackingId })
+		history.push('/admin/dashboard/orders')
 	} catch (err) {
 		const errorMessage = err.response.data.message
 		if (Array.isArray(errorMessage))
@@ -152,7 +166,7 @@ export const fetchCouponById = couponId => async dispatch => {
 	}
 }
 
-export const addCoupon = (formState, history) => async dispatch => {
+export const addCoupon = formState => async dispatch => {
 	try {
 		dispatch({ type: SET_INVENTORY_LOADING, payload: true })
 		await axios.post('/api/coupons', {
@@ -172,7 +186,6 @@ export const addCoupon = (formState, history) => async dispatch => {
 
 export const updateCoupon = (
 	formState,
-	history,
 	couponId
 ) => async dispatch => {
 	try {
@@ -245,7 +258,7 @@ export const changeProductAvailableState = (
 	}
 }
 
-export const addProduct = (formData, categoryId, history) => async dispatch => {
+export const addProduct = (formData, categoryId) => async dispatch => {
 	try {
 		dispatch({ type: SET_INVENTORY_LOADING, payload: true })
 		await axios.post(`/api/products/${categoryId}`, formData)
@@ -266,8 +279,7 @@ export const addProduct = (formData, categoryId, history) => async dispatch => {
 
 export const updateProduct = (
 	formData,
-	productId,
-	history
+	productId
 ) => async dispatch => {
 	console.log(Array.from(formData))
 	try {

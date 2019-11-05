@@ -18,7 +18,6 @@ import Spinner from '../../components/Spinner'
 import emptyImage from '../../images/empty.jpg'
 
 const AdminCreateProduct = ({
-	history,
 	loading,
 	categories,
 	fetchAllCategories,
@@ -66,7 +65,7 @@ const AdminCreateProduct = ({
 		data.append('product-image', productImages[1])
 		data.append('product-image', productImages[2])
 
-		addProduct(data, category, history)
+		addProduct(data, category)
 	}
 
 	const storeImages = files => {

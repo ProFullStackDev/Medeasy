@@ -9,11 +9,11 @@ const AdminCarousel = ({ totalPages, currentPageNumber, onClick }) => {
     numbers.push(<div onClick={() => onClick(number)} key={number} className={`AdminCarousel__circle ${currentPageNumber === number ? 'active' : ''}`}>{number}</div>)
   return (
     <div className='AdminCarousel'>
-      <span style={{ cursor: 'pointer' }}><LeftArrow /></span>
+      { totalPages > 1 ? <span style={{ cursor: 'pointer' }}><LeftArrow /></span> : null }
         <div className="AdminCarousel__circles">
           { numbers }
         </div>
-      <span style={{ cursor: 'pointer' }}><RightArrow /></span>
+      { totalPages > 1 ? <span style={{ cursor: 'pointer' }}><RightArrow /></span> : null }
     </div>
   )
 }

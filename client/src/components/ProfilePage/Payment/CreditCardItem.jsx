@@ -9,6 +9,7 @@ import '../../../styles/components/CreditCardItem.scss'
 import { ReactComponent as CardChip } from '../../../images/chip.svg'
 import { ReactComponent as Visa } from '../../../images/visa.svg'
 import { ReactComponent as MasterCard } from '../../../images/mastercard.svg'
+import { ReactComponent as Discover } from  '../../../images/discover.svg'
 import { ReactComponent as Amex } from '../../../images/amex.svg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash, faEdit } from '@fortawesome/free-solid-svg-icons'
@@ -61,6 +62,7 @@ const CreditCardItem = ({ deleteCard, card: { _id, cardSystem, cardName, cardNum
 				/>
 			)
 			break
+		case 'Discover': cardType = <Discover style={{ position: 'absolute', top: '15px', right: '20px', width: '60px', height: '45px' }} />; break
 		default:
 			break
 	}
@@ -92,9 +94,9 @@ const CreditCardItem = ({ deleteCard, card: { _id, cardSystem, cardName, cardNum
 					<p style={{ width: '2rem', fontSize: '8px', fontWeight: 'normal' }}>
 						VALID TILL
 					</p>
-					<p style={{ marginLeft: '1.5rem' }}>{cardExpiryMonth} / {cardExpiryYear}</p>
+					<p style={{ marginLeft: '1.5rem' }}>{cardExpiryMonth < 10 ? `0${cardExpiryMonth}` : cardExpiryMonth } / {cardExpiryYear}</p>
 				</div>
-				<p className="CreditCardItem__details--name">{ cardName }</p>
+				<p style={{ marginTop: '.5rem' }} className="CreditCardItem__details--name">{ cardName }</p>
 			</div>
 		</div>
 	)

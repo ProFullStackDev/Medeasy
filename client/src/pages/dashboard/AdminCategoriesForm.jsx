@@ -17,7 +17,6 @@ import CustomFormElement from '../../components/CustomFormElement'
 import Spinner from '../../components/Spinner'
 
 const AdminCategoriesForm = ({
-	history,
 	loading,
 	addCategory,
 	updateCategory,
@@ -29,7 +28,7 @@ const AdminCategoriesForm = ({
 	}
 }) => {
 	const pageTitle =
-		url === '/admin/dashboard/add-category' ? 'Add a category' : 'Edit category'
+		url === '/admin/dashboard/add-category' ? 'Add a Condition' : 'Edit Condition'
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -51,8 +50,8 @@ const AdminCategoriesForm = ({
 	const handleSubmit = event => {
 		event.preventDefault()
 		if (url === `/admin/dashboard/edit-category/${categoryId}`)
-			updateCategory(formState, history, categoryId)
-		else addCategory(formState, history)
+			updateCategory(formState, categoryId)
+		else addCategory(formState)
 	}
 
 	const handleChange = event =>
@@ -72,7 +71,7 @@ const AdminCategoriesForm = ({
 					name="name"
 					value={name}
 					onChange={handleChange}
-					placeholder="Category Name"
+					placeholder="Condition Name"
 				/>
 
 				<CustomFormElement
@@ -81,12 +80,12 @@ const AdminCategoriesForm = ({
 					name="description"
 					value={description}
 					onChange={handleChange}
-					placeholder="Category Description"
+					placeholder="Condition Description"
 				/>
 				<CustomButton extraStyle={{ width: '100%' }} isSubmitButton>
 					{url === `/admin/dashboard/edit-category/${categoryId}`
-						? 'Edit category'
-						: 'Add category'}
+						? 'Edit Condition'
+						: 'Add Condition'}
 				</CustomButton>
 			</form>
 		</div>

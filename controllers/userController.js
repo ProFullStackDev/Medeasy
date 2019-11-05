@@ -144,11 +144,11 @@ module.exports = {
             You are receiving this email, because you (or someone else) have requested to rest your password. <br/>
             Please click the following link below or copy and paste the link in your browser to complete the process. <br/> Please note that, this link will be valid for only 15 minutes.
           <p>
-          <p>http://localhost:3000/password/reset/${passwordResetToken}</p><br />
+          <p>${process.env.MEDEASY_WEBSITE}/password/reset/${passwordResetToken}</p><br />
           <p>If you did not raise this request means, kindly ignore the email</p>
           <br/><br/>
           <h4>With Regards</h4>
-          <h3>Medeasy @ <a href='http://localhost:3000'>medeasy.com</a></h3>
+          <h3>Medeasy @ <a href='${process.env.MEDEASY_WEBSITE}'>medeasy.com</a></h3>
         `
 			}
 

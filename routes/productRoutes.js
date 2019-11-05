@@ -4,7 +4,7 @@ const multer = require('multer')
 
 const authenticate = require('../middleware/authenticate')
 const isAdmin = require('../middleware/isAdmin')
-const { updateProductAvailability, createProduct, fetchAllProducts, fetchAllProductsByCategory, fetchProductById, updateProductById, deleteProductById } = require('../controllers/productController')
+const { updateProductAvailability, createProduct, fetchTopFiveProducts, fetchAllProducts, fetchAllProductsByCategory, fetchProductById, updateProductById, deleteProductById } = require('../controllers/productController')
 const { storage, limits, fileFilter } = require('../utils/multerUtils')
 
 const upload = multer({ storage, limits, fileFilter })
@@ -31,6 +31,11 @@ router.get('/', fetchAllProducts)
 // @desc - Fetch all products of a certain category
 // @method - Public
 router.get('/category/:categoryId', fetchAllProductsByCategory)
+
+// @route - GET /api/products/top
+// @desc - Fetch top sold products
+// @method - Public
+router.get('/top', fetchTopFiveProducts)
 
 // @route - GET /api/products/:productId
 // @desc - Fetch a product

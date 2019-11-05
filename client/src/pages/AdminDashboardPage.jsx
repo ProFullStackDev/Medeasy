@@ -20,6 +20,7 @@ import { ReactComponent as Hamburger } from '../images/hamburger.svg'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { selectAuthUser } from '../redux/selectors/authSelectors'
+import AdminOrderForm from './dashboard/AdminOrderForm'
 
 
 const AdminDashboardPage = ({ user, match: { url }, history }) => {
@@ -45,6 +46,7 @@ const AdminDashboardPage = ({ user, match: { url }, history }) => {
         <Route path={`${url}/add-product`} component={AdminCreateProduct} />
         <Route path={`${url}/add-coupon`} component={AdminCouponForm} />
         <Route path={`${url}/add-category`} component={AdminCategoriesForm} />
+        <Route path={`${url}/tracking/:orderId`} component={AdminOrderForm} />
         <Route path={`${url}/add-product`} component={AdminCreateProduct} />
         <Route path={`${url}/edit-product/:productId`} component={AdminEditProduct} />
         <Route path={`${url}/edit-coupon/:couponId`} component={AdminCouponForm} />

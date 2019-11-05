@@ -26,7 +26,6 @@ module.exports = {
 			const emailMessage = {
 				from: process.env.EMAIL_ID,
 				to: 'harishakira97@gmail.com',
-				cc: ['sunguru98@yahoo.co.in'],
 				envelope: {
 					from: `MEDEASY <${process.env.EMAIL_ID}>`,
 					to: 'harishakira97@gmail.com'
@@ -39,7 +38,7 @@ module.exports = {
 					<h2>Message: </h2><p>${message}</p>
           <br/><br/>
           <h4>With Regards</h4>
-          <h3>Medeasy @ <a href='http://localhost:3000'>medeasy.com</a></h3>
+          <h3>Medeasy @ <a href='${process.env.MEDEASY_WEBSITE}'>medeasy.com</a></h3>
         `
 			}
 			// Send the email message

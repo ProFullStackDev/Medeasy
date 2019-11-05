@@ -1,6 +1,7 @@
 const { validationResult } = require('express-validator')
 const crypto = require('crypto')
 const { orders: { OrdersCreateRequest, OrdersCaptureRequest } } = require('@paypal/checkout-server-sdk')
+const incrementProductSales = require('../utils/incrementPrdouctSales')
 
 const {
   resources: { Charge },
@@ -21,6 +22,7 @@ module.exports = {
     const { orderId, currency, amount } = req.body
     try {
       const order = await Order.findById(orderId)
+      if (!order) return res.status(404).send({ statusCode: 404, message: 'Order not found' })
       if (order.razorpay_order_id) return res.send({ statusCode: 200, rzpOrderId: order.razorpay_order_id })
       const rzpOrder = await instance.orders.create({ amount, currency, receipt: `Order ${orderId}` })
       order.razorpay_order_id = rzpOrder.id
@@ -51,6 +53,7 @@ module.exports = {
     try {
       const ppOrder = await client().execute(request)
       const order = await Order.findById(orderId)
+      if (!order) return res.status(404).send({ statusCode: 404, message: 'Order not found' })
       order.paypal_order_id = ppOrder.result.id
       await order.save()
       res.status(201).send({ statusCode: 201, ppOrderId: ppOrder.result.id })
@@ -77,6 +80,7 @@ module.exports = {
       }
       const { addresses, code, hosted_url, id } = await Charge.create(chargeData)
       const order = await Order.findById(orderId)
+      if (!order) return res.status(404).send({ statusCode: 404, message: 'Order not found' })
       order.coinbase_order_code = code
       await order.save()
       res
@@ -104,7 +108,7 @@ module.exports = {
       return res.status(400).send({ statusCode: 400, message: 'Signature failure' })
     
     try {
-      const order = await Order.findOne({ _id: medEasyOrderId, razorpay_order_id: orderId })
+      const order = await Order.findOne({ _id: medEasyOrderId, razorpay_order_id: orderId, status: 'Pending' })
       if (!order) 
         return res.status(404).send({ statusCode: 404, message: 'Order not found. Please contact our customer care' })
       order.razorpay_payment_id = paymentId
@@ -115,7 +119,10 @@ module.exports = {
       if (data.status === 'captured') {
         order.status = 'Success'
         order.method = 'card'
+        order.coinbase_order_code = undefined
+        order.paypal_order_id = undefined
         await order.save()
+        incrementProductSales(...orders.products.map(product => product._id))
         return res.status(203).send({ statusCode: 203, order: {
           _id: order._id,
           method: order.method,
@@ -144,15 +151,18 @@ module.exports = {
     request.requestBody({})
 
     try {
-      const order = await Order.findOne({ _id: orderId, paypal_order_id: paypalOrderId })
+      const order = await Order.findOne({ _id: orderId, paypal_order_id: paypalOrderId, status: 'Pending' })
       if (!order) return res.status(400).send({ statusCode: 400, message: 'Order not found. Please contact our customer care' })
       const { result: { purchase_units: { 0: { amount: { value }, payments: { captures: { 0: id } } } } } } = await client().execute(request)
 
       if (parseInt(value) === parseInt(order.totalAmount)) {
         order.paypal_capture_id = id
+        order.razorpay_order_id = undefined
+        order.coinbase_order_code = undefined
         order.status = 'Success'
         order.method = 'paypal'
         await order.save()
+        incrementProductSales(...orders.products.map(product => product._id))
         return res.status(203).send({ statusCode: 203, order: {
           _id: order._id,
           method: order.method,
@@ -203,17 +213,20 @@ module.exports = {
     const errors = validationResult(req)
     if (!errors.isEmpty()) return res.status(400).send({ statusCode: 400, message: errors.array() })
     try {
-      const { chargeCode, userId, mode } = req.body
+      const { chargeCode, userId } = req.body
       const coinbaseTransaction = await Coinbase.findOne({ code: chargeCode })
       // If there is no transaction means, return invalid order code
       if (!coinbaseTransaction) return res.status(404).send({ statusCode: 404, message: 'Invalid Order Code' })
       // We check whether the user who placed the order has entered the code. For that we query the Order datbase with user and orderCode
-      const order = await Order.findOne({ user: userId, coinbase_order_code: chargeCode })
+      const order = await Order.findOne({ user: userId, coinbase_order_code: chargeCode, status: 'Pending' })
       if (!order) 
-        return res.status(403).send({ statusCode: 403, message: 'You have not purchased this order' })
+        return res.status(403).send({ statusCode: 403, message: 'You have not purchased this order / Transaction complete already' })
       order.status = 'Success'
       order.method = 'bitcoin'
+      order.razorpay_order_id = undefined
+      order.paypal_order_id = undefined
       await order.save()
+      incrementProductSales(...orders.products.map(product => product._id))
       // Everything goes well. Hence release the order
       res.status(202).send({ statusCode: 202, order: {
         _id: order._id,

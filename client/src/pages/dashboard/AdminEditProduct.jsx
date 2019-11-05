@@ -27,7 +27,6 @@ const AdminEditProduct = ({
 	match: {
 		params: { productId }
 	},
-	history,
 	loading,
 	categories,
 	fetchAllCategories,
@@ -120,7 +119,7 @@ const AdminEditProduct = ({
 		data.append('product-image', productImages[1])
 		data.append('product-image', productImages[2])
 		data.append('stockAvailable', product.stockAvailable)
-		updateProduct(data, productId, history)
+		updateProduct(data, productId)
 	}
 
 	const storeImages = files => {

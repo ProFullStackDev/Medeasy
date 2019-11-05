@@ -18,7 +18,6 @@ import CustomFormElement from '../../components/CustomFormElement'
 import Spinner from '../../components/Spinner'
 
 const AdminCouponForm = ({
-	history,
 	loading,
 	addCoupon,
 	updateCoupon,
@@ -67,8 +66,8 @@ const AdminCouponForm = ({
 	const handleSubmit = event => {
 		event.preventDefault()
 		if (url === `/admin/dashboard/edit-coupon/${couponId}`)
-			updateCoupon(formState, history, couponId)
-		else addCoupon(formState, history)
+			updateCoupon(formState, couponId)
+		else addCoupon(formState)
 	}
 
 	const handleChange = event =>

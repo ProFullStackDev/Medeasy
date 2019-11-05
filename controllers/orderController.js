@@ -3,6 +3,8 @@ const Order = require('../models/Order')
 const Cart = require('../models/Cart')
 const User = require('../models/User')
 const Guest = require('../models/Guest')
+const transporter = require('../utils/mailTransporter')
+const moment = require('moment')
 
 module.exports = {
 
@@ -14,6 +16,7 @@ module.exports = {
       let order = await Order.findOne({ cart: cartId })
       if (order) return res.send({ statusCode: 200, orderId: order._id })
       const cart = await Cart.findById(cartId)
+      if (!cart) return res.status(404).send({ statusCode: 404, message: 'Cart not found' })
       let user
       if (mode === 'guest')
         user = await Guest.findById(userId)
@@ -77,11 +80,36 @@ module.exports = {
       if (!errors.isEmpty()) 
         return res.status(400).send({ statusCode: 400, message: errors.array() })
       const { trackingId } = req.body
-      const order = await Order.findById(orderId)
+      const order = await Order.findById(orderId).populate('user', ['name', 'email'])
       order.trackingId = trackingId
       await order.save()
+      const message = {
+				from: process.env.EMAIL_ID,
+				to: order.user.email,
+				envelope: {
+					from: `MEDEASY <${process.env.EMAIL_ID}>`,
+					to: order.user.email
+				},
+				subject: 'Update on your Shipment',
+				html: `
+          <h1>Dear ${order.user.name}</h1>
+          <p>
+            Your Order ID - <strong>${order._id}</strong>, amounting to USD <strong>${order.totalAmount}</strong>, placed at ${moment(order.createdAt).format('L')} has been shipped succesfully. <br/>
+            Shipment Tracking Id - <strong>${trackingId}</strong><br />
+            Estimated Delivery Date - <strong>${moment(order.createdAt).add(10, 'days').format('L')}</strong> to <strong>${moment(order.createdAt).add(16, 'days').format('L')}</strong><br />
+            Please click the following link below to track your shipment.
+          <p>
+          <a href='https://t.17track.net/en#nums=${trackingId}'>Track your Shipment</a><br />
+          <p>We thank you for believing in our service.</p>
+          <br/><br/>
+          <h4>With Regards</h4>
+          <h3>Medeasy @ <a href='${process.env.MEDEASY_WEBSITE}'>Medeasy.com</a></h3>
+        `
+      }
+      await transporter.sendMail(message)
       res.status(202).send({ statusCode: 202, order })
     } catch (err) {
+      console.log(err)
       res.status(500).send({ statusCode: 500, message: 'Server Error'})
     }
   },

@@ -1,67 +1,54 @@
 @import '../colors';
 
-.dropdown {
+.Conditions {
+  cursor: default;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: 1.5rem;
+  row-gap: 3.5rem;
+  grid-auto-rows: minmax(5rem, max-content);
+  min-width: 140rem;
   z-index: 10;
   position: absolute;
   left: 0;
   top: 7.5rem;
-  background: $medeasy-grey-color;
+  background: rgb(245, 245, 245);
   display: none;
   align-items: center;
   justify-content: center;
   opacity: 0;
   transition: opacity .2s;
   color: $black-color;
-  & .title { color: $medeasy-title-color; }
   padding: 3rem 3.5rem;
-}
 
-.Adhd, .PainKillers {
-  &__list-item:not(:last-child) {
-    margin-bottom: 1.5rem;
+  &-title {
+    color: $medeasy-title-color;
   }
-}
 
-.AnxietySeizure {
-  align-items: flex-start;
-  &__left, &__right {
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-    &-list--item {
-      .title {
-        margin-bottom: 1rem;
-      }
-      display: flex;
-      flex-direction: column;
-    }
-    &-list--item:not(:last-child) {
-      margin-bottom: 2rem;
-    }
-  }
-  &__right-list { padding-left: 4rem }
-  &__left-list {
-    padding-right: 3rem;
-    border-right: 1px solid #C5C3C3;
-  }
-}
-
-.HealthConditions {
-  width: 25rem;
   &__list {
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-    &--item {
-      .title {
-        margin-bottom: 1rem;
-      }
-      display: flex;
-      flex-direction: column;
+    &-title {
+      cursor: pointer;
+      padding-bottom: .4rem;
+      margin-bottom: 1.5rem;
+      width: 50%;
+      color: $medeasy-green-color;
+      border-bottom: 1px solid rgba(139, 139, 139, 0.2);
+    }
+
+    &-item {
       &:not(:last-child) {
-        margin-bottom: 2rem;
+        margin-bottom: 1.5rem;
+      }
+
+      transition: color .3s ease-in-out;
+      -webkit-transition: color .3s ease-in-out;
+      -moz-transition: color .3s ease-in-out;
+      -ms-transition: color .3s ease-in-out;
+      -o-transition: color .3s ease-in-out;
+
+      &:hover {
+        cursor: pointer;
+        color: $medeasy-green-color;
       }
     }
   }
 }
-

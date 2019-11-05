@@ -1,5 +1,6 @@
 import React from 'react'
-import Moment from 'react-moment'
+import { Link } from 'react-router-dom'
+import CustomButton from '../CustomButton'
 
 const OrdersList = ({ orders }) => {
 	return (
@@ -12,17 +13,19 @@ const OrdersList = ({ orders }) => {
 					<th>Order Status</th>
 					<th>Order Amount</th>
 					<th>Tracking Id</th>
+					<th>Action</th>
 				</tr>
 			</thead>
 			<tbody>
-				{orders.map(({_id, createdAt, user: { name }, totalAmount, status}, index) => (
+				{orders.map(({_id, trackingId, user: { name }, totalAmount, status}, index) => (
 					<tr key={_id}>
           <td>{index + 1}</td>
           <td>{_id}</td>
-          <td><Moment format='DD-MM-YYYY'>{createdAt}</Moment></td>
           <td>{name}</td>
           <td style={{ color: status === 'Success' ? 'green' : 'orangered', fontWeight: 'bold' }}>{status}</td>
           <td>{totalAmount}$</td>
+					<td style={{ fontWeight: 'bold', color: trackingId === 'nil' ? 'red': 'green' }}>{trackingId}</td>
+					<Link to={`/admin/dashboard/tracking/${_id}`}><CustomButton extraStyle={{ background: trackingId === 'nil' ? 'orangered' : '#7ac7b8' }}>{ trackingId === 'nil' ? 'Add Tracking Id' : 'Update Tracking Id' }</CustomButton></Link>
         </tr>
 				))}
 			</tbody>
