@@ -1,54 +1,80 @@
 import React, { useEffect, useState } from 'react'
+
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { fetchAllProducts } from '../redux/actions/inventoryActions'
 import {
 	selectInventoryProducts,
 	selectInventoryCategories
 } from '../redux/selectors/inventorySelectors'
 
+import styled from 'styled-components'
+
 import ProductsCarousel from '../components/ProductsCarousel'
 import ProductList from '../components/ProductList'
-import Spinner from '../components/Spinner'
+
+// Styles
+const Title = styled.h2`
+	margin-top: 2rem;
+	font-weight: bolder;
+	font-size: 2.5rem;
+	text-transform: uppercase;
+	color: black;
+`
+
+const DescriptionContainer = styled.div`
+	margin: 1.5rem 0;
+	padding: 2rem;
+	border-radius: 5px;
+	width: 100%;
+	min-height: 15rem;
+	box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+	& p {
+		&:not(:last-child) {
+			margin-bottom: 1.5rem
+		}
+	}
+`
 
 const CategoryProductsPage = ({
 	products,
 	categories,
-	fetchAllProducts,
 	match: {
 		params: { conditionId }
 	}
 }) => {
-	useEffect(() => {
-		if (!products) fetchAllProducts()
-	}, [fetchAllProducts, products])
-
-	const categoryName = categories.find(cat => cat._id === conditionId).name
-
 	const [currentPageNumber, setCurrentPageNumber] = useState(1)
 
-	return !products ? (
-		<Spinner />
-	) : (
-		<section style={{ minHeight: '60vh' }} className="CategoryProductsPage">
-			<h2 className="CategoryProductsPage__title">
-				{categoryName} :{' '}
-				{
-					products.filter(product => product.category._id === conditionId)
-						.length
-				}{' '}
-				Products
-			</h2>
+	const { name, description } = categories.find(cat => cat._id === conditionId)
+	console.log(name, description)
+	const categoryProducts = products.filter(
+		product => product.category._id === conditionId
+	)
+
+	return (
+		<section className="CategoryProductsPage">
+			<Title>
+				{name} : {categoryProducts.length} Products
+			</Title>
 			<ProductsCarousel
 				onClick={pageNumber => setCurrentPageNumber(pageNumber)}
 				currentPageNumber={currentPageNumber}
 				totalPages={Math.ceil(products.length / 30)}
 			/>
 			<ProductList
-				products={products
-					.filter(product => product.category._id === conditionId)
-					.slice((currentPageNumber - 1) * 30, 30 * currentPageNumber)}
+				products={categoryProducts.slice(
+					(currentPageNumber - 1) * 30,
+					30 * currentPageNumber
+				)}
 			/>
+			<ProductsCarousel
+				onClick={pageNumber => setCurrentPageNumber(pageNumber)}
+				currentPageNumber={currentPageNumber}
+				totalPages={Math.ceil(products.length / 30)}
+			/>
+			<Title>Description </Title>
+			<DescriptionContainer>
+				{description.split(/\n/g).map((d, index) => <p>{d}</p>)}
+			</DescriptionContainer>
 		</section>
 	)
 }
@@ -58,7 +84,4 @@ const mapStateToProps = createStructuredSelector({
 	categories: selectInventoryCategories
 })
 
-export default connect(
-	mapStateToProps,
-	{ fetchAllProducts }
-)(CategoryProductsPage)
+export default connect(mapStateToProps)(CategoryProductsPage)

@@ -5,7 +5,7 @@ module.exports = {
   
   fetchAllCategories: async (req, res) => {
     try {
-      const categories = await Category.find({}).select('name')
+      const categories = await Category.find({})
       if (!categories) return res.status(404).send({ statusCode: 404, message: 'No categories present' })
       res.send({ statusCode: 200, categories })
     } catch (err) {

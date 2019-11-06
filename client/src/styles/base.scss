@@ -6,6 +6,15 @@
   box-sizing: border-box;
 }
 
+.fullScreen {
+  display: block;
+  min-height: 60vh !important;
+}
+
+section {
+  height: 100%;
+}
+
 body {
   color: $black-color;
   & .App {
