@@ -5,35 +5,47 @@
   min-height: 100vh;
   background: $medeasy-green-color;
   transition: all .3s ease;
+
   &.closed {
-    width: 0;
-    flex-basis: 0;
     transform-origin: right right;
-    transform: scale(0);
+    transform: translateX(-100%);
+    transform-origin: center;
+    flex-basis: 0;
+    width: 0; 
     pointer-events: none;
+    -webkit-transform: translateX(-100%);
+    -moz-transform: translateX(-100%);
+    -ms-transform: translateX(-100%);
+    -o-transform: translateX(-100%);
   }
+
   &__logo {
     width: 100%;
     padding: 15%;
   }
+
   &__links {
     color: white;
     margin-top: 7.5rem;
   }
+
   &__link {
     display: block;
     padding: 1.5rem;
     text-align: center;
     transition: all .3s ease;
     cursor: pointer;
+
     &:not(:last-child) {
       margin-bottom: 5rem;
     }
+
     &:hover {
       color: $medeasy-green-color;
       background: white;
     }
   }
+
   a.active {
     color: $medeasy-green-color;
     background: white;

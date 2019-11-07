@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 
 import WelcomeSection from '../components/LandingPage/WelcomeSection'
 // import FeaturedProductsSection from '../components/LandingPage/FeaturedProductsSection'

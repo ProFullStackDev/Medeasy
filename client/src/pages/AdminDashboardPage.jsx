@@ -29,7 +29,7 @@ const AdminDashboardPage = ({ user, match: { url }, history }) => {
   const [modalState, setModalState] = useState(false)
 
   return !user ? <Redirect to='/admin' />  : (
-    <div className='AdminDashboardPage'>
+    <div className='AdminDashboardPage active'>
       <div style={{ display: `${modalState ? 'block' : 'none'}`}} className="AdminDashboardPage__overlay">
         <AdminModal onClick={boolVal => setModalState(boolVal)} />
       </div>

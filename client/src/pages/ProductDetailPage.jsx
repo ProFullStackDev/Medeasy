@@ -12,6 +12,7 @@ import {
 	fetchReviewsByProductId,
 	addReview
 } from '../redux/actions/inventoryActions'
+import { addProductToCart } from '../redux/actions/cartActions'
 import {
 	selectInventoryProduct,
 	selectInventoryLoading,
@@ -32,12 +33,15 @@ import { ReactComponent as StarIcon } from '../images/star.svg'
 import { ReactComponent as StarFilledIcon } from '../images/starFilled.svg'
 
 const ProductDetailPage = ({
+	history,
 	user,
 	product,
+	loading,
 	reviews,
 	fetchReviewsByProductId,
 	fetchProductById,
 	addReview,
+	addProductToCart,
 	match: {
 		params: { productId }
 	}
@@ -72,14 +76,18 @@ const ProductDetailPage = ({
 		setUserReviews([reviewObj, ...userReviews])
 	}
 
-	return !product || !reviews ? (
+	const handleProductAdding = (product, type) => {
+		addProductToCart({...product}).then(() => type === 'normal' ? null : history.push('/checkout/account'))
+	}
+
+	return !product || !reviews || loading ? (
 		<Spinner />
 	) : (
 		<Fragment>
 			<section className="ProductDetailPage">
 				<div className="ProductDetailPage__informations">
 					<ProductImageCarousel photos={product.photos} />
-					<ProductInformation reviews={reviews} product={product} />
+					<ProductInformation addProduct={handleProductAdding} reviews={reviews} product={product} />
 				</div>
 			</section>
 			<section
@@ -250,5 +258,5 @@ const mapStateToProps = createStructuredSelector({
 
 export default connect(
 	mapStateToProps,
-	{ fetchProductById, fetchReviewsByProductId, addReview }
+	{ fetchProductById, fetchReviewsByProductId, addReview, addProductToCart }
 )(ProductDetailPage)

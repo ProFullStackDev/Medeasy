@@ -239,7 +239,7 @@ export const fetchAllProducts = () => async dispatch => {
 	}
 }
 
-export const fetchProductById = productId => async dispatch => {
+export const fetchProductById = productId => async (dispatch) => {
 	try {
 		const {
 			data: { product }

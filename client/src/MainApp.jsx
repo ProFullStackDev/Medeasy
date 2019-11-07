@@ -4,6 +4,7 @@ import React, { Fragment, useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { loadHomePage } from './redux/actions/inventoryActions'
+import { generateCartId, fetchItemsFromCart } from './redux/actions/cartActions'
 import {
 	selectInventoryCategories,
 	selectInventoryProducts
@@ -30,10 +31,11 @@ import norton from './images/assurances/norton.png'
 import CheckoutPage from './pages/CheckoutPage'
 import CategoryProductsPage from './pages/CategoryProductsPage'
 
-const AdminApp = ({ categories, products, loadHomePage }) => {
+const AdminApp = ({ categories, products, loadHomePage, generateCartId, fetchItemsFromCart }) => {
 	useEffect(() => {
     loadHomePage()
-  }, [loadHomePage])
+    generateCartId().then(id => fetchItemsFromCart(id))
+  }, [loadHomePage, generateCartId, fetchItemsFromCart])
 
 	// Overlay state
 	const [overLayStatus, setOverlayStatus] = useState(false)
@@ -123,10 +125,10 @@ const overlayStyles = {
 
 const mapStateToProps = createStructuredSelector({
 	products: selectInventoryProducts,
-	categories: selectInventoryCategories
+  categories: selectInventoryCategories
 })
 
 export default connect(
 	mapStateToProps,
-	{ loadHomePage }
+	{ loadHomePage, generateCartId, fetchItemsFromCart }
 )(AdminApp)

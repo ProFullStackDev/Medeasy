@@ -8,10 +8,14 @@ import AccountPhase from '../components/CheckoutPage/AccountPhase'
 import BillingPhase from '../components/CheckoutPage/BillingPhase'
 import PaymentPhase from '../components/CheckoutPage/PaymentPhase'
 import ReviewPhase from '../components/CheckoutPage/ReviewPhase'
+// Redux
+import { connect } from 'react-redux'
+import { createStructuredSelector } from 'reselect'
+import { selectCartProducts } from '../redux/selectors/cartSelectors'
 
 import '../styles/pages/CheckoutPage.scss'
 
-const CheckoutPage = ({ changeOverlayState }) => {
+const CheckoutPage = ({ changeOverlayState, cartProducts }) => {
   // CheckoutProgress stepNumber
   const [stepNumber, setStepNumber] = useState(1)
   // 4 step phase state
@@ -60,11 +64,15 @@ const CheckoutPage = ({ changeOverlayState }) => {
       </div>
       { progressPhase !== 'review' &&
       <div className='CheckoutPage__right'>
-        <OrderSummary updateModalState={updateModalState} />
+        <OrderSummary cartProducts={cartProducts} updateModalState={updateModalState} />
       </div>
       }
     </section>
   )
 }
 
-export default CheckoutPage
+const mapStateToProps = createStructuredSelector({
+  cartProducts: selectCartProducts
+})
+
+export default connect(mapStateToProps)(CheckoutPage)

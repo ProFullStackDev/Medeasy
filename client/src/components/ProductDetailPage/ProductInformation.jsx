@@ -11,7 +11,8 @@ import Assurances from './Assurances'
 
 const ProductInformation = ({
 	reviews,
-	product: { name, stockAvailable, dosages, quantities, price }
+	product: { _id, name, stockAvailable, dosages, quantities, price },
+	addProduct
 }) => {
 	const [dosage, setDosage] = useState(parseInt(dosages[0]))
 	const [quantity, setQuantity] = useState(parseInt(quantities[0]))
@@ -21,6 +22,14 @@ const ProductInformation = ({
 
 	const handleQuantityClick = badgeValue =>
 		setQuantity(parseInt(badgeValue.replace(/ /g, '').split('Pills')[0]))
+
+	const productObj = {
+		productId: _id,
+		attributes: {
+			dosage: `${dosage}mg`,
+			quantity: `${quantity}`
+		}
+	}
 
 	return (
 		<div className="ProductInformation">
@@ -103,14 +112,19 @@ const ProductInformation = ({
 				</div>
 				<Assurances />
 			</div>
-			{ stockAvailable ? <div className="ProductInformation__buttons">
-				<button className="ProductInformation__buttons-button ProductInformation__buttons-addcart">
-					Add to Cart
-				</button>
-				<button className="ProductInformation__buttons-button ProductInformation__buttons-buy">
-					Buy Now
-				</button>
-          </div> : null }
+			{stockAvailable ? (
+				<div className="ProductInformation__buttons">
+					<button
+						onClick={() => addProduct(productObj, 'normal')}
+						className="ProductInformation__buttons-button ProductInformation__buttons-addcart"
+					>
+						Add to Cart
+					</button>
+					<button onClick={() => addProduct(productObj, 'direct')} className="ProductInformation__buttons-button ProductInformation__buttons-buy">
+						Buy Now
+					</button>
+				</div>
+			) : null}
 		</div>
 	)
 }

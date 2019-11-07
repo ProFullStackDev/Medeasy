@@ -1,16 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import {
 	selectInventoryProducts,
-	selectInventoryCategories
+	selectInventoryCategory
 } from '../redux/selectors/inventorySelectors'
+import { fetchCategoryById } from '../redux/actions/inventoryActions'
 
 import styled from 'styled-components'
 
 import ProductsCarousel from '../components/ProductsCarousel'
 import ProductList from '../components/ProductList'
+import Spinner from '../components/Spinner'
 
 // Styles
 const Title = styled.h2`
@@ -37,23 +39,25 @@ const DescriptionContainer = styled.div`
 
 const CategoryProductsPage = ({
 	products,
-	categories,
+	category,
 	match: {
 		params: { conditionId }
-	}
+	},
+	fetchCategoryById
 }) => {
-	const [currentPageNumber, setCurrentPageNumber] = useState(1)
+	useEffect(() => {
+		fetchCategoryById(conditionId)
+	}, [fetchCategoryById, conditionId])
 
-	const { name, description } = categories.find(cat => cat._id === conditionId)
-	console.log(name, description)
+	const [currentPageNumber, setCurrentPageNumber] = useState(1)
 	const categoryProducts = products.filter(
 		product => product.category._id === conditionId
 	)
 
-	return (
+	return !category ? <Spinner /> : (
 		<section className="CategoryProductsPage">
 			<Title>
-				{name} : {categoryProducts.length} Products
+				{category.name} : {categoryProducts.length} Products
 			</Title>
 			<ProductsCarousel
 				onClick={pageNumber => setCurrentPageNumber(pageNumber)}
@@ -73,7 +77,7 @@ const CategoryProductsPage = ({
 			/>
 			<Title>Description </Title>
 			<DescriptionContainer>
-				{description.split(/\n/g).map((d, index) => <p>{d}</p>)}
+				{category.description.split(/\n/g).map((d, index) => <p key={index}>{d}</p>)}
 			</DescriptionContainer>
 		</section>
 	)
@@ -81,7 +85,7 @@ const CategoryProductsPage = ({
 
 const mapStateToProps = createStructuredSelector({
 	products: selectInventoryProducts,
-	categories: selectInventoryCategories
+	category: selectInventoryCategory
 })
 
-export default connect(mapStateToProps)(CategoryProductsPage)
+export default connect(mapStateToProps, { fetchCategoryById })(CategoryProductsPage)

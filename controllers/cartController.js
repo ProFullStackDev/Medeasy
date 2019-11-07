@@ -38,7 +38,8 @@ module.exports = {
         cart.products[productIndex] = productObj
 
       await cart.save()
-      res.send({ statusCode: 201, cart })
+      cart = await cart.populate('products.product', ['dosages', 'quantities']).execPopulate()
+      res.send({ statusCode: 201, cart: cart.products })
     } catch (err) {
       console.error(err.message, err)
       res.status(500).send({ statusCode: 500, message: 'Server Error' })
@@ -50,15 +51,17 @@ module.exports = {
     const { cartId } = req.params
     try {
       if (!cartId) return res.status(400).send({ statusCode: 400, message: 'Cart id not found' })
-      const cart = await Cart.findById(cartId)
-      res.send({ statusCode: 200, cart })
+      const cart = await Cart.findById(cartId).populate('products.product', ['dosages', 'quantities'])
+      if (!cart) return res.send({ statusCode: 200, cart: [] })
+      res.send({ statusCode: 200, cart: cart.products })
     } catch (err) {
       if (err.name === 'CastError') return res.status(400).send({ statusCode: 400, message: 'Invalid cart id' })
+      res.status(500).send({ statusCode: 500, message: 'Server Error' })
     }
   },
 
   // Update product quantity by cartId and item id
-  updateProductQuantity: async (req, res) => {
+  updateProduct: async (req, res) => {
     const { cartId } = req.params
     const { itemId } = req.body
     try {
@@ -66,35 +69,71 @@ module.exports = {
       if (!errors.isEmpty()) return res.status(400).send({ statusCode: 400, message: errors.array() })
 
       if (!cartId || !itemId) return res.status(400).send({ statusCode: 400, message: 'Cart id or item id not found' })
-
-      const cart = await Cart.findById(cartId)
+      let cart = await Cart.findById(cartId)
       if (!cart) return res.status(404).send({ statusCode: 404, message: 'Cart not found' })
-
-      const productIndex = cart.products.findIndex(product => product._id.toString() === itemId)
-      if (productIndex === -1) return res.status(500).send({ statusCode: 500, message: 'Item doesnt exist' })
-      cart.products[productIndex].quantity = req.body.quantity
-      cart.products[productIndex].subTotal = req.body.quantity * parseInt(cart.products[productIndex].price)
+      const { mode, value } = req.body
+      if (mode !== 'dosage' && mode !== 'quantity') return res.status(400).send({ statusCode: 400, message: 'Bad Request' })
+      // Find the cartProduct
+      const cartItemIndex = cart.products.findIndex(prod => prod._id.toString() === itemId)
+      const cartItem = cart.products[cartItemIndex]
+      const product = await Product.findById(cartItem.product._id)
+      // Check the mode
+      if (mode === 'dosage') {
+        // Get the new price
+        const price = product.price[value][cartItem.attributes.quantity]
+        // Update in cart and update the value
+        cartItem.price = price
+        cartItem.attributes.dosage = value
+      } else {
+        const price = product.price[cartItem.attributes.dosage][value]
+        // Update in cart and update the value
+        cartItem.price = price
+        cartItem.attributes.quantity = value
+      }
+      cartItem.subTotal = String(parseInt(cartItem.quantity * cartItem.price))
+      // Save the changes
+      cart.products[cartItemIndex] = cartItem
       await cart.save()
-      res.send({ statusCode: 200, cart })
-
+      cart = await cart.populate('products.product', ['dosages', 'quantities']).execPopulate()
+      res.send({ statusCode: 200, cart: cart.products })
     } catch (err) {
+      console.log(err)
       if (err.name === 'CastError') return res.status(400).send({ statusCode: 400, message: 'Invalid cart id' })
+      res.status(500).send({ statusCode: 500, message: 'Server Error' })
     }
   },
 
   // Delete product from cart by cartId and item Id
   deleteProductFromCart: async (req, res) => {
-    const { cartId } = req.params
-    const { itemId } = req.body
+    const { cartId, itemId } = req.params
     try {
-      const errors = validationResult(req)
-      if (!errors.isEmpty()) return res.status(400).send({ statusCode: 400, message: errors.array() })
       if (!cartId || !itemId) return res.status(400).send({ statusCode: 400, message: 'Cart id or item id not found' })
-      const cart = await Cart.findById(cartId)
+      let cart = await Cart.findById(cartId)
       if (!cart) return res.status(404).send({ statusCode: 404, message: 'Cart not found' })
       cart.products = cart.products.filter(product => product._id.toString() !== itemId)
       await cart.save()
-      res.send({ statusCode: 200, cart })
+      cart = await cart.populate('products.product', ['dosages', 'quantities']).execPopulate()
+      res.send({ statusCode: 200, cart: cart.products })
+    } catch (err) {
+      console.log(err)
+      if (err.name === 'CastError') return res.status(400).send({ statusCode: 400, message: 'Invalid cart id' })
+      res.status(500).send({ statusCode: 500, message: 'Server Error' })
+    }
+  },
+
+  // Clear Cart
+  clearCart: async (req, res) => {
+    const { cartId } = req.params
+    console.log(cartId)
+    try {
+      const errors = validationResult(req)
+      if (!errors.isEmpty()) return res.status(400).send({ statusCode: 400, message: errors.array() })
+      if (!cartId) return res.status(400).send({ statusCode: 400, message: 'Cart id not found' })
+      const cart = await Cart.findById(cartId)
+      if (!cart) return res.status(404).send({ statusCode: 404, message: 'Cart not found' })
+      cart.products = []
+      await cart.save()
+      res.send({ statusCode: 200, cart: cart.products })
     } catch (err) {
       if (err.name === 'CastError') return res.status(400).send({ statusCode: 400, message: 'Invalid cart id' })
     }
