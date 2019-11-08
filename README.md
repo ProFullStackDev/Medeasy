@@ -1,5 +1,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+### The application is still in development. However the project structure can be seen in the folder structure
+
 ## Available Scripts
 
 In the project directory, you can run:
