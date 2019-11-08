@@ -20,7 +20,7 @@ const LandingPage = ({ conditions, products }) => (
 			<Condtions conditions={conditions} />
 			{/* <FeaturedProductsSection /> */}
 			<PaymentBrands />
-			<BestSellerSection products={products} />
+			<BestSellerSection products={products.sort((a, b) => a.timesSold > b.timesSold ? -1 : 1).slice(0, 5)} />
 		</section>
 	)
 

@@ -57,7 +57,7 @@ module.exports = {
 			])
 
 			if (profile) {
-				profile.addresses.push(profileObj)
+				profile.addresses.push(req.body)
 				await profile.save()
 				return res.send({ statusCode: 200, profile })
 			}
@@ -84,7 +84,7 @@ module.exports = {
 			profile = await profile.populate('user', ['name', 'email']).execPopulate()
 			res.status(201).send({ statusCode: 201, profile })
 		} catch (err) {
-			console.log(err.message)
+			console.log(err)
 			res.status(500).send({ statusCode: 500, message: 'Server Error' })
 		}
 	},

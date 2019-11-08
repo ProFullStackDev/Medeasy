@@ -5,6 +5,28 @@ const ordersSchema = new Schema({
   user: { type: Schema.Types.ObjectId, required: true, refPath: 'mode' },
   mode: { type: String, required: true, enum: ['user', 'guest'] },
   cart: { type: Schema.Types.ObjectId, required: true, ref: 'cart' },
+  shippingAddress: {
+    name: String,
+    addressLine1: String,
+    addressLine2: String,
+    city: String,
+    state: String,
+    postalCode: Number,
+    country: { type: String, default: 'United States of America'},
+    phNumber: Number,
+    faxNumber: Number
+  },
+  billingAddress: {
+    name: String,
+    addressLine1: String,
+    addressLine2: String,
+    city: String,
+    state: String,
+    postalCode: Number,
+    country: { type: String, default: 'United States of America'},
+    phNumber: Number,
+    faxNumber: Number
+  },
   razorpay_order_id: String,
   coinbase_order_code: String,
   razorpay_signature: String,

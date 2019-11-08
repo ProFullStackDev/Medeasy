@@ -11,6 +11,7 @@ const productSchema = new Schema(
 		admin: { type: Schema.Types.ObjectId, ref: 'user' },
 		stockAvailable: { type: Boolean, default: true },
 		timesSold: { type: Number, default: 0 },
+		featured: { type: Boolean, default: false },
 		dosages: { type: [String], required: true },
 		quantities: { type: [String], required: true },
 		photos: { type: [String], required: true }

@@ -2,7 +2,7 @@ import React from 'react'
 import '../styles/components/CustomRadioButton.scss'
 
 const CustomRadioButton = ({ mode, onClick, noName, selected, text }) => {
-  const handleClick = event => onClick(mode)
+  const handleClick = () => onClick(mode)
   return (
     <div data-mode={mode} className='CustomRadioButton' onClick={handleClick}>
       <div onClick={handleClick}  className='CustomRadioButton__circle'>

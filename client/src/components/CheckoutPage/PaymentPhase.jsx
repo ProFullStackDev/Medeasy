@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, useState } from 'react'
 // Components
 import PaymentType from './PaymentType'
 import CustomFormElement from '../CustomFormElement'
@@ -7,6 +7,10 @@ import CustomButton from '../CustomButton'
 import paypalImg from '../../images/paypal.svg'
 import cardImg from '../../images/credit-card.svg'
 import bitcoinImg from '../../images/bitcoin.svg'
+// Redux
+import { connect } from 'react-redux'
+import { createStructuredSelector } from 'reselect'
+import { selectPaymentOrderId } from '../../redux/selectors/paymentSelectors'
 
 import '../../styles/components/PaymentPhase.scss'
 
@@ -61,4 +65,8 @@ class PaymentPhase extends Component {
   }
 }
 
-export default PaymentPhase
+const mapStateToProps = createStructuredSelector({
+  orderId: selectPaymentOrderId
+})
+
+export default connect(mapStateToProps)(PaymentPhase)

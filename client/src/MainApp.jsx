@@ -94,8 +94,7 @@ const AdminApp = ({ categories, products, loadHomePage, generateCartId, fetchIte
 							)}
 						/>
 						<Route
-							exact
-							path="/checkout/account"
+							path="/checkout"
 							render={routeParams => (
 								<CheckoutPage
 									{...routeParams}

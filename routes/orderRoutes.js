@@ -24,8 +24,8 @@ router.get('/', [authenticate, isAdmin], fetchOrders)
 router.get('/user', authenticate, fetchOrdersByUserId)
 
 // @route - POST /api/orders
-// @desc - Delete product from cart by CartId and Item Id
-// @method - Public or Private (Not necessarily needed to be private)
+// @desc - Create an order
+// @method - Public
 router.post(
 	'/',
 	[
@@ -39,7 +39,37 @@ router.post(
 			.not()
 			.isEmpty(),
 		check('cartId', 'Invalid Cart Id').isMongoId(),
-		check('userId', 'Invalid User Id').isMongoId()
+		check('userId', 'Invalid User Id').isMongoId(),
+		check('shippingAddress.address1', 'Address is required').not().isEmpty(),
+		check('shippingAddress.state', 'State is required').not().isEmpty(),
+		check('shippingAddress.city', 'City is required').not().isEmpty(),
+		check('shippingAddress.phNumber', 'Phone number is required').not().isEmpty(),
+		check('billingAddress.address1', 'Address is required').not().isEmpty(),
+		check('billingAddress.state', 'State is required').not().isEmpty(),
+		check('billingAddress.city', 'City is required').not().isEmpty(),
+		check('billingAddress.phNumber', 'Phone number is required').not().isEmpty(),
+		check(
+			'billingAddress.postalCode',
+			'postal must be 5 digits long'
+		).isLength({ min: 5, max: 5 }),
+		check(
+			'billingAddress.phNumber',
+			'phone number must be of numbers'
+		).isNumeric(),
+		check('billingAddress.phNumber', 'Invalid Phone number').matches(
+			/^(1\s?)?((\([0-9]{3}\))|[0-9]{3})[\s\-]?[\0-9]{3}[\s\-]?[0-9]{4}$/g
+		),
+		check(
+			'shippingAddress.postalCode',
+			'postal must be 5 digits long'
+		).isLength({ min: 5, max: 5 }),
+		check(
+			'shippingAddress.phNumber',
+			'phone number must be of numbers'
+		).isNumeric(),
+		check('shippingAddress.phNumber', 'Invalid Phone number').matches(
+			/^(1\s?)?((\([0-9]{3}\))|[0-9]{3})[\s\-]?[\0-9]{3}[\s\-]?[0-9]{4}$/g
+		)
 	],
 	createOrder
 )

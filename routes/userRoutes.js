@@ -47,36 +47,6 @@ router.post(
 			.isEmpty(),
 		check('email', 'Email is required')
 			.not()
-			.isEmpty(),
-		check('baddressLine1', 'Billing Address is required')
-			.not()
-			.isEmpty(),
-		check('bcity', 'Billing Address city is required')
-			.not()
-			.isEmpty(),
-		check('bstate', 'Billing Address state is required')
-			.not()
-			.isEmpty(),
-		check('bpostalCode', 'Billing Address postal code is required')
-			.not()
-			.isEmpty(),
-		check('bphNumber', 'Billing Address phone number is required')
-			.not()
-			.isEmpty(),
-		check('saddressLine1', 'Shipping Address is required')
-			.not()
-			.isEmpty(),
-		check('scity', 'Shipping Address city is required')
-			.not()
-			.isEmpty(),
-		check('sstate', 'Shipping Address state is required')
-			.not()
-			.isEmpty(),
-		check('spostalCode', 'Shipping Address postal code is required')
-			.not()
-			.isEmpty(),
-		check('sphNumber', 'Shipping Address phone number is required')
-			.not()
 			.isEmpty()
 	],
 	addGuestUser
@@ -127,7 +97,10 @@ router.patch(
 		check('newPassword', 'New Password is required')
 			.not()
 			.isEmpty(),
-		check('newPassword', 'New Password should contain minimum 8 characters').isLength({
+		check(
+			'newPassword',
+			'New Password should contain minimum 8 characters'
+		).isLength({
 			min: 8
 		})
 	],

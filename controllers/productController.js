@@ -41,7 +41,7 @@ module.exports = {
   fetchAllProducts: async (req, res) => {
     const searchQuery = req.query.search || ''
     try {
-      const products = await Product.find({ name: {$regex: '^' + searchQuery , $options: 'i'}}, 'name photos').populate('category', ['name']).sort('-createdAt')
+      const products = await Product.find({ name: {$regex: '^' + searchQuery , $options: 'i'}}).populate('category', ['name']).sort('-createdAt')
       res.send({ statusCode: 200, count: products.length, products })
     } catch (err) {
       console.log(err.message)

@@ -14,8 +14,8 @@ import AdminCarousel from '../../components/AdminPage/AdminCarousel'
 const AdminProducts = ({ products, fetchAllProducts, onClick }) => {
 	// If there are no products on state, means fetch them
 	useEffect(() => {
-		if (!products) fetchAllProducts()
-	}, [products, fetchAllProducts])
+		fetchAllProducts()
+	}, [fetchAllProducts])
 
 	const [pageNumber, setPageNumber] = useState(1)
 	const handleClick = page => setPageNumber(page)

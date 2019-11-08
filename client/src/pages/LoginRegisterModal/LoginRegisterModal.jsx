@@ -1,5 +1,9 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+// Redux
+import { connect } from 'react-redux'
+import { selectAuthUser } from '../../redux/selectors/authSelectors'
+import { createStructuredSelector } from 'reselect'
 // Components
 import LoginModalForm from './LoginModalForm'
 import RegisterModalForm from './RegisterModalForm'
@@ -12,10 +16,10 @@ import medeasyAuth from '../../images/medeasy-auth.svg'
 import formGraphic from '../../images/form-graphic.svg'
 import { ReactComponent as CloseBtnGrey } from '../../images/closeBtnGrey.svg'
 
-const LoginRegisterModal = ({ history, match }) => {
+const LoginRegisterModal = ({ history, match, user }) => {
 	const determineMode = match.path === '/login' ? 'login' : 'register'
-	// This depends on what the user clicks in navbar
 	const [mode, setMode] = useState(determineMode)
+	if (user) history.goBack()
 	return (
 		<Modal>
 			<div className="LoginRegisterModal">
@@ -38,9 +42,9 @@ const LoginRegisterModal = ({ history, match }) => {
 					/>
 				</div>
 				<div className="LoginRegisterModal__right">
-          <AlertMessage />
-					<Link title='close' to="/">
-						<CloseBtnGrey title='close' alt="close-btn-grey" />
+					<AlertMessage />
+					<Link title="close" to="/">
+						<CloseBtnGrey title="close" alt="close-btn-grey" />
 					</Link>
 					{/* Show the forms based on the mode */}
 					{mode === 'login' ? (
@@ -79,4 +83,8 @@ const LoginRegisterModal = ({ history, match }) => {
 	)
 }
 
-export default LoginRegisterModal
+const mapStateToProps = createStructuredSelector({
+	user: selectAuthUser
+})
+
+export default connect(mapStateToProps)(LoginRegisterModal)

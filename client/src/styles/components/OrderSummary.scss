@@ -1,10 +1,15 @@
 @import '../colors';
 .OrderSummary {
   min-width: 50rem;
+  height: 100%;
   padding: 1rem 3rem;
   border-left: 1px solid rgba($medeasy-border-light-grey-color, .2);
   &__allproducts, &__coupon {
     border-bottom: 1px solid #EFE8E8;
+  }
+  &__allproducts {
+    position: relative;
+    min-height: 15rem;
   }
   &__coupon {
     padding: 2.7rem 0;

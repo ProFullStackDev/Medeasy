@@ -3,7 +3,6 @@ import fullfiled from '../../images/assurances/fullfiled.png'
 import '../../styles/components/PricesBreakDown.scss'
 
 const PricesBreakDown = ({ prices: { subTotal, tax, shippingPrice, discount }}) => {
-  console.log(subTotal)
   return (
     <div className='PricesBreakDown'>
       <div className='PricesBreakDown-subtotal PricesBreakDown--general'>

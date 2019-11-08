@@ -21,7 +21,6 @@ const {
 export const fetchInventory = () => async dispatch => {
 	setTimeout(() => {
 		dispatch(fetchAllOrders())
-		dispatch(fetchAllCoupons())
 		dispatch(fetchAllProducts())
 	}, 1)
 }
@@ -33,7 +32,8 @@ export const loadHomePage = () => async dispatch => {
 
 // CATEGORIES RELATED ACTIONS
 
-export const fetchAllCategories = () => async dispatch => {
+export const fetchAllCategories = () => async (dispatch, getState) => {
+	if (getState().inventory.categories) return
 	try {
 		const {
 			data: { categories }
@@ -110,7 +110,8 @@ export const deleteCategory = categoryId => async dispatch => {
 
 // ORDERS RELATED ACTIONS
 
-export const fetchAllOrders = () => async dispatch => {
+export const fetchAllOrders = () => async (dispatch, getState) => {
+	if (getState().inventory.orders) return
 	try {
 		const {
 			data: { orders }
@@ -223,7 +224,8 @@ export const deleteCoupon = couponId => async dispatch => {
 
 // PRODUCTS RELATED ACTIONS
 
-export const fetchAllProducts = () => async dispatch => {
+export const fetchAllProducts = () => async (dispatch, getState) => {
+	if (getState().inventory.products) return
 	try {
 		const {
 			data: { products }

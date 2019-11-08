@@ -5,6 +5,8 @@ import history from '../createHistory'
 
 const {
 	SET_USER,
+	SET_GUEST,
+	SET_CHECKOUT_ROLE,
 	SET_ACCESS_TOKEN,
 	CLEAR_INVENTORY,
 	CLEAR_USER,
@@ -14,9 +16,13 @@ const {
 	SET_PROFILE_LOADING
 } = actionTypes
 
+export const setCheckoutRole = role => dispatch =>
+	dispatch({ type: SET_CHECKOUT_ROLE, payload: role })
+
 export const signIn = (
 	{ email, password, rememberMe },
-	isAdmin = false
+	isAdmin = false,
+	mode = 'normal'
 ) => async dispatch => {
 	try {
 		// Sign in
@@ -28,17 +34,21 @@ export const signIn = (
 		})
 		// Store the user
 		dispatch({ type: SET_USER, payload: user })
+		sessionStorage.removeItem('guest')
+		dispatch({ type: SET_GUEST, payload: null })
 		dispatch({ type: SET_ACCESS_TOKEN, payload: accessToken })
+		dispatch(setCheckoutRole('user'))
 		// If user selects remember me means, store in localStorage, else in sessionStorage
 		if (rememberMe)
 			localStorage.setItem('auth', JSON.stringify({ user, accessToken }))
 		else sessionStorage.setItem('auth', JSON.stringify({ user, accessToken }))
 		// Push to Dashboard
-		setTimeout(
-			() => (isAdmin ? history.push('/admin/dashboard') : history.goBack()),
-			100
-		)
+		if (mode === 'normal' && isAdmin)
+			setTimeout(() => history.push('/admin/dashboard'), 100)
+		else if (mode === 'normal' && !isAdmin) history.goBack()
+		else history.push('/checkout/address')
 	} catch (err) {
+		console.log(err)
 		const errorMessage = err.response.data.message
 		if (Array.isArray(errorMessage))
 			errorMessage.forEach(message =>
@@ -48,7 +58,10 @@ export const signIn = (
 	}
 }
 
-export const signUp = ({ name, email, password }) => async dispatch => {
+export const signUp = (
+	{ name, email, password },
+	mode = 'normal'
+) => async dispatch => {
 	try {
 		const {
 			data: { user, accessToken }
@@ -57,7 +70,12 @@ export const signUp = ({ name, email, password }) => async dispatch => {
 		dispatch({ type: SET_USER, payload: user })
 		dispatch({ type: SET_ACCESS_TOKEN, payload: accessToken })
 		// Push to Home
-		history.push('/')
+		if (mode === 'normal') history.push('/')
+		else {
+			dispatch(setCheckoutRole('user'))
+			history.push('/checkout/address')
+		}
+		return
 	} catch (err) {
 		const errorMessage = err.response.data.message
 		if (Array.isArray(errorMessage))
@@ -148,6 +166,7 @@ export const logout = (
 		dispatch({ type: CLEAR_PROFILE })
 		localStorage.removeItem('auth')
 		sessionStorage.removeItem('auth')
+		sessionStorage.removeItem('checkoutRole')
 		history.push(isAdmin ? '/admin' : '/')
 		dispatch(alertUser(message, 'danger'))
 	} catch (err) {

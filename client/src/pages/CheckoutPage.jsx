@@ -1,4 +1,5 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
+import { Route } from 'react-router-dom'
 // Components
 import UpdateModal from '../components/UpdateModal'
 import CheckoutProgress from '../components/CheckoutPage/CheckoutProgress'
@@ -11,68 +12,78 @@ import ReviewPhase from '../components/CheckoutPage/ReviewPhase'
 // Redux
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { selectCartProducts } from '../redux/selectors/cartSelectors'
+import {
+	selectCartProducts,
+	selectCartStepProgress
+} from '../redux/selectors/cartSelectors'
 
 import '../styles/pages/CheckoutPage.scss'
 
-const CheckoutPage = ({ changeOverlayState, cartProducts }) => {
-  // CheckoutProgress stepNumber
-  const [stepNumber, setStepNumber] = useState(1)
-  // 4 step phase state
-  const [progressPhase, setProgressPhase] = useState('account')
-  // edit btn toggle state
-  const [isQuantityClicked, setIsQuantityClicked] = useState(false)
+const CheckoutPage = ({
+	changeOverlayState,
+	stepProgress,
+	cartProducts,
+	match: { url }
+}) => {
+	// Update Modal Values
+	const [updateValues, setUpdateValues] = useState([])
+	// Current Modal Value
+	const [currentVal, setCurrentVal] = useState('')
+	// Item Id
+	const [itemId, setItemId] = useState('')
+	// edit btn toggle state
+	const [isModalClicked, setIsModalClicked] = useState(false)
+	// Type of modal
+	const [modalType, setModalType] = useState('')
 
-  // Toggling the UpdateModal Component
-  const updateModalState = () => {
-    setIsQuantityClicked(true)
-    changeOverlayState(true)
-  }
+	// Toggling the UpdateModal Component
+	const updateModalState = (boolVal, values, itemId, currentVal, type) => {
+		setIsModalClicked(boolVal)
+		changeOverlayState(boolVal)
+		setUpdateValues(values)
+		setCurrentVal(currentVal)
+		setItemId(itemId)
+		setModalType(type)
+	}
 
-  // Toggling the overlay
-  const disableOverlay = () => {
-    setIsQuantityClicked(false)
-    changeOverlayState(false)
-  }
+	// Toggling the overlay
+	const disableOverlay = () => {
+		setIsModalClicked(false)
+		changeOverlayState(false)
+	}
 
-  // The Switch handler for the 4 step process
-  // Currently it only handles the proceeding and not any data saving or anything .. 
-  // SO Remember !!
-  const proceedToNextStep = step => {
-    switch (step) {
-      case 1: setStepNumber(2); setProgressPhase('address'); break;
-      case 2: setStepNumber(3); setProgressPhase('payment'); break;
-      case 3: setStepNumber(4); setProgressPhase('review'); break;
-      default: break;
-    }
-  }
-
-  return (
-    <section className='CheckoutPage'>
-      { isQuantityClicked && <UpdateModal disableOverlay={disableOverlay}  title='Update Dosage' values={['5mg', '10mg']}/> }
-      <div className='CheckoutPage__left'>
-        <CheckoutProgress stepNumber={stepNumber} />
-        { /* Four stages are present here. The state changes based on the clicks */ }
-        { /* Show this component only if there is no user in state */ }
-        { progressPhase === 'account' && <AccountPhase step={1} onClick={proceedToNextStep} /> }
-        { /* If the user has filled their address in profile page means, Show them in these forms (redux) */ }
-        { progressPhase === 'address' && <BillingPhase step={2} onClick={proceedToNextStep} /> }
-        { /* Either we must use the custom UI component or the Braintree card component */ }
-        { progressPhase === 'payment' && <PaymentPhase step={3} onClick={proceedToNextStep} /> }
-        { /* This is still uncertain because a conflict rises in the data flow */ }
-        { progressPhase === 'review' && <ReviewPhase step={4} onClick={proceedToNextStep} /> }
-      </div>
-      { progressPhase !== 'review' &&
-      <div className='CheckoutPage__right'>
-        <OrderSummary cartProducts={cartProducts} updateModalState={updateModalState} />
-      </div>
-      }
-    </section>
-  )
+	return (
+		<section className="CheckoutPage">
+			{isModalClicked && (
+				<UpdateModal
+					prevVal={currentVal}
+					disableOverlay={disableOverlay}
+					title={`Update ${modalType === 'quantity' ? 'Quantity' : 'Dosage'}`}
+					values={updateValues}
+					itemId={itemId}
+					type={modalType}
+				/>
+			)}
+			<div className="CheckoutPage__left">
+				<CheckoutProgress stepNumber={stepProgress} />
+				<Route exact path={`${url}/account`} component={AccountPhase} />
+				<Route exact path={`${url}/address`} component={BillingPhase} />
+				<Route exact path={`${url}/review`} render={routeProps => <ReviewPhase {...routeProps} cartProducts={cartProducts} updateModalState={updateModalState} />} />
+				<Route exact path={`${url}/payment`} component={PaymentPhase} />
+			</div>
+			{ stepProgress < 3 ? <div className="CheckoutPage__right">
+				<OrderSummary
+					cartProducts={cartProducts}
+					updateModalState={updateModalState}
+				/>
+			</div> : null }
+		</section>
+	)
 }
 
 const mapStateToProps = createStructuredSelector({
-  cartProducts: selectCartProducts
+	cartProducts: selectCartProducts,
+	stepProgress: selectCartStepProgress
 })
 
 export default connect(mapStateToProps)(CheckoutPage)

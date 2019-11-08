@@ -19,6 +19,7 @@ export const fetchUserAddresses = () => async dispatch => {
 			data: { addresses }
 		} = await Axios.get('/api/profile/address')
 		dispatch({ type: SET_USER_ADDRESSES, payload: addresses })
+		return addresses
 	} catch (err) {
 		console.log(err)
 		const errorMessage = err.response.data.message
@@ -33,7 +34,6 @@ export const fetchUserAddresses = () => async dispatch => {
 }
 
 export const addUserAddress = address => async dispatch => {
-	console.log(address)
 	try {
 		dispatch({ type: SET_PROFILE_LOADING, payload: true })
 		await Axios.post('/api/profile/address', address)

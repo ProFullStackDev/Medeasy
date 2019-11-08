@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 
 import medeasyLogo from '../../images/medeasy-logo.png'
@@ -16,6 +16,7 @@ import { selectAuthUser } from '../../redux/selectors/authSelectors'
 import { selectCartProducts } from '../../redux/selectors/cartSelectors'
 
 const NavBarUpper = ({ logout, user, cartProducts }) => {
+	useState(user)
 	const logoutUser = () => logout()
 
 	return (
