@@ -56,9 +56,6 @@ router.post(
 			'billingAddress.phNumber',
 			'phone number must be of numbers'
 		).isNumeric(),
-		check('billingAddress.phNumber', 'Invalid Phone number').matches(
-			/^(1\s?)?((\([0-9]{3}\))|[0-9]{3})[\s\-]?[\0-9]{3}[\s\-]?[0-9]{4}$/g
-		),
 		check(
 			'shippingAddress.postalCode',
 			'postal must be 5 digits long'
@@ -66,10 +63,7 @@ router.post(
 		check(
 			'shippingAddress.phNumber',
 			'phone number must be of numbers'
-		).isNumeric(),
-		check('shippingAddress.phNumber', 'Invalid Phone number').matches(
-			/^(1\s?)?((\([0-9]{3}\))|[0-9]{3})[\s\-]?[\0-9]{3}[\s\-]?[0-9]{4}$/g
-		)
+		).isNumeric()
 	],
 	createOrder
 )

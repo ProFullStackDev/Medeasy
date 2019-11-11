@@ -9,7 +9,7 @@ export const selectPaymentOrderId = createSelector(
 
 export const selectPaymentRazorpayOrderId = createSelector(
 	[selectPayment],
-	payment => payment.razorpayOrderId
+	payment => payment.razorPayOrderId
 )
 
 export const selectPaymentPaypalOrderId = createSelector(

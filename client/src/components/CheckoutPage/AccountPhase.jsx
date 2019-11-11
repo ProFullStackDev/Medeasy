@@ -11,13 +11,14 @@ import AlertMessage from '../AlertMessage'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { selectAuthUser } from '../../redux/selectors/authSelectors'
+import { selectPaymentOrderId } from '../../redux/selectors/paymentSelectors'
 import { signIn, signUp, setCheckoutRole } from '../../redux/actions/authActions'
 import { alertUser } from '../../redux/actions/alertActions'
 import { setStepProgress } from '../../redux/actions/cartActions'
 
 import '../../styles/components/AccountPhase.scss'
 
-const AccountPhase = ({ signIn, signUp, alertUser, setCheckoutRole, setStepProgress, user, history }) => {
+const AccountPhase = ({ signIn, signUp, alertUser, setCheckoutRole, setStepProgress, user, history, orderId }) => {
 	useEffect(() => {
 		setStepProgress(1)
 	}, [setStepProgress])
@@ -30,11 +31,12 @@ const AccountPhase = ({ signIn, signUp, alertUser, setCheckoutRole, setStepProgr
 		mName: '',
 		cPassword: ''
 	})
+
 	const [mode, setMode] = useState('user')
 	const [authMode, setAuthMode] = useState('login')
 
+	if (orderId) return <Redirect to='/checkout/payment/card' />
 	if (user) return <Redirect to='/checkout/address' />
-
 	const { email, password, cPassword, fName, mName, lName } = formState
 
 
@@ -44,7 +46,7 @@ const AccountPhase = ({ signIn, signUp, alertUser, setCheckoutRole, setStepProgr
 	const signInUser = event => {
 		event.preventDefault()
 		const userObj = { email, password, rememberMe: false }
-		signIn(userObj, false, 'passon').then(() => setStepProgress(2))
+		signIn(userObj, false, 'passon')
 	}
 
 	const registerUser = event => {
@@ -228,7 +230,8 @@ const AccountPhase = ({ signIn, signUp, alertUser, setCheckoutRole, setStepProgr
 }
 
 const mapStateToProps = createStructuredSelector({
-	user: selectAuthUser
+	user: selectAuthUser,
+	orderId: selectPaymentOrderId
 })
 
 export default connect(mapStateToProps, { setStepProgress, signIn, signUp, alertUser, setCheckoutRole })(AccountPhase)

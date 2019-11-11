@@ -38,7 +38,8 @@ module.exports = {
 				mode,
 				totalAmount,
 				shippingAddress,
-				billingAddress
+				billingAddress,
+				expiryDate: new Date().setHours(new Date().getHours() + 48)
 			}
 			order = await Order.create(orderObj)
 			res.status(201).send({ statusCode: 201, orderId: order._id })
@@ -161,6 +162,8 @@ module.exports = {
 
 	fetchOrders: async (req, res) => {
 		try {
+			console.log(await Order.find({ status: 'Pending', expiryDate: { $lte: new Date().getTime() }}))
+			await Order.deleteMany({ status: 'Pending', expiryDate: { $lte: new Date().getTime() }})
 			const orders = await Order.find({}).populate('user', ['name', 'email'])
 			res.send({ statusCode: 200, orders })
 		} catch (err) {
@@ -171,7 +174,7 @@ module.exports = {
 	fetchOrdersByUserId: async (req, res) => {
 		const user = req.user
 		try {
-			const orders = await Order.find({ user: user._id })
+			const orders = await Order.find({ user: user._id, status: 'Success' })
 			res.send({ statusCode: 200, orders })
 		} catch (err) {
 			console.log(err)

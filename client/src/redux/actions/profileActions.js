@@ -15,11 +15,14 @@ const {
 export const fetchUserAddresses = () => async dispatch => {
 	try {
 		dispatch({ type: SET_PROFILE_LOADING, payload: true })
-		const {
-			data: { addresses }
-		} = await Axios.get('/api/profile/address')
-		dispatch({ type: SET_USER_ADDRESSES, payload: addresses })
-		return addresses
+		setTimeout(async () => {
+			const {
+				data: { addresses }
+			} = await Axios.get('/api/profile/address')
+			dispatch({ type: SET_USER_ADDRESSES, payload: addresses })
+			dispatch({ type: SET_PROFILE_LOADING, payload: false })
+			return addresses
+		}, 10)
 	} catch (err) {
 		console.log(err)
 		const errorMessage = err.response.data.message
@@ -28,8 +31,6 @@ export const fetchUserAddresses = () => async dispatch => {
 				dispatch(alertUser(message.msg, 'danger'))
 			)
 		else dispatch(alertUser(errorMessage, 'danger'))
-	} finally {
-		dispatch({ type: SET_PROFILE_LOADING, payload: false })
 	}
 }
 

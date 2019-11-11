@@ -51,7 +51,8 @@ const ordersSchema = new Schema({
     subTotal: String
   }],
   totalAmount: Number,
-  trackingId: { type: String, default: 'nil' }
+  trackingId: { type: String, default: 'nil' },
+  expiryDate: Date
 }, { timestamps: true })
 
 ordersSchema.methods = {

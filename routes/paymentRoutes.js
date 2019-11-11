@@ -51,7 +51,9 @@ router.post(
     check('medEasyOrderId', 'Database Order id is required')
       .not()
       .isEmpty(),
-    check('medEasyOrderId', 'Database Order Id is invalid').isMongoId()
+    check('medEasyOrderId', 'Database Order Id is invalid').isMongoId(),
+    check('amount', 'Amount is required').not().isEmpty(),
+    check('amount', 'Amount should be a number').isNumeric()
   ],
   createRazorpayCharge
 )

@@ -44,6 +44,7 @@ const ReviewPhase = ({
 		setStepProgress(3)
 	}, [setStepProgress])
 
+
 	if (!checkoutRole || (!user && checkoutRole === 'user'))
 		return <Redirect to="/checkout/account" />
 	if (!billingAddress || !shippingAddress)

@@ -34,7 +34,10 @@ export default (state = initialState, action) => {
 			return { ...state, billingAddress: payload }
 		case CLEAR_CART:
 			localStorage.removeItem('cart')
-			return { ...state, products: [] }
+			localStorage.removeItem('cartId')
+			sessionStorage.removeItem('billingAddress')
+			sessionStorage.removeItem('shippingAddress')
+			return { ...state, products: [], cartId: null, billingAddress: null, shippingAddress: null }
 		case SET_STEP_PROGRESS:
 			return { ...state, stepProgress: payload }
 		default:

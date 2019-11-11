@@ -1,20 +1,30 @@
-import React, { Fragment } from 'react'
+import React from 'react'
+import { FlexContainer } from './FlexContainer'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import anxietyImage from '../../images/anxiety.jpg'
+import adhdImage from '../../images/adhd.jpg'
+import edImage from '../../images/ed.jpg'
+import insomniaImage from '../../images/insomnia.jpg'
+import muscleImage from '../../images/muscle.jpg'
+import painImage from '../../images/pain.jpg'
+import smokingImage from '../../images/smoking.jpg'
+import weightImage from '../../images/weight.jpg'
 
 const ConditionsContainer = styled.div`
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
 	column-gap: 2rem;
 	row-gap: 2rem;
-	grid-auto-rows: minmax(15rem, max-content);
+	grid-auto-rows: minmax(20rem, max-content);
 `
 
 const ConditionItem = styled.div`
-	background: white;
-	color: #7ac7b8;
+	position: relative;
+	background: linear-gradient(to bottom right, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.45) 100%), url(${({ image }) => image}) no-repeat;
+	color: white;
 	height: 100%;
-	transition: all 0.3s ease-in;
+	transition: background 0.3s ease-in;
 	box-shadow: 0 0 1.5rem rgba(0, 0, 0, 0.1);
 	border-radius: 4px;
 	display: flex;
@@ -24,37 +34,41 @@ const ConditionItem = styled.div`
 	font-size: 1.8rem;
 	justify-content: center;
 	&:hover {
-		background: #7ac7b8;
-		color: white;
+		transition: background-color 0.3s ease-in;
+		background: linear-gradient(to bottom right, rgba(122, 199, 184, 0.5) 0%, rgba(122, 199, 184, 0.4) 100%), url(${({ image }) => image}) no-repeat;
 		box-shadow: 0;
 		cursor: pointer;
 	}
 `
 
-const titleStyle = {
-	textAlign: 'center',
-	color: 'white',
-	background: '#7ac7b8',
-	fontWeight: 'normal',
-	padding: '.5rem',
-	borderRadius: '2rem',
-	width: '20%',
-	margin: '2.5rem auto',
-	cursor: 'default'
-}
+const images = [
+	adhdImage,
+	edImage,
+	weightImage,
+	anxietyImage,
+	insomniaImage,
+	muscleImage,
+	painImage,
+	smokingImage
+]
 
 const Conditions = ({ conditions }) => {
 	return (
-		<Fragment>
-			<h3 style={titleStyle}>Conditions</h3>
+		<FlexContainer titleName="Conditions">
 			<ConditionsContainer>
-				{conditions.map(condition => (
-					<Link key={condition._id} to={`/condition/${condition._id}`} id={condition._id}>
-						<ConditionItem>{condition.name}</ConditionItem>
+				{conditions.map((condition, index) => (
+					<Link
+						key={condition._id}
+						to={`/condition/${condition._id}`}
+						id={condition._id}
+					>
+						<ConditionItem image={images[index]}>
+							{condition.name}
+						</ConditionItem>
 					</Link>
 				))}
 			</ConditionsContainer>
-		</Fragment>
+		</FlexContainer>
 	)
 }
 

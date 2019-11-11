@@ -10,10 +10,12 @@ module.exports = async (...productIds) => {
 							product.timesSold += 1
 							return product.save()
 						})
-						.then(product => resolve(product))
+						.then(product => {
+							return resolve(product)
+						})
 						.catch(err => {
 							console.log(err)
-							reject(err)
+							return reject(err)
 						})
 				})
 		)

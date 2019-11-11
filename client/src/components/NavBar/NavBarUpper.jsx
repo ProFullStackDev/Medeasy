@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import medeasyLogo from '../../images/medeasy-logo.png'
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPhoneAlt } from '@fortawesome/free-solid-svg-icons'
+import { ReactComponent as SearchIcon } from '../../images/search.svg'
 import { ReactComponent as CartIcon } from '../../images/cart.svg'
-import { ReactComponent as ContactIcon } from '../../images/contactus.svg'
 import { ReactComponent as UserIcon } from '../../images/user.svg'
 import { ReactComponent as DownArrowBlackIcon } from '../../images/downArrowBlack.svg'
 import { ReactComponent as BagIcon } from '../../images/bag.svg'
@@ -31,20 +34,12 @@ const NavBarUpper = ({ logout, user, cartProducts }) => {
 						/>
 					</Link>
 				</div>
-				<nav className="NavBar__upper-links">
-					<NavLink exact to="/" activeClassName="active">
-						Home
-					</NavLink>
-					<NavLink exact to="/about" activeClassName="active">
-						About Us
-					</NavLink>
-					<NavLink exact to="/customer" activeClassName="active">
-						Customer Service
-					</NavLink>
-					<NavLink exact to="/privacy" activeClassName="active">
-						Privacy Policy
-					</NavLink>
-				</nav>
+				<div className="NavBar__upper--search">
+					<form className="NavBar__upper--search-text">
+						<input type="text" placeholder="Search for products" />
+						<SearchIcon alt="Search fr" />
+					</form>
+				</div>
 				<div className="NavBar__upper-other">
 					<span className="NavBar__upper-other-auth">
 						{!user ? (
@@ -96,14 +91,14 @@ const NavBarUpper = ({ logout, user, cartProducts }) => {
 								className="NavBar__upper-other-cart--image"
 							/>
 							{cartProducts.length ? (
-								<span className="NavBar__upper-other-cart--count">{ cartProducts.length }</span>
-							) : null }
+								<span className="NavBar__upper-other-cart--count">
+									{cartProducts.length}
+								</span>
+							) : null}
 						</div>
 					</Link>
-					<Link to="/contact" className="NavBar__upper-other-contact">
-						<ContactIcon alt="contact" style={{ marginRight: '.5rem' }} />
-						Contact us
-					</Link>
+					<FontAwesomeIcon style={{ margin: '0 1rem' }} icon={faPhoneAlt} />
+					<a href="tel:+15555777572" style={{ fontWeight: 'bold', fontSize: '1.7rem' }}>+1-555-5777-572</a>
 				</div>
 			</div>
 		</div>

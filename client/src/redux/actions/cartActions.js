@@ -13,12 +13,12 @@ const {
 } = actionTypes
 
 export const cacheAddress = (billingAddress, shippingAddress) => dispatch => {
-	billingAddress.name = `${billingAddress.fName} ${billingAddress.mName.length > 0 ? billingAddress.mName : ''}${
-		billingAddress.mName ? ' ' : ''
-	}${billingAddress.lName}`
-	shippingAddress.name = `${shippingAddress.fName} ${shippingAddress.mName.length > 0 ? shippingAddress.mName : ''}${
-		shippingAddress.mName ? ' ' : ''
-	}${shippingAddress.lName}`
+	billingAddress.name = `${billingAddress.fName} ${
+		billingAddress.mName.length > 0 ? billingAddress.mName : ''
+	}${billingAddress.mName ? ' ' : ''}${billingAddress.lName}`
+	shippingAddress.name = `${shippingAddress.fName} ${
+		shippingAddress.mName.length > 0 ? shippingAddress.mName : ''
+	}${shippingAddress.mName ? ' ' : ''}${shippingAddress.lName}`
 	delete billingAddress.fName
 	delete billingAddress.mName
 	delete billingAddress.lName
@@ -33,7 +33,9 @@ export const storeGuestDetails = ({ name, email }) => async dispatch => {
 	console.log(name, email)
 	try {
 		dispatch({ type: SET_PROFILE_LOADING, payload: true })
-		const { data: { guest } } = await Axios.post('/api/user/guest', { name, email })
+		const {
+			data: { guest }
+		} = await Axios.post('/api/user/guest', { name, email })
 		dispatch({ type: SET_GUEST, payload: guest })
 		return
 	} catch (err) {
@@ -44,7 +46,9 @@ export const storeGuestDetails = ({ name, email }) => async dispatch => {
 			)
 		else dispatch(errorMessage, 'danger')
 		dispatch(alertUser(errorMessage, 'danger'))
-	} finally { dispatch({ type: SET_PROFILE_LOADING, payload: false }) }
+	} finally {
+		dispatch({ type: SET_PROFILE_LOADING, payload: false })
+	}
 }
 
 export const setStepProgress = number => dispatch =>
@@ -69,14 +73,10 @@ export const generateCartId = () => async (dispatch, getState) => {
 
 export const fetchItemsFromCart = cartId => async (dispatch, getState) => {
 	try {
-		let cartProducts = getState().cart.products
-		if (!cartProducts) {
-			const {
-				data: { cart }
-			} = await Axios.get(`/api/cart/${cartId}`)
-			cartProducts = [...cart]
-		}
-		dispatch({ type: SET_CART_PRODUCTS, payload: cartProducts })
+		const {
+			data: { cart }
+		} = await Axios.get(`/api/cart/${cartId}`)
+		dispatch({ type: SET_CART_PRODUCTS, payload: cart })
 	} catch (err) {
 		const errorMessage = err.response.data.message
 		dispatch(alertUser(errorMessage, 'danger'))

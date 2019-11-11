@@ -31,7 +31,7 @@ import norton from './images/assurances/norton.png'
 import CheckoutPage from './pages/CheckoutPage'
 import CategoryProductsPage from './pages/CategoryProductsPage'
 
-const AdminApp = ({ categories, products, loadHomePage, generateCartId, fetchItemsFromCart }) => {
+const MainApp = ({ categories, products, loadHomePage, generateCartId, fetchItemsFromCart }) => {
 	useEffect(() => {
     loadHomePage()
     generateCartId().then(id => fetchItemsFromCart(id))
@@ -61,7 +61,8 @@ const AdminApp = ({ categories, products, loadHomePage, generateCartId, fetchIte
 						<Route exact path="/" component={LandingPage} />
 						<Route exact path="/login" component={LoginRegisterModal} />
 						<Route exact path="/register" component={LoginRegisterModal} />
-						<Route exact path="/about" render={() => <h1>About page</h1>} />
+						<Route exact path="/payment/success" render={() => <h1>Success page</h1>} />
+						<Route exact path="/payment/failure" render={() => <h1>Failure page</h1>} />
 						<Route
 							exact
 							path="/customer"
@@ -130,4 +131,4 @@ const mapStateToProps = createStructuredSelector({
 export default connect(
 	mapStateToProps,
 	{ loadHomePage, generateCartId, fetchItemsFromCart }
-)(AdminApp)
+)(MainApp)

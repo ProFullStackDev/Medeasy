@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Route } from 'react-router-dom'
+import { Route, Redirect } from 'react-router-dom'
 // Components
 import UpdateModal from '../components/UpdateModal'
 import CheckoutProgress from '../components/CheckoutPage/CheckoutProgress'
@@ -16,6 +16,7 @@ import {
 	selectCartProducts,
 	selectCartStepProgress
 } from '../redux/selectors/cartSelectors'
+import { selectPaymentOrderId } from '../redux/selectors/paymentSelectors'
 
 import '../styles/pages/CheckoutPage.scss'
 
@@ -23,6 +24,7 @@ const CheckoutPage = ({
 	changeOverlayState,
 	stepProgress,
 	cartProducts,
+	orderId,
 	match: { url }
 }) => {
 	// Update Modal Values
@@ -52,6 +54,8 @@ const CheckoutPage = ({
 		changeOverlayState(false)
 	}
 
+	if (cartProducts.length === 0) return <Redirect to='/cart' />
+
 	return (
 		<section className="CheckoutPage">
 			{isModalClicked && (
@@ -69,7 +73,7 @@ const CheckoutPage = ({
 				<Route exact path={`${url}/account`} component={AccountPhase} />
 				<Route exact path={`${url}/address`} component={BillingPhase} />
 				<Route exact path={`${url}/review`} render={routeProps => <ReviewPhase {...routeProps} cartProducts={cartProducts} updateModalState={updateModalState} />} />
-				<Route exact path={`${url}/payment`} component={PaymentPhase} />
+				<Route path={`${url}/payment`} component={PaymentPhase} />
 			</div>
 			{ stepProgress < 3 ? <div className="CheckoutPage__right">
 				<OrderSummary
@@ -83,7 +87,8 @@ const CheckoutPage = ({
 
 const mapStateToProps = createStructuredSelector({
 	cartProducts: selectCartProducts,
-	stepProgress: selectCartStepProgress
+	stepProgress: selectCartStepProgress,
+	orderId: selectPaymentOrderId
 })
 
 export default connect(mapStateToProps)(CheckoutPage)

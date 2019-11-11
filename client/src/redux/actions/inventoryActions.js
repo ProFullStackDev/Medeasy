@@ -13,6 +13,7 @@ const {
 	SET_CATEGORIES,
 	SET_CATEGORY,
 	CLEAR_PRODUCTS,
+	CLEAR_PRODUCT,
 	CLEAR_CATEGORIES,
 	CLEAR_COUPONS,
 	SET_INVENTORY_LOADING
@@ -243,6 +244,7 @@ export const fetchAllProducts = () => async (dispatch, getState) => {
 
 export const fetchProductById = productId => async (dispatch) => {
 	try {
+		dispatch({ type: CLEAR_PRODUCT })
 		const {
 			data: { product }
 		} = await axios.get(`/api/products/${productId}`)

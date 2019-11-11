@@ -1,4 +1,5 @@
 @import '../colors';
+
 .Footer {
   color: $white-color;
   height: 13.5rem;
@@ -11,18 +12,28 @@
   flex-direction: column;
   justify-content: space-between;
   padding: 30px 0;
-  &__nav {
-    text-transform: uppercase;
-    &-link {
-      &:not(:last-child) {
-        margin-right: 10rem;
+
+  &__info {
+    display: flex;
+    justify-content: space-between;
+    width: 60%;
+
+    & a {
+      transition: color .3s ease-in;
+      &:hover {
+        color: rgb(27, 99, 85);
+      }
+      & svg { 
+        margin-right: 1rem;
       }
     }
   }
+
   &__copyright {
     display: flex;
     justify-content: center;
     align-items: center;
+
     &--text {
       margin-left: 1rem;
     }

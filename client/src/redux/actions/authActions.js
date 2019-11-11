@@ -10,6 +10,7 @@ const {
 	SET_ACCESS_TOKEN,
 	CLEAR_INVENTORY,
 	CLEAR_USER,
+	CLEAR_ORDER,
 	CLEAR_ORDERS,
 	CLEAR_COUPONS,
 	CLEAR_PROFILE,
@@ -38,6 +39,7 @@ export const signIn = (
 		dispatch({ type: SET_GUEST, payload: null })
 		dispatch({ type: SET_ACCESS_TOKEN, payload: accessToken })
 		dispatch(setCheckoutRole('user'))
+		axios.defaults.headers.common['Authorization'] = accessToken
 		// If user selects remember me means, store in localStorage, else in sessionStorage
 		if (rememberMe)
 			localStorage.setItem('auth', JSON.stringify({ user, accessToken }))
@@ -45,7 +47,7 @@ export const signIn = (
 		// Push to Dashboard
 		if (mode === 'normal' && isAdmin)
 			setTimeout(() => history.push('/admin/dashboard'), 100)
-		else if (mode === 'normal' && !isAdmin) history.goBack()
+		else if (mode === 'normal' && !isAdmin) history.push('/')
 		else history.push('/checkout/address')
 	} catch (err) {
 		console.log(err)
@@ -164,9 +166,11 @@ export const logout = (
 		}
 		dispatch({ type: CLEAR_USER })
 		dispatch({ type: CLEAR_PROFILE })
+		dispatch({ type: CLEAR_ORDER })
 		localStorage.removeItem('auth')
 		sessionStorage.removeItem('auth')
-		sessionStorage.removeItem('checkoutRole')
+		sessionStorage.removeItem('checkoutRole')	
+		dispatch({ type: SET_CHECKOUT_ROLE, payload: null })
 		history.push(isAdmin ? '/admin' : '/')
 		dispatch(alertUser(message, 'danger'))
 	} catch (err) {

@@ -4,8 +4,8 @@ import { ReactComponent as CloseBtnIcon } from '../../images/closeBtn.svg'
 import '../../styles/components/CartListItem.scss'
 
 const CartListItem = ({
-  decideModalState,
-  onDelete,
+	decideModalState,
+	onDelete,
 	cartProduct: {
 		_id,
 		product: { dosages, quantities },
@@ -25,16 +25,16 @@ const CartListItem = ({
 		</div>
 		<div className="CartListItem__dosage">
 			<span className="CartListItem__dosage-value">{dosage}</span>
-			{/* {dosages.length > 1 ? ( */}
-			<span
-				style={{ cursor: 'pointer' }}
-				onClick={() =>
-					decideModalState('dosage', dosages.map(d => `${d} mg`), dosage, _id)
-				}
-			>
-				<EditBtnIcon alt="editbtn" />
-			</span>
-			{/* ) : null} */}
+			{dosages.length > 1 ? (
+				<span
+					style={{ cursor: 'pointer' }}
+					onClick={() =>
+						decideModalState('dosage', dosages.map(d => `${d} mg`), dosage, _id)
+					}
+				>
+					<EditBtnIcon alt="editbtn" />
+				</span>
+			) : null}
 		</div>
 		<div className="CartListItem__quantity">
 			<span className="CartListItem__quantity-value">{quantity} Pills</span>

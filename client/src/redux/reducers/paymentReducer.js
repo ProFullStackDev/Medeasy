@@ -4,11 +4,13 @@ const {
 	SET_PAYPAL_ORDER_ID,
 	SET_COINBASE_ORDER_ID,
 	SET_RAZORPAY_ORDER_ID,
+	SET_CURRENCY_RATE,
 	CLEAR_ORDER
 } = actionTypes
 
 const initialState = {
 	orderId: localStorage.getItem('orderId') || null,
+	currencyRate: parseFloat(sessionStorage.getItem('currencyRate')) || null,
 	paypalOrderId: sessionStorage.getItem('paypalOrderId') || null,
 	coinbaseChargeCode: sessionStorage.getItem('coinbaseOrderId') || null,
 	razorPayOrderId: sessionStorage.getItem('razorpayOrderId') || null
@@ -28,17 +30,22 @@ export default (state = initialState, action) => {
 			return { ...state, coinbaseChargeCode: payload }
 		case SET_RAZORPAY_ORDER_ID:
 			sessionStorage.setItem('razorpayOrderId', payload)
-			return { ...state, razorpayOrderId: payload }
+			return { ...state, razorPayOrderId: payload }
+		case SET_CURRENCY_RATE:
+			sessionStorage.setItem('currencyRate', String(payload))
+			return { ...state, currencyRate: payload }
 		case CLEAR_ORDER:
 			sessionStorage.removeItem('razorpayOrderId')
 			sessionStorage.removeItem('coinbaseOrderId')
 			sessionStorage.removeItem('paypalOrderId')
+			sessionStorage.removeItem('currencyRate')
 			localStorage.removeItem('orderId')
 			return {
 				orderId: null,
 				paypalOrderId: null,
 				razorPayOrderId: null,
-				coinbaseChargeCode: null
+				coinbaseChargeCode: null,
+				currencyRate: null
 			}
 		default:
 			return state

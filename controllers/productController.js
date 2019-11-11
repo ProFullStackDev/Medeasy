@@ -16,7 +16,6 @@ module.exports = {
     if (!categoryId) return res.status(400).send({ statusCode: 400, message: 'Invalid Category Id' })
     try {
       const filePaths = req.files.map(file => `/${file.path.replace(/\\/g, '/')}`)
-      console.log(filePaths)
       if (await Product.findOne({ name: req.body.name }))
         return res.status(400).send({ statusCode: 400, message: 'Product already exists' })
 
@@ -42,7 +41,7 @@ module.exports = {
     const searchQuery = req.query.search || ''
     try {
       const products = await Product.find({ name: {$regex: '^' + searchQuery , $options: 'i'}}).populate('category', ['name']).sort('-createdAt')
-      res.send({ statusCode: 200, count: products.length, products })
+      res.json({ statusCode: 200, count: products.length, products })
     } catch (err) {
       console.log(err.message)
       res.status(500).send({ statusCode: 500, message: 'Server Error' })
@@ -89,8 +88,6 @@ module.exports = {
 
       const filePaths = req.files.map(file => `/${file.path.replace(/\\/g, '/')}`)
       const originalFileNames = req.files.map(file => file.originalname)
-
-      console.log(originalFileNames)
 
       let oldProduct = await Product.findOne({ admin: req.user._id, _id: productId })
       let product = await Product.findOneAndUpdate({ admin: req.user._id, _id: productId }, { $set: prepareProductObject(req.body) }, { new: true })

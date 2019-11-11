@@ -9,6 +9,7 @@ const {
 	SET_CATEGORIES,
 	SET_CATEGORY,
 	CLEAR_PRODUCTS,
+	CLEAR_PRODUCT,
 	CLEAR_CATEGORIES,
 	CLEAR_ORDERS,
 	CLEAR_COUPONS,
@@ -49,6 +50,8 @@ export default (state = initialState, action) => {
 		case CLEAR_PRODUCTS:
 			sessionStorage.removeItem('products')
 			return { ...state, products: null }
+		case CLEAR_PRODUCT:
+			return { ...state, product: null }
 		case CLEAR_ORDERS:
 			return { ...state, orders: null }
 		case CLEAR_COUPONS:

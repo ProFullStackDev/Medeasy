@@ -21,7 +21,7 @@ const App = ({ logout, accessToken }) => {
 			const statusCode = err.response.data.statusCode
 			const method = err.response.data.method
 			if ((statusCode === 401 || statusCode === 403) && method === undefined)
-				logout('Session Expired')
+				logout(false, 'Session Expired')
 			return Promise.reject(err)
 		}
 	)
@@ -35,16 +35,6 @@ const App = ({ logout, accessToken }) => {
 		</div>
 	)
 }
-
-/* 
-	{window.location.pathname.match(/\/admin/g) ? (
-				<AdminApp />
-			) : window.location.pathname.match(/\/password\/reset/g) ? (
-				<PasswordResetPage />
-			) : (
-				<MainApp />
-			)}
-*/
 
 const mapStateToProps = createStructuredSelector({
   accessToken: selectAuthAccessToken

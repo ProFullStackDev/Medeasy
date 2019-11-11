@@ -29,6 +29,7 @@ const AdminProducts = ({ products, fetchAllProducts, onClick }) => {
 				<Link to="/admin/dashboard/add-product">
 					<CustomButton>Add product</CustomButton>
 				</Link>
+				<Link><CustomButton>Select Featured Products</CustomButton></Link>
 			</div>
 			<ProductList
 				onClick={onClick}

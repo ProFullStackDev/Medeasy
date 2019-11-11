@@ -1,8 +1,7 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import CustomButton from '../CustomButton'
 
-const OrdersList = ({ orders }) => {
+const OrdersList = ({ orders, history }) => {
 	return (
 		<table className="AdminDashboardPage__orders-table">
 			<thead>
@@ -25,7 +24,7 @@ const OrdersList = ({ orders }) => {
           <td style={{ color: status === 'Success' ? 'green' : 'orangered', fontWeight: 'bold' }}>{status}</td>
           <td>{totalAmount}$</td>
 					<td style={{ fontWeight: 'bold', color: trackingId === 'nil' ? 'red': 'green' }}>{trackingId}</td>
-					<Link to={`/admin/dashboard/tracking/${_id}`}><CustomButton extraStyle={{ background: trackingId === 'nil' ? 'orangered' : '#7ac7b8' }}>{ trackingId === 'nil' ? 'Add Tracking Id' : 'Update Tracking Id' }</CustomButton></Link>
+					<td><CustomButton onClick={() => history.push(`/admin/dashboard/tracking/${_id}`)} extraStyle={{ background: trackingId === 'nil' ? 'orangered' : '#7ac7b8' }}>{ trackingId === 'nil' ? 'Add Tracking Id' : 'Update Tracking Id' }</CustomButton></td>
         </tr>
 				))}
 			</tbody>

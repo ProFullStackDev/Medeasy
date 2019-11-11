@@ -146,7 +146,7 @@ module.exports = {
 			const profile = await Profile.findOne({ user: req.user._id })
 			if (!profile) return res.send({ statusCode: 200, cards: [] })
 			const modifiedCards = profile.creditCards.map(({ _id, cardNumber, cardSystem, cardName, cardExpiryMonth, cardExpiryYear }) => {
-				return { _id, cardNumber: `XXXX   XXXX   XXXX   ${String(cardNumber).substr(String(cardNumber).length - 4)}`, cardName, cardSystem, cardExpiryYear, cardExpiryMonth }
+				return { _id, hidNum: cardNumber, cardNumber: `XXXX   XXXX   XXXX   ${String(cardNumber).substr(String(cardNumber).length - 4)}`, cardName, cardSystem, cardExpiryYear, cardExpiryMonth }
 			})
 			res.send({ statusCode: 200, cards: modifiedCards })
 		} catch (err) {

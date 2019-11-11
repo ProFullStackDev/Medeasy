@@ -4,13 +4,17 @@ import { Redirect } from 'react-router-dom'
 import validator from 'validator'
 
 import { connect } from 'react-redux'
-import { selectProfileLoading } from '../../redux/selectors/profileSelectors'
+import {
+	selectProfileLoading,
+	selectProfileAddresses
+} from '../../redux/selectors/profileSelectors'
+import { selectPaymentOrderId } from '../../redux/selectors/paymentSelectors'
 import { createStructuredSelector } from 'reselect'
 import { fetchUserAddresses } from '../../redux/actions/profileActions'
 import {
 	setStepProgress,
 	cacheAddress,
-	storeGuestDetails,
+	storeGuestDetails
 } from '../../redux/actions/cartActions'
 import {
 	selectAuthUser,
@@ -37,45 +41,14 @@ const BillingPhase = ({
 	cacheAddress,
 	alertUser,
 	storeGuestDetails,
-	history
+	history,
+	orderId,
+	addresses
 }) => {
 	useEffect(() => {
 		setStepProgress(2)
-		if (checkoutRole === 'user')
-			fetchUserAddresses().then(addresses => {
-				if (addresses.length) {
-					const {
-						name,
-						mode,
-						addressLine1,
-						addressLine2,
-						city,
-						state,
-						postalCode,
-						country,
-						phNumber,
-						faxNumber
-					} = addresses[0]
-					setBillingFormState({
-						fName: name.split(' ')[0],
-						mName: name.split(' ').length === 3 ? name.split(' ')[1] : '',
-						lName:
-							name.split(' ').length === 3
-								? name.split(' ')[2]
-								: name.split(' ')[1],
-						mode,
-						address1: addressLine1,
-						address2: addressLine2,
-						city,
-						state,
-						postalCode,
-						country,
-						phNumber: String(phNumber),
-						faxNumber
-					})
-				}
-			})
-	}, [setStepProgress, fetchUserAddresses, checkoutRole])
+		if (checkoutRole === 'user' && user) fetchUserAddresses()
+	}, [setStepProgress, fetchUserAddresses, user, checkoutRole])
 
 	const [mode, setMode] = useState('yes')
 	const [billingFormState, setBillingFormState] = useState({
@@ -110,8 +83,41 @@ const BillingPhase = ({
 		faxNumber: ''
 	})
 
+	const [selectAddress, setSelectAddress] = useState('')
+
 	if (user && !checkoutRole) setCheckoutRole('user')
-	if ((!user && !checkoutRole)) return <Redirect to="/checkout/account" />
+	if (!user && !checkoutRole) return <Redirect to="/checkout/account" />
+
+	const handleAddressChange = event => {
+		const {
+			name,
+			addressLine1,
+			addressLine2,
+			state,
+			city,
+			postalCode,
+			phNumber,
+			faxNumber
+		} = addresses.find(add => add.mode === event.target.value)
+		const fName = name.split(' ')[0]
+		const lName =
+			name.split(' ').length === 2 ? name.split(' ')[1] : name.split(' ')[2]
+		const mName = name.split(' ').length === 3 ? name.split(' ')[1] : ''
+		setBillingFormState({
+			...billingFormState,
+			fName,
+			mName,
+			lName,
+			address1: addressLine1,
+			address2: addressLine2,
+			state,
+			city,
+			postalCode: String(postalCode),
+			phNumber: String(phNumber),
+			faxNumber: String(faxNumber)
+		})
+		setSelectAddress(event.target.value)
+	}
 
 	const handleShippingChange = event =>
 		setShippingFormState({
@@ -180,9 +186,9 @@ const BillingPhase = ({
 				return alertUser('Shipping address email is required', 'danger')
 			if (mode === 'no' && !validator.isEmail(billingFormState.email))
 				return alertUser('Billing address email is invalid', 'danger')
-			const name = `${billingFormState.fName} ${billingFormState.mName.length > 0 ? billingFormState.mName : ''}${
-				billingFormState.mName ? ' ' : ''
-			}${billingFormState.lName}`
+			const name = `${billingFormState.fName} ${
+				billingFormState.mName.length > 0 ? billingFormState.mName : ''
+			}${billingFormState.mName ? ' ' : ''}${billingFormState.lName}`
 			await storeGuestDetails({
 				name,
 				email: billingFormState.email
@@ -218,9 +224,36 @@ const BillingPhase = ({
 				<Spinner />
 			) : (
 				<Fragment>
-					<h2 style={{ marginBottom: '2rem' }} className="BillingPhase__title">
-						Billing Address
-					</h2>
+					<div
+						style={{
+							display: 'flex',
+							alignItems: 'center',
+							marginBottom: '2rem'
+						}}
+					>
+						<h2 className="BillingPhase__title">Billing Address</h2>
+						{user && addresses.length > 0 ? (
+							<select
+								style={{
+									marginLeft: '2rem',
+									border: 'none',
+									background: '#7AC7B8',
+									color: 'white',
+									padding: '1rem',
+									borderRadius: '.5rem'
+								}}
+								onChange={handleAddressChange}
+								value={selectAddress}
+							>
+								<option defaultValue="Select Address">Select Address</option>
+								{addresses.map(address => (
+									<option key={address._id} value={address.mode}>
+										{address.mode} - {address.addressLine1}
+									</option>
+								))}
+							</select>
+						) : null}
+					</div>
 					<AlertMessage />
 					<CredentialsForm
 						formState={billingFormState}
@@ -274,6 +307,8 @@ const mapStateToProps = createStructuredSelector({
 	user: selectAuthUser,
 	checkoutRole: selectAuthCheckoutRole,
 	loading: selectProfileLoading,
+	addresses: selectProfileAddresses,
+	orderId: selectPaymentOrderId
 })
 
 export default connect(

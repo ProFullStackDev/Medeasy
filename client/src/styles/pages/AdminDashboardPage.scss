@@ -13,10 +13,6 @@
     align-items: center;
     justify-content: center;
     position: relative;
-
-    & table {
-      margin-top: 6rem;
-    }
   }
 
   &__hamburger {
@@ -48,7 +44,7 @@
   &__product-form,
   &__coupons,
   &__orders {
-    margin: 0 4rem;
+    margin: 10rem 4rem 0 4rem;
     width: 100%;
   }
 
@@ -111,7 +107,7 @@
     }
 
     & .AdminCarousel {
-      margin-top: 8rem;
+      margin-top: 2rem;
     }
   }
 
