@@ -72,7 +72,7 @@ const WelcomeSection = ({ addQuery }) => {
 						id="message"
 						required
 					/>
-					<CustomButton isSubmitButton fontSize="1.6rem">
+					<CustomButton extraStyle={{ background: '#F8931A' }} isSubmitButton fontSize="1.6rem">
 						Request Callback
 					</CustomButton>
 				</form> : null }

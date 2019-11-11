@@ -9,7 +9,7 @@ import Spinner from '../../components/Spinner'
 import OrdersList from '../../components/AdminPage/OrdersList'
 import AdminCarousel from '../../components/AdminPage/AdminCarousel'
 
-const Adminorders = ({ orders, fetchAllOrders, onClick, history }) => {
+const Adminorders = ({ orders, fetchAllOrders, onClick, history, match: { url } }) => {
 	// If there are no orders on state, means fetch them
 	useEffect(() => {
 		if (!orders) fetchAllOrders()
@@ -25,7 +25,7 @@ const Adminorders = ({ orders, fetchAllOrders, onClick, history }) => {
 			<div className="AdminDashboardPage__orders-info">
 				<h2>ALL orders</h2>
 			</div>
-			<OrdersList history={history} orders={orders.slice((pageNumber - 1) * 10, 10 * pageNumber)}/>
+			<OrdersList url={url} history={history} orders={orders.slice((pageNumber - 1) * 10, 10 * pageNumber)}/>
 			<AdminCarousel
 				onClick={handleClick}
 				totalPages={Math.ceil(orders.length / 10)}

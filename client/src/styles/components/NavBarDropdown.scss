@@ -3,10 +3,10 @@
 .Conditions {
   cursor: default;
   grid-template-columns: repeat(4, 1fr);
-  column-gap: 1.5rem;
+  column-gap: 4rem;
   row-gap: 3.5rem;
-  grid-auto-rows: minmax(5rem, max-content);
-  min-width: 140rem;
+  grid-auto-rows: minmax(min-content, max-content);
+  min-width: calc(140rem - 7.5rem);
   z-index: 10;
   position: absolute;
   left: 0;
@@ -27,6 +27,14 @@
   &__list {
     display: flex;
     flex-direction: column;
+    align-self: start;
+
+    & div {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(max-content, 1fr));
+      grid-auto-rows: minmax(min-content, max-content);
+      column-gap: 2rem;
+    }
 
     &-title {
       cursor: pointer;
@@ -34,13 +42,12 @@
       font-weight: bold;
       padding-bottom: .4rem;
       margin-bottom: 1.5rem;
-      width: 50%;
+      width: 80%;
       color: $medeasy-green-color;
       border-bottom: 1px solid rgba(139, 139, 139, 0.2);
     }
 
     &-item {
-      max-width: 20%;
       &:not(:last-child) {
         margin-bottom: 1.5rem;
       }

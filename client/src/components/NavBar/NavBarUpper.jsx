@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom'
 
 import medeasyLogo from '../../images/medeasy-logo.png'
 
+import { AutoSelect } from '../AutoSelect'
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPhoneAlt } from '@fortawesome/free-solid-svg-icons'
-import { ReactComponent as SearchIcon } from '../../images/search.svg'
 import { ReactComponent as CartIcon } from '../../images/cart.svg'
 import { ReactComponent as UserIcon } from '../../images/user.svg'
 import { ReactComponent as DownArrowBlackIcon } from '../../images/downArrowBlack.svg'
@@ -15,10 +16,11 @@ import { ReactComponent as LogoutIcon } from '../../images/logout.svg'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { logout } from '../../redux/actions/authActions'
+import { selectInventoryProducts } from '../../redux/selectors/inventorySelectors'
 import { selectAuthUser } from '../../redux/selectors/authSelectors'
 import { selectCartProducts } from '../../redux/selectors/cartSelectors'
 
-const NavBarUpper = ({ logout, user, cartProducts }) => {
+const NavBarUpper = ({ logout, user, cartProducts, products }) => {
 	useState(user)
 	const logoutUser = () => logout()
 
@@ -34,12 +36,7 @@ const NavBarUpper = ({ logout, user, cartProducts }) => {
 						/>
 					</Link>
 				</div>
-				<div className="NavBar__upper--search">
-					<form className="NavBar__upper--search-text">
-						<input type="text" placeholder="Search for products" />
-						<SearchIcon alt="Search fr" />
-					</form>
-				</div>
+				<AutoSelect products={products} />
 				<div className="NavBar__upper-other">
 					<span className="NavBar__upper-other-auth">
 						{!user ? (
@@ -107,7 +104,8 @@ const NavBarUpper = ({ logout, user, cartProducts }) => {
 
 const mapStateToProps = createStructuredSelector({
 	user: selectAuthUser,
-	cartProducts: selectCartProducts
+	cartProducts: selectCartProducts,
+	products: selectInventoryProducts
 })
 
 export default connect(

@@ -10,10 +10,12 @@ const {
 	SET_COUPONS,
 	SET_COUPON,
 	SET_ORDERS,
+	SET_ORDER,
 	SET_CATEGORIES,
 	SET_CATEGORY,
 	CLEAR_PRODUCTS,
 	CLEAR_PRODUCT,
+	CLEAR_ADMIN_ORDER,
 	CLEAR_CATEGORIES,
 	CLEAR_COUPONS,
 	SET_INVENTORY_LOADING
@@ -80,10 +82,7 @@ export const addCategory = formState => async dispatch => {
 	}
 }
 
-export const updateCategory = (
-	formState,
-	categoryId
-) => async dispatch => {
+export const updateCategory = (formState, categoryId) => async dispatch => {
 	try {
 		dispatch({ type: SET_INVENTORY_LOADING, payload: true })
 		await axios.put(`/api/categories/${categoryId}`, formState)
@@ -125,6 +124,22 @@ export const fetchAllOrders = () => async (dispatch, getState) => {
 				dispatch(alertUser(message.msg, 'danger'))
 			)
 		else dispatch(alertUser(errorMessage, 'danger'))
+	}
+}
+
+export const fetchOrderById = orderId => async dispatch => {
+	try {
+		dispatch({ type: SET_INVENTORY_LOADING, payload: true })
+		dispatch({ type: CLEAR_ADMIN_ORDER })
+		const {
+			data: { order }
+		} = await axios.get(`/api/orders/${orderId}`)
+		dispatch({ type: SET_ORDER, payload: order })
+	} catch (err) {
+		const errorMessage = err.response.data.message
+		dispatch(alertUser(errorMessage, 'danger'))
+	} finally {
+		dispatch({ type: SET_INVENTORY_LOADING, payload: false })
 	}
 }
 
@@ -192,10 +207,7 @@ export const addCoupon = formState => async dispatch => {
 	}
 }
 
-export const updateCoupon = (
-	formState,
-	couponId
-) => async dispatch => {
+export const updateCoupon = (formState, couponId) => async dispatch => {
 	try {
 		dispatch({ type: SET_INVENTORY_LOADING, payload: true })
 		await axios.put(`/api/coupons/${couponId}`, {
@@ -242,7 +254,7 @@ export const fetchAllProducts = () => async (dispatch, getState) => {
 	}
 }
 
-export const fetchProductById = productId => async (dispatch) => {
+export const fetchProductById = productId => async dispatch => {
 	try {
 		dispatch({ type: CLEAR_PRODUCT })
 		const {
@@ -263,9 +275,13 @@ export const changeProductAvailableState = (
 	status
 ) => async dispatch => {
 	try {
-		const { data: { product } } = await axios.patch(`/api/products/available/${productId}`, { status })
+		const {
+			data: { product }
+		} = await axios.patch(`/api/products/available/${productId}`, { status })
 		const products = JSON.parse(sessionStorage.getItem('products'))
-		const productIndex = products.findIndex(p => p._id.toString() === product._id)
+		const productIndex = products.findIndex(
+			p => p._id.toString() === product._id
+		)
 		products[productIndex] = product
 		dispatch({ type: SET_PRODUCTS, payload: products })
 	} catch (err) {
@@ -293,11 +309,7 @@ export const addProduct = (formData, categoryId) => async dispatch => {
 	}
 }
 
-export const updateProduct = (
-	formData,
-	productId
-) => async dispatch => {
-	console.log(Array.from(formData))
+export const updateProduct = (formData, productId) => async dispatch => {
 	try {
 		dispatch({ type: SET_INVENTORY_LOADING, payload: true })
 		await axios.put(`/api/products/${productId}`, formData)
@@ -323,6 +335,25 @@ export const deleteProduct = productId => async dispatch => {
 	} catch (err) {
 		const errorMessage = err.response.data.message
 		dispatch(alertUser(errorMessage, 'danger'))
+	}
+}
+
+export const saveProductsAsFavourites = productIds => async dispatch => {
+	try {
+		dispatch({ type: SET_INVENTORY_LOADING, payload: true })
+		await axios.patch('/api/products/featured', { productIds })
+		dispatch(alertUser('Request accepted successfuly !', 'success'))
+		return true
+	} catch (err) {
+		const errorMessage = err.response.data.message
+		if (Array.isArray(errorMessage))
+			errorMessage.forEach(message =>
+				dispatch(alertUser(message.msg, 'danger'))
+			)
+		else dispatch(alertUser(errorMessage, 'danger'))
+		return false
+	} finally {
+		dispatch({ type: SET_INVENTORY_LOADING, payload: false })
 	}
 }
 

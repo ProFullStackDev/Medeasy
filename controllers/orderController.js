@@ -171,6 +171,19 @@ module.exports = {
 		}
 	},
 
+	async fetchOrderById (req, res) {
+		const { orderId } = req.params
+		if (!orderId) return res.status(400).send({ statusCode: 400, message: 'Order Id is required' })
+		try {
+			const order = await Order.findById(orderId)
+			if (!order) return res.status(404).send({ statusCode: 404, message: 'Order not found' })
+			res.send({ statusCode: 200, order })
+		} catch (err) {
+			console.log(err)
+			if (err.name === 'CastError') return res.status(404).send({ statusCode: 400, message: 'Invalid Order Id' })
+		}
+	},
+
 	fetchOrdersByUserId: async (req, res) => {
 		const user = req.user
 		try {

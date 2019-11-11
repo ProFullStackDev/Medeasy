@@ -8,7 +8,8 @@ const {
 	changePaymentMethod,
   changePaymentStatus,
   changeTrackingStatus,
-  fetchOrders,
+	fetchOrders,
+	fetchOrderById,
   fetchOrdersByUserId,
 	deleteOrderById
 } = require('../controllers/orderController')
@@ -17,6 +18,11 @@ const {
 // @desc - Get all orders
 // @method - Private (both Auth and Admin)
 router.get('/', [authenticate, isAdmin], fetchOrders)
+
+// @route - GET /api/orders/:orderId
+// @desc - Get order by Id
+// @method - Private (both Auth and Admin)
+router.get('/:orderId', [authenticate, isAdmin], fetchOrderById)
 
 // @route - GET /api/orders/user
 // @desc - Get all orders of a particular user

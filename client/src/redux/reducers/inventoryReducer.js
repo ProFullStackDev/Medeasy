@@ -6,6 +6,8 @@ const {
 	SET_COUPONS,
 	SET_COUPON,
 	SET_ORDERS,
+	SET_ORDER,
+	CLEAR_ADMIN_ORDER,
 	SET_CATEGORIES,
 	SET_CATEGORY,
 	CLEAR_PRODUCTS,
@@ -22,6 +24,7 @@ const initialState = {
 	reviews: null,
 	product: null,
 	orders: null,
+	order: null,
 	coupons: null,
 	coupon: null,
 	categories: JSON.parse(sessionStorage.getItem('categories')) || null,
@@ -33,12 +36,16 @@ export default (state = initialState, action) => {
 	const { type, payload } = action
 	switch (type) {
 		case SET_PRODUCTS:
-			sessionStorage.setItem('products', JSON.stringify(payload))
+			// sessionStorage.setItem('products', JSON.stringify(payload))
 			return { ...state, products: payload }
 		case SET_REVIEWS:
 			return { ...state, reviews: payload }
 		case SET_PRODUCT:
 			return { ...state, product: payload }
+		case SET_ORDER:
+			return { ...state, order: payload }
+		case CLEAR_ADMIN_ORDER:
+			return { ...state, order: null }
 		case SET_CATEGORIES:
 			sessionStorage.setItem('categories', JSON.stringify(payload))
 			return { ...state, categories: payload }
@@ -71,6 +78,7 @@ export default (state = initialState, action) => {
 				products: null,
 				product: null,
 				orders: null,
+				order: null,
 				coupons: null,
 				coupon: null,
 				loading: false

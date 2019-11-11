@@ -7,6 +7,7 @@ const isAdmin = require('../middleware/isAdmin')
 const {
 	updateProductAvailability,
 	createProduct,
+	makeProductsFeatured,
 	fetchAllProducts,
 	fetchAllProductsByCategory,
 	fetchProductById,
@@ -30,6 +31,7 @@ router.post(
 		check('name', 'Name is required')
 			.not()
 			.isEmpty(),
+		check('distributor', 'Distributor is required').not().isEmpty(),
 		check('description', 'Description is required')
 			.not()
 			.isEmpty(),
@@ -95,6 +97,11 @@ router.put(
 	updateProductById
 )
 
+// @route - PATCH /api/products/featured
+// @desc - Set products featured
+// @method - Private (Both Auth and Admin)
+router.patch('/featured', authenticate, isAdmin, makeProductsFeatured)
+
 // @route - PATCH /api/products/available/:productId
 // @desc - Update a product's availability
 // @method - Private (Both Auth and Admin)
@@ -105,6 +112,8 @@ router.patch(
 		.isEmpty(),
 	updateProductAvailability
 )
+
+
 
 // @route - DELETE /api/products/:productId
 // @desc - Delete a product

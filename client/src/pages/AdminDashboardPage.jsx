@@ -4,7 +4,9 @@ import { Route, Redirect } from 'react-router-dom'
 import AdminNavBar from '../components/AdminPage/AdminNavBar'
 import AdminHome from './dashboard/AdminHome'
 import AdminProducts from './dashboard/AdminProducts'
+import { AdminFeaturedProducts } from './dashboard/AdminFeaturedProducts'
 import AdminOrders from './dashboard/AdminOrders'
+import AdminOrderDetail from './dashboard/AdminOrderDetail'
 import AdminCoupons from './dashboard/AdminCoupons'
 import AdminCategories from './dashboard/AdminCategories'
 import AdminCreateProduct from './dashboard/AdminCreateProduct'
@@ -39,17 +41,19 @@ const AdminDashboardPage = ({ user, match: { url }, history }) => {
         <span className='AdminDashboardPage__user'> Welcome {user.name} !</span>
         <AlertMessage />
         <Route exact path={`${url}`} component={AdminHome} />
-        <Route path={`${url}/products`} render={routeProps => <AdminProducts {...routeProps} onClick={boolVal => setModalState(boolVal)} />} />
-        <Route path={`${url}/orders`} render={routeProps => <AdminOrders {...routeProps} onClick={boolVal => setModalState(boolVal)} />} />
-        <Route path={`${url}/coupons`} render={routeProps => <AdminCoupons {...routeProps} onClick={boolVal => setModalState(boolVal)} />} />
-        <Route path={`${url}/categories`} render={routeProps => <AdminCategories {...routeProps} onClick={boolVal => setModalState(boolVal)} />} />
-        <Route path={`${url}/add-product`} component={AdminCreateProduct} />
-        <Route path={`${url}/add-coupon`} component={AdminCouponForm} />
-        <Route path={`${url}/add-category`} component={AdminCategoriesForm} />
-        <Route path={`${url}/tracking/:orderId`} component={AdminOrderForm} />
-        <Route path={`${url}/edit-product/:productId`} component={AdminEditProduct} />
-        <Route path={`${url}/edit-coupon/:couponId`} component={AdminCouponForm} />
-        <Route path={`${url}/edit-category/:categoryId`} component={AdminCategoriesForm} />
+        <Route exact path={`${url}/products`} render={routeProps => <AdminProducts {...routeProps} onClick={boolVal => setModalState(boolVal)} />} />
+        <Route exact path={`${url}/orders`} render={routeProps => <AdminOrders {...routeProps} onClick={boolVal => setModalState(boolVal)} />} />
+        <Route exact path={`${url}/orders/:orderId`} component={AdminOrderDetail} />
+        <Route exact path={`${url}/coupons`} render={routeProps => <AdminCoupons {...routeProps} onClick={boolVal => setModalState(boolVal)} />} />
+        <Route exact path={`${url}/categories`} render={routeProps => <AdminCategories {...routeProps} onClick={boolVal => setModalState(boolVal)} />} />
+        <Route exact path={`${url}/add-product`} component={AdminCreateProduct} />
+        <Route exact path={`${url}/product/featured`} component={AdminFeaturedProducts} />
+        <Route exact path={`${url}/add-coupon`} component={AdminCouponForm} />
+        <Route exact path={`${url}/add-category`} component={AdminCategoriesForm} />
+        <Route exact path={`${url}/tracking/:orderId`} component={AdminOrderForm} />
+        <Route exact path={`${url}/edit-product/:productId`} component={AdminEditProduct} />
+        <Route exact path={`${url}/edit-coupon/:couponId`} component={AdminCouponForm} />
+        <Route exact path={`${url}/edit-category/:categoryId`} component={AdminCategoriesForm} />
       </div>
     </div>
   )

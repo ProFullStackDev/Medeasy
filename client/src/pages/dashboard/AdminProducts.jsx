@@ -26,10 +26,10 @@ const AdminProducts = ({ products, fetchAllProducts, onClick }) => {
 		<div className="AdminDashboardPage__products">
 			<div className="AdminDashboardPage__products-info">
 				<h2>ALL PRODUCTS</h2>
-				<Link to="/admin/dashboard/add-product">
+				<Link style={{ marginLeft: 'auto', marginRight: '2rem' }} to="/admin/dashboard/add-product">
 					<CustomButton>Add product</CustomButton>
 				</Link>
-				<Link><CustomButton>Select Featured Products</CustomButton></Link>
+				<Link to='/admin/dashboard/product/featured'><CustomButton>Select Featured Products</CustomButton></Link>
 			</div>
 			<ProductList
 				onClick={onClick}

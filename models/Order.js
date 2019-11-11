@@ -18,8 +18,8 @@ const ordersSchema = new Schema({
   },
   billingAddress: {
     name: String,
-    addressLine1: String,
-    addressLine2: String,
+    address1: String,
+    address2: String,
     city: String,
     state: String,
     postalCode: Number,

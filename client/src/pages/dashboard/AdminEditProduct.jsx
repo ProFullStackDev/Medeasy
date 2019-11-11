@@ -35,6 +35,7 @@ const AdminEditProduct = ({
 	const [formState, setFormState] = useState({
 		name: '',
 		category: '',
+		distributor: '',
 		description: '',
 		productImages: [],
 		sideEffects: '',
@@ -50,6 +51,7 @@ const AdminEditProduct = ({
 			setFormState({
 				name: product.name,
 				category: product.category._id,
+				distributor: product.distributor !== undefined ? product.distributor : '',
 				description: product.description,
 				productImages: await convertImageURLToFileObject(product.photos),
 				sideEffects: product.sideEffects.join(','),
@@ -97,6 +99,7 @@ const AdminEditProduct = ({
 	const {
 		name,
 		description,
+		distributor,
 		category,
 		productImages,
 		sideEffects,
@@ -109,6 +112,7 @@ const AdminEditProduct = ({
 		event.preventDefault()
 		const data = new FormData()
 		data.append('name', name)
+		data.append('distributor', distributor)
 		data.append('description', description)
 		data.append('dosages', dosages)
 		data.append('price', prices)
@@ -213,6 +217,14 @@ const AdminEditProduct = ({
 							</option>
 						))}
 					</select>
+
+					<CustomFormElement
+						required
+						name='distributor'
+						placeholder="Product Distributor"
+						value={distributor}
+						onChange={handleChange}
+					/>
 
 					<CustomFormElement
 						required
@@ -327,6 +339,7 @@ const AdminEditProduct = ({
 				<h2>Product Details Preview</h2>
 				<div className="AdminDashboardPage__product-form--right__info">
 					<p>Name: {name}</p>
+					<p>Distributor: {distributor}</p>
 					<p>Category ID: {category}</p>
 					<p>
 						Dosages:{' '}

@@ -31,6 +31,7 @@ const AdminCreateProduct = ({
 	const [formState, setFormState] = useState({
 		name: '',
 		category: '',
+		distributor: '',
 		description: '',
 		productImages: [],
 		sideEffects: '',
@@ -44,6 +45,7 @@ const AdminCreateProduct = ({
 	const {
 		name,
 		description,
+		distributor,
 		category,
 		productImages,
 		sideEffects,
@@ -57,6 +59,7 @@ const AdminCreateProduct = ({
 		const data = new FormData()
 		data.append('name', name)
 		data.append('description', description)
+		data.append('distributor', distributor)
 		data.append('dosages', dosages)
 		data.append('price', prices)
 		data.append('quantities', quantities)
@@ -161,6 +164,14 @@ const AdminCreateProduct = ({
 							</option>
 						))}
 					</select>
+
+					<CustomFormElement
+						required
+						placeholder="Product Distributor"
+						name='distributor'
+						value={distributor}
+						onChange={handleChange}
+					/>
 
 					<CustomFormElement
 						required
@@ -275,6 +286,7 @@ const AdminCreateProduct = ({
 				<h2>Product Details Preview</h2>
 				<div className="AdminDashboardPage__product-form--right__info">
 					<p>Name: {name}</p>
+					<p>Distributor: {distributor}</p>
 					<p>Category ID: {category}</p>
 					<p>
 						Dosages:{' '}

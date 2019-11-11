@@ -77,7 +77,9 @@ const ProductDetailPage = ({
 	}
 
 	const handleProductAdding = (product, type) => {
-		addProductToCart({...product}).then(() => type === 'normal' ? null : history.push('/checkout/account'))
+		addProductToCart({ ...product }).then(() =>
+			type === 'normal' ? null : history.push('/checkout/account')
+		)
 	}
 
 	return !product || !reviews || loading ? (
@@ -87,7 +89,11 @@ const ProductDetailPage = ({
 			<section className="ProductDetailPage">
 				<div className="ProductDetailPage__informations">
 					<ProductImageCarousel photos={product.photos} />
-					<ProductInformation addProduct={handleProductAdding} reviews={reviews} product={product} />
+					<ProductInformation
+						addProduct={handleProductAdding}
+						reviews={reviews}
+						product={product}
+					/>
 				</div>
 			</section>
 			<section
@@ -127,17 +133,25 @@ const ProductDetailPage = ({
 									<div className="ProductDetailPage__othertabs-reviews-createreview-ratings">
 										<span style={{ fontSize: '2rem' }}>Your Rating:</span>
 										<div className="ProductDetailPage__othertabs-reviews-createreview-ratings--stars">
-											{[1, 2, 3, 4, 5].map(val => (
-												val <= formState.rating ? <StarFilledIcon
-													key={val}
-													onClick={() => setFormState({ ...formState, rating: val })}
-													alt="star"
-												/> : <StarIcon
-												key={val}
-												onClick={() => setFormState({ ...formState, rating: val })}
-												alt="star"
-											/>
-											))}
+											{[1, 2, 3, 4, 5].map(val =>
+												val <= formState.rating ? (
+													<StarFilledIcon
+														key={val}
+														onClick={() =>
+															setFormState({ ...formState, rating: val })
+														}
+														alt="star"
+													/>
+												) : (
+													<StarIcon
+														key={val}
+														onClick={() =>
+															setFormState({ ...formState, rating: val })
+														}
+														alt="star"
+													/>
+												)
+											)}
 										</div>
 									</div>
 									<form onSubmit={handleSubmit}>

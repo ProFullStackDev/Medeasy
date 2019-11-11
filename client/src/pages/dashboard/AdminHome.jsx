@@ -16,7 +16,7 @@ const AdminHome = ({ fetchInventory, products, orders, coupons }) => {
     <div className='AdminDashboardPage__home'>
       <AdminCard title='Total Products' value={products.length.toString()} btnRequired btnText='View Products' btnLink='products' />
       <AdminCard title='Total Orders' value={orders.length.toString()} btnRequired btnText='View Orders' btnLink='orders' />
-      <AdminCard title='Total Sales' value={orders.reduce((acc, order) => acc += order.totalAmount, 0) + '$'} />
+      <AdminCard title='Total Sales' value={orders.filter(o => o.status === 'Success').reduce((acc, order) => acc += order.totalAmount, 0) + '$'} />
     </div>
   )
 }

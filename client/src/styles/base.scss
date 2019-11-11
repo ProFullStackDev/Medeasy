@@ -54,4 +54,7 @@ body {
     margin: 0 auto;
     height: 100%;
   }
+  .LandingPage .review-item:not(:last-child) {
+    border-right: 1px solid #ccc;
+  }
 }

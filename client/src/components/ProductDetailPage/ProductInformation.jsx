@@ -11,7 +11,7 @@ import Assurances from './Assurances'
 
 const ProductInformation = ({
 	reviews,
-	product: { _id, name, stockAvailable, dosages, quantities, price },
+	product: { _id, name, stockAvailable, dosages, quantities, price, distributor },
 	addProduct
 }) => {
 	const [dosage, setDosage] = useState(parseInt(dosages[0]))
@@ -37,6 +37,7 @@ const ProductInformation = ({
 				<span className="ProductInformation__detail--name">
 					{name.toUpperCase()}
 				</span>
+				<span className='ProductInformation__detail--manufacturer'>by <span style={{ color: '#7AC7B8', fontSize: '1.8rem' }}>{distributor}</span></span>
 				<BestSellerProduct />
 				<FeaturedProduct />
 			</div>
