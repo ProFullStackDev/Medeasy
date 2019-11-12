@@ -5,6 +5,7 @@ import { ReactComponent as CloseBtnIcon } from '../../images/closeBtn.svg'
 import '../../styles/components/SummaryListItem.scss'
 const SummaryListItem = ({
 	updateModalState,
+	index,
 	deleteItem,
 	product: {
 		_id: itemId,
@@ -16,6 +17,7 @@ const SummaryListItem = ({
 }) => {
 	return (
 		<div className="SummaryListItem">
+			<span className='SummaryListItem__sno'>{index}</span>
 			<div className="SummaryListItem__product">
 				<h3
 					style={{ fontSize: '1.8rem', color: '#000' }}

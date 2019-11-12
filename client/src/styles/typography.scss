@@ -165,6 +165,7 @@ textarea,
 }
 
 .CartListItem {
+  &__dosage-value, &__quantity-value { font-size: 2rem; }
   &__price--final {
     font-size: 3rem;
   }

@@ -18,9 +18,8 @@ import { createStructuredSelector } from 'reselect'
 import { logout } from '../../redux/actions/authActions'
 import { selectInventoryProducts } from '../../redux/selectors/inventorySelectors'
 import { selectAuthUser } from '../../redux/selectors/authSelectors'
-import { selectCartProducts } from '../../redux/selectors/cartSelectors'
 
-const NavBarUpper = ({ logout, user, cartProducts, products }) => {
+const NavBarUpper = ({ logout, user, products }) => {
 	useState(user)
 	const logoutUser = () => logout()
 
@@ -81,19 +80,6 @@ const NavBarUpper = ({ logout, user, cartProducts, products }) => {
 							</React.Fragment>
 						)}
 					</span>
-					<Link to="/cart">
-						<div className="NavBar__upper-other-cart">
-							<CartIcon
-								alt="cart-img"
-								className="NavBar__upper-other-cart--image"
-							/>
-							{cartProducts.length ? (
-								<span className="NavBar__upper-other-cart--count">
-									{cartProducts.length}
-								</span>
-							) : null}
-						</div>
-					</Link>
 					<FontAwesomeIcon style={{ margin: '0 1rem' }} icon={faPhoneAlt} />
 					<a href="tel:+15555777572" style={{ fontWeight: 'bold', fontSize: '1.7rem' }}>+1-555-5777-572</a>
 				</div>
@@ -104,7 +90,6 @@ const NavBarUpper = ({ logout, user, cartProducts, products }) => {
 
 const mapStateToProps = createStructuredSelector({
 	user: selectAuthUser,
-	cartProducts: selectCartProducts,
 	products: selectInventoryProducts
 })
 

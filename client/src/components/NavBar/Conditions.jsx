@@ -20,7 +20,6 @@ const Conditions = ({ products, conditions, onClick }) => {
 					>
 						{condition.name}
 					</Link>
-					<div>
 						{products
 							.filter(
 								product => product.category._id.toString() === condition._id
@@ -35,7 +34,6 @@ const Conditions = ({ products, conditions, onClick }) => {
 									{product.name}
 								</Link>
 							))}
-					</div>
 				</ul>
 			))}
 		</div>

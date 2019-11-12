@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 
 const ProductListItem = ({ product: { photos, name, price, dosages, quantities, _id } }) => {
   return (
-    <Link to={`/product/${_id}`}><div className='ProductListItem'>
+    <div className='ProductListItem'>
       <img src={photos[0]} alt='product' className='ProductListItem__image' />
       <div className='ProductListItem__details'>
         <Link to={`/product/${_id}`}><p className='ProductListItem__details--title'>{`${name} ${dosages[0]} mg`}</p></Link>
@@ -13,7 +13,7 @@ const ProductListItem = ({ product: { photos, name, price, dosages, quantities, 
         <p style={{ fontSize: '1.8rem', marginTop: '1rem' }}>${price[`${dosages[0]}mg`][quantities[0]]}</p>
       </div>
       <Link style={{ marginTop: '1rem' }} to={`/product/${_id}`}><CustomButton extraStyle={{ background: '#F8931A' }} fontSize='1.4rem'>Buy Now</CustomButton></Link>
-    </div></Link>
+    </div>
   )
 }
 

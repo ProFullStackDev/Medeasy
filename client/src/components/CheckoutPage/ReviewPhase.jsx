@@ -22,10 +22,11 @@ import { createOrder } from '../../redux/actions/paymentActions'
 import PricesBreakDown from './PricesBreakDown'
 import SummaryListItem from './SummaryListItem'
 import Spinner from '../Spinner'
+import CustomButton from '../CustomButton'
+import ProductsTitle from '../ProductsTitle'
 
 import { ReactComponent as EditBtnIcon } from '../../images/editBtn.svg'
 import '../../styles/components/ReviewPhase.scss'
-import CustomButton from '../CustomButton'
 
 // We grab the address and the card details from the redux states
 const ReviewPhase = ({
@@ -43,7 +44,6 @@ const ReviewPhase = ({
 	useEffect(() => {
 		setStepProgress(3)
 	}, [setStepProgress])
-
 
 	if (!checkoutRole || (!user && checkoutRole === 'user'))
 		return <Redirect to="/checkout/account" />
@@ -135,19 +135,21 @@ const ReviewPhase = ({
 				</div>
 			</div>
 			<h2
-				style={{ marginTop: '3.2rem' }}
+				style={{ margin: '3.2rem 0' }}
 				className="ReviewPhase__order-summary ReviewPhase__title"
 			>
 				Order Summary
 			</h2>
+			<ProductsTitle width={'85%'} />
 			<div style={{ position: 'relative', minHeight: '20vh' }}>
 				{invLoading ? (
 					<Spinner />
-				) : (
-					products.length > 0 ? <Fragment>
+				) : products.length > 0 ? (
+					<Fragment>
 						<div className="ReviewPhase__summary">
-							{products.map(product => (
+							{products.map((product, index) => (
 								<SummaryListItem
+									index={index}
 									key={product._id}
 									deleteItem={itemId => deleteCartItem(itemId)}
 									updateModalState={updateModalState}
@@ -156,7 +158,12 @@ const ReviewPhase = ({
 							))}
 						</div>
 						<PricesBreakDown prices={prices} />
-					</Fragment> : <h2 style={{ textAlign: 'center', marginTop: '3rem' }}>There are no products in cart. Feel free to add some items and check back later</h2>
+					</Fragment>
+				) : (
+					<h2 style={{ textAlign: 'center', marginTop: '3rem' }}>
+						There are no products in cart. Feel free to add some items and check
+						back later
+					</h2>
 				)}
 			</div>
 			{products.length > 0 ? (

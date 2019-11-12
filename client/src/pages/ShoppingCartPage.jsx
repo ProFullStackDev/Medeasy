@@ -5,13 +5,12 @@ import UpdateModal from '../components/UpdateModal'
 import CustomButton from '../components/CustomButton'
 import CartList from '../components/ShoppingCartPage/CartList'
 import Spinner from '../components/Spinner'
+import ProductsTitle from '../components/ProductsTitle'
 // Redux
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { selectCartProducts } from '../redux/selectors/cartSelectors'
-import {
-	selectInventoryLoading
-} from '../redux/selectors/inventorySelectors'
+import { selectInventoryLoading } from '../redux/selectors/inventorySelectors'
 import { clearCart, deleteCartItem } from '../redux/actions/cartActions'
 // images
 import { ReactComponent as CartLargeIcon } from '../images/cartLarge.svg'
@@ -24,8 +23,8 @@ const ShoppingCartPage = ({
 	changeOverlayState,
 	cartProducts,
 	loading,
-  clearCart,
-  deleteCartItem
+	clearCart,
+	deleteCartItem
 }) => {
 	const [isDosageClicked, setIsDosageClicked] = useState(false)
 	const [isQuantityClicked, setIsQuantityClicked] = useState(false)
@@ -44,13 +43,13 @@ const ShoppingCartPage = ({
 		setItemId(itemId)
 		setModalValues([...values])
 		changeOverlayState(true)
-  }
-  
+	}
+
 	const disableOverlay = () => {
 		setIsDosageClicked(false)
 		setIsQuantityClicked(false)
 		changeOverlayState(false)
-  }
+	}
 
 	const totalPrice = cartProducts.reduce(
 		(acc, product) => (acc += parseInt(product.subTotal)),
@@ -87,7 +86,9 @@ const ShoppingCartPage = ({
 					alt="cart-large"
 					className="ShoppingCartPage__title--img"
 				/>
-				<span className="ShoppingCartPage__title--name">Shopping Cart</span>
+				<span className="ShoppingCartPage__title--name">
+					Shopping Cart ({cartProducts.length} Products)
+				</span>
 			</h1>
 			<div className="ShoppingCartPage__main">
 				{!cartProducts.length ? (
@@ -96,8 +97,9 @@ const ShoppingCartPage = ({
 					</p>
 				) : (
 					<Fragment>
+						<ProductsTitle width={'90%'} imageOnly />
 						<CartList
-              onDelete={itemId => deleteCartItem(itemId)}
+							onDelete={itemId => deleteCartItem(itemId)}
 							cartProducts={cartProducts}
 							decideModalState={updateModalState}
 						/>

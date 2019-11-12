@@ -133,7 +133,7 @@ export const fetchOrderById = orderId => async dispatch => {
 		dispatch({ type: CLEAR_ADMIN_ORDER })
 		const {
 			data: { order }
-		} = await axios.get(`/api/orders/${orderId}`)
+		} = await axios.get(`/api/orders/single/${orderId}`)
 		dispatch({ type: SET_ORDER, payload: order })
 	} catch (err) {
 		const errorMessage = err.response.data.message

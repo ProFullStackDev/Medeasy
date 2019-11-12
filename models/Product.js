@@ -8,6 +8,7 @@ const productSchema = new Schema(
 		description: { type: String, trim: true, required: true },
 		sideEffects: { type: [String], required: true },
 		price: { type: Object, required: true },
+		discountedPrice: { type: Number, default: 0 },
 		category: { type: Schema.Types.ObjectId, ref: 'category' },
 		admin: { type: Schema.Types.ObjectId, ref: 'user' },
 		stockAvailable: { type: Boolean, default: true },
@@ -29,7 +30,7 @@ productSchema.methods = {
 }
 
 productSchema.index({ name: 'text' })
-productSchema.pre('remove', async function (next) {
+productSchema.pre('remove', async function(next) {
 	await Review.deleteMany({ product: this._id })
 	next()
 })

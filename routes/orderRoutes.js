@@ -19,10 +19,10 @@ const {
 // @method - Private (both Auth and Admin)
 router.get('/', [authenticate, isAdmin], fetchOrders)
 
-// @route - GET /api/orders/:orderId
+// @route - GET /api/orders/single/:orderId
 // @desc - Get order by Id
 // @method - Private (both Auth and Admin)
-router.get('/:orderId', [authenticate, isAdmin], fetchOrderById)
+router.get('/single/:orderId', [authenticate, isAdmin], fetchOrderById)
 
 // @route - GET /api/orders/user
 // @desc - Get all orders of a particular user

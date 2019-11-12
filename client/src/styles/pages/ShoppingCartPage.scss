@@ -12,6 +12,7 @@
     flex-direction: column;
     margin: 6rem 0;
     &--price {
+      margin-top: 2rem;
       align-self: flex-end;
       &-subtotal, &-amount, &-savings {
         &.ShoppingCartPage__main--general:not(:last-child) {
