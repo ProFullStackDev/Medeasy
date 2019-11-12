@@ -5,6 +5,7 @@ const ordersSchema = new Schema({
   user: { type: Schema.Types.ObjectId, required: true, refPath: 'mode' },
   mode: { type: String, required: true, enum: ['user', 'guest'] },
   cart: { type: Schema.Types.ObjectId, required: true, ref: 'cart' },
+  couponUsed: { type: String, required: true},
   shippingAddress: {
     name: String,
     addressLine1: String,

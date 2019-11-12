@@ -21,7 +21,7 @@ const App = ({ logout, accessToken }) => {
 			const statusCode = err.response.data.statusCode
 			const method = err.response.data.method
 			if ((statusCode === 401 || statusCode === 403) && method === undefined)
-				logout(false, 'Session Expired')
+				logout(true, 'Session Expired')
 			return Promise.reject(err)
 		}
 	)

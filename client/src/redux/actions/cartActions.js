@@ -5,12 +5,50 @@ const {
 	SET_GUEST,
 	SET_CART_ID,
 	SET_CART_PRODUCTS,
+	SET_CART_COUPON,
+	SET_CART_COUPON_ERROR,
 	SET_INVENTORY_LOADING,
 	SET_PROFILE_LOADING,
 	SET_STEP_PROGRESS,
 	SET_BILLING_ADDRESS,
 	SET_SHIPPING_ADDRESS
 } = actionTypes
+
+export const setCouponError = message => dispatch => dispatch({ type: SET_CART_COUPON_ERROR, payload: message })
+
+export const applyCoupon = couponName => async (dispatch, getState) => {
+	try {
+		dispatch(setCouponError(null))
+		dispatch({ type: SET_INVENTORY_LOADING, payload: true })
+		const {
+			data: { coupon }
+		} = await Axios.patch('/api/cart/coupon/redeem', {
+			name: couponName,
+			cartId: getState().cart.cartId
+		})
+		dispatch({ type: SET_CART_COUPON, payload: coupon })
+	} catch (err) {
+		dispatch(setCouponError(err.response.data.message))
+	} finally {
+		dispatch({ type: SET_INVENTORY_LOADING, payload: false })
+	}
+}
+
+export const removeCoupon = () => async (dispatch, getState) => {
+	try {
+		dispatch({ type: SET_INVENTORY_LOADING, payload: true })
+		const {
+			data: { coupon }
+		} = await Axios.patch('/api/cart/coupon/remove', {
+			cartId: getState().cart.cartId
+		})
+		dispatch({ type: SET_CART_COUPON, payload: coupon })
+	} catch (err) {
+		console.log(err.response.data.message)
+	} finally {
+		dispatch({ type: SET_INVENTORY_LOADING, payload: false })
+	}
+}
 
 export const cacheAddress = (billingAddress, shippingAddress) => dispatch => {
 	billingAddress.name = `${billingAddress.fName} ${
@@ -71,12 +109,13 @@ export const generateCartId = () => async (dispatch, getState) => {
 	}
 }
 
-export const fetchItemsFromCart = cartId => async (dispatch, getState) => {
+export const fetchItemsFromCart = cartId => async dispatch => {
 	try {
 		const {
 			data: { cart }
 		} = await Axios.get(`/api/cart/${cartId}`)
-		dispatch({ type: SET_CART_PRODUCTS, payload: cart })
+		dispatch({ type: SET_CART_PRODUCTS, payload: cart.products })
+		if (cart.coupon) dispatch({ type: SET_CART_COUPON, payload: cart.coupon })
 	} catch (err) {
 		const errorMessage = err.response.data.message
 		dispatch(alertUser(errorMessage, 'danger'))
@@ -152,7 +191,8 @@ export const deleteCartItem = itemId => async (dispatch, getState) => {
 		const {
 			data: { cart }
 		} = await Axios.delete(`/api/cart/${getState().cart.cartId}/${itemId}`)
-		dispatch({ type: SET_CART_PRODUCTS, payload: cart })
+		dispatch({ type: SET_CART_PRODUCTS, payload: cart.products })
+		dispatch({ type: SET_CART_COUPON, payload: cart.coupon || {} })
 	} catch (err) {
 		const errorMessage = err.response.data.message
 		if (Array.isArray(errorMessage))

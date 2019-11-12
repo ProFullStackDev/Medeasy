@@ -3,6 +3,8 @@ const router = Router()
 const { check } = require('express-validator')
 
 const {
+	applyCoupon,
+	removeCoupon,
 	generateCartId,
 	addProductToCart,
 	getProductsByCartId,
@@ -68,6 +70,23 @@ router.patch(
 	],
 	updateProduct
 )
+
+// @route - PATCH /api/cart/coupon/redeem
+// @desc - Apply coupon by CartId
+// @method - Public
+router.patch('/coupon/redeem', [
+	check('cartId', 'Cart Id is required').not().isEmpty(),
+	check('cartId', 'Invalid Cart Id').isMongoId(),
+	check('name', 'Coupon name is required').not().isEmpty()
+], applyCoupon)
+
+// @route - PATCH /api/cart/coupon/remove
+// @desc - Remove coupon by CartId
+// @method - Public
+router.patch('/coupon/remove', [
+	check('cartId', 'Cart Id is required').not().isEmpty(),
+	check('cartId', 'Invalid Cart Id').isMongoId(),
+], removeCoupon)
 
 // @route - DELETE /api/cart/empty/:cartId
 // @desc - Clear Cart

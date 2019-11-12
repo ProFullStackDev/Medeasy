@@ -27,11 +27,19 @@ module.exports = {
 				return res
 					.status(404)
 					.send({ statusCode: 404, message: 'User not found' })
-			const totalAmount = cart.products.reduce(
+			const productsSubTotal = cart.products.reduce(
 				(acc, product) => parseInt(acc) + parseInt(product.subTotal),
 				0
 			)
+			const totalAmount =
+				productsSubTotal -
+				(cart.coupon.value !== undefined
+					? cart.coupon.type === 'percent'
+						? Math.round(productsSubTotal * (parseInt(cart.coupon.value) / 100))
+						: parseInt(cart.coupon.value)
+					: 0)
 			const orderObj = {
+				couponUsed: cart.coupon.name !== undefined ? cart.coupon.name : 'nil',
 				cart: cart._id,
 				user: user._id,
 				products: cart.products,
@@ -162,8 +170,16 @@ module.exports = {
 
 	fetchOrders: async (req, res) => {
 		try {
-			console.log(await Order.find({ status: 'Pending', expiryDate: { $lte: new Date().getTime() }}))
-			await Order.deleteMany({ status: 'Pending', expiryDate: { $lte: new Date().getTime() }})
+			console.log(
+				await Order.find({
+					status: 'Pending',
+					expiryDate: { $lte: new Date().getTime() }
+				})
+			)
+			await Order.deleteMany({
+				status: 'Pending',
+				expiryDate: { $lte: new Date().getTime() }
+			})
 			const orders = await Order.find({}).populate('user', ['name', 'email'])
 			res.send({ statusCode: 200, orders })
 		} catch (err) {
@@ -171,16 +187,25 @@ module.exports = {
 		}
 	},
 
-	async fetchOrderById (req, res) {
+	async fetchOrderById(req, res) {
 		const { orderId } = req.params
-		if (!orderId) return res.status(400).send({ statusCode: 400, message: 'Order Id is required' })
+		if (!orderId)
+			return res
+				.status(400)
+				.send({ statusCode: 400, message: 'Order Id is required' })
 		try {
 			const order = await Order.findById(orderId)
-			if (!order) return res.status(404).send({ statusCode: 404, message: 'Order not found' })
+			if (!order)
+				return res
+					.status(404)
+					.send({ statusCode: 404, message: 'Order not found' })
 			res.send({ statusCode: 200, order })
 		} catch (err) {
 			console.log(err)
-			if (err.name === 'CastError') return res.status(404).send({ statusCode: 400, message: 'Invalid Order Id' })
+			if (err.name === 'CastError')
+				return res
+					.status(404)
+					.send({ statusCode: 400, message: 'Invalid Order Id' })
 		}
 	},
 

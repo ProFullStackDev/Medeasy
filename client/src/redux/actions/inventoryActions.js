@@ -161,6 +161,7 @@ export const addTrackingId = (trackingId, orderId) => async dispatch => {
 
 export const fetchAllCoupons = () => async dispatch => {
 	try {
+		dispatch({ type: CLEAR_COUPONS })
 		const {
 			data: { coupons }
 		} = await axios.get('/api/coupons')

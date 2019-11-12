@@ -11,7 +11,8 @@ import {
 } from '../../redux/selectors/authSelectors'
 import {
 	selectCartBillingAddress,
-	selectCartShippingAddress
+	selectCartShippingAddress,
+	selectCartCoupon
 } from '../../redux/selectors/cartSelectors'
 import {
 	setStepProgress,
@@ -39,7 +40,8 @@ const ReviewPhase = ({
 	createOrder,
 	updateModalState,
 	deleteCartItem,
-	cartProducts: products
+	cartProducts: products,
+	coupon
 }) => {
 	useEffect(() => {
 		setStepProgress(3)
@@ -50,15 +52,21 @@ const ReviewPhase = ({
 	if (!billingAddress || !shippingAddress)
 		return <Redirect to="/checkout/address" />
 
-	const prices = {
-		subTotal: products.reduce(
+		const subTotal = products.reduce(
 			(acc, product) => (acc += parseInt(product.subTotal)),
 			0
-		),
-		shippingPrice: 0,
-		tax: 0,
-		discount: 0
-	}
+		)
+		const prices = {
+			subTotal,
+			shippingPrice: 0,
+			tax: 0,
+			discount:
+				Object.keys(coupon).length > 0
+					? coupon.type === 'percent'
+						? Math.round(subTotal * (parseInt(coupon.value) / 100))
+						: parseInt(coupon.value)
+					: 0
+		}
 
 	const processOrder = () => {
 		createOrder(billingAddress, shippingAddress)
@@ -179,6 +187,7 @@ const mapStateToProps = createStructuredSelector({
 	shippingAddress: selectCartShippingAddress,
 	billingAddress: selectCartBillingAddress,
 	cartProduct: selectCartProducts,
+	coupon: selectCartCoupon,
 	invLoading: selectInventoryLoading
 })
 

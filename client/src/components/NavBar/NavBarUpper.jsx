@@ -7,7 +7,6 @@ import { AutoSelect } from '../AutoSelect'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPhoneAlt } from '@fortawesome/free-solid-svg-icons'
-import { ReactComponent as CartIcon } from '../../images/cart.svg'
 import { ReactComponent as UserIcon } from '../../images/user.svg'
 import { ReactComponent as DownArrowBlackIcon } from '../../images/downArrowBlack.svg'
 import { ReactComponent as BagIcon } from '../../images/bag.svg'

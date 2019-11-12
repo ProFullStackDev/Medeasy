@@ -19,7 +19,7 @@ module.exports = {
 
   fetchAllCoupons: async (req, res) => {
     try {
-      const coupons = await Coupon.find({}).sort('-createdAt')
+      const coupons = await Coupon.find({ expiresAt: { $gt: new Date().getTime() } }).sort('-createdAt')
       res.send({ statusCode: 200, coupons })
     } catch (err) {
       console.error(err.message)

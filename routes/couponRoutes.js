@@ -19,8 +19,8 @@ createCoupon)
 
 // @route - GET api/coupons
 // @desc - Get all coupons
-// @method - Private (Both Auth and Admin)
-router.get('/', authenticate, isAdmin, fetchAllCoupons)
+// @method - Public
+router.get('/', fetchAllCoupons)
 
 // @route - GET api/coupons/:couponId
 // @desc - Get coupon by ID

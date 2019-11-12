@@ -31,7 +31,7 @@ const PricesBreakDown = ({ prices: { subTotal, tax, shippingPrice, discount }}) 
       <div className='PricesBreakDown-total PricesBreakDown--general'>
         <span className='PricesBreakDown-total-title'>Total:</span>
         {/* Price must be dynamic */}
-        <span className='PricesBreakDown-total-value'>${parseInt(subTotal) + parseInt(shippingPrice) + parseInt(tax) + parseInt(discount)}.0
+        <span className='PricesBreakDown-total-value'>${parseInt(subTotal) + parseInt(shippingPrice) + parseInt(tax) - parseInt(discount)}.0
           {/* This must be dynamic coz of uncertainty in delivery charge */}
         </span>
       </div>

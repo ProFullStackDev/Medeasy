@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react'
+import React, { Fragment } from 'react'
 import '../../styles/components/OrderSummary.scss'
 
 // Components
@@ -11,25 +11,42 @@ import Spinner from '../Spinner'
 import { connect } from 'react-redux'
 import { selectInventoryLoading } from '../../redux/selectors/inventorySelectors'
 import { deleteCartItem } from '../../redux/actions/cartActions'
+import { selectCartCoupon } from '../../redux/selectors/cartSelectors'
 import { createStructuredSelector } from 'reselect'
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faInfoCircle } from '@fortawesome/free-solid-svg-icons'
+
+import { ReactComponent as CloseIcon } from '../../images/closeBtn.svg'
+
 const OrderSummary = ({
+	handleSubmit,
 	updateModalState,
+	updateCouponState,
 	cartProducts,
 	loading,
-	deleteCartItem
+	coupon,
+	nullifyCoupon,
+	deleteCartItem,
+	handleChange,
+	couponName,
+	couponError
 }) => {
+	const subTotal = cartProducts.reduce(
+		(acc, product) => (acc += parseInt(product.subTotal)),
+		0
+	)
 	const prices = {
-		subTotal: cartProducts.reduce(
-			(acc, product) => (acc += parseInt(product.subTotal)),
-			0
-		),
+		subTotal,
 		shippingPrice: 0,
 		tax: 0,
-		discount: 0
+		discount:
+			Object.keys(coupon).length > 0
+				? coupon.type === 'percent'
+					? Math.round(subTotal * (parseInt(coupon.value) / 100))
+					: parseInt(coupon.value)
+				: 0
 	}
-	const [couponCode, setCouponCode] = useState('')
-	const handleChange = event => setCouponCode(event.target.value)
 
 	const handleDelete = itemId => {
 		deleteCartItem(itemId)
@@ -55,22 +72,57 @@ const OrderSummary = ({
 						)}
 					</div>
 					<div className="OrderSummary__coupon">
-						<p className="OrderSummary__coupon-title">Discount / Coupon Code</p>
-						<form
-							className="OrderSummary__coupon-form"
-							onSubmit={() => console.log('Do something here')}
+						<p
+							style={{ display: 'inline-block', marginRight: '1rem' }}
+							className="OrderSummary__coupon-title"
 						>
-							<CustomFormElement
-								noStyle
-								noLabel
-								type="text"
-								onChange={handleChange}
-								value={couponCode}
-							/>
-							<CustomButton isSubmitButton fontSize="1.8rem">
-								Apply
-							</CustomButton>
-						</form>
+							Discount / Coupon Code
+						</p>
+						{Object.keys(coupon).length === 0 ? (
+							<Fragment>
+								<span
+									style={{ cursor: 'pointer' }}
+									onClick={() => updateCouponState(true)}
+								>
+									<FontAwesomeIcon icon={faInfoCircle} />
+								</span>
+								<form
+									className="OrderSummary__coupon-form"
+									onSubmit={handleSubmit}
+								>
+									<CustomFormElement
+										noStyle
+										noLabel
+										type="text"
+										name="name"
+										onChange={event => handleChange(event.target.value)}
+										value={couponName.toUpperCase()}
+									/>
+									<CustomButton isSubmitButton fontSize="1.8rem">
+										Apply
+									</CustomButton>
+								</form>
+							</Fragment>
+						) : null}
+						{Object.keys(coupon).length > 0 ? (
+							<p style={{ marginTop: '1rem' }}>
+								Coupon applied:{' '}
+								<span style={{ fontWeight: 'bold', color: '#F8931A' }}>
+									{coupon.name}
+								</span>
+								<span
+									onClick={nullifyCoupon}
+									style={{ marginLeft: '1rem', cursor: 'pointer' }}
+								>
+									<CloseIcon style={{ width: '1.2rem', height: '1.2rem' }} />
+								</span>
+							</p>
+						) : null}
+						{couponError ? (
+							<p style={{ marginTop: '1rem', color: '#D44A4A', fontWeight: 'bold' }}>
+								{couponError}
+							</p>
+						) : null}
 					</div>
 					<PricesBreakDown prices={prices} />
 				</Fragment>
@@ -89,7 +141,8 @@ const OrderSummary = ({
 }
 
 const mapStateToProps = createStructuredSelector({
-	loading: selectInventoryLoading
+	loading: selectInventoryLoading,
+	coupon: selectCartCoupon
 })
 
 export default connect(

@@ -6,7 +6,7 @@ import { ReactComponent as DownArrowIcon } from '../../images/downarrow.svg'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHome, faShoppingCart } from '@fortawesome/free-solid-svg-icons'
-import { NavLink, Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
