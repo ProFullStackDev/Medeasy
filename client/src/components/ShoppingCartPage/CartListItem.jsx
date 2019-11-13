@@ -10,6 +10,7 @@ const CartListItem = ({
 		_id,
 		product: { dosages, quantities },
 		image,
+		distributor,
 		name,
 		attributes: { dosage, quantity },
 		subTotal
@@ -21,7 +22,7 @@ const CartListItem = ({
 			<p className="CartListItem__details-name" style={{ fontSize: '2.5rem' }}>
 				{name}
 			</p>
-			{/* <a href='www' className='CartListItem__details-distributor' style={{ fontSize: '1.4rem' }}>{distributor}</a> */}
+			<span className='CartListItem__details-distributor' style={{ fontSize: '1.4rem' }}>{distributor}</span>
 		</div>
 		<div className="CartListItem__dosage">
 			<span className="CartListItem__dosage-value">{dosage}</span>

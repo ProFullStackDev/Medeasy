@@ -17,8 +17,8 @@ module.exports = {
 		if (!errros.isEmpty())
 			return res.status(400).send({ statusCode: 400, message: errros.array() })
 		try {
-      const { name, phoneNumber, message } = req.body
-      const queryObj = { name, phoneNumber: `+1${phoneNumber}`, message }
+      const { name, phoneNumber, message, email } = req.body
+      const queryObj = { name, phoneNumber: `+1${phoneNumber}`, message, email }
 			const query = await Query.create(queryObj)
 
 			const modifiedPhoneNumber = `+1${phoneNumber.slice(0, 3)}-${phoneNumber.slice(3, 6)}-${phoneNumber.slice(6)}`
@@ -34,6 +34,7 @@ module.exports = {
 				html: `
           <h1>QUERY DETAILS</h1>
 					<h2>Name: </h2><p>${name}</p><br />
+					<h2>Email: </h2><p>${email}</p><br />
 					<h2>Phone: </h2><p><a href="tel:${modifiedPhoneNumber}">${modifiedPhoneNumber}</a></p><br/>
 					<h2>Message: </h2><p>${message}</p>
           <br/><br/>

@@ -14,7 +14,7 @@ router.get('/', fetchAllQueries)
 router.post('/', [
   check('name', 'Name is required').not().isEmpty(),
   check('phoneNumber', 'Phone number is required').not().isEmpty(),
-  check('message', 'Message is required').not().isEmpty(),
+  check('email', 'Email is required').not().isEmpty(),
   check('phoneNumber', 'Invalid Phone number').matches(/^(1\s?)?((\([0-9]{3}\))|[0-9]{3})[\s\-]?[\0-9]{3}[\s\-]?[0-9]{4}$/g)
 ], addQuery)
 

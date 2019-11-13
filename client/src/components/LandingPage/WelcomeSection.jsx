@@ -18,6 +18,7 @@ const WelcomeSection = ({ addQuery }) => {
 	const [formState, setFormState] = useState({
 		name: '',
 		phoneNumber: '',
+		email: '',
 		message: ''
 	})
 
@@ -33,7 +34,7 @@ const WelcomeSection = ({ addQuery }) => {
 		setQueryStatus(status)
 	}
 
-	const { name, phoneNumber, message } = formState
+	const { name, phoneNumber, message, email } = formState
 	return (
 		<div className="LandingPage__welcome">
 			<div
@@ -53,7 +54,7 @@ const WelcomeSection = ({ addQuery }) => {
 				</h2>
 				{ !queryStatus ? <form className="LandingPage__helpform-form" onSubmit={handleSubmit}>
 					<CustomFormElement
-						labelName="Name"
+						labelName="Name *"
 						onChange={handleChange}
 						name="name"
 						type="text"
@@ -61,6 +62,7 @@ const WelcomeSection = ({ addQuery }) => {
 						value={name}
 						required
 					/>
+					<CustomFormElement type='email' name='email' value={email} onChange={handleChange} labelName='Email' />
 					<PhoneFormElement name='phoneNumber' required value={phoneNumber} onChange={handleChange} />
 					<label htmlFor="message">Message</label>
 					<CustomFormElement
@@ -70,7 +72,6 @@ const WelcomeSection = ({ addQuery }) => {
 						onChange={handleChange}
 						name="message"
 						id="message"
-						required
 					/>
 					<CustomButton extraStyle={{ background: '#F8931A' }} isSubmitButton fontSize="1.6rem">
 						Request Callback

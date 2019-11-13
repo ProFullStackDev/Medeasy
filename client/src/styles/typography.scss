@@ -39,6 +39,12 @@ code {
     monospace;
 }
 
+.CheckoutProgress {
+  & .title {
+    font-size: 1.6rem !important;
+  }
+}
+
 .NavBar {
   &__upper-links {
     font-weight: bold;
@@ -93,6 +99,13 @@ textarea,
 
 .Footer {
   font-weight: bold;
+  & a {
+    font-size: 1.8rem;
+  }
+  &__info-title {
+    text-transform: uppercase;
+    font-size: 2rem;
+  }
 }
 
 .ProductInformation {
@@ -165,7 +178,12 @@ textarea,
 }
 
 .CartListItem {
-  &__dosage-value, &__quantity-value { font-size: 2rem; }
+
+  &__dosage-value,
+  &__quantity-value {
+    font-size: 2rem;
+  }
+
   &__price--final {
     font-size: 3rem;
   }

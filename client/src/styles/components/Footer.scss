@@ -2,7 +2,7 @@
 
 .Footer {
   color: $white-color;
-  height: 13.5rem;
+  min-height: 13.5rem;
   background: $medeasy-green-color;
   position: relative;
   bottom: 0;
@@ -16,20 +16,39 @@
   &__info {
     display: flex;
     justify-content: space-between;
-    width: 60%;
+    width: 70%;
 
     & a {
       transition: color .3s ease-in;
+
       &:hover {
         color: rgb(27, 99, 85);
       }
-      & svg { 
+
+      & svg {
         margin-right: 1rem;
       }
+    }
+
+    &-contact,
+    &-useful {
+      display: flex;
+      flex-direction: column;
+
+      & a:not(:last-child) {
+        margin-bottom: 1.5rem;
+      }
+    }
+
+    &-title {
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #5D988D;
     }
   }
 
   &__copyright {
+    margin-top: 2rem;
     display: flex;
     justify-content: center;
     align-items: center;
