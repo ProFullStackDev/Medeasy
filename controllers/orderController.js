@@ -13,7 +13,7 @@ module.exports = {
 			return res.status(400).send({ statusCode: 400, message: errors.array() })
 		const { cartId, mode, userId, shippingAddress, billingAddress } = req.body
 		try {
-			let order = await Order.findOne({ cart: cartId })
+			let order = await Order.findOne({ cart: cartId, status: 'Pending' })
 			if (order) return res.send({ statusCode: 200, orderId: order._id })
 			const cart = await Cart.findById(cartId)
 			if (!cart)

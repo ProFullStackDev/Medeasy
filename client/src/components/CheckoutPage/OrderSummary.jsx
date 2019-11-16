@@ -14,9 +14,6 @@ import { deleteCartItem } from '../../redux/actions/cartActions'
 import { selectCartCoupon } from '../../redux/selectors/cartSelectors'
 import { createStructuredSelector } from 'reselect'
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faInfoCircle } from '@fortawesome/free-solid-svg-icons'
-
 import { ReactComponent as CloseIcon } from '../../images/closeBtn.svg'
 
 const OrderSummary = ({
@@ -81,10 +78,10 @@ const OrderSummary = ({
 						{Object.keys(coupon).length === 0 ? (
 							<Fragment>
 								<span
-									style={{ cursor: 'pointer' }}
+									className='OrderSummary__coupon-button'
 									onClick={() => updateCouponState(true)}
 								>
-									<FontAwesomeIcon icon={faInfoCircle} />
+									View coupons
 								</span>
 								<form
 									className="OrderSummary__coupon-form"

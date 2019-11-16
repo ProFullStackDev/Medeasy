@@ -104,7 +104,7 @@ const CheckoutPage = ({
 			)}
 			{isCouponModalClicked && (
 				<CouponModal
-					onClick={couponName => setCouponName(couponName)}
+					onClick={couponName => applyCoupon(couponName.toUpperCase())}
 					disableOverlay={disableOverlay}
 				/>
 			)}

@@ -3,6 +3,8 @@ import Axios from 'axios'
 import { alertUser } from './alertActions'
 const {
 	SET_GUEST,
+	SET_USER,
+	SET_ACCESS_TOKEN,
 	SET_CART_ID,
 	SET_CART_PRODUCTS,
 	SET_CART_COUPON,
@@ -75,6 +77,8 @@ export const storeGuestDetails = ({ name, email }) => async dispatch => {
 			data: { guest }
 		} = await Axios.post('/api/user/guest', { name, email })
 		dispatch({ type: SET_GUEST, payload: guest })
+		dispatch({ type: SET_USER, payload: null })
+		dispatch({ type: SET_ACCESS_TOKEN, payload: null })
 		return
 	} catch (err) {
 		const errorMessage = err.response.data.message

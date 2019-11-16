@@ -4,7 +4,7 @@ const Review = require('./Review')
 const productSchema = new Schema(
 	{
 		name: { type: String, trim: true, required: true },
-		distributor: { type: String, required: true },
+		distributor: { type: String },
 		description: { type: String, trim: true, required: true },
 		sideEffects: { type: [String], required: true },
 		price: { type: Object, required: true },

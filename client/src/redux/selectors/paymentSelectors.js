@@ -21,3 +21,8 @@ export const selectPaymentCoinbaseChargeCode = createSelector(
 	[selectPayment],
 	payment => payment.coinbaseChargeCode
 )
+
+export const selectPaymentCoinbaseHostedUrl = createSelector(
+	[selectPayment],
+	payment => payment.coinbaseHostedUrl
+)

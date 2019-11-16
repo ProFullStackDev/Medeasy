@@ -21,7 +21,7 @@ const initialState = {
 		: null,
 	userLoading: false,
 	checkoutRole: sessionStorage.getItem('checkoutRole') || null,
-	guest: sessionStorage.getItem('guest') || null
+	guest: localStorage.getItem('guest') || null
 }
 
 export default (state = initialState, action) => {
@@ -30,7 +30,7 @@ export default (state = initialState, action) => {
 		case SET_USER:
 			return { ...state, user: payload }
 		case SET_GUEST:
-			sessionStorage.setItem('guest', JSON.stringify(payload))
+			localStorage.setItem('guest', JSON.stringify(payload))
 			return { ...state, guest: payload }
 		case SET_CHECKOUT_ROLE:
 			sessionStorage.setItem('checkoutRole', payload)

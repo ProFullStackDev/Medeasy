@@ -85,6 +85,7 @@ const BillingPhase = ({
 
 	const [selectAddress, setSelectAddress] = useState('')
 
+	if (orderId) return <Redirect to='/checkout/payment/card' />
 	if (user && !checkoutRole) setCheckoutRole('user')
 	if (!user && !checkoutRole) return <Redirect to="/checkout/account" />
 

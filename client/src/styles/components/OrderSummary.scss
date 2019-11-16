@@ -1,11 +1,12 @@
-@import '../colors';
+@import "../colors";
 .OrderSummary {
   min-width: 50rem;
   height: 100%;
   padding: 1rem 3rem;
-  border-left: 1px solid rgba($medeasy-border-light-grey-color, .2);
-  &__allproducts, &__coupon {
-    border-bottom: 1px solid #EFE8E8;
+  border-left: 1px solid rgba($medeasy-border-light-grey-color, 0.2);
+  &__allproducts,
+  &__coupon {
+    border-bottom: 1px solid #efe8e8;
   }
   &__allproducts {
     position: relative;
@@ -16,14 +17,40 @@
     &-title {
       margin-bottom: 2rem;
     }
+    &-button {
+      margin-top: -1rem;
+      cursor: pointer;
+      float: right;
+      background: white;
+      color: $medeasy-green-color;
+      font-weight: bold;
+      box-shadow: 0 0 1rem rgba(0, 0, 0, .16);
+      padding: 1rem 2rem;
+      border-radius: 2rem;
+      animation: pulsate .7s infinite alternate;
+    }
     &-form {
+      margin-top: 1rem;
       display: flex;
       align-items: center;
       & .CustomButton {
         margin-left: 2.5rem;
         padding: 1rem 2.5rem !important;
       }
-      & { margin: 0 }
     }
+  }
+}
+
+@keyframes pulsate {
+  from {
+    background: white;
+    color: $medeasy-green-color;
+    transform: scale(.75);
+  }
+  to{
+    background: $medeasy-green-color;
+    color: white;
+    box-shadow: 0 0 1.5rem rgba(0, 0, 0, .4);
+    transform: scale(1);
   }
 }

@@ -129,7 +129,6 @@ router.post('/coinbase/webhooks', storeCoinbaseCharge)
 // @method - Public
 router.post('/coinbase/charge', [
   check('userId', 'User Id is required').not().isEmpty(),
-  check('mode', 'Mode is required').not().isEmpty(),
   check('chargeCode', 'Coinbase Charge code is required').not().isEmpty()
 ],
 createCoinbaseCharge)

@@ -81,7 +81,7 @@ const CouponModal = ({
 					{coupons.map(coupon => (
 						<CouponItem
 							onClick={() => {
-                onClick(coupon.name);
+                onClick(coupon.name)
                 disableOverlay()
 							}}
 							key={coupon._id}

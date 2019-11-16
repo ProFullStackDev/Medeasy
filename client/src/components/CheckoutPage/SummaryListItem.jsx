@@ -17,7 +17,7 @@ const SummaryListItem = ({
 }) => {
 	return (
 		<div className="SummaryListItem">
-			<span className='SummaryListItem__sno'>{index}</span>
+			<span className='SummaryListItem__sno'>{index + 1}</span>
 			<div className="SummaryListItem__product">
 				<h3
 					style={{ fontSize: '1.8rem', color: '#000' }}
