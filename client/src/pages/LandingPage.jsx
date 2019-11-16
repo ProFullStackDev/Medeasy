@@ -2,7 +2,7 @@ import React from 'react'
 
 import WelcomeSection from '../components/LandingPage/WelcomeSection'
 import FeaturedProductsSection from '../components/LandingPage/FeaturedProductsSection'
-import PaymentBrands from '../components/PaymentBrands'
+import BannerDetails from '../components/BannerDetails'
 import BestSellerSection from '../components/LandingPage/BestSellerSection'
 import { ReviewsSection } from '../components/LandingPage/ReviewsSection'
 import Condtions from '../components/LandingPage/Condtions'
@@ -30,7 +30,7 @@ const LandingPage = ({ conditions, products }) => (
 		<FeaturedProductsSection
 			products={products.filter(p => p.featured).slice(0, 5)}
 		/>
-		<PaymentBrands />
+		<BannerDetails direction='row' />
 		<BestSellerSection
 			products={products
 				.sort((a, b) => (a.timesSold > b.timesSold ? -1 : 1))
