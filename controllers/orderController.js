@@ -178,6 +178,7 @@ module.exports = {
 			)
 			await Order.deleteMany({
 				status: 'Pending',
+				method: { $ne: { } },
 				expiryDate: { $lte: new Date().getTime() }
 			})
 			const orders = await Order.find({}).populate('user', ['name', 'email'])

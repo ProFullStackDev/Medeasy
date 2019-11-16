@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect } from 'react'
 import '../../styles/components/OrderSummary.scss'
 
 // Components
@@ -9,7 +9,8 @@ import PricesBreakDown from '../CheckoutPage/PricesBreakDown'
 import Spinner from '../Spinner'
 
 import { connect } from 'react-redux'
-import { selectInventoryLoading } from '../../redux/selectors/inventorySelectors'
+import { selectInventoryLoading, selectInventoryCoupons } from '../../redux/selectors/inventorySelectors'
+import { fetchAllCoupons } from '../../redux/actions/inventoryActions'
 import { deleteCartItem } from '../../redux/actions/cartActions'
 import { createStructuredSelector } from 'reselect'
 
@@ -22,6 +23,8 @@ const OrderSummary = ({
 	cartProducts,
 	loading,
 	coupon,
+	coupons,
+	fetchAllCoupons,
 	nullifyCoupon,
 	deleteCartItem,
 	handleChange,
@@ -33,6 +36,12 @@ const OrderSummary = ({
 	const handleDelete = itemId => {
 		deleteCartItem(itemId)
 	}
+
+	useEffect(() => {
+		fetchAllCoupons()
+	}, [fetchAllCoupons])
+
+	console.log(coupons)
 
 	return (
 		<div className="OrderSummary">
@@ -53,7 +62,7 @@ const OrderSummary = ({
 							))
 						)}
 					</div>
-					<div className="OrderSummary__coupon">
+					{ coupons ? <div className="OrderSummary__coupon">
 						<p
 							style={{ display: 'inline-block', marginRight: '1rem' }}
 							className="OrderSummary__coupon-title"
@@ -105,7 +114,7 @@ const OrderSummary = ({
 								{couponError}
 							</p>
 						) : null}
-					</div>
+					</div> : null }
 					<PricesBreakDown prices={prices} />
 				</Fragment>
 			) : (
@@ -123,10 +132,11 @@ const OrderSummary = ({
 }
 
 const mapStateToProps = createStructuredSelector({
-	loading: selectInventoryLoading
+	loading: selectInventoryLoading,
+	coupons: selectInventoryCoupons
 })
 
 export default connect(
 	mapStateToProps,
-	{ deleteCartItem }
+	{ deleteCartItem, fetchAllCoupons }
 )(OrderSummary)

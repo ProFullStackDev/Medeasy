@@ -17,7 +17,7 @@ const CartListItem = ({
 	}
 }) => (
 	<div className="CartListItem">
-		<img src={image} alt="tablet" className="CartListItem__tabletimage" />
+		<img style={{ cursor: 'default' }} src={image} alt="tablet" className="CartListItem__tabletimage" />
 		<div className="CartListItem__details">
 			<p className="CartListItem__details-name" style={{ fontSize: '2.5rem' }}>
 				{name}
