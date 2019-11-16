@@ -11,6 +11,7 @@ const CouponsList = ({ coupons, onClick }) => {
 					<th>Type</th>
 					<th>Value</th>
 					<th>Expires At</th>
+					<th>Min. Amount</th>
 					<th>Actions</th>
 				</tr>
 			</thead>

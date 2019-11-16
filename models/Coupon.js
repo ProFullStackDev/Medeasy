@@ -10,7 +10,8 @@ const couponSchema = new Schema({
     required: true, 
     min: `${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()}`,
     max: `${new Date().getFullYear() + 1}-12-31`
-  }
+  },
+  minimumOrderAmount: { type: Number, required: true }
 }, { timestamps: true })
 
 couponSchema.methods = {

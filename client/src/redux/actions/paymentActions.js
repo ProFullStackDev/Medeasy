@@ -139,9 +139,7 @@ export const chargeCard = (
 ) => async dispatch => {
   try {
     dispatch({ type: SET_INVENTORY_LOADING, payload: true })
-    const {
-      data: { order }
-    } = await Axios.post('/api/payments/razorpay/charge', {
+    await Axios.post('/api/payments/razorpay/charge', {
       paymentId: razorpayPaymentId,
       orderId: razorpayOrderId,
       medEasyOrderId: orderId,

@@ -18,7 +18,7 @@ const {
 
 export const setCouponError = message => dispatch => dispatch({ type: SET_CART_COUPON_ERROR, payload: message })
 
-export const applyCoupon = couponName => async (dispatch, getState) => {
+export const applyCoupon = (subTotal, couponName) => async (dispatch, getState) => {
 	try {
 		dispatch(setCouponError(null))
 		dispatch({ type: SET_INVENTORY_LOADING, payload: true })
@@ -26,6 +26,7 @@ export const applyCoupon = couponName => async (dispatch, getState) => {
 			data: { coupon }
 		} = await Axios.patch('/api/cart/coupon/redeem', {
 			name: couponName,
+			subTotal: parseInt(subTotal),
 			cartId: getState().cart.cartId
 		})
 		dispatch({ type: SET_CART_COUPON, payload: coupon })

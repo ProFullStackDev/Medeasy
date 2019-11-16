@@ -80,6 +80,9 @@
     }
 
     &-table {
+      & th, & td {
+        flex: 1;
+      }
       padding: 4rem 1.5rem;
       background: #fff;
       position: relative;

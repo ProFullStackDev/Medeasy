@@ -77,7 +77,9 @@ router.patch(
 router.patch('/coupon/redeem', [
 	check('cartId', 'Cart Id is required').not().isEmpty(),
 	check('cartId', 'Invalid Cart Id').isMongoId(),
-	check('name', 'Coupon name is required').not().isEmpty()
+	check('name', 'Coupon name is required').not().isEmpty(),
+	check('subTotal', 'Sub Total is required').not().isEmpty(),
+	check('subTotal', 'Sub Total must be a number').isNumeric()
 ], applyCoupon)
 
 // @route - PATCH /api/cart/coupon/remove

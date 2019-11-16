@@ -9,7 +9,7 @@ import Moment from 'react-moment'
 const CouponListItem = ({
 	onClick,
 	alertModal,
-	coupon: { _id, name, type, value, expiresAt },
+	coupon: { _id, name, type, value, expiresAt, minimumOrderAmount },
 	index
 }) => {
 	const handleClick = () => {
@@ -29,6 +29,7 @@ const CouponListItem = ({
 			<td>{type}</td>
 			<td>{value} {type === 'percent' ? '%' : '$'}</td>
 			<td><Moment format='DD-MM-YYYY'>{expiresAt}</Moment></td>
+			<td>${minimumOrderAmount}</td>
 			<td>
 				<Link to={`/admin/dashboard/edit-coupon/${_id}`}>
 					<CustomButton

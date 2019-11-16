@@ -16,7 +16,7 @@ module.exports = {
 		if (!errors.isEmpty())
 			return res.status(400).send({ statusCode: 400, message: errors.array() })
 		try {
-			const { name, cartId } = req.body
+			const { name, cartId, subTotal } = req.body
 			const coupon = await Coupon.findOne({
 				name: name.toUpperCase(),
 				expiresAt: { $gt: new Date().getTime() }
@@ -30,6 +30,7 @@ module.exports = {
 				return res
 					.status(404)
 					.send({ statusCode: 404, message: 'Cart not found' })
+			if (subTotal < coupon.minimumOrderAmount) return res.status(400).send({ statusCode: 400, message: `Order value must be minimum $${coupon.minimumOrderAmount}` })
 			const { name: couponName, type, value } = coupon
 			cart.coupon = { name: couponName, type, value }
       await cart.save()

@@ -195,7 +195,8 @@ export const addCoupon = formState => async dispatch => {
 		dispatch({ type: SET_INVENTORY_LOADING, payload: true })
 		await axios.post('/api/coupons', {
 			...formState,
-			name: formState.name.toUpperCase()
+			name: formState.name.toUpperCase(),
+			minimumOrderAmount: parseInt(formState.minimumOrderAmount)
 		})
 		dispatch({ type: CLEAR_COUPONS })
 		history.push('/admin/dashboard/coupons')
@@ -213,7 +214,8 @@ export const updateCoupon = (formState, couponId) => async dispatch => {
 		dispatch({ type: SET_INVENTORY_LOADING, payload: true })
 		await axios.put(`/api/coupons/${couponId}`, {
 			...formState,
-			name: formState.name.toUpperCase()
+			name: formState.name.toUpperCase(),
+			minimumOrderAmount: parseInt(formState.minimumOrderAmount)
 		})
 		dispatch({ type: CLEAR_COUPONS })
 		history.push('/admin/dashboard/coupons')

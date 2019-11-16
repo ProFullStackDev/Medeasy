@@ -86,11 +86,12 @@ const CouponModal = ({
 							}}
 							key={coupon._id}
 						>
-							<CouponCode>{coupon.description}</CouponCode>
+							<CouponCode>{coupon.description}*</CouponCode>
 							<CouponDescriptionContainer>
 								<BarCodeIcon />
 								<CouponItemCode>{coupon.name}</CouponItemCode>
 							</CouponDescriptionContainer>
+						<span style={{ float: 'right', fontSize: '9px', marginTop: '1rem', textTransform: 'capitalise' }}>*Min Order Amount: $ {coupon.minimumOrderAmount}</span>
 						</CouponItem>
 					))}
 					<div className="ShowModal__buttons">

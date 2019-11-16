@@ -10,6 +10,7 @@ const OrdersList = ({ orders, history, url }) => {
 					<th>S.No</th>
 					<th>Order Id</th>
 					<th>Ordered by</th>
+					<th>Payment Method</th>
 					<th>Order Status</th>
 					<th>Order Amount</th>
 					<th>Tracking Id</th>
@@ -18,7 +19,7 @@ const OrdersList = ({ orders, history, url }) => {
 			</thead>
 			<tbody>
 				{orders.map(
-					({ _id, trackingId, user: { name }, totalAmount, status }, index) => (
+					({ _id, trackingId, user: { name }, totalAmount, status, method }, index) => (
 						<tr key={_id}>
 							<td>{index + 1}</td>
 							<td>
@@ -30,6 +31,7 @@ const OrdersList = ({ orders, history, url }) => {
 								</Link>
 							</td>
 							<td>{name}</td>
+							<td>{method}</td>
 							<td
 								style={{
 									color: status === 'Success' ? 'green' : 'orangered',

@@ -11,7 +11,6 @@ import Spinner from '../Spinner'
 import { connect } from 'react-redux'
 import { selectInventoryLoading } from '../../redux/selectors/inventorySelectors'
 import { deleteCartItem } from '../../redux/actions/cartActions'
-import { selectCartCoupon } from '../../redux/selectors/cartSelectors'
 import { createStructuredSelector } from 'reselect'
 
 import { ReactComponent as CloseIcon } from '../../images/closeBtn.svg'
@@ -27,23 +26,9 @@ const OrderSummary = ({
 	deleteCartItem,
 	handleChange,
 	couponName,
-	couponError
+	couponError,
+	prices
 }) => {
-	const subTotal = cartProducts.reduce(
-		(acc, product) => (acc += parseInt(product.subTotal)),
-		0
-	)
-	const prices = {
-		subTotal,
-		shippingPrice: 0,
-		tax: 0,
-		discount:
-			Object.keys(coupon).length > 0
-				? coupon.type === 'percent'
-					? Math.round(subTotal * (parseInt(coupon.value) / 100))
-					: parseInt(coupon.value)
-				: 0
-	}
 
 	const handleDelete = itemId => {
 		deleteCartItem(itemId)
@@ -138,8 +123,7 @@ const OrderSummary = ({
 }
 
 const mapStateToProps = createStructuredSelector({
-	loading: selectInventoryLoading,
-	coupon: selectCartCoupon
+	loading: selectInventoryLoading
 })
 
 export default connect(

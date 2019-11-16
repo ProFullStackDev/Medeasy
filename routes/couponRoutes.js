@@ -12,6 +12,8 @@ router.post('/', authenticate, isAdmin, [
   check('name', 'Name is required').not().isEmpty(),
   check('type', 'Type is required').not().isEmpty(),
   check('description', 'Description is required').not().isEmpty(),
+  check('minimumOrderAmount', 'Minimum Order Amount is required').not().isEmpty(),
+  check('minimumOrderAmount', 'Minimum Order Amount should be a number').isNumeric(),
   check('value', 'Value is required').not().isEmpty(),
   check('expiresAt', 'Expiry Date is required').not().isEmpty()
 ],
@@ -35,6 +37,8 @@ router.put('/:couponId', authenticate, isAdmin, [
   check('type', 'Type is required').not().isEmpty(),
   check('description', 'Description is required').not().isEmpty(),
   check('value', 'Value is required').not().isEmpty(),
+  check('minimumOrderAmount', 'Minimum Order Amount is required').not().isEmpty(),
+  check('minimumOrderAmount', 'Minimum Order Amount should be a number').isNumeric(),
   check('expiresAt', 'Expiry Date is required').not().isEmpty()
 ], updateCouponById)
 
