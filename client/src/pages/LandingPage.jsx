@@ -26,11 +26,11 @@ const reviews = [
 const LandingPage = ({ conditions, products }) => (
 	<section className="LandingPage">
 		<WelcomeSection />
+		<BannerDetails direction='row' />
 		<Condtions conditions={conditions} />
 		<FeaturedProductsSection
 			products={products.filter(p => p.featured).slice(0, 5)}
 		/>
-		<BannerDetails direction='row' />
 		<BestSellerSection
 			products={products
 				.sort((a, b) => (a.timesSold > b.timesSold ? -1 : 1))
