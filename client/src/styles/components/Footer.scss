@@ -1,4 +1,5 @@
-@import "../colors";
+@import '../colors';
+@import '../mixins';
 
 .Footer {
   color: $white-color;
@@ -15,6 +16,9 @@
     display: flex;
     justify-content: space-between;
     width: 75%;
+    @include desktop {
+      width: 90%;
+    }
 
     & a {
       transition: color 0.3s ease-in;

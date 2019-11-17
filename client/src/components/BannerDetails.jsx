@@ -13,8 +13,9 @@ import bankCards from '../images/bank-cards.png'
 
 // Styles
 const BannerGroup = styled.div`
-  ${({ direction }) => direction === 'column' ? 'margin-top: 1.5rem' : null };
-  ${({ direction }) => direction === 'row' ? 'width: 100%; margin: 2.5rem 0;' : null };
+  ${({ direction }) => (direction === 'column' ? 'margin-top: 1.5rem' : null)};
+  ${({ direction }) =>
+    direction === 'row' ? 'width: 100%; margin: 2.5rem 0;' : null};
   display: grid;
   ${({ direction }) =>
     direction === 'row'

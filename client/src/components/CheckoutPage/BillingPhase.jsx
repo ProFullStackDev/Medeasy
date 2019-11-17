@@ -22,7 +22,7 @@ import {
 } from '../../redux/selectors/authSelectors'
 import { alertUser } from '../../redux/actions/alertActions'
 import { setCheckoutRole } from '../../redux/actions/authActions'
-
+import { selectAlertAlerts } from '../../redux/selectors/alertSelectors'
 import CustomRadioButton from '../CustomRadioButton'
 import CustomButton from '../CustomButton'
 import CredentialsForm from './CredentialsForm'
@@ -37,6 +37,7 @@ const BillingPhase = ({
 	user,
 	checkoutRole,
 	loading,
+	alerts,
 	fetchUserAddresses,
 	cacheAddress,
 	alertUser,
@@ -45,6 +46,9 @@ const BillingPhase = ({
 	orderId,
 	addresses
 }) => {
+
+	if (alerts.length > 0) window.scrollTo(0, 0)
+
 	useEffect(() => {
 		setStepProgress(2)
 		if (checkoutRole === 'user' && user) fetchUserAddresses()
@@ -237,6 +241,7 @@ const BillingPhase = ({
 							<select
 								style={{
 									marginLeft: '2rem',
+									fontSize: '1.5rem',
 									border: 'none',
 									background: '#7AC7B8',
 									color: 'white',
@@ -287,7 +292,6 @@ const BillingPhase = ({
 							>
 								Shipping Address
 							</h2>
-							<AlertMessage />
 							<CredentialsForm
 								onChange={handleShippingChange}
 								formState={shippingFormState}
@@ -309,7 +313,8 @@ const mapStateToProps = createStructuredSelector({
 	checkoutRole: selectAuthCheckoutRole,
 	loading: selectProfileLoading,
 	addresses: selectProfileAddresses,
-	orderId: selectPaymentOrderId
+	orderId: selectPaymentOrderId,
+	alerts: selectAlertAlerts
 })
 
 export default connect(

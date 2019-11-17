@@ -28,8 +28,8 @@ const Footer = () => {
           <a href='mailto:contact@medeasyonline.com'>
             <FontAwesomeIcon icon={faEnvelope} /> contact@medeasyonline.com
           </a>
-          <span style={{ cursor: 'default' }}>
-            <FontAwesomeIcon icon={faClock} /> We are open 24 X 7
+          <span style={{ cursor: 'default', fontSize: '1.5rem' }}>
+            <FontAwesomeIcon style={{ marginRight: '1rem' }} icon={faClock} /> We are open 24 X 7
           </span>
         </div>
         <div className='Footer__info-useful'>

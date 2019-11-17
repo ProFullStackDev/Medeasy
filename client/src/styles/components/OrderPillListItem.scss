@@ -1,9 +1,12 @@
+@import '../mixins';
+
 .OrderPillListItem {
   img { cursor: pointer; }
   width: 100%;
   position: relative;
   display: flex;
   margin: 3rem 0;
+
   justify-content: space-between;
   align-items: center;
   &__closebtn {
@@ -30,6 +33,12 @@
       align-self: flex-end;
       margin-bottom: 1.5rem;
       margin-right: 2.5rem;
+
+      &--final {
+        @include desktop {
+          margin-left: -8rem;
+        }
+      }
     }
   }
 }

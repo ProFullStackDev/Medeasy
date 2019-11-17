@@ -101,7 +101,7 @@ const AccountPhase = ({ signIn, signUp, alertUser, setCheckoutRole, setStepProgr
 								<CustomButton type="submit" fontSize="1.8rem">
 									Login
 								</CustomButton>
-								<span style={{ fontSize: '1.2rem', marginLeft: '1.5rem' }}>
+								<span style={{ fontSize: '1.4rem', marginLeft: '1.5rem' }}>
 									New to Medeasy ?{' '}
 									<span
 										onClick={() => {
@@ -176,7 +176,7 @@ const AccountPhase = ({ signIn, signUp, alertUser, setCheckoutRole, setStepProgr
 								<CustomButton type="submit" fontSize="1.8rem">
 									Register
 								</CustomButton>
-								<span style={{ fontSize: '1.2rem', marginLeft: '1.5rem' }}>
+								<span style={{ fontSize: '1.4rem', marginLeft: '1.5rem' }}>
 									Already Registered ?{' '}
 									<span
 										onClick={() => {

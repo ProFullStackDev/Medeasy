@@ -17,16 +17,22 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    &-review { color: #979797; margin-left: 1.5rem; }
+    &-review {
+      color: #979797;
+      margin-left: 1.5rem;
+    }
   }
   &__availability {
     margin-top: 3rem;
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    span { margin-right: 1rem; }
+    span {
+      margin-right: 1rem;
+    }
   }
-  &__dosage, &__pillquantity {
+  &__dosage,
+  &__pillquantity {
     margin-top: 3rem;
     &--badges {
       margin-top: 2rem;
@@ -39,7 +45,9 @@
   }
   &__rates {
     margin-top: 4rem;
-    @include desktop { margin-top: 3rem; }
+    @include desktop {
+      margin-top: 3rem;
+    }
     display: flex;
     align-items: center;
     &--price {
@@ -62,7 +70,9 @@
   }
   &__buttons {
     margin-top: 3.5rem;
-    @include desktop { margin-top: 3rem; }
+    @include desktop {
+      margin-top: 3rem;
+    }
     display: flex;
     justify-content: flex-start;
     &-button {
