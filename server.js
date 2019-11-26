@@ -13,7 +13,6 @@ const port = process.env.PORT || 9998
 if (process.env.NODE_ENV === 'development') app.use(morgan('dev'))
 app.use(express.json())
 app.use('/uploads', express.static('uploads'))
-app.use(express.static(path.join(__dirname, 'client', 'build')))
 
 // All routes
 app.use('/api/user', require('./routes/userRoutes'))
@@ -27,8 +26,9 @@ app.use('/api/payments', require('./routes/paymentRoutes'))
 app.use('/api/coupons', require('./routes/couponRoutes'))
 app.use('/api/queries', require('./routes/queryRoutes'))
 
+app.use(express.static(path.resolve(__dirname, 'client', 'build')))
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'))
+  res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
 })
 
 app.listen(port, () => console.log('Server listening on port', port))
