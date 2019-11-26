@@ -35,7 +35,6 @@ module.exports = {
       review = await review.populate('product', ['name']).populate('user', ['name', 'email']).execPopulate()
       res.status(201).send({ statusCode: 201, review })
     } catch (err) {
-      console.log(err.message)
       if (err.name === 'CastError') return res.status(400).send({ statusCode: 400, message: 'Invalid Product Id' })
       res.status(500).send({ statusCode: 500, message: 'Server Error' })
     }

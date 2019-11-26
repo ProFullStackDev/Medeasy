@@ -28,7 +28,6 @@ module.exports = {
         expiresIn: '12h'
       })
     } catch (err) {
-      console.error(err.message)
       res.status(500).send({ statusCode: 400, message: 'Server Error' })
     }
   },
@@ -50,7 +49,6 @@ module.exports = {
       else guest = await Guest.create(req.body)
       res.send({ statusCode: 200, guest: guest._doc })
     } catch (err) {
-      console.log(err.message)
       res.status(500).send({ statusCode: 500, message: 'Server Error' })
     }
   },
@@ -67,7 +65,6 @@ module.exports = {
         expiresIn: '12h'
       })
     } catch (err) {
-      console.log(err, err.message)
       res
         .status(401)
         .send({ statusCode: 401, message: err.message, method: 'signin' })
@@ -99,7 +96,6 @@ module.exports = {
         .status(202)
         .send({ statusCode: 202, message: 'Password changed successfully' })
     } catch (err) {
-      console.error(err)
       res.status(500).send({ statusCode: 500, message: 'Server Error' })
     }
   },
@@ -155,13 +151,11 @@ module.exports = {
           <h3>Medeasy @ <a target='_blank' rel='noopener noreferrer' href='https://${process.env.MEDEASY_WEBSITE}'>medeasyonline.com</a></h3>
         `
       }
-
       // Send the email message
       const transporter = createTransporter(process.env.PASSWORD_RESET_EMAIL)
-      const response = await transporter.sendMail(message)
+			const response = await transporter.sendMail(message)
       res.send({ statusCode: 200, response })
     } catch (err) {
-      console.log(err)
       res.status(500).send({ statusCode: 500, message: 'Server Error' })
     }
   },
@@ -198,7 +192,6 @@ module.exports = {
         email: user.email
       })
     } catch (err) {
-      console.log(err)
       res.status(500).send({ statusCode: 500, message: 'Server Error' })
     }
   },
@@ -271,7 +264,6 @@ module.exports = {
         .status(202)
         .send({ statusCode: 202, message: 'User logged out successfully' })
     } catch (err) {
-      console.error(err.message)
       res.status(500).send({ statusCode: 500, message: 'Server Error' })
     }
   }

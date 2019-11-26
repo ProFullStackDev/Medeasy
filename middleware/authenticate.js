@@ -13,7 +13,6 @@ const authenticate = async (req, res, next) => {
     req.accessToken = accessToken
     next()
   } catch (err) {
-    console.log(err.message)
     res.status(401).send({ statusCode: 401, message: 'Incorrect Credentials' })
   }
 }

@@ -47,7 +47,6 @@ export const removeCoupon = () => async (dispatch, getState) => {
 		})
 		dispatch({ type: SET_CART_COUPON, payload: coupon })
 	} catch (err) {
-		console.log(err.response.data.message)
 	} finally {
 		dispatch({ type: SET_INVENTORY_LOADING, payload: false })
 	}
@@ -71,7 +70,6 @@ export const cacheAddress = (billingAddress, shippingAddress) => dispatch => {
 }
 
 export const storeGuestDetails = ({ name, email }) => async dispatch => {
-	console.log(name, email)
 	try {
 		dispatch({ type: SET_PROFILE_LOADING, payload: true })
 		const {
@@ -136,7 +134,6 @@ export const clearCart = () => async (dispatch, getState) => {
 		} = await Axios.delete(`/api/cart/empty/${cartId}`)
 		dispatch({ type: SET_CART_PRODUCTS, payload: cart })
 	} catch (err) {
-		console.log(err)
 	} finally {
 		dispatch({ type: SET_INVENTORY_LOADING, payload: false })
 	}

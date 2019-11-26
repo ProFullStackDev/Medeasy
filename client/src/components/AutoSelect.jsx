@@ -109,7 +109,6 @@ export const AutoSelect = ({ products, isNormalItem, onClick }) => {
 	const handleClick = (productName, productId) => {
 		setAutoSelectState(false)
 		setSearchText('')
-		console.log(productName, productId)
 		if (isNormalItem) onClick({ id: productId, name: productName })
 	}
 

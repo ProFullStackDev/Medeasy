@@ -8,7 +8,6 @@ import { updateCartItem } from '../redux/actions/cartActions'
 
 const UpdateModal = ({ title, values, disableOverlay, prevVal, type, itemId, updateCartItem }) => {
   const [selectedVal, setSelectedVal] = useState(prevVal)
-  console.log(prevVal, type)
   const handleClick = () => {
     disableOverlay()
     let value = ''

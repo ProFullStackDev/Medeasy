@@ -26,19 +26,19 @@ const mapStateToProps = state => ({
 })
 
 export const CreditCardPage = ({
-	fetchUserCreditCards,
-	user,
-	billingAddress,
-	checkoutRole,
-	orderId,
-	amount,
-	cards,
-	loading,
-	fetchRazorpayOrderId,
-	chargeCard,
-	razorPayOrderId,
-	currencyRate,
-	alertUser
+  fetchUserCreditCards,
+  user,
+  billingAddress,
+  checkoutRole,
+  orderId,
+  amount,
+  cards,
+  loading,
+  fetchRazorpayOrderId,
+  chargeCard,
+  razorPayOrderId,
+  currencyRate,
+  alertUser
 }) => {
   let razorpay = useRef()
   const [formState, setFormState] = useState({
@@ -94,7 +94,6 @@ export const CreditCardPage = ({
       parseInt(expYear) === new Date().getFullYear() - 2000
     )
       return alertUser('Card has expired', 'danger')
-    console.log(razorPayOrderId)
     const paiseAmount = Math.round(parseInt(amount) * currencyRate) * 100
     await razorpay.current.createPayment({
       amount: paiseAmount,
@@ -145,8 +144,7 @@ export const CreditCardPage = ({
           display: 'flex',
           alignItems: 'center',
           marginBottom: '2rem'
-        }}
-      >
+        }}>
         <h2 className='PaymentPhase__title'>Credit Card Information</h2>
         {user && cards.length > 0 ? (
           <select
@@ -155,12 +153,11 @@ export const CreditCardPage = ({
               border: 'none',
               background: '#7AC7B8',
               color: 'white',
-              padding: '1rem',
+              padding: '2rem',
               borderRadius: '.5rem'
             }}
             onChange={handleCardChange}
-            value={selectCard}
-          >
+            value={selectCard}>
             <option defaultValue='Select Card'>Select Card</option>
             {cards.map(card => (
               <option key={card._id} value={card.cardNumber}>
@@ -174,8 +171,7 @@ export const CreditCardPage = ({
       <form
         className='PaymentPhase__payment-form'
         style={{ width: '50%', marginTop: '3rem' }}
-        onSubmit={handleSubmit}
-      >
+        onSubmit={handleSubmit}>
         <CustomFormElement
           required
           labelName='Name on Card'

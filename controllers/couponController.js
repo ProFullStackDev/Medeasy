@@ -15,7 +15,6 @@ module.exports = {
       coupon = await Coupon.create(req.body)
       res.status(201).send({ statusCode: 201, coupon })
     } catch (err) {
-      console.error(err.message)
       res.status(500).send({ statusCode: 500, message: 'Server Error' })
     }
   },
@@ -27,7 +26,6 @@ module.exports = {
       }).sort('-createdAt')
       res.send({ statusCode: 200, coupons })
     } catch (err) {
-      console.error(err.message)
       res.status(500).send({ statusCode: 500, message: 'Server Error' })
     }
   },
@@ -49,7 +47,6 @@ module.exports = {
           .send({ statusCode: 404, message: 'Coupon does not exist' })
       res.status(202).send({ statusCode: 202, coupon })
     } catch (err) {
-      console.log(err.message)
       if (err.name === 'CastError')
         return res
           .status(400)

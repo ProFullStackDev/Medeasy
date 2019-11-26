@@ -14,10 +14,9 @@ module.exports = async (...productIds) => {
 							return resolve(product)
 						})
 						.catch(err => {
-							console.log(err)
 							return reject(err)
 						})
 				})
 		)
-	).catch(err => console.log(err))
+	).catch(err => { throw err })
 }

@@ -42,7 +42,6 @@ export const createOrder = (billingAddress, shippingAddress) => async (
     dispatch({ type: SET_ORDER_ID, payload: orderId })
     history.push('/checkout/payment/card')
   } catch (err) {
-    console.log(err)
     const errorMessage = err.response.data.message
     if (Array.isArray(errorMessage))
       errorMessage.forEach(message =>
@@ -73,9 +72,6 @@ export const fetchCoinbaseOrderId = (
     dispatch({ type: SET_COINBASE_ORDER_ID, payload: code })
     dispatch({ type: SET_COINBASE_HOSTED_URL, payload: hosted_url })
   } catch (err) {
-    console.log(err)
-    const errorMessage = err.response.data.message
-    console.log(errorMessage)
   } finally {
     dispatch({ type: SET_PROFILE_LOADING, payload: false })
   }
@@ -99,9 +95,6 @@ export const fetchRazorpayOrderId = (
     dispatch({ type: SET_RAZORPAY_ORDER_ID, payload: rzpOrderId })
     dispatch({ type: SET_CURRENCY_RATE, payload: currencyRate })
   } catch (err) {
-    console.log(err)
-    const errorMessage = err.response.data.message
-    console.log(errorMessage)
   } finally {
     dispatch({ type: SET_INVENTORY_LOADING, payload: false })
   }
@@ -124,7 +117,6 @@ export const fetchPaypalOrderId = (
     dispatch({ type: SET_CURRENCY_RATE, payload: currencyRate })
     return ppOrderId
   } catch (err) {
-    console.log(err)
     const errorMessage = err.response.data.message
     console.log(errorMessage)
   }
@@ -215,7 +207,6 @@ export const chargeBitcoin = chargeCode => async (dispatch, getState) => {
     history.push('/payment/success')
   } catch (err) {
     const errorMessage = err.response.data.message
-    console.log(errorMessage)
     if (Array.isArray(errorMessage))
       errorMessage.forEach(message =>
         dispatch(alertUser(message.msg, 'danger'))
@@ -242,7 +233,6 @@ export const chargeWesternUnion = (
     dispatch(alertUser('Order processed successfully', 'success'))
   } catch (err) {
     const errorMessage = err.response.data.message
-    console.log(errorMessage)
     if (Array.isArray(errorMessage))
       errorMessage.forEach(message =>
         dispatch(alertUser(message.msg, 'danger'))

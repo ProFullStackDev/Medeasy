@@ -43,7 +43,6 @@ export const fetchAllCategories = () => async (dispatch, getState) => {
     } = await axios.get('/api/categories')
     dispatch({ type: SET_CATEGORIES, payload: categories })
   } catch (err) {
-    console.log(err)
     const errorMessage = err.response.data.message
     if (Array.isArray(errorMessage))
       errorMessage.forEach(message =>
@@ -90,7 +89,6 @@ export const updateCategory = (formState, categoryId) => async dispatch => {
     history.push('/admin/dashboard/categories')
     dispatch(alertUser('Condition Updated Successfully', 'success'))
   } catch (err) {
-    console.log(err.response.data)
     const errorMessage = err.response.data.message
     dispatch(alertUser(errorMessage, 'danger'))
   } finally {
@@ -282,7 +280,6 @@ export const fetchProductById = productId => async dispatch => {
     dispatch({ type: SET_PRODUCT, payload: product })
     return product
   } catch (err) {
-    console.log(err)
     history.push('/')
     const errorMessage = err.response.data.message
     dispatch(alertUser(errorMessage, 'danger'))
@@ -386,7 +383,6 @@ export const fetchReviewsByProductId = productId => async dispatch => {
     dispatch({ type: SET_REVIEWS, payload: reviews })
     return reviews
   } catch (err) {
-    console.log(err)
     history.push('/')
     const errorMessage = err.response.data.message
     dispatch(alertUser(errorMessage, 'danger'))

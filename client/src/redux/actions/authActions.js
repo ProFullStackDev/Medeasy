@@ -50,7 +50,6 @@ export const signIn = (
 		else if (mode === 'normal' && !isAdmin) history.push('/')
 		else history.push('/checkout/address')
 	} catch (err) {
-		console.log(err)
 		const errorMessage = err.response.data.message
 		if (Array.isArray(errorMessage))
 			errorMessage.forEach(message =>

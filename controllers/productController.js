@@ -46,7 +46,7 @@ module.exports = {
 				.execPopulate()
 			res.status(201).send({ statusCode: 201, product })
 		} catch (err) {
-			console.log(err.message, err)
+			
 			if (err.name === 'CastError')
 				return res
 					.status(400)
@@ -81,7 +81,7 @@ module.exports = {
 				)
 				.catch(err => new Error(err))
 		} catch (err) {
-			console.log(err, err.message)
+			(err, err.message)
 			res.status(500).send({ statusCode: 500, message: 'Server Error' })
 		}
 	},
@@ -97,7 +97,7 @@ module.exports = {
 				.sort('-createdAt')
 			res.json({ statusCode: 200, count: products.length, products })
 		} catch (err) {
-			console.log(err.message)
+			(err.message)
 			res.status(500).send({ statusCode: 500, message: 'Server Error' })
 		}
 	},
@@ -120,7 +120,6 @@ module.exports = {
 					.send({ statusCode: 404, message: 'No products found' })
 			res.send({ statusCode: 200, products })
 		} catch (err) {
-			console.error(err.message)
 			if (err.name === 'CastError')
 				return res
 					.status(400)
@@ -146,7 +145,6 @@ module.exports = {
 					.send({ statusCode: 404, message: 'Product not found' })
 			res.send({ statusCode: 200, product })
 		} catch (err) {
-			console.error(err.message)
 			if (err.name === 'CastError')
 				return res
 					.status(400)
@@ -211,7 +209,7 @@ module.exports = {
 				.execPopulate()
 			res.status(202).send({ statusCode: 202, product })
 		} catch (err) {
-			console.log(err)
+			(err)
 			if (err.name === 'CastError')
 				return res
 					.status(400)
@@ -239,7 +237,7 @@ module.exports = {
 			await product.save()
 			res.status(202).send({ statusCode: 202, product })
 		} catch (err) {
-			console.log(err.message)
+			(err.message)
 			if (err.name === 'CastError')
 				return res
 					.status(400)
@@ -267,7 +265,7 @@ module.exports = {
 				res.send({ statusCode: 200, product })
 			})
 		} catch (err) {
-			console.log(err.message)
+			(err.message)
 			if (err.name === 'CastError')
 				return res
 					.status(400)

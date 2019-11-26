@@ -33,7 +33,6 @@ const WesternUnionProcess = ({
 
   const handleSubmit = event => {
     event.preventDefault()
-    console.log('Submitting')
     if (!isMoneyReceived)
       return alertUser(
         'Process cant be done without accepting money.',

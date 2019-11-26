@@ -102,7 +102,6 @@ const AdminCreateProduct = ({
 				if (checker) {
 					// Checking file SIZE Limit
 					if (file.size > 1024 * 1024 * 2) {
-						console.log('Large')
 						setFileErrorMessages([
 							...fileErrorMessages,
 							`${file.name}'s size is larger than 2MB`

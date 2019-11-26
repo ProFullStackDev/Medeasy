@@ -52,7 +52,6 @@ module.exports = {
       order = await Order.create(orderObj)
       res.status(201).send({ statusCode: 201, orderId: order._id })
     } catch (err) {
-      console.log(err.message)
       res.status(500).send({ statusCode: 500, message: 'Server Error' })
     }
   },
@@ -103,8 +102,6 @@ module.exports = {
       order.paypal_capture_id = undefined
       order.razorpay_payment_id = undefined
       order.paypal_capture_id = undefined
-      await order.save()
-      console.log(order)
       const message = {
         from: process.env.ORDER_EMAIL_ID,
         to: order.user.email,
@@ -132,9 +129,9 @@ module.exports = {
           }, As this is not an automated process on our side. Kindly send the amount to the following name and country</p><br/>
           <p>Name: <strong>HARISH BALASUBRAMANIUM</strong></p>
           <p>Country: <strong>INDIA</strong></p><br />
-          <p>4) After successfully completing the payment, Do send us a reply mail containing a screen shot of the payment receipt (transaction number and your name in it) to <a href="mailto:${process.env.ORDER_EMAIL_ID}">${
+          <p>4) After successfully completing the payment, Do send us a reply mail containing a screen shot of the payment receipt (transaction number and your name in it) to <a href="mailto:${
             process.env.ORDER_EMAIL_ID
-          }</a></p><br/>
+          }">${process.env.ORDER_EMAIL_ID}</a></p><br/>
           <p>5) Once the payment is received on our side, We will email you the order receipt.</p><br />
           <p>We thank you for believing in our service.</p>
           <br/><br/>
@@ -148,7 +145,6 @@ module.exports = {
       await transporter.sendMail(message)
       res.status(202).send({ statusCode: 202, message: 'Accepted' })
     } catch (err) {
-      console.log(err)
       if (err.name === 'CastError')
         return res
           .status(400)
@@ -218,13 +214,13 @@ module.exports = {
               order._id
             }</strong>, amounting to USD <strong>${
           order.totalAmount
-        }</strong>, placed at ${moment(order.createdAt).format(
+        }</strong>, placed at ${moment(order.paidAt).format(
           'L'
         )} has been shipped succesfully. <br/>
             Shipment Tracking Id - <strong>${trackingId}</strong><br />
-            Estimated Delivery Date - <strong>${moment(order.createdAt)
+            Estimated Delivery Date - <strong>${moment(order.paidAt)
               .add(10, 'days')
-              .format('L')}</strong> to <strong>${moment(order.createdAt)
+              .format('L')}</strong> to <strong>${moment(order.paidAt)
           .add(16, 'days')
           .format('L')}</strong><br />
             Please click the following link below to track your shipment.
@@ -239,10 +235,9 @@ module.exports = {
         `
       }
       const transporter = createTransporter(process.env.ORDER_EMAIL_ID)
-      await transporter.sendMail(message)
+      const response = await transporter.sendMail(message)
       res.status(202).send({ statusCode: 202, order })
     } catch (err) {
-      console.log(err)
       res.status(500).send({ statusCode: 500, message: 'Server Error' })
     }
   },
@@ -275,7 +270,6 @@ module.exports = {
           .send({ statusCode: 404, message: 'Order not found' })
       res.send({ statusCode: 200, order })
     } catch (err) {
-      console.log(err)
       if (err.name === 'CastError')
         return res
           .status(404)
@@ -289,7 +283,6 @@ module.exports = {
       const orders = await Order.find({ user: user._id, status: 'Success' })
       res.send({ statusCode: 200, orders })
     } catch (err) {
-      console.log(err)
       res.status(500).send({ statusCode: 500, message: 'Server Error' })
     }
   },

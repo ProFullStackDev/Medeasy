@@ -10,7 +10,7 @@ const app = express()
 const port = process.env.PORT || 9998
 
 // Middlewares
-if (process.env.NODE_ENV === 'development') app.use(morgan('dev'))
+app.use(morgan('dev'))
 app.use(express.json())
 app.use('/uploads', express.static('uploads'))
 

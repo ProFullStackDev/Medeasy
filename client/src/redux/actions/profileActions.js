@@ -24,7 +24,6 @@ export const fetchUserAddresses = () => async dispatch => {
 			return addresses
 		}, 10)
 	} catch (err) {
-		console.log(err)
 		const errorMessage = err.response.data.message
 		if (Array.isArray(errorMessage))
 			errorMessage.forEach(message =>

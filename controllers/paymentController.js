@@ -145,10 +145,10 @@ module.exports = {
         currencyRate: USDINR
       })
     } catch (err) {
-      console.log(err)
+      
       res
         .status(500)
-        .send({ statusCode: 500, message: JSON.parse(err.message) })
+        .send({ statusCode: 500, message: JSON.p })
     }
   },
 
@@ -182,7 +182,6 @@ module.exports = {
         charge: { coinbaseId: id, addresses, code, hosted_url }
       })
     } catch (err) {
-      console.error(err.message)
       res.status(500).send({ statusCode: 500, message: 'Server Error' })
     }
   },
@@ -250,7 +249,6 @@ module.exports = {
           'There seems to be an error in capturing the payment. Please contact our customer care'
       })
     } catch (err) {
-      console.log(err.message, err)
       res.status(500).send({ statusCode: 500, message: 'Server Error' })
     }
   },
@@ -318,7 +316,6 @@ module.exports = {
           message: 'Amount sent not equal to real amount'
         })
     } catch (err) {
-      console.log(err.message, err)
       res.status(500).send({ statusCode: 500, message: 'Server Error' })
     }
   },
@@ -355,7 +352,6 @@ module.exports = {
       await Coinbase.create(coinbaseObj)
       res.send({ statusCode: 200 })
     } catch (err) {
-      console.log(err.message)
       res.status(500).send({ statusCode: 500, message: 'Signature incorrect' })
     }
   },
@@ -404,7 +400,6 @@ module.exports = {
         }
       })
     } catch (err) {
-      console.log(err.message)
       res.status(500).send({ statusCode: 500, message: 'Server Error' })
     }
   },
@@ -429,6 +424,7 @@ module.exports = {
       }
       order.status = 'Success'
       order.method = 'Western Union'
+      order.paidAt = new Date()
       await order.save()
       incrementProductSales(...order.products.map(product => product.product))
       res.status(202).send({ statusCode: 202, order })

@@ -2,34 +2,6 @@ const { validationResult } = require('express-validator')
 const Profile = require('../models/Profile')
 
 module.exports = {
-	// addProfile: async (req, res) => {
-	//   const user = req.user
-	//   try {
-	//     const errors = validationResult(req)
-	//     if (!errors.isEmpty())
-	//       return res
-	//         .status(400)
-	//         .send({ statusCode: 400, message: errors.array() })
-	//     let profile = await Profile.findOne({ user: user._id })
-	//     if (profile) {
-	//       profile = await profile.populate('user', ['email']).execPopulate()
-	//       return res.send({ statusCode: 200, profile })
-	//     }
-	//     profile = new Profile({
-	//       firstName: req.body.firstName,
-	//       middleName: req.body.middleName,
-	//       lastName: req.body.lastName,
-	//       addresses: [req.body.shippingAddress, req.body.billingAddress]
-	//     })
-	//     profile.user = user._id
-	//     await profile.save()
-	//     profile = await profile.populate('user', ['email']).execPopulate()
-	//     res.status(201).send({ statusCode: 201, profile })
-	//   } catch (err) {
-	//     console.log(err.message)
-	//     res.status(500).send({ statusCode: 500, message: 'Server Error' })
-	//   }
-	// },
 	addAddress: async (req, res) => {
 		const user = req.user
 		try {
@@ -84,7 +56,6 @@ module.exports = {
 			profile = await profile.populate('user', ['name', 'email']).execPopulate()
 			res.status(201).send({ statusCode: 201, profile })
 		} catch (err) {
-			console.log(err)
 			res.status(500).send({ statusCode: 500, message: 'Server Error' })
 		}
 	},
@@ -131,7 +102,6 @@ module.exports = {
 			await profile.save()
 			res.status(202).send({ statusCode: 202, cards: profile.creditCards })
 		} catch (err) {
-			console.log(err)
 			res.status(500).send({ statusCode: 500, message: 'Server Error' })
 		}
 	},
@@ -150,7 +120,6 @@ module.exports = {
 			})
 			res.send({ statusCode: 200, cards: modifiedCards })
 		} catch (err) {
-			console.log(err)
 			res.status(500).send({ statusCode: 500, message: 'Server Error' })
 		}
 	},
@@ -275,7 +244,6 @@ module.exports = {
 			await profile.save()
 			return res.status(200).send({ statusCode: 200, card })
 		} catch (err) {
-			console.log(err)
 			if (err.name === 'CastError')
 				return res
 					.status(400)
@@ -295,7 +263,6 @@ module.exports = {
 			if (!profile) return res.send({ statusCode: 200, addresses: [] })
 			res.send({ statusCode: 200, addresses: profile.addresses })
 		} catch (err) {
-			console.log(err)
 			res.status(500).send({ statusCode: 500, message: 'Server Error' })
 		}
 	},
@@ -319,7 +286,6 @@ module.exports = {
       address.phNumber = String(address.phNumber).slice(1)
       res.send({ statusCode: 200, address })
 		} catch (err) {
-      console.error(err)
 			if (err.name === 'CastError')
 				return res
 					.status(400)
@@ -357,7 +323,6 @@ module.exports = {
 	},
 
 	async updateAddressById(req, res) {
-    console.log(req.body.phNumber)
 		const { addressId } = req.params
 		if (!addressId)
 			return res
@@ -407,7 +372,6 @@ module.exports = {
       await profile.save()
       res.status(202).send({ statusCode: 202, address: profile.addresses[addressIndex] })
 		} catch (err) {
-      console.log(err)
 			if (err.name === 'CastError')
 				return res
 					.status(400)
@@ -435,7 +399,6 @@ module.exports = {
 			await profile.save()
 			return res.status(202).send({ statusCode: 202, profile })
 		} catch (err) {
-			console.error(err.message)
 			if (err.name === 'CastError')
 				return res
 					.status(400)
