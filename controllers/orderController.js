@@ -3,7 +3,7 @@ const Order = require('../models/Order')
 const Cart = require('../models/Cart')
 const User = require('../models/User')
 const Guest = require('../models/Guest')
-const transporter = require('../utils/mailTransporter')
+const createTransporter = require('../utils/mailTransporter')
 const moment = require('moment')
 
 module.exports = {
@@ -106,10 +106,10 @@ module.exports = {
       await order.save()
       console.log(order)
       const message = {
-        from: process.env.EMAIL_ID,
+        from: process.env.ORDER_EMAIL_ID,
         to: order.user.email,
         envelope: {
-          from: `MEDEASY <${process.env.EMAIL_ID}>`,
+          from: `MEDEASY <${process.env.ORDER_EMAIL_ID}>`,
           to: order.user.email
         },
         subject: `Medeasy - Steps to process your order.`,
@@ -132,18 +132,19 @@ module.exports = {
           }, As this is not an automated process on our side. Kindly send the amount to the following name and country</p><br/>
           <p>Name: <strong>HARISH BALASUBRAMANIUM</strong></p>
           <p>Country: <strong>INDIA</strong></p><br />
-          <p>4) After successfully completing the payment, Do send us a reply mail containing a screen shot of the payment receipt (transaction number and your name in it) to ${
-            process.env.MEDEASY_ORDERS_EMAIL
-          }</p><br/>
+          <p>4) After successfully completing the payment, Do send us a reply mail containing a screen shot of the payment receipt (transaction number and your name in it) to <a href="mailto:${process.env.ORDER_EMAIL_ID}">${
+            process.env.ORDER_EMAIL_ID
+          }</a></p><br/>
           <p>5) Once the payment is received on our side, We will email you the order receipt.</p><br />
           <p>We thank you for believing in our service.</p>
           <br/><br/>
           <h4>With Regards</h4>
           <h3>Medeasy @ <a href='${
             process.env.MEDEASY_WEBSITE
-          }'>Medeasy.com</a></h3>
+          }'>Medeasyonline.com</a></h3>
         `
       }
+      const transporter = createTransporter(process.env.ORDER_EMAIL_ID)
       await transporter.sendMail(message)
       res.status(202).send({ statusCode: 202, message: 'Accepted' })
     } catch (err) {
@@ -203,10 +204,10 @@ module.exports = {
       order.trackingId = trackingId
       await order.save()
       const message = {
-        from: process.env.EMAIL_ID,
+        from: process.env.ORDER_EMAIL_ID,
         to: order.user.email,
         envelope: {
-          from: `MEDEASY <${process.env.EMAIL_ID}>`,
+          from: `MEDEASY <${process.env.ORDER_EMAIL_ID}>`,
           to: order.user.email
         },
         subject: 'Update on your Shipment',
@@ -234,9 +235,10 @@ module.exports = {
           <h4>With Regards</h4>
           <h3>Medeasy @ <a href='${
             process.env.MEDEASY_WEBSITE
-          }'>Medeasy.com</a></h3>
+          }'>Medeasyonline.com</a></h3>
         `
       }
+      const transporter = createTransporter(process.env.ORDER_EMAIL_ID)
       await transporter.sendMail(message)
       res.status(202).send({ statusCode: 202, order })
     } catch (err) {

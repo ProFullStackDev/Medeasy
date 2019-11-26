@@ -1,6 +1,6 @@
 const { validationResult } = require('express-validator')
 const Query = require('../models/Query')
-const transporter = require('../utils/mailTransporter')
+const createTransporter = require('../utils/mailTransporter')
 
 module.exports = {
 	async fetchAllQueries(req, res) {
@@ -24,10 +24,10 @@ module.exports = {
 			const modifiedPhoneNumber = `+1${phoneNumber.slice(0, 3)}-${phoneNumber.slice(3, 6)}-${phoneNumber.slice(6)}`
 			// Construct email message
 			const emailMessage = {
-				from: process.env.EMAIL_ID,
+				from: process.env.CONTACT_EMAIL_ID,
 				to: 'harishakira97@gmail.com',
 				envelope: {
-					from: `MEDEASY <${process.env.EMAIL_ID}>`,
+					from: `MEDEASY <${process.env.CONTACT_EMAIL_ID}>`,
 					to: 'harishakira97@gmail.com'
 				},
 				subject: 'You have a new query',
@@ -39,10 +39,11 @@ module.exports = {
 					<h2>Message: </h2><p>${message}</p>
           <br/><br/>
           <h4>With Regards</h4>
-          <h3>Medeasy @ <a href='${process.env.MEDEASY_WEBSITE}'>medeasy.com</a></h3>
+          <h3>Medeasy @ <a href='${process.env.MEDEASY_WEBSITE}'>medeasyonline.com</a></h3>
         `
 			}
 			// Send the email message
+			const transporter = createTransporter(process.env.CONTACT_EMAIL_ID)
 			await transporter.sendMail(emailMessage)
 			res.send({ statusCode: 201, query })
 		} catch (err) {
