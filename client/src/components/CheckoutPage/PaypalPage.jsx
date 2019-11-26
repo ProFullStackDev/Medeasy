@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Spinner from '../Spinner'
 
-export const PaypalPage = ({
+const PaypalPage = ({
   orderId,
   amount,
   chargePaypal,
@@ -46,3 +46,5 @@ export const PaypalPage = ({
     </>
   )
 }
+
+export default PaypalPage

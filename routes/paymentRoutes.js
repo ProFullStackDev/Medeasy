@@ -8,7 +8,8 @@ const {
   createPaypalCharge,
   createCoinbaseOrder,
   storeCoinbaseCharge,
-  createCoinbaseCharge
+  createCoinbaseCharge,
+  createWesternUnionCharge
 } = require('../controllers/paymentController')
 
 // @route - POST /api/payments/razorpay/order
@@ -132,5 +133,13 @@ router.post('/coinbase/charge', [
   check('chargeCode', 'Coinbase Charge code is required').not().isEmpty()
 ],
 createCoinbaseCharge)
+
+router.post('/western/charge', [
+  check('orderId', 'Order Id is required').not().isEmpty(),
+  check('orderId', 'Order Id is invalid').isMongoId(),
+  check('senderName', 'Sender name is required').not().isEmpty(),
+  check('paymentNumber', 'Payment number is required').not().isEmpty(),
+  check('moneyReceived', 'Money received status is required').not().isEmpty()
+], createWesternUnionCharge)
 
 module.exports = router

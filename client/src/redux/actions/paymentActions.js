@@ -130,6 +130,23 @@ export const fetchPaypalOrderId = (
   }
 }
 
+export const acceptWesternUnion = orderId => async dispatch => {
+  try {
+    dispatch({ type: SET_PROFILE_LOADING, payload: true })
+    await Axios.patch(`/api/orders/western/${orderId}`)
+    dispatch({ type: CLEAR_CART })
+    dispatch({ type: CLEAR_ORDER })
+    localStorage.removeItem('guest')
+    dispatch(generateCartId())
+    history.push('/payment/confirmed')
+  } catch (err) {
+    const errorMessage = err.response.data.message
+    dispatch(alertUser(errorMessage, 'danger'))
+  } finally {
+    dispatch({ type: SET_PROFILE_LOADING, payload: false })
+  }
+}
+
 export const chargeCard = (
   orderId,
   razorpayOrderId,
@@ -206,5 +223,32 @@ export const chargeBitcoin = chargeCode => async (dispatch, getState) => {
     else dispatch(alertUser(errorMessage, 'danger'))
   } finally {
     dispatch({ type: SET_PROFILE_LOADING, payload: false })
+  }
+}
+
+export const chargeWesternUnion = (
+  orderId,
+  { senderName, receiptNumber, isMoneyReceived }
+) => async dispatch => {
+  try {
+    dispatch({ type: SET_INVENTORY_LOADING, payload: true })
+    await Axios.post('/api/payments/western/charge', {
+      orderId,
+      senderName,
+      paymentNumber: receiptNumber,
+      moneyReceived: isMoneyReceived
+    })
+    history.push('/admin/dashboard/orders')
+    dispatch(alertUser('Order processed successfully', 'success'))
+  } catch (err) {
+    const errorMessage = err.response.data.message
+    console.log(errorMessage)
+    if (Array.isArray(errorMessage))
+      errorMessage.forEach(message =>
+        dispatch(alertUser(message.msg, 'danger'))
+      )
+    else dispatch(alertUser(errorMessage, 'danger'))
+  } finally {
+    dispatch({ type: SET_INVENTORY_LOADING, payload: false })
   }
 }

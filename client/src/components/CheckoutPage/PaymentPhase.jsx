@@ -3,12 +3,14 @@ import { Redirect, Route, Switch, NavLink } from 'react-router-dom'
 // Components
 import Spinner from '../Spinner'
 import CreditCardPage from './CreditCardPage'
-import { PaypalPage } from './PaypalPage'
+import PaypalPage from './PaypalPage'
 import BitcoinPage from './BitcoinPage'
+import WesternUnionPage from './WesternUnionPage'
 // Images
 import paypalImg from '../../images/paypal.svg'
 import cardImg from '../../images/credit-card.svg'
 import bitcoinImg from '../../images/bitcoin.svg'
+import westernUnion from '../../images/westernUnion.png'
 // Redux
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
@@ -62,6 +64,9 @@ const PaymentPhase = ({
         : cartCoupon.value
       : 0)
 
+  const bitWuTotalAmount =
+    subTotal >= 200 ? subTotal - subTotal * 0.1 : subTotal
+
   useEffect(() => {
     setStepProgress(4)
   }, [setStepProgress])
@@ -110,6 +115,20 @@ const PaymentPhase = ({
             Bitcoin
           </p>
         </NavLink>
+        <NavLink
+          to={`${url}/western-union`}
+          className='PaymentType'
+          activeClassName='activeType'
+        >
+          <img
+            src={westernUnion}
+            className='PaymentType__image'
+            alt='paymenttype'
+          />
+          <p style={{ fontSize: '1.5rem' }} className='PaymentType__name'>
+            Western Union
+          </p>
+        </NavLink>
       </ul>
       {loading ? (
         <Spinner />
@@ -150,9 +169,16 @@ const PaymentPhase = ({
                 proLoading={proLoading}
                 {...routeProps}
                 orderId={orderId}
-                amount={totalAmount}
+                amount={bitWuTotalAmount}
+                isSame={subTotal === bitWuTotalAmount}
               />
             )}
+          />
+          <Route
+            exact
+            path={`${url}/western-union`}
+            amount={bitWuTotalAmount}
+            render={routeProps => <WesternUnionPage {...routeProps} amount={bitWuTotalAmount} isSame={subTotal === bitWuTotalAmount}/>}
           />
         </Switch>
       )}

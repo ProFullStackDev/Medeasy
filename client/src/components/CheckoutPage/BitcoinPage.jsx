@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
-import { fetchCoinbaseOrderId, chargeBitcoin } from '../../redux/actions/paymentActions'
+import {
+  fetchCoinbaseOrderId,
+  chargeBitcoin
+} from '../../redux/actions/paymentActions'
 
 import Spinner from '../Spinner'
 import AlertMessage from '../AlertMessage'
@@ -28,9 +31,9 @@ export const BitcoinPage = ({
   proLoading,
   orderId,
   amount,
+  isSame,
   url
 }) => {
-  console.log('asss')
   useEffect(() => {
     fetchCoinbaseOrderId(orderId, amount)
   }, [fetchCoinbaseOrderId, orderId, amount])
@@ -47,6 +50,13 @@ export const BitcoinPage = ({
   ) : (
     <div style={{ marginTop: '4rem' }}>
       <h2>Pay With Bitcoin</h2>
+      <p
+        style={{ textAlign: 'center', fontWeight: 'bold', margin: '1.5rem 0' }}
+      >
+        {!isSame
+          ? `10% OFF applied. Amount Payable - $${amount}`
+          : `Sorry. Minimum Order amount is 200 $ to be eligible for discount. Amount Payable - $${amount}`}
+      </p>
       <p style={{ margin: '1.5rem 0' }}>
         Before proceeding, We assume that you did the following.
       </p>
@@ -155,4 +165,6 @@ export const BitcoinPage = ({
   )
 }
 
-export default connect(null, { fetchCoinbaseOrderId, chargeBitcoin })(BitcoinPage)
+export default connect(null, { fetchCoinbaseOrderId, chargeBitcoin })(
+  BitcoinPage
+)

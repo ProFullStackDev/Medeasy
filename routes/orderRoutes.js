@@ -4,14 +4,16 @@ const { check } = require('express-validator')
 const isAdmin = require('../middleware/isAdmin')
 const authenticate = require('../middleware/authenticate')
 const {
-	createOrder,
-	changePaymentMethod,
-  changePaymentStatus,
+  createOrder,
+  changePaymentMethod,
+	changePaymentStatus,
   changeTrackingStatus,
-	fetchOrders,
-	fetchOrderById,
-  fetchOrdersByUserId,
-	deleteOrderById
+  fetchOrders,
+  fetchOrderById,
+	fetchOrdersByUserId,
+	fetchOrderSingleByUserId,
+	deleteOrderById,
+	acceptWesternUnionOrder
 } = require('../controllers/orderController')
 
 // @route - GET /api/orders
@@ -29,49 +31,77 @@ router.get('/single/:orderId', [authenticate, isAdmin], fetchOrderById)
 // @method - Private (Auth)
 router.get('/user', authenticate, fetchOrdersByUserId)
 
+// @route - GET /api/orders/user/single
+// @desc - Get a single order of a particular user
+// @method - Public (Auth)
+router.post('/user/single', [
+  check('orderId', 'Order Id is required')
+    .not()
+    .isEmpty(),
+	check('orderId', 'Order Id is invalid').isMongoId(),
+	check('userId', 'User Id is required').not().isEmpty(),
+	check('userId', 'User id is invalid').isMongoId()
+], fetchOrderSingleByUserId)
+
 // @route - POST /api/orders
 // @desc - Create an order
 // @method - Public
 router.post(
-	'/',
-	[
-		check('cartId', 'Cart Id is required')
-			.not()
-			.isEmpty(),
-		check('mode', 'User mode is required')
-			.not()
-			.isEmpty(),
-		check('userId', 'User Id is required')
-			.not()
-			.isEmpty(),
-		check('cartId', 'Invalid Cart Id').isMongoId(),
-		check('userId', 'Invalid User Id').isMongoId(),
-		check('shippingAddress.address1', 'Address is required').not().isEmpty(),
-		check('shippingAddress.state', 'State is required').not().isEmpty(),
-		check('shippingAddress.city', 'City is required').not().isEmpty(),
-		check('shippingAddress.phNumber', 'Phone number is required').not().isEmpty(),
-		check('billingAddress.address1', 'Address is required').not().isEmpty(),
-		check('billingAddress.state', 'State is required').not().isEmpty(),
-		check('billingAddress.city', 'City is required').not().isEmpty(),
-		check('billingAddress.phNumber', 'Phone number is required').not().isEmpty(),
-		check(
-			'billingAddress.postalCode',
-			'postal must be 5 digits long'
-		).isLength({ min: 5, max: 5 }),
-		check(
-			'billingAddress.phNumber',
-			'phone number must be of numbers'
-		).isNumeric(),
-		check(
-			'shippingAddress.postalCode',
-			'postal must be 5 digits long'
-		).isLength({ min: 5, max: 5 }),
-		check(
-			'shippingAddress.phNumber',
-			'phone number must be of numbers'
-		).isNumeric()
-	],
-	createOrder
+  '/',
+  [
+    check('cartId', 'Cart Id is required')
+      .not()
+      .isEmpty(),
+    check('mode', 'User mode is required')
+      .not()
+      .isEmpty(),
+    check('userId', 'User Id is required')
+      .not()
+      .isEmpty(),
+    check('cartId', 'Invalid Cart Id').isMongoId(),
+    check('userId', 'Invalid User Id').isMongoId(),
+    check('shippingAddress.address1', 'Address is required')
+      .not()
+      .isEmpty(),
+    check('shippingAddress.state', 'State is required')
+      .not()
+      .isEmpty(),
+    check('shippingAddress.city', 'City is required')
+      .not()
+      .isEmpty(),
+    check('shippingAddress.phNumber', 'Phone number is required')
+      .not()
+      .isEmpty(),
+    check('billingAddress.address1', 'Address is required')
+      .not()
+      .isEmpty(),
+    check('billingAddress.state', 'State is required')
+      .not()
+      .isEmpty(),
+    check('billingAddress.city', 'City is required')
+      .not()
+      .isEmpty(),
+    check('billingAddress.phNumber', 'Phone number is required')
+      .not()
+      .isEmpty(),
+    check(
+      'billingAddress.postalCode',
+      'postal must be 5 digits long'
+    ).isLength({ min: 5, max: 5 }),
+    check(
+      'billingAddress.phNumber',
+      'phone number must be of numbers'
+    ).isNumeric(),
+    check(
+      'shippingAddress.postalCode',
+      'postal must be 5 digits long'
+    ).isLength({ min: 5, max: 5 }),
+    check(
+      'shippingAddress.phNumber',
+      'phone number must be of numbers'
+    ).isNumeric()
+  ],
+  createOrder
 )
 
 // @route - PUT /api/orders/method/:orderId
@@ -79,17 +109,22 @@ router.post(
 // @method - Public
 router.patch('/method/:orderId', changePaymentMethod)
 
+// @route - PUT /api/orders/western/:orderId
+// @desc - Accept order as western union
+// @method - Public
+router.patch('/western/:orderId', acceptWesternUnionOrder)
+
 // @route - PUT /api/orders/track/:orderId
 // @desc - Update Tracking Id
 // @method - Private (Both Auth and Admin)
 router.patch(
-	'/track/:orderId',
-	authenticate,
-	isAdmin,
-	check('trackingId', 'Tracking Id is required')
-		.not()
-		.isEmpty(),
-	changeTrackingStatus
+  '/track/:orderId',
+  authenticate,
+  isAdmin,
+  check('trackingId', 'Tracking Id is required')
+    .not()
+    .isEmpty(),
+  changeTrackingStatus
 )
 
 // @route - PUT /api/orders/status/:orderId

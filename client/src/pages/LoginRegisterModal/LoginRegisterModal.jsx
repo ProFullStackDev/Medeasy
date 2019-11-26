@@ -19,7 +19,7 @@ import { ReactComponent as CloseBtnGrey } from '../../images/closeBtnGrey.svg'
 const LoginRegisterModal = ({ history, match, user }) => {
 	const determineMode = match.path === '/login' ? 'login' : 'register'
 	const [mode, setMode] = useState(determineMode)
-	if (user) history.goBack()
+	if (user) history.push('/')
 	return (
 		<Modal>
 			<div className="LoginRegisterModal">

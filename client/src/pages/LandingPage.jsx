@@ -18,8 +18,8 @@ import {
 const LandingPage = ({ conditions, products }) => (
 	<section className="LandingPage">
 		<WelcomeSection />
-		<BannerDetails direction='row' />
 		<Condtions conditions={conditions} />
+		<BannerDetails direction='row' />
 		<FeaturedProductsSection
 			products={products.filter(p => p.featured).slice(0, 5)}
 		/>

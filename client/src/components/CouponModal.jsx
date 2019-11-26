@@ -2,8 +2,6 @@ import React, { useEffect, Fragment } from 'react'
 import styled from 'styled-components'
 
 import { ReactComponent as BarCodeIcon } from '../images/bar.svg'
-import { ReactComponent as ScissorIcon } from '../images/scissors.svg'
-
 import Spinner from './Spinner'
 import CustomButton from './CustomButton'
 

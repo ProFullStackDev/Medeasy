@@ -22,6 +22,7 @@ import ProductDetailPage from './pages/ProductDetailPage'
 import ShoppingCartPage from './pages/ShoppingCartPage'
 import ProfilePage from './pages/ProfilePage'
 import LoginRegisterModal from './pages/LoginRegisterModal/LoginRegisterModal'
+import PaymentConfirmedPage from './pages/PaymentConfimedPage'
 
 // React-router
 import { Switch, Route, Redirect } from 'react-router-dom'
@@ -62,7 +63,7 @@ const MainApp = ({ categories, products, loadHomePage, generateCartId, fetchItem
 						<Route exact path="/login" component={LoginRegisterModal} />
 						<Route exact path="/register" component={LoginRegisterModal} />
 						<Route exact path="/payment/success" render={() => <h1>Success page</h1>} />
-						<Route exact path="/payment/failure" render={() => <h1>Failure page</h1>} />
+						<Route exact path="/payment/confirmed" component={PaymentConfirmedPage} />
 						<Route
 							exact
 							path="/customer"

@@ -41,8 +41,6 @@ const OrderSummary = ({
 		fetchAllCoupons()
 	}, [fetchAllCoupons])
 
-	console.log(coupons)
-
 	return (
 		<div className="OrderSummary">
 			<p className="OrderSummary__title">Order Summary</p>

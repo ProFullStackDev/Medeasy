@@ -139,7 +139,11 @@ module.exports = {
       const ppOrder = await client().execute(request)
       order.paypal_order_id = ppOrder.result.id
       await order.save()
-      res.status(201).send({ statusCode: 201, ppOrderId: ppOrder.result.id, currencyRate: USDINR })
+      res.status(201).send({
+        statusCode: 201,
+        ppOrderId: ppOrder.result.id,
+        currencyRate: USDINR
+      })
     } catch (err) {
       console.log(err)
       res
@@ -224,6 +228,7 @@ module.exports = {
         order.method = 'card'
         order.coinbase_order_code = undefined
         order.paypal_order_id = undefined
+        order.paidAt = new Date()
         await order.save()
         incrementProductSales(...order.products.map(product => product.product))
         return res.status(203).send({
@@ -275,7 +280,12 @@ module.exports = {
           purchase_units: {
             0: {
               payments: {
-                captures: { 0: { id, amount: { value } } }
+                captures: {
+                  0: {
+                    id,
+                    amount: { value }
+                  }
+                }
               }
             }
           }
@@ -288,6 +298,7 @@ module.exports = {
         order.coinbase_order_code = undefined
         order.status = 'Success'
         order.method = 'paypal'
+        order.paidAt = new Date()
         await order.save()
         incrementProductSales(...order.products.map(product => product.product))
         return res.status(203).send({
@@ -377,6 +388,7 @@ module.exports = {
       order.method = 'bitcoin'
       order.razorpay_order_id = undefined
       order.paypal_order_id = undefined
+      order.paidAt = new Date()
       await order.save()
       incrementProductSales(...order.products.map(product => product.product))
       // Everything goes well. Hence release the order
@@ -393,6 +405,34 @@ module.exports = {
       })
     } catch (err) {
       console.log(err.message)
+      res.status(500).send({ statusCode: 500, message: 'Server Error' })
+    }
+  },
+
+  createWesternUnionCharge: async (req, res) => {
+    try {
+      const errors = validationResult(req)
+      if (!errors.isEmpty())
+        return res
+          .status(400)
+          .send({ statusCode: 400, message: errors.array() })
+      const { orderId, senderName, paymentNumber, moneyReceived } = req.body
+      const order = await Order.findById(orderId)
+      if (!order)
+        return res
+          .status(404)
+          .send({ statusCode: 404, message: 'Order not found' })
+      order.westenUnion = {
+        moneyReceived,
+        senderName,
+        paymentNumber
+      }
+      order.status = 'Success'
+      order.method = 'Western Union'
+      await order.save()
+      incrementProductSales(...order.products.map(product => product.product))
+      res.status(202).send({ statusCode: 202, order })
+    } catch (err) {
       res.status(500).send({ statusCode: 500, message: 'Server Error' })
     }
   }

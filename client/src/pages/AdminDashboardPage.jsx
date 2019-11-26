@@ -2,6 +2,9 @@ import React, { useState } from 'react'
 import { Route, Redirect } from 'react-router-dom'
 
 import AdminNavBar from '../components/AdminPage/AdminNavBar'
+import AlertMessage from '../components/AlertMessage'
+import AdminModal from '../components/AdminPage/AdminModal'
+
 import AdminHome from './dashboard/AdminHome'
 import AdminProducts from './dashboard/AdminProducts'
 import { AdminFeaturedProducts } from './dashboard/AdminFeaturedProducts'
@@ -13,8 +16,7 @@ import AdminCreateProduct from './dashboard/AdminCreateProduct'
 import AdminEditProduct from './dashboard/AdminEditProduct'
 import AdminCouponForm from './dashboard/AdminCouponForm'
 import AdminCategoriesForm from './dashboard/AdminCategoriesForm'
-import AlertMessage from '../components/AlertMessage'
-import AdminModal from '../components/AdminPage/AdminModal'
+import WesternUnionProcess from './dashboard/WesternUnionProcess'
 
 import '../styles/pages/AdminDashboardPage.scss'
 import { ReactComponent as Hamburger } from '../images/hamburger.svg'
@@ -51,6 +53,7 @@ const AdminDashboardPage = ({ user, match: { url }, history }) => {
         <Route exact path={`${url}/add-coupon`} component={AdminCouponForm} />
         <Route exact path={`${url}/add-category`} component={AdminCategoriesForm} />
         <Route exact path={`${url}/tracking/:orderId`} component={AdminOrderForm} />
+        <Route exact path={`${url}/western/:orderId`} component={WesternUnionProcess} />
         <Route exact path={`${url}/edit-product/:productId`} component={AdminEditProduct} />
         <Route exact path={`${url}/edit-coupon/:couponId`} component={AdminCouponForm} />
         <Route exact path={`${url}/edit-category/:categoryId`} component={AdminCategoriesForm} />
