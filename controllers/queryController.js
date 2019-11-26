@@ -39,7 +39,7 @@ module.exports = {
 					<h2>Message: </h2><p>${message}</p>
           <br/><br/>
           <h4>With Regards</h4>
-          <h3>Medeasy @ <a href='${process.env.MEDEASY_WEBSITE}'>medeasyonline.com</a></h3>
+          <h3>Medeasy @ <a href='https://${process.env.MEDEASY_WEBSITE}'>medeasyonline.com</a></h3>
         `
 			}
 			// Send the email message

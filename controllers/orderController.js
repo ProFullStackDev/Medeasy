@@ -139,7 +139,7 @@ module.exports = {
           <p>We thank you for believing in our service.</p>
           <br/><br/>
           <h4>With Regards</h4>
-          <h3>Medeasy @ <a href='${
+          <h3>Medeasy @ <a href='https://${
             process.env.MEDEASY_WEBSITE
           }'>Medeasyonline.com</a></h3>
         `
@@ -233,7 +233,7 @@ module.exports = {
           <p>We thank you for believing in our service.</p>
           <br/><br/>
           <h4>With Regards</h4>
-          <h3>Medeasy @ <a href='${
+          <h3>Medeasy @ <a href='https://${
             process.env.MEDEASY_WEBSITE
           }'>Medeasyonline.com</a></h3>
         `

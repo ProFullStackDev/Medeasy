@@ -152,7 +152,7 @@ module.exports = {
           <p>If you did not raise this request means, kindly ignore the email</p>
           <br/><br/>
           <h4>With Regards</h4>
-          <h3>Medeasy @ <a target='_blank' rel='noopener noreferrer' href='${process.env.MEDEASY_WEBSITE}'>medeasyonline.com</a></h3>
+          <h3>Medeasy @ <a target='_blank' rel='noopener noreferrer' href='https://${process.env.MEDEASY_WEBSITE}'>medeasyonline.com</a></h3>
         `
       }
 
