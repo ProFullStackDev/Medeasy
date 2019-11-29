@@ -6,14 +6,12 @@ import {
   faPhoneAlt,
   faClock
 } from '@fortawesome/free-solid-svg-icons'
-import {
-  faCcVisa,
-  faCcMastercard,
-  faBitcoin,
-  faCcPaypal
-} from '@fortawesome/free-brands-svg-icons'
 import { ReactComponent as CopyrightIcon } from '../images/copyright.svg'
 import { ReactComponent as WesternUnionIcon } from '../images/westernUnion.svg'
+import { ReactComponent as PaypalIcon } from '../images/paypalFooter.svg'
+import { ReactComponent as VisaIcon } from '../images/visaFooter.svg'
+import { ReactComponent as MasterCardIcon } from '../images/mastercardFooter.svg'
+import { ReactComponent as BitcoinIcon } from '../images/bitcoinFooter.svg'
 import '../styles/components/Footer.scss'
 
 const Footer = () => {
@@ -29,7 +27,8 @@ const Footer = () => {
             <FontAwesomeIcon icon={faEnvelope} /> contact@medeasyonline.com
           </a>
           <span style={{ cursor: 'default', fontSize: '1.5rem' }}>
-            <FontAwesomeIcon style={{ marginRight: '1rem' }} icon={faClock} /> We are open 24 X 7
+            <FontAwesomeIcon style={{ marginRight: '1rem' }} icon={faClock} />{' '}
+            We are open 24 X 7
           </span>
         </div>
         <div className='Footer__info-useful'>
@@ -43,13 +42,15 @@ const Footer = () => {
         </div>
         <div className='Footer__info-payments'>
           <p className='Footer__info-title'>We Accept</p>
-          <div>
-            <FontAwesomeIcon icon={faCcPaypal} size='5x' />
-            <FontAwesomeIcon icon={faCcVisa} size='5x' />
-            <FontAwesomeIcon icon={faCcMastercard} size='5x' />
-            <FontAwesomeIcon icon={faBitcoin} size='5x' />
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <PaypalIcon />
+            <VisaIcon />
+            <MasterCardIcon />
+            <BitcoinIcon />
           </div>
-          <div style={{ marginTop: '2rem' }}><WesternUnionIcon /></div>
+          <div style={{ marginTop: '2rem' }}>
+            <WesternUnionIcon />
+          </div>
         </div>
       </div>
       <div className='Footer__copyright'>

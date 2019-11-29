@@ -28,7 +28,7 @@ import PaymentConfirmedPage from './pages/PaymentConfimedPage'
 import { Switch, Route, Redirect } from 'react-router-dom'
 
 // Assets
-import norton from './images/assurances/norton.png'
+import { ReactComponent as NortonIcon } from './images/assurances/norton.svg'
 import CheckoutPage from './pages/CheckoutPage'
 import CategoryProductsPage from './pages/CategoryProductsPage'
 
@@ -109,7 +109,7 @@ const MainApp = ({ categories, products, loadHomePage, generateCartId, fetchItem
 				)}
 			</div>
 			<div className="App__secure">
-				<img src={norton} alt="norton" />
+				<NortonIcon />
 			</div>
 			<Footer />
 		</Fragment>

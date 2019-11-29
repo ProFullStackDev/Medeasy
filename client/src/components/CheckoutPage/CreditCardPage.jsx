@@ -153,7 +153,7 @@ export const CreditCardPage = ({
               border: 'none',
               background: '#7AC7B8',
               color: 'white',
-              padding: '2rem',
+              fontSize: '1.6rem',
               borderRadius: '.5rem'
             }}
             onChange={handleCardChange}
@@ -189,7 +189,7 @@ export const CreditCardPage = ({
           className='card_number'
           required
           placeholder='XXXX-XXXX-XXXX-XXXX'
-          labelName='Name on Card'
+          labelName='Card Number'
           type='number'
           value={cardNumber}
           name='cardNumber'

@@ -2,7 +2,10 @@
   &__types {
     margin: 3rem 0;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
+    & a:not(:last-child) {
+      margin-right: 4rem;
+    }
   }
   &__payment-form {
     &-three {

@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=PT+Sans+Caption&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Lato:700&display=swap');
+// @import url('https://fonts.googleapis.com/css?family=Open+Sans:700&display=swap');
 @import './mixins';
 
 html {
@@ -35,13 +37,19 @@ label {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
 
 .CheckoutProgress {
   & .title {
     font-size: 1.6rem !important;
+  }
+}
+
+.CustomRadioButton {
+  &__text {
+    font-size: 1.4rem;
   }
 }
 
@@ -86,7 +94,7 @@ code {
 }
 
 .AlertMessage {
-  font-size: 1.6rem
+  font-size: 1.6rem;
 }
 
 input,
@@ -109,7 +117,10 @@ textarea,
 }
 
 .ProductInformation {
-
+  &__detail--name {
+    font-family: Lato, sans-serif;
+    // font-family: 'Open Sans', sans-serif;
+  }
   &__detail--name,
   &__rates--price-final {
     font-size: 4.5rem;
@@ -178,7 +189,6 @@ textarea,
 }
 
 .CartListItem {
-
   &__dosage-value,
   &__quantity-value {
     font-size: 2rem;
@@ -197,7 +207,7 @@ textarea,
 
 .OrderSummary {
   &__title {
-    font-size: 2.2rem
+    font-size: 2.2rem;
   }
 }
 
@@ -215,7 +225,7 @@ textarea,
   }
 
   &__value {
-    font-size: 6rem
+    font-size: 6rem;
   }
 }
 
@@ -254,10 +264,9 @@ textarea,
 }
 
 .ProfilePageNavBar {
-
   li,
   p {
-    font-size: 1.8rem
+    font-size: 1.8rem;
   }
 
   &__profile-tile,
@@ -281,6 +290,6 @@ textarea,
   }
 
   &__intro-name {
-    font-size: 1.8rem
+    font-size: 1.8rem;
   }
 }

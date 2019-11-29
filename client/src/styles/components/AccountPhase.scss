@@ -7,6 +7,9 @@
       margin-left: 4rem;
     }
   }
+  &__user, &__guest {
+    margin-top: 2rem;
+  }
   &__user {
     &-signinform, &-registerform {
       width: 50%;
