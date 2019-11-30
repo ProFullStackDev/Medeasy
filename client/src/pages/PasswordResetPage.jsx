@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Helmet } from 'react-helmet'
 
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
@@ -59,10 +60,15 @@ const PasswordResetPage = ({
 
 	return (
 		<div className="LoginRegisterModal-wrapper">
+			<Helmet>
+        <title>Medeasy - Password Reset</title>
+        <meta name='description' content='Featured products' />
+      </Helmet>
 			{verifiedState === '' ? (
 				<Spinner white={true} />
 			) : (
 				<div className="LoginRegisterModal">
+					
 					<div className="LoginRegisterModal__left">
 						<div className="LoginRegisterModal__left-title">
 							<h2 className="LoginRegisterModal__left-title--content">

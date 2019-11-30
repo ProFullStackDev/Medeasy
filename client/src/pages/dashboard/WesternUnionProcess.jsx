@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Helmet } from 'react-helmet'
 import styled from 'styled-components'
 import CustomCheckBox from '../../components/CustomCheckbox'
 import AlertMessage from '../../components/AlertMessage'
@@ -55,10 +56,14 @@ const WesternUnionProcess = ({
 
   return (
     <MainContainer>
+      <Helmet>
+        <title>Medeasy - Process Western Union Order</title>
+        <meta name='description' content='Process Western Union Order' />
+      </Helmet>
       <h1>Process Western Union Order</h1>
       <h2 style={{ margin: '1.5rem 0' }}>Order number: {orderId}</h2>
       <AlertMessage />
-      { !loading ? (
+      {!loading ? (
         <FormContainer onSubmit={handleSubmit}>
           <CustomCheckBox
             style={{ margin: '3.5rem 0 1.5rem 0' }}

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Helmet } from 'react-helmet'
 
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
@@ -59,6 +60,10 @@ const CategoryProductsPage = ({
     <Spinner />
   ) : (
     <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
+      <Helmet>
+        <title>Medeasy - {category.name}</title>
+        <meta name='description' content='Featured products' />
+      </Helmet>
 			<BannerDetails direction='column' />
       <section className='CategoryProductsPage' style={{ marginLeft: '3rem' }}>
         <Title>

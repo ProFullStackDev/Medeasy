@@ -1,4 +1,5 @@
 import React, { Fragment, useState, useEffect, useRef } from 'react'
+import { Helmet } from 'react-helmet'
 
 import Spinner from '../Spinner'
 import CustomFormElement from '../CustomFormElement'
@@ -139,6 +140,10 @@ export const CreditCardPage = ({
     <Spinner />
   ) : (
     <Fragment>
+      <Helmet>
+        <title>Medeasy - Payment</title>
+        <meta name='description' content='Pay with Credit / Debit Card' />
+      </Helmet>
       <div
         style={{
           display: 'flex',

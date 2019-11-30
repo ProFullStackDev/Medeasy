@@ -7,6 +7,9 @@
   row-gap: 3.5rem;
   grid-auto-rows: minmax(min-content, max-content);
   width: calc(99vw - 11.5rem);
+  @media screen and (min-width: 1440px) {
+    width: calc(144rem - 11.5rem);
+  }
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
   z-index: 10;

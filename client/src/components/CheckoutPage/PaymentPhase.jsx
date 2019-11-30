@@ -8,7 +8,7 @@ import BitcoinPage from './BitcoinPage'
 import WesternUnionPage from './WesternUnionPage'
 // Images
 import paypalImg from '../../images/paypal.svg'
-import cardImg from '../../images/credit-card.svg'
+// import cardImg from '../../images/credit-card.svg'
 import bitcoinImg from '../../images/bitcoin.svg'
 import westernUnion from '../../images/westernUnion.png'
 // Redux
@@ -49,7 +49,7 @@ const PaymentPhase = ({
   proLoading,
   setStepProgress,
   products,
-  fetchCoinbaseOrderId,
+  // fetchCoinbaseOrderId,
   fetchRazorpayOrderId,
   fetchPaypalOrderId,
   match: { url }
@@ -73,11 +73,21 @@ const PaymentPhase = ({
 
   if (!orderId) return <Redirect to='/checkout/review' />
 
+  // NOTE (CREDIT CARD IS CURRENTLY DISABLED. I CHANGED TO PAYPAL IN FOLLOWING PLACES)
+  /**
+   * 1) AccountPhase.jsx - Line 50
+   * 2) BillingPhase.jsx - Line 92
+   * 3) paymenActions.js - Line 43
+   * 4) Disabled the card Type below (Line 88 - 97)
+   * 5) Commented fetchCoinbaseId (Line 52)
+   * 6) Commented cardImg (Line 11)
+   */
+
   return (
     <div className='PaymentPhase'>
       <h2 className='PaymentPhase__title'>Payment Information</h2>
       <ul className='PaymentPhase__types'>
-        <NavLink
+        {/* <NavLink
           to={`${url}/card`}
           className='PaymentType'
           activeClassName='activeType'
@@ -86,12 +96,11 @@ const PaymentPhase = ({
           <p style={{ fontSize: '1.5rem' }} className='PaymentType__name'>
             Credit Card
           </p>
-        </NavLink>
+        </NavLink> */}
         <NavLink
           to={`${url}/paypal`}
           className='PaymentType'
-          activeClassName='activeType'
-        >
+          activeClassName='activeType'>
           <img
             src={paypalImg}
             className='PaymentType__image'
@@ -104,8 +113,7 @@ const PaymentPhase = ({
         <NavLink
           to={`${url}/bitcoin`}
           className='PaymentType'
-          activeClassName='activeType'
-        >
+          activeClassName='activeType'>
           <img
             src={bitcoinImg}
             className='PaymentType__image'
@@ -118,8 +126,7 @@ const PaymentPhase = ({
         <NavLink
           to={`${url}/western-union`}
           className='PaymentType'
-          activeClassName='activeType'
-        >
+          activeClassName='activeType'>
           <img
             src={westernUnion}
             className='PaymentType__image'
@@ -178,7 +185,13 @@ const PaymentPhase = ({
             exact
             path={`${url}/western-union`}
             amount={bitWuTotalAmount}
-            render={routeProps => <WesternUnionPage {...routeProps} amount={bitWuTotalAmount} isSame={subTotal === bitWuTotalAmount}/>}
+            render={routeProps => (
+              <WesternUnionPage
+                {...routeProps}
+                amount={bitWuTotalAmount}
+                isSame={subTotal === bitWuTotalAmount}
+              />
+            )}
           />
         </Switch>
       )}

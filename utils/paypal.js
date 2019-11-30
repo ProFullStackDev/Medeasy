@@ -18,8 +18,8 @@ const client = () => new PayPalHttpClient(environment())
 const environment = () => {
   let clientId = process.env.PAYPAL_CLIENT_ID || 'PAYPAL-SANDBOX-CLIENT-ID'
   let clientSecret = process.env.PAYPAL_CLIENT_SECRET || 'PAYPAL-SANDBOX-CLIENT-SECRET'
-  // return new LiveEnvironment(clientId, clientSecret) // Live
-  return new SandboxEnvironment(clientId, clientSecret) // sanbox
+  return new LiveEnvironment(clientId, clientSecret) // Live
+  // return new SandboxEnvironment(clientId, clientSecret) // sanbox
 }
 
 const prettyPrint = async (jsonData, pre = '') => {

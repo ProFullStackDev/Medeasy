@@ -3,8 +3,11 @@ const dotenv = require('dotenv')
 const morgan = require('morgan')
 const path = require('path')
 
-dotenv.config({ path: './.env' })
+dotenv.config({ path: './prod.env' })
 require('./db')
+// require('./models/Order').deleteMany().then(() => console.log('Done'))
+// require('./models/Coinbase').deleteMany().then(() => console.log('Done'))
+// require('./models/Cart').deleteMany().then(() => console.log('Done'))
 
 const app = express()
 const port = process.env.PORT || 9998

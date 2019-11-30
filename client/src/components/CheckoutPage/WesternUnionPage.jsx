@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { Helmet } from 'react-helmet'
 
 import { connect } from 'react-redux'
 import { fetchOrderByUserId } from '../../redux/actions/inventoryActions'
@@ -35,6 +36,10 @@ const WesternUnionPage = ({
     <Spinner />
   ) : (
     <div>
+      <Helmet>
+        <title>Medeasy - Payment</title>
+        <meta name='description' content='Pay with Western Union' />
+      </Helmet>
       <h3 style={{ textAlign: 'center' }}>Pay through Western Union.</h3>
       <p
         style={{ textAlign: 'center', fontWeight: 'bold', margin: '1.5rem 0' }}

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Helmet } from 'react-helmet'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 import {
@@ -49,6 +50,10 @@ export const BitcoinPage = ({
     <Spinner />
   ) : (
     <div style={{ marginTop: '4rem' }}>
+      <Helmet>
+        <title>Medeasy - Payment</title>
+        <meta name='description' content='Pay with Bitcoin' />
+      </Helmet>
       <h2>Pay With Bitcoin</h2>
       <p
         style={{ textAlign: 'center', fontWeight: 'bold', margin: '1.5rem 0' }}

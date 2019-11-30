@@ -2,6 +2,7 @@ import React, { useState, useEffect, Fragment } from 'react'
 
 import { Redirect } from 'react-router-dom'
 import validator from 'validator'
+import { Helmet } from 'react-helmet'
 
 import { connect } from 'react-redux'
 import {
@@ -89,7 +90,7 @@ const BillingPhase = ({
 
 	const [selectAddress, setSelectAddress] = useState('')
 
-	if (orderId) return <Redirect to='/checkout/payment/card' />
+	if (orderId) return <Redirect to='/checkout/payment/paypal' />
 	if (user && !checkoutRole) setCheckoutRole('user')
 	if (!user && !checkoutRole) return <Redirect to="/checkout/account" />
 
@@ -225,6 +226,10 @@ const BillingPhase = ({
 
 	return (
 		<div style={{ position: 'relative' }} className="BillingPhase">
+			<Helmet>
+        <title>Medeasy - Billing</title>
+        <meta name='description' content='Fill in your shipping / billing address details' />
+      </Helmet>
 			{loading ? (
 				<Spinner />
 			) : (

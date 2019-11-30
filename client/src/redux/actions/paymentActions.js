@@ -40,7 +40,7 @@ export const createOrder = (billingAddress, shippingAddress) => async (
       shippingAddress
     })
     dispatch({ type: SET_ORDER_ID, payload: orderId })
-    history.push('/checkout/payment/card')
+    history.push('/checkout/payment/paypal')
   } catch (err) {
     const errorMessage = err.response.data.message
     if (Array.isArray(errorMessage))

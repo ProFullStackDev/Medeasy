@@ -1,5 +1,5 @@
 @mixin desktop {
-  @media only screen and (max-width: 74.99em) {
+  @media only screen and (max-width: 90em) {
     @content;
   }
 }

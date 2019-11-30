@@ -1,4 +1,5 @@
 import React, { useState, Fragment } from 'react'
+import { Helmet } from 'react-helmet'
 import '../styles/pages/ShoppingCartPage.scss'
 // components
 import UpdateModal from '../components/UpdateModal'
@@ -60,6 +61,10 @@ const ShoppingCartPage = ({
 		<Spinner />
 	) : (
 		<section className="ShoppingCartPage">
+			<Helmet>
+        <title>Medeasy - Shopping Cart</title>
+        <meta name='description' content='Featured products' />
+      </Helmet>
 			{/* Show modal when update button is clicked */}
 			{isDosageClicked && (
 				<UpdateModal

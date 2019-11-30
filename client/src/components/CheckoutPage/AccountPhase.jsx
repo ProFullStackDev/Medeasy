@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Redirect } from 'react-router-dom'
+import { Helmet } from 'react-helmet'
 
 // Components
 import CustomFormElement from '../CustomFormElement'
@@ -44,10 +45,10 @@ const AccountPhase = ({
     cPassword: ''
   })
 
-  const [isUser, setIsUser] = useState(true)
+  const [isUser] = useState(true)
   const [authMode, setAuthMode] = useState('login')
 
-  if (orderId) return <Redirect to='/checkout/payment/card' />
+  if (orderId) return <Redirect to='/checkout/payment/paypal' />
   if (user) return <Redirect to='/checkout/address' />
   const { email, password, cPassword, fName, mName, lName } = formState
 
@@ -80,6 +81,10 @@ const AccountPhase = ({
 
   return (
     <div style={{ position: 'relative' }} className='AccountPhase'>
+      <Helmet>
+        <title>Medeasy - Account</title>
+        <meta name='description' content='Authenticate or continue as a guest' />
+      </Helmet>
       <h2 className='AccountPhase__title' style={{ marginBottom: '1rem' }}>
         Account
       </h2>
@@ -199,51 +204,49 @@ const AccountPhase = ({
             </form>
           )}
         </div>
-      ) : (
-        <div className='AccountPhase__guest'>
-          <p className='AccountPhase__guest--info'>
-            <span
-              onClick={() => {
-                setAuthMode('login')
-                setIsUser(true)
-              }}
-              style={{ color: '#7AC7B8', cursor: 'pointer' }}>
-              Login
-            </span>{' '}
-            or{' '}
-            <span
-              onClick={() => {
-                setAuthMode('register')
-                setIsUser(true)
-              }}
-              style={{ color: '#7AC7B8', cursor: 'pointer' }}>
-              Register
-            </span>{' '}
-            with us for convenience
-          </p>
-          <ul className='AccountPhase__guest--featlist'>
-            <li>
-              <span className='AccountPhase__guest--featlist-dot'></span>
-              <span>Fast and easy check out</span>
-            </li>
-            <li>
-              <span className='AccountPhase__guest--featlist-dot'></span>
-              <span>Easy access to your order history and status</span>
-            </li>
-          </ul>
-          <CustomButton
-            onClick={() => {
-              setCheckoutRole('guest')
-              history.push('/checkout/address')
-            }}>
-            Checkout as Guest
-          </CustomButton>
-        </div>
-      )}
+      ) : //(
+      //   <div className='AccountPhase__guest'>
+      //     <p className='AccountPhase__guest--info'>
+      //       <span
+      //         onClick={() => {
+      //           setAuthMode('login')
+      //           setIsUser(true)
+      //         }}
+      //         style={{ color: '#7AC7B8', cursor: 'pointer' }}>
+      //         Login
+      //       </span>{' '}
+      //       or{' '}
+      //       <span
+      //         onClick={() => {
+      //           setAuthMode('register')
+      //           setIsUser(true)
+      //         }}
+      //         style={{ color: '#7AC7B8', cursor: 'pointer' }}>
+      //         Register
+      //       </span>{' '}
+      //       with us for convenience
+      //     </p>
+      //     <ul className='AccountPhase__guest--featlist'>
+      //       <li>
+      //         <span className='AccountPhase__guest--featlist-dot'></span>
+      //         <span>Fast and easy check out</span>
+      //       </li>
+      //       <li>
+      //         <span className='AccountPhase__guest--featlist-dot'></span>
+      //         <span>Easy access to your order history and status</span>
+      //       </li>
+      //     </ul>
+      //     <CustomButton>Checkout as Guest</CustomButton>
+      //   </div>
+      // )}
+      null}
       {isUser && (
         <CustomButton
-          extraStyle={{ marginTop: '1.5rem' }}
-          onClick={() => setIsUser(!isUser)}>
+          extraStyle={{ marginTop: '1.5rem', background: 'rgb(248, 147, 26)' }}
+          onClick={() => {
+            setCheckoutRole('guest')
+            history.push('/checkout/address')
+          }}>
           Continue as Guest
         </CustomButton>
       )}
