@@ -1,19 +1,19 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "8399a3cabb7a17b96a850399788c8c85",
+    "revision": "118889c1bc904616ebf646182d7b5202",
     "url": "/index.html"
   },
   {
-    "revision": "8ebeb80f0d3f24677857",
-    "url": "/static/css/main.2e2c2d36.chunk.css"
+    "revision": "a9db43bd6014ae726ed6",
+    "url": "/static/css/main.84e2fc22.chunk.css"
   },
   {
-    "revision": "94f880903e7df36ae9a6",
-    "url": "/static/js/2.381e2667.chunk.js"
+    "revision": "96c54a4f4dc7dc7b0545",
+    "url": "/static/js/2.d0d9128a.chunk.js"
   },
   {
-    "revision": "8ebeb80f0d3f24677857",
-    "url": "/static/js/main.e8e86358.chunk.js"
+    "revision": "a9db43bd6014ae726ed6",
+    "url": "/static/js/main.97a3607f.chunk.js"
   },
   {
     "revision": "42ac5946195a7306e2a5",
@@ -68,6 +68,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/media/bitcoin.f40a81e3.svg"
   },
   {
+    "revision": "09680bfff9a9488dad853eb01da66f98",
+    "url": "/static/media/bitcoinFooter.09680bff.svg"
+  },
+  {
     "revision": "39112b1809691c93d7e4a17e6471a58d",
     "url": "/static/media/carouselimg.39112b18.png"
   },
@@ -94,10 +98,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "47f75504c8662c7b8988319228d3911d",
     "url": "/static/media/copyright.47f75504.svg"
-  },
-  {
-    "revision": "0c379e7d8099c08b75f87c1af74c8fa0",
-    "url": "/static/media/credit-card.0c379e7d.svg"
   },
   {
     "revision": "c837b78403a5a97bd10700f40d1a1304",
@@ -176,6 +176,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/media/mastercard.5450f163.svg"
   },
   {
+    "revision": "40aa286518e8e30ee90f66c6bae0e1c9",
+    "url": "/static/media/mastercardFooter.40aa2865.svg"
+  },
+  {
     "revision": "434a46fd7991092895a408cce2f98e22",
     "url": "/static/media/material.434a46fd.ttf"
   },
@@ -192,16 +196,20 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/media/noAddress.516bd81b.svg"
   },
   {
-    "revision": "f455180451afe35dd38323d2f8d4564f",
-    "url": "/static/media/norton.f4551804.png"
+    "revision": "8974153736e92ecb9d0719865d818e3b",
+    "url": "/static/media/norton.89741537.svg"
   },
   {
     "revision": "a5e56182a836c9738d8e15f2b89bbd86",
     "url": "/static/media/pain.a5e56182.jpg"
   },
   {
-    "revision": "e887a7aaac799fbd19fc37b76fbdf100",
-    "url": "/static/media/paypal.e887a7aa.svg"
+    "revision": "728659144b763190eaf57846e9d35862",
+    "url": "/static/media/paypal.72865914.svg"
+  },
+  {
+    "revision": "c84749137f87c4267a00419d32c6f320",
+    "url": "/static/media/paypalFooter.c8474913.svg"
   },
   {
     "revision": "a1188d350364399fa115e5400cefeec3",
@@ -260,7 +268,11 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/media/visa.b742437b.svg"
   },
   {
-    "revision": "741f9765e0aff55ed8ef9783412fccd2",
-    "url": "/static/media/westernUnion.741f9765.svg"
+    "revision": "d53d594f990202c76ebae19c1af5a06b",
+    "url": "/static/media/visaFooter.d53d594f.svg"
+  },
+  {
+    "revision": "3d17f5442a96a744948a73b398fc4257",
+    "url": "/static/media/westernUnion.3d17f544.svg"
   }
 ]);
