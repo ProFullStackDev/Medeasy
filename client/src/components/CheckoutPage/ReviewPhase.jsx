@@ -7,7 +7,7 @@ import { selectCartProducts } from '../../redux/selectors/cartSelectors'
 import { selectInventoryLoading } from '../../redux/selectors/inventorySelectors'
 import {
   selectAuthUser,
-  selectAuthCheckoutRole
+  selectAuthGuest
 } from '../../redux/selectors/authSelectors'
 import {
   selectCartBillingAddress,
@@ -35,8 +35,8 @@ const ReviewPhase = ({
   billingAddress,
   shippingAddress,
   user,
+  guest,
   invLoading,
-  checkoutRole,
   createOrder,
   updateModalState,
   deleteCartItem,
@@ -47,10 +47,10 @@ const ReviewPhase = ({
     setStepProgress(3)
   }, [setStepProgress])
 
-  if (!checkoutRole || (!user && checkoutRole === 'user'))
-    return <Redirect to='/checkout/account' />
   if (!billingAddress || !shippingAddress)
     return <Redirect to='/checkout/address' />
+
+  if (!user && !guest) return <Redirect to='/checkout/account' />
 
   const subTotal = products.reduce(
     (acc, product) => (acc += parseInt(product.subTotal)),
@@ -182,7 +182,7 @@ const ReviewPhase = ({
 
 const mapStateToProps = createStructuredSelector({
   user: selectAuthUser,
-  checkoutRole: selectAuthCheckoutRole,
+  guest: selectAuthGuest,
   shippingAddress: selectCartShippingAddress,
   billingAddress: selectCartBillingAddress,
   cartProduct: selectCartProducts,

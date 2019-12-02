@@ -52,11 +52,8 @@ const AccountPhase = ({
   const [isUser] = useState(true)
   const [authMode, setAuthMode] = useState('login')
 
+  if (orderId && (user || guest)) return <Redirect to='/checkout/review' />
   if (user) return <Redirect to='/checkout/address' />
-  if (orderId && (user || guest)) {
-    console.log('Reacing here', guest)
-    return <Redirect to='/checkout/review' />
-  }
   const { email, password, cPassword, fName, mName, lName } = formState
 
   const handleChange = event =>

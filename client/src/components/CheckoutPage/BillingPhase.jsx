@@ -91,7 +91,10 @@ const BillingPhase = ({
 
   if (orderId) return <Redirect to='/checkout/review' />
   if (user && !checkoutRole) setCheckoutRole('user')
-  if (!user && !checkoutRole) return <Redirect to='/checkout/account' />
+  if (!user && !checkoutRole){
+    console.log('Going to account page')
+    return <Redirect to='/checkout/account' />
+  } 
 
   const handleAddressChange = event => {
     const {
