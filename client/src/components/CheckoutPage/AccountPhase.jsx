@@ -10,7 +10,10 @@ import AlertMessage from '../AlertMessage'
 // Redux
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { selectAuthUser } from '../../redux/selectors/authSelectors'
+import {
+  selectAuthUser,
+  selectAuthGuest
+} from '../../redux/selectors/authSelectors'
 import { selectPaymentOrderId } from '../../redux/selectors/paymentSelectors'
 import {
   signIn,
@@ -29,6 +32,7 @@ const AccountPhase = ({
   setCheckoutRole,
   setStepProgress,
   user,
+  guest,
   history,
   orderId
 }) => {
@@ -48,8 +52,11 @@ const AccountPhase = ({
   const [isUser] = useState(true)
   const [authMode, setAuthMode] = useState('login')
 
-  if (orderId) return <Redirect to='/checkout/review' />
   if (user) return <Redirect to='/checkout/address' />
+  if (orderId && (user || guest)) {
+    console.log('Reacing here', guest)
+    return <Redirect to='/checkout/review' />
+  }
   const { email, password, cPassword, fName, mName, lName } = formState
 
   const handleChange = event =>
@@ -83,7 +90,10 @@ const AccountPhase = ({
     <div style={{ position: 'relative' }} className='AccountPhase'>
       <Helmet>
         <title>Medeasy - Account</title>
-        <meta name='description' content='Authenticate or continue as a guest' />
+        <meta
+          name='description'
+          content='Authenticate or continue as a guest'
+        />
       </Helmet>
       <h2 className='AccountPhase__title' style={{ marginBottom: '1rem' }}>
         Account
@@ -256,6 +266,7 @@ const AccountPhase = ({
 
 const mapStateToProps = createStructuredSelector({
   user: selectAuthUser,
+  guest: selectAuthGuest,
   orderId: selectPaymentOrderId
 })
 

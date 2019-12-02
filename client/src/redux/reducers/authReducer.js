@@ -21,7 +21,7 @@ const initialState = {
 		: null,
 	userLoading: false,
 	checkoutRole: sessionStorage.getItem('checkoutRole') || null,
-	guest: localStorage.getItem('guest') || null
+	guest: JSON.parse(localStorage.getItem('guest')) || null
 }
 
 export default (state = initialState, action) => {
