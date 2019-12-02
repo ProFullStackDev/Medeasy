@@ -9,7 +9,6 @@ import {
   selectProfileLoading,
   selectProfileAddresses
 } from '../../redux/selectors/profileSelectors'
-import { selectPaymentOrderId } from '../../redux/selectors/paymentSelectors'
 import { createStructuredSelector } from 'reselect'
 import { fetchUserAddresses } from '../../redux/actions/profileActions'
 import {
@@ -19,6 +18,7 @@ import {
 } from '../../redux/actions/cartActions'
 import {
   selectAuthUser,
+  selectAuthGuest,
   selectAuthCheckoutRole
 } from '../../redux/selectors/authSelectors'
 import { alertUser } from '../../redux/actions/alertActions'
@@ -36,6 +36,7 @@ const BillingPhase = ({
   setStepProgress,
   setCheckoutRole,
   user,
+  guest,
   checkoutRole,
   loading,
   alerts,
@@ -44,7 +45,6 @@ const BillingPhase = ({
   alertUser,
   storeGuestDetails,
   history,
-  orderId,
   addresses
 }) => {
   if (alerts.length > 0) window.scrollTo(0, 0)
@@ -89,12 +89,8 @@ const BillingPhase = ({
 
   const [selectAddress, setSelectAddress] = useState('')
 
-  if (orderId) return <Redirect to='/checkout/review' />
   if (user && !checkoutRole) setCheckoutRole('user')
-  if (!user && !checkoutRole){
-    console.log('Going to account page')
-    return <Redirect to='/checkout/account' />
-  } 
+  if (!user && !guest) return <Redirect to='/checkout/account' />
 
   const handleAddressChange = event => {
     const {
@@ -235,7 +231,7 @@ const BillingPhase = ({
           content='Fill in your shipping / billing address details'
         />
       </Helmet>
-      {loading ? (
+      {(checkoutRole === 'user' && user) && !addresses.length ? (
         <Spinner />
       ) : (
         <Fragment>
@@ -316,10 +312,10 @@ const BillingPhase = ({
 
 const mapStateToProps = createStructuredSelector({
   user: selectAuthUser,
+  guest: selectAuthGuest,
   checkoutRole: selectAuthCheckoutRole,
   loading: selectProfileLoading,
   addresses: selectProfileAddresses,
-  orderId: selectPaymentOrderId,
   alerts: selectAlertAlerts
 })
 

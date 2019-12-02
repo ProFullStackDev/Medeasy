@@ -28,6 +28,7 @@ import ProductsTitle from '../ProductsTitle'
 
 import { ReactComponent as EditBtnIcon } from '../../images/editBtn.svg'
 import '../../styles/components/ReviewPhase.scss'
+import { selectPaymentOrderId } from '../../redux/selectors/paymentSelectors'
 
 // We grab the address and the card details from the redux states
 const ReviewPhase = ({
@@ -35,6 +36,7 @@ const ReviewPhase = ({
   billingAddress,
   shippingAddress,
   user,
+  orderId,
   guest,
   invLoading,
   createOrder,
@@ -183,6 +185,7 @@ const ReviewPhase = ({
 const mapStateToProps = createStructuredSelector({
   user: selectAuthUser,
   guest: selectAuthGuest,
+  orderId: selectPaymentOrderId,
   shippingAddress: selectCartShippingAddress,
   billingAddress: selectCartBillingAddress,
   cartProduct: selectCartProducts,

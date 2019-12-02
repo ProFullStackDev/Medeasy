@@ -4,8 +4,9 @@ const morgan = require('morgan')
 const path = require('path')
 
 dotenv.config({ path: './prod.env' })
-
+// dotenv.config()
 require('./db')
+
 // require('./models/Order')
 //   .deleteMany()
 //   .then(() => console.log('Done'))
@@ -36,9 +37,11 @@ app.use('/api/payments', require('./routes/paymentRoutes'))
 app.use('/api/coupons', require('./routes/couponRoutes'))
 app.use('/api/queries', require('./routes/queryRoutes'))
 
-app.use(express.static(path.resolve(__dirname, 'client', 'build')))
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
-})
+if (process.env === 'production') {
+  app.use(express.static(path.resolve(__dirname, 'client', 'build')))
+  app.get('*', (_, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+  })
+}
 
 app.listen(port, () => console.log('Server listening on port', port))
