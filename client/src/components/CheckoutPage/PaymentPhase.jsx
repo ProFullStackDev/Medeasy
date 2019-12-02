@@ -75,12 +75,10 @@ const PaymentPhase = ({
 
   // NOTE (CREDIT CARD IS CURRENTLY DISABLED. I CHANGED TO PAYPAL IN FOLLOWING PLACES)
   /**
-   * 1) AccountPhase.jsx - Line 50
-   * 2) BillingPhase.jsx - Line 92
-   * 3) paymenActions.js - Line 43
-   * 4) Disabled the card Type below (Line 88 - 97)
-   * 5) Commented fetchCoinbaseId (Line 52)
-   * 6) Commented cardImg (Line 11)
+   * 1) paymenActions.js - Line 42
+   * 2) Disabled the card Type below (Line 88 - 97)
+   * 3) Commented fetchCoinbaseId (Line 52)
+   * 4) Commented cardImg (Line 11)
    */
 
   return (

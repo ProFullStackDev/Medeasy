@@ -23,7 +23,6 @@ export const createOrder = (billingAddress, shippingAddress) => async (
 ) => {
   delete billingAddress.mode
   delete shippingAddress.mode
-  if (getState().payment.orderId) return history.push('/checkout/payment/card')
   try {
     dispatch({ type: SET_INVENTORY_LOADING, payload: true })
     const cartId = getState().cart.cartId

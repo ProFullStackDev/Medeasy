@@ -48,7 +48,7 @@ const AccountPhase = ({
   const [isUser] = useState(true)
   const [authMode, setAuthMode] = useState('login')
 
-  if (orderId) return <Redirect to='/checkout/payment/paypal' />
+  if (orderId) return <Redirect to='/checkout/review' />
   if (user) return <Redirect to='/checkout/address' />
   const { email, password, cPassword, fName, mName, lName } = formState
 

@@ -1,0 +1,912 @@
+[
+  {
+    "_id": "5dc10b6bb0087f535894a385",
+    "sideEffects": [
+      "headache or dizziness",
+      " insomnia",
+      " dry mouth",
+      " constipation",
+      " tremors",
+      " anxiety",
+      " fever",
+      " increased blood pressure",
+      " changes in behaviour",
+      " muscle twitches",
+      " hallucinations"
+    ],
+    "stockAvailable": true,
+    "timesSold": 0,
+    "dosages": ["30"],
+    "quantities": ["30", "60", "90", "120", "180"],
+    "photos": [
+      "/uploads/Adderall/add1.jfif",
+      "/uploads/Adderall/add2.jpg",
+      "/uploads/Adderall/add3.jfif"
+    ],
+    "name": "Adderall",
+    "description": "Adderall is prescribed to treat attention deficit disorder (ADD) and attention deficit hyperactivity disorder (ADHD). Adderall can also be used in the treatment of a sleep disorder called narcolepsy.",
+    "price": {
+      "30mg": {
+        "30": "180",
+        "60": "330",
+        "90": "450",
+        "120": "575",
+        "180": "808"
+      }
+    },
+    "admin": "5d92ffa020b0ca6f39bc1069",
+    "category": "5dc0c97de7f9e32260c179de",
+    "createdAt": "2019-11-05T05:40:59.920Z",
+    "updatedAt": "2019-11-15T08:08:27.363Z",
+    "__v": 0,
+    "featured": true,
+    "discountedPrice": 0
+  },
+  {
+    "_id": "5dc8ba6dc025b53c70d816bf",
+    "sideEffects": [
+      "Headache",
+      " Dizziness",
+      " Feeling nervous or anxious",
+      " Back pain",
+      " Nausea",
+      " Diarrhea",
+      " Upset stomach",
+      " Sleep problems (insomnia)",
+      " Stuffy nose"
+    ],
+    "stockAvailable": true,
+    "timesSold": 0,
+    "featured": false,
+    "dosages": ["100", "200"],
+    "quantities": ["30", "60", "90", "120", "180"],
+    "photos": [
+      "/uploads/Modafinil/modalert.jpg",
+      "/uploads/Modafinil/modalert1.jpg",
+      "/uploads/Modafinil/modalert2.jpg"
+    ],
+    "name": "Modafinil",
+    "description": "Provigil (modafinil) is used to promote wakefulness. The medication is used to treat excessive sleepiness caused by narcolepsy, sleep apnea or shift work sleep disorder",
+    "price": {
+      "100mg": {
+        "30": "99",
+        "60": "139",
+        "90": "180",
+        "120": "230",
+        "180": "320"
+      },
+      "200mg": {
+        "30": "109",
+        "60": "159",
+        "90": "229",
+        "120": "269",
+        "180": "329"
+      }
+    },
+    "admin": "5d92ffa020b0ca6f39bc1069",
+    "category": "5dc0c97de7f9e32260c179de",
+    "createdAt": "2019-11-11T01:33:33.633Z",
+    "updatedAt": "2019-11-30T16:33:44.333Z",
+    "__v": 0,
+    "discountedPrice": 0,
+    "distributor": "Cephalon Inc"
+  },
+  {
+    "_id": "5dc8bc1ec025b53c70d816c0",
+    "sideEffects": [
+      "Nausea",
+      " Vomiting",
+      " Upset stomach",
+      " Constipation",
+      " Dry mouth",
+      " Loss of appetite",
+      " Mood changes",
+      " Feeling tired",
+      " Dizziness",
+      " Urination problems"
+    ],
+    "stockAvailable": true,
+    "timesSold": 0,
+    "featured": false,
+    "dosages": ["25", "40"],
+    "quantities": ["30", "60", "90", "120", "180"],
+    "photos": [
+      "/uploads/Strattera/strattera1.jpg",
+      "/uploads/Strattera/strattera2.jpg",
+      "/uploads/Strattera/strattera3.jpg"
+    ],
+    "name": "Strattera",
+    "description": "Strattera (Atomoxetine) is used to treat attention-deficit hyperactivity disorder (ADHD) in children, teenagers, and adults. It belongs to the group of medicines called selective norepinephrine reuptake inhibitor",
+    "price": {
+      "25mg": {
+        "30": "105",
+        "60": "195",
+        "90": "290",
+        "120": "375",
+        "180": "540"
+      },
+      "40mg": {
+        "30": "115",
+        "60": "210",
+        "90": "306",
+        "120": "396",
+        "180": "585"
+      }
+    },
+    "admin": "5d92ffa020b0ca6f39bc1069",
+    "category": "5dc0c97de7f9e32260c179de",
+    "createdAt": "2019-11-11T01:40:46.601Z",
+    "updatedAt": "2019-11-30T06:44:06.046Z",
+    "__v": 1,
+    "discountedPrice": 0,
+    "distributor": "Eli Lilly "
+  },
+  {
+    "_id": "5dc8bd728f6b255cb465e480",
+    "sideEffects": [
+      "Daytime drowsiness",
+      " Dizziness",
+      " Weakness",
+      " Light headed",
+      " Drugged feeling",
+      " Tiredness",
+      " Loss of coordination",
+      " Stuffy nose"
+    ],
+    "stockAvailable": true,
+    "timesSold": 0,
+    "featured": true,
+    "dosages": ["5", " 10"],
+    "quantities": ["30", "60", "90", "120", "180"],
+    "photos": [
+      "/uploads/Ambien/ambien1.jfif",
+      "/uploads/Ambien/ambien2.jpg",
+      "/uploads/Ambien/ambien3.jfif"
+    ],
+    "name": "Ambien",
+    "description": "Ambien (Zolpidem) is used for the short-term treatment of insomnia characterized by difficulties with sleep initiation",
+    "price": {
+      "5mg": {
+        "30": "120",
+        "60": "210",
+        "90": "290",
+        "120": "370",
+        "180": "550"
+      },
+      " 10mg": {
+        "30": "140",
+        "60": "250",
+        "90": "350",
+        "120": "440",
+        "180": "640"
+      }
+    },
+    "admin": "5d92ffa020b0ca6f39bc1069",
+    "category": "5dc0ca57e7f9e32260c179e2",
+    "createdAt": "2019-11-11T01:46:26.769Z",
+    "updatedAt": "2019-11-30T10:30:22.715Z",
+    "__v": 1,
+    "distributor": "Sanofi Aventis",
+    "discountedPrice": 0
+  },
+  {
+    "_id": "5dc8bea08f6b255cb465e481",
+    "sideEffects": [
+      "Drowsiness",
+      " Viral Infection",
+      " Dry Mouth",
+      " Dizziness",
+      " Hallucinations",
+      " Infection Rash",
+      " Unpleasant Taste"
+    ],
+    "stockAvailable": true,
+    "timesSold": 0,
+    "featured": false,
+    "dosages": ["2"],
+    "quantities": ["30", "60", "90", "120", "180"],
+    "photos": [
+      "/uploads/Lunesta/lunesta1.jfif",
+      "/uploads/Lunesta/lunesta2.jfif",
+      "/uploads/Lunesta/lunesta3.jpg"
+    ],
+    "name": "Lunesta",
+    "description": "Lunesta (Zopiclone) is a nonbenzodiazepine hypnotic agent approved for the long term treatment of insomnia and sleep maintenance.\n\nLunesta is indicated for the treatment of patients who experience difficulty falling asleep as well as for the treatment of patients who are unable to sleep through the night (sleep maintenance difficulty).",
+    "price": {
+      "2mg": {
+        "30": "119",
+        "60": "229",
+        "90": "327",
+        "120": "417",
+        "180": "619"
+      }
+    },
+    "admin": "5d92ffa020b0ca6f39bc1069",
+    "category": "5dc0ca57e7f9e32260c179e2",
+    "createdAt": "2019-11-11T01:51:28.567Z",
+    "updatedAt": "2019-11-30T06:39:13.057Z",
+    "__v": 1,
+    "distributor": "Sunovion Pharmaceuticals",
+    "discountedPrice": 0
+  },
+  {
+    "_id": "5dc8c2ec8f6b255cb465e482",
+    "sideEffects": [
+      "dizziness. daytime drowsiness (or during hours when you are not normally sleeping) amnesia or forgetfulness",
+      " Muscle weakness",
+      " Loss of balance or coordination",
+      " Headache",
+      " Blurred vision",
+      " Depression"
+    ],
+    "stockAvailable": true,
+    "timesSold": 0,
+    "featured": false,
+    "dosages": ["30"],
+    "quantities": ["30", "60", "90", "120", "180"],
+    "photos": [
+      "/uploads/Restoril/restoril2.jfif",
+      "/uploads/Restoril/restoril1.jpg",
+      "/uploads/Restoril/restoril3.jpg"
+    ],
+    "name": "Restoril",
+    "description": "Restoril (Temazepam) functions by producing drowsiness and it slows down the functioning of the central nervous system. Restoril helps the patients to fall asleep with great ease. Restlessness arises among people due to insufficient sleep and makes them quite uncomfortable. This drug helps overcome sleep disorders among patients. The formulation of the pills is a benzodiazepine or temazepam. Keeping the nerves of the brain by influencing the chemical of the brain, it is the best treatment of insomnia. It is one of the best ways of treating the patients that show symptoms of insomnia.",
+    "price": {
+      "30mg": {
+        "30": "140",
+        "60": "250",
+        "90": "350",
+        "120": "440",
+        "180": "640"
+      }
+    },
+    "admin": "5d92ffa020b0ca6f39bc1069",
+    "category": "5dc0ca57e7f9e32260c179e2",
+    "createdAt": "2019-11-11T02:09:48.502Z",
+    "updatedAt": "2019-11-30T06:37:53.634Z",
+    "__v": 0,
+    "distributor": "Mylan",
+    "discountedPrice": 0
+  },
+  {
+    "_id": "5dc8c4bd8f6b255cb465e483",
+    "sideEffects": [
+      "Warmth redness or tingly feeling",
+      " Headache",
+      " Dizziness",
+      "Abnormal vision",
+      " Runny or stuffy nose",
+      " Nosebleeds",
+      " Sleep problems (insomnia)",
+      " Muscle pain",
+      " Back pain",
+      " Upset stomach"
+    ],
+    "stockAvailable": true,
+    "timesSold": 0,
+    "featured": false,
+    "dosages": ["100"],
+    "quantities": ["30", "60", "90", "120", "180"],
+    "photos": [
+      "/uploads/Viagra/viagra3.jpg",
+      "/uploads/Viagra/viagra2.jpg",
+      "/uploads/Viagra/viagra1.jpg"
+    ],
+    "name": "Viagra",
+    "description": "Viagra (sildenafil) is the treatment of erectile dysfunction (inability to sustain a satisfactory erection to complete intercourse). Its use is now standard treatment for erectile dysfunction in all settings, including diabetes.\n\nPeople on antidepressants may experience sexual dysfunction, either as a result of their illness or as a result of their treatment. A 2003 study showed that sildenafil improved sexual function in men in this situation. Following up reports from 1999, the same researchers found that sildenafil improved sexual function in female patients on antidepressants as well.",
+    "price": {
+      "100mg": {
+        "30": "99",
+        "60": "129",
+        "90": "159",
+        "120": "179",
+        "180": "199"
+      }
+    },
+    "admin": "5d92ffa020b0ca6f39bc1069",
+    "category": "5dc0c9d7e7f9e32260c179df",
+    "createdAt": "2019-11-11T02:17:33.707Z",
+    "updatedAt": "2019-11-30T06:36:30.328Z",
+    "__v": 0,
+    "distributor": "Pfizer",
+    "discountedPrice": 0
+  },
+  {
+    "_id": "5dc8c69e8f6b255cb465e484",
+    "sideEffects": [
+      "Redness or warmth of the face",
+      " Headaches",
+      " Stomach upset",
+      " Diarrhea",
+      " Flu-like symptoms",
+      " Memory problems",
+      " Muscle or back pain",
+      " Nausea"
+    ],
+    "stockAvailable": true,
+    "timesSold": 1,
+    "featured": true,
+    "dosages": ["20", "40", "60"],
+    "quantities": ["30", "60", "90", "120", "180"],
+    "photos": [
+      "/uploads/Cialis/cialis3.jpg",
+      "/uploads/Cialis/cialis2.png",
+      "/uploads/Cialis/cialis1.jpg"
+    ],
+    "name": "Cialis",
+    "description": "Cialis (tadalafil) is an oral drug that is used for treating impotence (erectile dysfunction, ED). By increasing the blood flow towards the penis it enhances the stimulation and treats the erectile dysfunction in males. It can be used to cure the enlarged prostate . It is ideal for finishing the need of frequent urination in middle of the night,weak stream, flow of urine and many more. Performing well by making relaxed the smooth muscle in the bladder and the prostate it is the best drug for men’s use. Cialis is not the treatment or does not provide the protection from the sexually transmitted diseases, including syphilis, gonorrhea, hepatitis B, and HIV. In order to avoid any such disease always opt for the safe sex options as precaution is the best way to stay safe rather then having treatment after catching it.",
+    "price": {
+      "20mg": {
+        "30": "99",
+        "60": "129",
+        "90": "159",
+        "120": "197",
+        "180": "247"
+      },
+      "40mg": {
+        "30": "109",
+        "60": "139",
+        "90": "169",
+        "120": "209",
+        "180": "259"
+      },
+      "60mg": {
+        "30": "119",
+        "60": "147",
+        "90": "179",
+        "120": "217",
+        "180": "267"
+      }
+    },
+    "admin": "5d92ffa020b0ca6f39bc1069",
+    "category": "5dc0c9d7e7f9e32260c179df",
+    "createdAt": "2019-11-11T02:25:34.833Z",
+    "updatedAt": "2019-11-30T09:53:57.913Z",
+    "__v": 0,
+    "distributor": "Eli Lilly",
+    "discountedPrice": 0
+  },
+  {
+    "_id": "5dc8c79f8f6b255cb465e485",
+    "sideEffects": [
+      "Headache",
+      " Flushing",
+      " Stuffy nose",
+      " Stomach upset",
+      " Heartburn",
+      " Dizziness",
+      " Back pain",
+      " Nausea"
+    ],
+    "stockAvailable": true,
+    "timesSold": 0,
+    "featured": false,
+    "dosages": ["20"],
+    "quantities": ["30", "60", "90", "120", "180"],
+    "photos": [
+      "/uploads/Levitra/levitra2.jpg",
+      "/uploads/Levitra/levitra3.jfif",
+      "/uploads/Levitra/levitra1.jfif"
+    ],
+    "name": "Levitra",
+    "description": "Levitra is a new drug used for treating erectile dysfunction (ED). This is a phosphodiesterase inhibitor working by increasing blood flow",
+    "price": {
+      "20mg": {
+        "30": "129",
+        "60": "199",
+        "90": "250",
+        "120": "309",
+        "180": "449"
+      }
+    },
+    "admin": "5d92ffa020b0ca6f39bc1069",
+    "category": "5dc0c9d7e7f9e32260c179df",
+    "createdAt": "2019-11-11T02:29:51.578Z",
+    "updatedAt": "2019-11-30T06:00:18.562Z",
+    "__v": 0,
+    "discountedPrice": 0,
+    "distributor": "Bayer Pharmaceuticals"
+  },
+  {
+    "_id": "5dc8ca6e8f6b255cb465e486",
+    "sideEffects": [
+      "Flu symptoms",
+      " Runny or stuffy nose",
+      " Sore throat",
+      " Cough",
+      " Fast heartbeats",
+      " High blood pressure",
+      " Shortness of breath",
+      " Seizure"
+    ],
+    "stockAvailable": true,
+    "timesSold": 0,
+    "featured": false,
+    "dosages": ["10", "15"],
+    "quantities": ["30", "60", "90", "120", "180"],
+    "photos": [
+      "/uploads/Meridia/meridia2.jpg",
+      "/uploads/Meridia/meridia3.jpg",
+      "/uploads/Meridia/meridia1.jpg"
+    ],
+    "name": "Meridia",
+    "description": "Meridia helps the seriously overweight shed pounds and keep them off. It is especially recommended for those who in addition to being overweight have other health problems such as high blood pressure, diabetes, or high cholesterol. It is used in conjunction with a low-calorie diet. Meridia works by boosting levels of certain chemical messengers in the nervous system, including serotonin, dopamine, and norepinephrine.",
+    "price": {
+      "10mg": {
+        "30": "119",
+        "60": "229",
+        "90": "329",
+        "120": "419",
+        "180": "619"
+      },
+      "15mg": {
+        "30": "149",
+        "60": "279",
+        "90": "399",
+        "120": "499",
+        "180": "699"
+      }
+    },
+    "admin": "5d92ffa020b0ca6f39bc1069",
+    "category": "5dc0c9ffe7f9e32260c179e0",
+    "createdAt": "2019-11-11T02:41:50.659Z",
+    "updatedAt": "2019-11-30T05:57:37.146Z",
+    "__v": 0,
+    "distributor": "Abbot Laboratories",
+    "discountedPrice": 0
+  },
+  {
+    "_id": "5dc8cfb38f6b255cb465e488",
+    "sideEffects": [
+      "Itching",
+      " Dizziness",
+      " Headache",
+      " Dry mouth",
+      " Unpleasant taste",
+      " Diarrhea",
+      " Constipation",
+      " Stomach pain",
+      " increased or decreased interest in sex."
+    ],
+    "stockAvailable": true,
+    "timesSold": 0,
+    "featured": true,
+    "dosages": ["37"],
+    "quantities": ["30", "60", "90", "120", "180"],
+    "photos": [
+      "/uploads/Phentermine/phenter3.jpg",
+      "/uploads/Phentermine/phenter2.jpg",
+      "/uploads/Phentermine/phenter1.png"
+    ],
+    "name": "Phentermine",
+    "description": "Phentermine is used as a new kind of weight loss drug who are ominously overweight and is unable to lose sufficient weight with exercise and diet only. Getting thinner and keeping it off can decrease many health issues that accompany heaviness, including heart disease, hypertension, diabetes, and a shorter life.",
+    "price": {
+      "37mg": {
+        "30": "150",
+        "60": "280",
+        "90": "400",
+        "120": "500",
+        "180": "700"
+      }
+    },
+    "admin": "5d92ffa020b0ca6f39bc1069",
+    "category": "5dc0c9ffe7f9e32260c179e0",
+    "createdAt": "2019-11-11T03:04:19.198Z",
+    "updatedAt": "2019-11-11T15:54:30.002Z",
+    "__v": 0
+  },
+  {
+    "_id": "5dc8dd4e8f6b255cb465e489",
+    "sideEffects": [
+      "Agitation",
+      " Nervousness",
+      " Anxiety",
+      " Seizure",
+      " Skin rash",
+      " Dizziness",
+      " Spinning sensation",
+      " Hallucinations"
+    ],
+    "stockAvailable": true,
+    "timesSold": 0,
+    "featured": false,
+    "dosages": ["50", "100"],
+    "quantities": ["30", "60", "90", "120", "180"],
+    "photos": [
+      "/uploads/Ultram/ultram2.png",
+      "/uploads/Ultram/ultram3.jpg",
+      "/uploads/Ultram/ultram1.jfif"
+    ],
+    "name": "Ultram",
+    "description": "Ultram (Tramadol) is the medicine that is suggested by the doctors to majority of people. It is considered to be a perfect medicine for the treatment of moderate to severe pain. It is an analgesic drug that is used to get instant relief from pain. Having the similarities to the narcotic analgesics, it is not sold without doctor’s prescription. Working in the brain by changing the responding attitude towards the painful organ is the function of this drug.Offering the incredible solution and comfort to the pain is the amazing trait of this medicine.",
+    "price": {
+      "50mg": {
+        "30": "159",
+        "60": "289",
+        "90": "409",
+        "120": "509",
+        "180": "709"
+      },
+      "100mg": {
+        "30": "129",
+        "60": "239",
+        "90": "339",
+        "120": "429",
+        "180": "629"
+      }
+    },
+    "admin": "5d92ffa020b0ca6f39bc1069",
+    "category": "5dc0cb10e7f9e32260c179e4",
+    "createdAt": "2019-11-11T04:02:22.352Z",
+    "updatedAt": "2019-11-30T05:56:34.803Z",
+    "__v": 0,
+    "distributor": "Johnson & Johnson",
+    "discountedPrice": 0
+  },
+  {
+    "_id": "5dc8deb28f6b255cb465e48a",
+    "sideEffects": [
+      "Nausea",
+      "Vomiting",
+      " Constipation",
+      " Light headed",
+      " Dizziness",
+      " Drowsiness"
+    ],
+    "stockAvailable": true,
+    "timesSold": 0,
+    "featured": false,
+    "dosages": ["325", "500"],
+    "quantities": ["30", "60", "90", "120", "180"],
+    "photos": [
+      "/uploads/Watson/watson2.jfif",
+      "/uploads/Watson/watson3.jpg",
+      "/uploads/Watson/watson1.jpg"
+    ],
+    "name": "Watson",
+    "description": "Hydrocodone is used in the treatment of pain, back pain, cough, and rheumatoid arthritis. As a narcotic, hydrocodone relieves pain by binding to opioid receptors in the brain and spinal cord. It can be taken with or without food as one prefer.",
+    "price": {
+      "325mg": {
+        "30": "189",
+        "60": "409",
+        "90": "579",
+        "120": "709",
+        "180": "899"
+      },
+      "500mg": {
+        "30": "209",
+        "60": "429",
+        "90": "609",
+        "120": "759",
+        "180": "999"
+      }
+    },
+    "admin": "5d92ffa020b0ca6f39bc1069",
+    "category": "5dc0cb10e7f9e32260c179e4",
+    "createdAt": "2019-11-11T04:08:18.308Z",
+    "updatedAt": "2019-11-30T05:55:40.238Z",
+    "__v": 0,
+    "distributor": "Actavis plc",
+    "discountedPrice": 0
+  },
+  {
+    "_id": "5dc8dfc38f6b255cb465e48b",
+    "sideEffects": [
+      "Drowsiness",
+      " Dizziness",
+      " Tiredness",
+      " Muscle weakness",
+      " Headache",
+      "Blurred vision",
+      "Sleep problems (insomnia)",
+      " Loss of balance or coordination"
+    ],
+    "stockAvailable": true,
+    "timesSold": 0,
+    "featured": true,
+    "dosages": ["1", "2"],
+    "quantities": ["30", "60", "90", "120", "180"],
+    "photos": [
+      "/uploads/Ativan/ativan3.jpg",
+      "/uploads/Ativan/ativan2.jpg",
+      "/uploads/Ativan/ativan1.jpg"
+    ],
+    "name": "Ativan",
+    "description": "Ativan (Lorazepam)  is used before surgery or procedures to cause drowsiness, decrease anxiety and cause forgetfulness about the procedure or surgery.",
+    "price": {
+      "1mg": {
+        "30": "119",
+        "60": "199",
+        "90": "269",
+        "120": "349",
+        "180": "529"
+      },
+      "2mg": {
+        "30": "119",
+        "60": "229",
+        "90": "329",
+        "120": "419",
+        "180": "619"
+      }
+    },
+    "admin": "5d92ffa020b0ca6f39bc1069",
+    "category": "5dc0ca33e7f9e32260c179e1",
+    "createdAt": "2019-11-11T04:12:51.979Z",
+    "updatedAt": "2019-11-30T05:53:40.452Z",
+    "__v": 0,
+    "discountedPrice": 0,
+    "distributor": "Wyeth Pharmaceuticals"
+  },
+  {
+    "_id": "5dc8e25c8f6b255cb465e48c",
+    "sideEffects": [
+      "Headache",
+      "Dizziness",
+      " Drowsiness",
+      "Sleep problems (insomnia)",
+      " Nausea",
+      " Upset stomach",
+      " Feeling nervous or excited."
+    ],
+    "stockAvailable": true,
+    "timesSold": 0,
+    "featured": false,
+    "dosages": ["5", "10"],
+    "quantities": ["30", "60", "90", "120", "180"],
+    "photos": [
+      "/uploads/Busron/busron2.jpg",
+      "/uploads/Busron/busron1.jpg",
+      "/uploads/Busron/busron3.jpg"
+    ],
+    "name": "Busron",
+    "description": "Busron (Buspirone) is used to relieve nervousness, anxiety, and tension. For the treatment of anxiety, it is the best anti-anxiety drug that leaves the impact on the brain chemicals of releasing anxiety. Stress and anxiety are the main causes of the mental and physical disorders. Reversing the symptoms of anxiety, including physical symptoms, pounding heartbeat, dizziness, irritability, tension and fear it is the best way to overcome the anxious attitude. If a person is suffering from any kind of mental illness, then one must consult doctor for getting rid of this stress. Keeping the nerves calm and making you relaxed is the main feature of this medicine. It must not be taken if a person has been using the MAO inhibitor in the previous fourteen days.",
+    "price": {
+      "5mg": {
+        "30": "100",
+        "60": "190",
+        "90": "270",
+        "120": "350",
+        "180": "530"
+      },
+      "10mg": {
+        "30": "120",
+        "60": "230",
+        "90": "330",
+        "120": "420",
+        "180": "620"
+      }
+    },
+    "admin": "5d92ffa020b0ca6f39bc1069",
+    "category": "5dc0ca33e7f9e32260c179e1",
+    "createdAt": "2019-11-11T04:23:56.633Z",
+    "updatedAt": "2019-11-30T05:52:19.196Z",
+    "__v": 0,
+    "distributor": "Teva",
+    "discountedPrice": 0
+  },
+  {
+    "_id": "5dc8e3cf8f6b255cb465e48d",
+    "sideEffects": [
+      "Drowsiness",
+      " Dizziness",
+      " Problems with thinking",
+      " Tired feeling",
+      " Muscle weakness",
+      " Loss of balance or coordination",
+      " Slurred speech",
+      " Drooling or dry mouth",
+      " Sore gums",
+      " Runny or stuffy nose",
+      " Loss of appetite",
+      " Nausea",
+      " Diarrhea",
+      " Constipation"
+    ],
+    "stockAvailable": true,
+    "timesSold": 0,
+    "featured": false,
+    "dosages": ["2"],
+    "quantities": ["30", "60", "90", "120", "180"],
+    "photos": [
+      "/uploads/Klonopin/klonopin3.jpg",
+      "/uploads/Klonopin/klonopin2.jfif",
+      "/uploads/Klonopin/klonopin1.png"
+    ],
+    "name": "Klonopin",
+    "description": "Klonopin (Clonazepam) is used to treat seizure disorders or panic disorder.",
+    "price": {
+      "2mg": {
+        "30": "160",
+        "60": "290",
+        "90": "410",
+        "120": "510",
+        "180": "710"
+      }
+    },
+    "admin": "5d92ffa020b0ca6f39bc1069",
+    "category": "5dc0ca33e7f9e32260c179e1",
+    "createdAt": "2019-11-11T04:30:07.012Z",
+    "updatedAt": "2019-11-30T05:51:17.402Z",
+    "__v": 0,
+    "distributor": "Teva",
+    "discountedPrice": 0
+  },
+  {
+    "_id": "5dc8ea99be81a05c0cd550c3",
+    "sideEffects": [
+      "Drowsiness",
+      " Tiredness",
+      " Fatigue. ",
+      "Muscle weakness. ",
+      "Inability to control muscle movements (ataxia)",
+      " Headache",
+      " Tremor",
+      " Dizziness",
+      " Dry mouth or excessive saliva"
+    ],
+    "stockAvailable": true,
+    "timesSold": 0,
+    "featured": false,
+    "dosages": ["5", "10"],
+    "quantities": ["30", "60", "90", "120", "180"],
+    "photos": [
+      "/uploads/Valium/valium2.jfif",
+      "/uploads/Valium/valium3.jfif",
+      "/uploads/Valium/valium1.jpg"
+    ],
+    "name": "Valium",
+    "description": "Valium (Diazepam) is mainly used to treat anxiety disorders and for short-term relief of the symptoms of anxiety. It is a useful adjunct for the relief of skeletal muscle spasm due to reflex spasm to local pathology (such as inflammation of the muscles or joints, or secondary to trauma), spasticity caused by upper motor neuron disorders (such as cerebral palsy and paraplegia), athetosis, and stiff-man syndrome.",
+    "price": {
+      "5mg": {
+        "30": "120",
+        "60": "210",
+        "90": "290",
+        "120": "370",
+        "180": "550"
+      },
+      "10mg": {
+        "30": "140",
+        "60": "250",
+        "90": "350",
+        "120": "440",
+        "180": "640"
+      }
+    },
+    "admin": "5d92ffa020b0ca6f39bc1069",
+    "category": "5dc0ca33e7f9e32260c179e1",
+    "createdAt": "2019-11-11T04:59:05.777Z",
+    "updatedAt": "2019-11-30T05:50:39.872Z",
+    "__v": 0,
+    "distributor": "Roche",
+    "discountedPrice": 0
+  },
+  {
+    "_id": "5dc8ec39be81a05c0cd550c4",
+    "sideEffects": [
+      "Ataxia",
+      " Cognitive dysfunction",
+      " Constipation",
+      " Difficulty in micturition",
+      " Drowsiness",
+      " Dysarthria",
+      " Fatigue",
+      " Memory impairment",
+      " Skin rash",
+      " Weight loss",
+      " Anxiety",
+      " Blurred vision"
+    ],
+    "stockAvailable": true,
+    "timesSold": 0,
+    "featured": false,
+    "dosages": ["1"],
+    "quantities": ["30", "60", "90", "120", "180"],
+    "photos": [
+      "/uploads/Xanax (1 mg)/xanax3.jfif",
+      "/uploads/Xanax (1 mg)/xanax2.jpg",
+      "/uploads/Xanax (1 mg)/xanax1.jpg"
+    ],
+    "name": "Xanax (1 mg)",
+    "description": "Xanax (Alprazolam) is a benzodiazepine. Alprazolam affects chemicals in the brain that may be unbalanced in people with anxiety.\n\nXanax is used to treat anxiety disorders, panic disorders, and anxiety caused by depression.\n\nXanax may also be used for purposes not listed in this medication guide.",
+    "price": {
+      "1mg": {
+        "30": "140",
+        "60": "250",
+        "90": "350",
+        "120": "440",
+        "180": "640"
+      }
+    },
+    "admin": "5d92ffa020b0ca6f39bc1069",
+    "category": "5dc0ca33e7f9e32260c179e1",
+    "createdAt": "2019-11-11T05:06:01.470Z",
+    "updatedAt": "2019-11-30T05:49:11.753Z",
+    "__v": 0,
+    "discountedPrice": 0
+  },
+  {
+    "_id": "5dc8ed76be81a05c0cd550c5",
+    "sideEffects": [
+      "Ataxia",
+      " Cognitive dysfunction",
+      " Constipation",
+      " Difficulty in micturition",
+      " Drowsiness",
+      " Dysarthria",
+      " Fatigue",
+      " Memory impairment",
+      " Skin rash",
+      " Weight loss",
+      " Anxiety",
+      " Blurred vision"
+    ],
+    "stockAvailable": true,
+    "timesSold": 0,
+    "featured": false,
+    "dosages": ["2"],
+    "quantities": ["50", "100", "150", "250"],
+    "photos": [
+      "/uploads/Xanax (2mg)/xanax6.jpg",
+      "/uploads/Xanax (2mg)/xanax5.jpg",
+      "/uploads/Xanax (2mg)/xanax4.jpg"
+    ],
+    "name": "Xanax (2mg)",
+    "description": "Xanax is used in the treatment of anxiety, panic disorder, depression and belongs to the drug class benzodiazepines. There is positive evidence of human fetal risk during pregnancy. Xanax 2 mg is classified as a Schedule 4 controlled substance under the Controlled Substance Act (CSA).",
+    "price": {
+      "2mg": { "50": "300", "100": "550", "150": "750", "250": "1000" }
+    },
+    "admin": "5d92ffa020b0ca6f39bc1069",
+    "category": "5dc0ca33e7f9e32260c179e1",
+    "createdAt": "2019-11-11T05:11:18.920Z",
+    "updatedAt": "2019-11-11T18:43:42.515Z",
+    "__v": 0,
+    "distributor": "Xanax Ltd"
+  },
+  {
+    "_id": "5dc8efa76fb9ab595489223d",
+    "sideEffects": [
+      "Drowsiness",
+      " Sedated state",
+      "Chills",
+      "Cold sweats",
+      "Confusion",
+      "Convulsions",
+      "Cough"
+    ],
+    "stockAvailable": true,
+    "timesSold": 0,
+    "featured": false,
+    "dosages": ["350", " 500"],
+    "quantities": ["30", "60", "90", "120", "180"],
+    "photos": [
+      "/uploads/Soma/soma3.jfif",
+      "/uploads/Soma/soma2.jfif",
+      "/uploads/Soma/soma1.png"
+    ],
+    "name": "Soma",
+    "description": "Soma (Carisoprodol) is a muscle relaxer that blocks pain sensations between the nerves and the brain.  Soma is used together with rest and physical therapy to treat skeletal muscle conditions such as pain or injury.  Soma should only be used for short periods (up to two or three weeks) because there is no evidence of its effectiveness in long term use and most skeletal muscle injuries are generally of short duration.",
+    "price": {
+      "350mg": {
+        "30": "119",
+        "60": "229",
+        "90": "329",
+        "120": "419",
+        "180": "619"
+      },
+      " 500mg": {
+        "30": "149",
+        "60": "279",
+        "90": "399",
+        "120": "499",
+        "180": "699"
+      }
+    },
+    "admin": "5d92ffa020b0ca6f39bc1069",
+    "category": "5dc0cabae7f9e32260c179e3",
+    "createdAt": "2019-11-11T05:20:39.615Z",
+    "updatedAt": "2019-11-30T05:44:16.267Z",
+    "__v": 0,
+    "distributor": "Soma Incorporated",
+    "discountedPrice": 0
+  }
+]

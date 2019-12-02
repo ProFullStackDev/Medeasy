@@ -14,7 +14,6 @@ module.exports = {
     const { cartId, mode, userId, shippingAddress, billingAddress } = req.body
     try {
       let order = await Order.findOne({ cart: cartId, status: 'Pending' })
-      if (order) return res.send({ statusCode: 200, orderId: order._id })
       const cart = await Cart.findById(cartId)
       if (!cart)
         return res
@@ -48,6 +47,14 @@ module.exports = {
         shippingAddress,
         billingAddress,
         expiryDate: new Date().setHours(new Date().getHours() + 48)
+      }
+      if (order) {
+        order = await Order.findOneAndUpdate(
+          { cart: cartId, status: 'Pending' },
+          { $set: { ...orderObj } },
+          { new: true }
+        )
+        return res.send({ statusCode: 200, orderId: order._id })
       }
       order = await Order.create(orderObj)
       res.status(201).send({ statusCode: 201, orderId: order._id })
