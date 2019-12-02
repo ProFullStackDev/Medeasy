@@ -37,7 +37,7 @@ app.use('/api/payments', require('./routes/paymentRoutes'))
 app.use('/api/coupons', require('./routes/couponRoutes'))
 app.use('/api/queries', require('./routes/queryRoutes'))
 
-if (process.env === 'production') {
+if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.resolve(__dirname, 'client', 'build')))
   app.get('*', (_, res) => {
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))

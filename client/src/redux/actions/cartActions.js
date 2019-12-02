@@ -172,7 +172,7 @@ export const updateCartItem = (itemId, mode, value) => async (
 		} = await Axios.patch(`/api/cart/${getState().cart.cartId}`, {
 			itemId,
 			mode,
-			value
+			value: mode === 'dosage' ? value.replace(' ', '') : value
 		})
 		dispatch({ type: SET_CART_PRODUCTS, payload: cart })
 	} catch (err) {
