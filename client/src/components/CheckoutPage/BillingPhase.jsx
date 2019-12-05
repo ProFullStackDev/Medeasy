@@ -90,7 +90,7 @@ const BillingPhase = ({
   const [selectAddress, setSelectAddress] = useState('')
 
   if (user && !checkoutRole) setCheckoutRole('user')
-  if (!user && !guest) return <Redirect to='/checkout/account' />
+  if (!user && !guest && !checkoutRole) return <Redirect to='/checkout/account' />
 
   const handleAddressChange = event => {
     const {
