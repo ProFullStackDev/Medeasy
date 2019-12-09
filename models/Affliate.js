@@ -4,7 +4,7 @@ const affliateSchema = new Schema(
   {
     name: { type: String, required: true },
     email: { type: String, required: true },
-    companyName: { type: String, required: true },
+    companyName: String,
     city: { type: String, required: true },
     comment: { type: String, required: true },
     street: { type: String, required: true },
