@@ -12,6 +12,7 @@ import PaymentConfirmedPage from './pages/PaymentConfimedPage'
 import CheckoutPage from './pages/CheckoutPage'
 import CategoryProductsPage from './pages/CategoryProductsPage'
 import AffliatesPage from './pages/AffliatesPage'
+import FaqPage from './pages/FaqPage'
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage'
 import DeliveryReturnsPage from './pages/DeliveryReturnsPage'
 import BitcoinTutorialPage from './pages/BitcoinTutorialPage'
@@ -35,6 +36,16 @@ const MainRoutes = ({ decideOverlayState }) => {
           <AffliatesPage
             descriptionName='Affliates'
             content='Become an affiliate with Medeasy'
+          />
+        )}
+      />
+      <Route
+        exact
+        path='/faq'
+        render={() => (
+          <FaqPage
+            descriptionName='FAQ'
+            content='Frequently Asked Questions'
           />
         )}
       />

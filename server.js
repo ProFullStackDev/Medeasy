@@ -3,7 +3,7 @@ const dotenv = require('dotenv')
 const morgan = require('morgan')
 const path = require('path')
 
-dotenv.config({ path: './prod.env' }) 
+dotenv.config({ path: './prod.env' })
 // dotenv.config()
 require('./db')
 

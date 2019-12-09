@@ -1,0 +1,45 @@
+@import '../colors';
+
+.FaqSlider {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  margin: 2rem 0;
+
+  ol {
+    margin-left: 1rem;
+    list-style: disc;
+    list-style-position: outside !important;
+  }
+
+  &__question {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    color: black;
+    background: $medeasy-grey-color;
+    transition: all 0.3s linear padding 0.3s 0.3s linear;
+    &.active {
+      background: $medeasy-green-color;
+      color: white;
+      & svg tspan {
+        fill: white;
+        transform: rotate(360deg);
+      }
+    }
+  }
+
+  &__answer {
+    transform-origin: top;
+    height: 0;
+    visibility: hidden;
+    &.active {
+      padding: 2rem;
+      background: $medeasy-grey-color;
+      height: 100%;
+      visibility: visible;
+    }
+  }
+}
