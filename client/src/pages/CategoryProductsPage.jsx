@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { Helmet } from 'react-helmet'
 
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
@@ -10,11 +9,11 @@ import {
 import { fetchCategoryById } from '../redux/actions/inventoryActions'
 
 import styled from 'styled-components'
+import withBannerHoc from '../components/withBannerHoc'
 
 import ProductsCarousel from '../components/ProductsCarousel'
 import ProductList from '../components/ProductList'
 import Spinner from '../components/Spinner'
-import BannerDetails from '../components/BannerDetails'
 
 // Styles
 const Title = styled.h2`
@@ -59,40 +58,33 @@ const CategoryProductsPage = ({
   return !category ? (
     <Spinner />
   ) : (
-    <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
-      <Helmet>
-        <title>Medeasy - {category.name}</title>
-        <meta name='description' content='Featured products' />
-      </Helmet>
-			<BannerDetails direction='column' />
-      <section className='CategoryProductsPage' style={{ marginLeft: '3rem' }}>
-        <Title>
-          {category.name} : {categoryProducts.length} Products
-        </Title>
-        <ProductsCarousel
-          onClick={pageNumber => setCurrentPageNumber(pageNumber)}
-          currentPageNumber={currentPageNumber}
-          totalPages={Math.ceil(products.length / 30)}
-        />
-        <ProductList
-          products={categoryProducts.slice(
-            (currentPageNumber - 1) * 30,
-            30 * currentPageNumber
-          )}
-        />
-        <ProductsCarousel
-          onClick={pageNumber => setCurrentPageNumber(pageNumber)}
-          currentPageNumber={currentPageNumber}
-          totalPages={Math.ceil(products.length / 30)}
-        />
-        <Title>Description </Title>
-        <DescriptionContainer>
-          {category.description.split(/\n/g).map((d, index) => (
-            <p key={index}>{d}</p>
-          ))}
-        </DescriptionContainer>
-      </section>
-    </div>
+    <section className='CategoryProductsPage' style={{ marginLeft: '3rem' }}>
+      <Title>
+        {category.name} : {categoryProducts.length} Products
+      </Title>
+      <ProductsCarousel
+        onClick={pageNumber => setCurrentPageNumber(pageNumber)}
+        currentPageNumber={currentPageNumber}
+        totalPages={Math.ceil(products.length / 30)}
+      />
+      <ProductList
+        products={categoryProducts.slice(
+          (currentPageNumber - 1) * 30,
+          30 * currentPageNumber
+        )}
+      />
+      <ProductsCarousel
+        onClick={pageNumber => setCurrentPageNumber(pageNumber)}
+        currentPageNumber={currentPageNumber}
+        totalPages={Math.ceil(products.length / 30)}
+      />
+      <Title>Description </Title>
+      <DescriptionContainer>
+        {category.description.split(/\n/g).map((d, index) => (
+          <p key={index}>{d}</p>
+        ))}
+      </DescriptionContainer>
+    </section>
   )
 }
 
@@ -101,6 +93,6 @@ const mapStateToProps = createStructuredSelector({
   category: selectInventoryCategory
 })
 
-export default connect(mapStateToProps, { fetchCategoryById })(
-  CategoryProductsPage
+export default withBannerHoc(
+  connect(mapStateToProps, { fetchCategoryById })(CategoryProductsPage)
 )

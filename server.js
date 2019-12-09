@@ -3,8 +3,8 @@ const dotenv = require('dotenv')
 const morgan = require('morgan')
 const path = require('path')
 
-dotenv.config({ path: './prod.env' })
-// dotenv.config()
+// dotenv.config({ path: './prod.env' }) 
+dotenv.config()
 require('./db')
 
 // require('./models/Order')
@@ -27,6 +27,7 @@ app.use('/uploads', express.static('uploads'))
 
 // All routes
 app.use('/api/user', require('./routes/userRoutes'))
+app.use('/api/affliates', require('./routes/affliateRoutes'))
 app.use('/api/profile', require('./routes/profileRoutes'))
 app.use('/api/cart', require('./routes/cartRoutes'))
 app.use('/api/products', require('./routes/productRoutes'))

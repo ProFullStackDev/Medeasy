@@ -37,7 +37,7 @@ const BannerItem = styled.div`
   box-sizing: border-box;
   background: #8fcfcd;
   max-height: 230px;
-  max-width: 250px;
+  max-width: ${({ direction }) => (direction === 'row' ? '250px' : '200.7px')};
   border-radius: 1rem;
   display: flex;
   flex-direction: column;
