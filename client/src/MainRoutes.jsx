@@ -13,6 +13,8 @@ import CheckoutPage from './pages/CheckoutPage'
 import CategoryProductsPage from './pages/CategoryProductsPage'
 import AffliatesPage from './pages/AffliatesPage'
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage'
+import DeliveryReturnsPage from './pages/DeliveryReturnsPage'
+import BitcoinTutorialPage from './pages/BitcoinTutorialPage'
 
 const MainRoutes = ({ decideOverlayState }) => {
   return (
@@ -29,9 +31,45 @@ const MainRoutes = ({ decideOverlayState }) => {
       <Route
         exact
         path='/affliates'
-        render={() => <AffliatesPage descriptionName='Affliates' />}
+        render={() => (
+          <AffliatesPage
+            descriptionName='Affliates'
+            content='Become an affiliate with Medeasy'
+          />
+        )}
       />
-      <Route exact path='/privacy' component={PrivacyPolicyPage} />
+      <Route
+        exact
+        path='/bitcoin-tutorial'
+        render={() => (
+          <BitcoinTutorialPage
+            descriptionName='How to buy Bitcoins'
+            content='Get an idea on how to buy and pay through Bitcoin'
+          />
+        )}
+      />
+      <Route
+        exact
+        path='/delivery'
+        render={routeProps => (
+          <DeliveryReturnsPage
+            {...routeProps}
+            content='Know about our delivery policy'
+            descriptionName='Delivery and Returns'
+          />
+        )}
+      />
+      <Route
+        exact
+        path='/privacy'
+        render={routeProps => (
+          <PrivacyPolicyPage
+            {...routeProps}
+            descriptionName='Privacy Policy'
+            content='Our Privacy Policy'
+          />
+        )}
+      />
       <PrivateRoute path='/profile' component={ProfilePage} />
       <Route
         exact
