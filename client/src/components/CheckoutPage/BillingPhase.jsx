@@ -5,25 +5,32 @@ import validator from 'validator'
 import { Helmet } from 'react-helmet'
 
 import { connect } from 'react-redux'
-import {
-  selectProfileLoading,
-  selectProfileAddresses
-} from '../../redux/selectors/profileSelectors'
 import { createStructuredSelector } from 'reselect'
+
+// Selectors
+import { selectAlertAlerts } from '../../redux/selectors/alertSelectors'
+import {
+  selectAuthUser,
+  selectAuthGuest,
+  selectAuthCheckoutRole
+} from '../../redux/selectors/authSelectors'
+import { selectProfileAddresses } from '../../redux/selectors/profileSelectors'
+import {
+  selectCartBillingAddress,
+  selectCartShippingAddress
+} from '../../redux/selectors/cartSelectors'
+
+// Actions
 import { fetchUserAddresses } from '../../redux/actions/profileActions'
 import {
   setStepProgress,
   cacheAddress,
   storeGuestDetails
 } from '../../redux/actions/cartActions'
-import {
-  selectAuthUser,
-  selectAuthGuest,
-  selectAuthCheckoutRole
-} from '../../redux/selectors/authSelectors'
 import { alertUser } from '../../redux/actions/alertActions'
 import { setCheckoutRole } from '../../redux/actions/authActions'
-import { selectAlertAlerts } from '../../redux/selectors/alertSelectors'
+
+// Components
 import CustomRadioButton from '../CustomRadioButton'
 import CustomButton from '../CustomButton'
 import CredentialsForm from './CredentialsForm'
@@ -32,14 +39,23 @@ import AlertMessage from '../AlertMessage'
 
 import '../../styles/components/BillingPhase.scss'
 
+const splitName = name => {
+  const fName = name.split(' ')[0]
+  const lName =
+    name.split(' ').length === 2 ? name.split(' ')[1] : name.split(' ')[2]
+  const mName = name.split(' ').length === 3 ? name.split(' ')[1] : ''
+  return { fName, lName, mName }
+}
+
 const BillingPhase = ({
   setStepProgress,
   setCheckoutRole,
   user,
   guest,
   checkoutRole,
-  loading,
   alerts,
+  billingAddress,
+  shippingAddress,
   fetchUserAddresses,
   cacheAddress,
   alertUser,
@@ -48,11 +64,6 @@ const BillingPhase = ({
   addresses
 }) => {
   if (alerts.length > 0) window.scrollTo(0, 0)
-
-  useEffect(() => {
-    setStepProgress(2)
-    if (checkoutRole === 'user' && user) fetchUserAddresses()
-  }, [setStepProgress, fetchUserAddresses, user, checkoutRole])
 
   const [mode, setMode] = useState('yes')
   const [billingFormState, setBillingFormState] = useState({
@@ -89,8 +100,66 @@ const BillingPhase = ({
 
   const [selectAddress, setSelectAddress] = useState('')
 
+  const setAddress = mode => {
+    const address =
+      mode === 'billing' ? { ...billingAddress } : { ...shippingAddress }
+    const {
+      address1,
+      address2,
+      city,
+      state,
+      faxNumber,
+      phNumber,
+      name,
+      email,
+      postalCode
+    } = address
+    const { fName, mName, lName } = splitName(name)
+    mode === 'billing'
+      ? setBillingFormState({
+          ...billingFormState,
+          fName,
+          mName,
+          lName,
+          address1,
+          address2,
+          state,
+          city,
+          email,
+          postalCode: String(postalCode),
+          phNumber: String(phNumber),
+          faxNumber: String(faxNumber)
+        })
+      : setShippingFormState({
+          ...shippingFormState,
+          fName,
+          mName,
+          lName,
+          address1,
+          address2,
+          state,
+          city,
+          email,
+          postalCode: String(postalCode),
+          phNumber: String(phNumber),
+          faxNumber: String(faxNumber)
+        })
+  }
+
+  useEffect(() => {
+    setStepProgress(2)
+    if (checkoutRole === 'user' && user) fetchUserAddresses()
+  }, [setStepProgress, fetchUserAddresses, user, checkoutRole])
+
+  useEffect(() => {
+    if (billingAddress) setAddress('billing')
+    if (shippingAddress) setAddress('shipping')
+  })
+
   if (user && !checkoutRole) setCheckoutRole('user')
-  if (!user && !guest && !checkoutRole) return <Redirect to='/checkout/account' />
+  if (guest && !checkoutRole) setCheckoutRole('guest')
+  if (!user && !guest && !checkoutRole)
+    return <Redirect to='/checkout/account' />
 
   const handleAddressChange = event => {
     const {
@@ -103,10 +172,9 @@ const BillingPhase = ({
       phNumber,
       faxNumber
     } = addresses.find(add => add.mode === event.target.value)
-    const fName = name.split(' ')[0]
-    const lName =
-      name.split(' ').length === 2 ? name.split(' ')[1] : name.split(' ')[2]
-    const mName = name.split(' ').length === 3 ? name.split(' ')[1] : ''
+
+    const { fName, mName, lName } = splitName(name)
+
     setBillingFormState({
       ...billingFormState,
       fName,
@@ -231,7 +299,7 @@ const BillingPhase = ({
           content='Fill in your shipping / billing address details'
         />
       </Helmet>
-      {(checkoutRole === 'user' && user) && !addresses.length ? (
+      {checkoutRole === 'user' && user && !addresses.length ? (
         <Spinner />
       ) : (
         <Fragment>
@@ -313,8 +381,9 @@ const BillingPhase = ({
 const mapStateToProps = createStructuredSelector({
   user: selectAuthUser,
   guest: selectAuthGuest,
+  billingAddress: selectCartBillingAddress,
+  shippingAddress: selectCartShippingAddress,
   checkoutRole: selectAuthCheckoutRole,
-  loading: selectProfileLoading,
   addresses: selectProfileAddresses,
   alerts: selectAlertAlerts
 })

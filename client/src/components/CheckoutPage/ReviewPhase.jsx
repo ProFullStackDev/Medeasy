@@ -7,18 +7,21 @@ import { selectCartProducts } from '../../redux/selectors/cartSelectors'
 import { selectInventoryLoading } from '../../redux/selectors/inventorySelectors'
 import {
   selectAuthUser,
-  selectAuthGuest
+  selectAuthGuest,
+  selectAuthCheckoutRole
 } from '../../redux/selectors/authSelectors'
 import {
   selectCartBillingAddress,
   selectCartShippingAddress,
   selectCartCoupon
 } from '../../redux/selectors/cartSelectors'
+
 import {
   setStepProgress,
   deleteCartItem
 } from '../../redux/actions/cartActions'
 import { createOrder } from '../../redux/actions/paymentActions'
+import { setCheckoutRole } from '../../redux/actions/authActions'
 
 import PricesBreakDown from './PricesBreakDown'
 import SummaryListItem from './SummaryListItem'
@@ -28,7 +31,6 @@ import ProductsTitle from '../ProductsTitle'
 
 import { ReactComponent as EditBtnIcon } from '../../images/editBtn.svg'
 import '../../styles/components/ReviewPhase.scss'
-import { selectPaymentOrderId } from '../../redux/selectors/paymentSelectors'
 
 // We grab the address and the card details from the redux states
 const ReviewPhase = ({
@@ -36,8 +38,9 @@ const ReviewPhase = ({
   billingAddress,
   shippingAddress,
   user,
-  orderId,
   guest,
+  checkoutRole,
+  setCheckoutRole,
   invLoading,
   createOrder,
   updateModalState,
@@ -48,6 +51,9 @@ const ReviewPhase = ({
   useEffect(() => {
     setStepProgress(3)
   }, [setStepProgress])
+
+  if (user && !checkoutRole) setCheckoutRole('user')
+  if (guest && !checkoutRole) setCheckoutRole('guest')
 
   if (!billingAddress || !shippingAddress)
     return <Redirect to='/checkout/address' />
@@ -185,7 +191,7 @@ const ReviewPhase = ({
 const mapStateToProps = createStructuredSelector({
   user: selectAuthUser,
   guest: selectAuthGuest,
-  orderId: selectPaymentOrderId,
+  checkoutRole: selectAuthCheckoutRole,
   shippingAddress: selectCartShippingAddress,
   billingAddress: selectCartBillingAddress,
   cartProduct: selectCartProducts,
@@ -196,5 +202,6 @@ const mapStateToProps = createStructuredSelector({
 export default connect(mapStateToProps, {
   setStepProgress,
   deleteCartItem,
-  createOrder
+  createOrder,
+  setCheckoutRole
 })(ReviewPhase)

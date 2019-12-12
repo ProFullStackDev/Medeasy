@@ -4,6 +4,14 @@ import Axios from 'axios'
 import history from '../createHistory'
 import { generateCartId } from './cartActions'
 
+const resetCartState = dispatch => {
+  dispatch({ type: CLEAR_CART })
+  dispatch({ type: CLEAR_ORDER })
+  localStorage.removeItem('guest')
+  sessionStorage.removeItem('checkoutRole')
+  dispatch(generateCartId())
+}
+
 const {
   SET_ORDER_ID,
   SET_PAYPAL_ORDER_ID,
@@ -125,10 +133,7 @@ export const acceptWesternUnion = orderId => async dispatch => {
   try {
     dispatch({ type: SET_PROFILE_LOADING, payload: true })
     await Axios.patch(`/api/orders/western/${orderId}`)
-    dispatch({ type: CLEAR_CART })
-    dispatch({ type: CLEAR_ORDER })
-    localStorage.removeItem('guest')
-    dispatch(generateCartId())
+    resetCartState(dispatch)
     history.push('/payment/confirmed')
   } catch (err) {
     const errorMessage = err.response.data.message
@@ -154,10 +159,7 @@ export const chargeCard = (
       signature: razorpaySignature,
       amount
     })
-    dispatch({ type: CLEAR_CART })
-    dispatch({ type: CLEAR_ORDER })
-    localStorage.removeItem('guest')
-    dispatch(generateCartId())
+    resetCartState(dispatch)
     history.push('/payment/success')
   } catch (err) {
     const errorMessage = err.response.data.message
@@ -178,10 +180,7 @@ export const chargePaypal = (orderId, ppOrderId) => async (
       paypalOrderId: ppOrderId,
       currencyRate: getState().payment.currencyRate
     })
-    dispatch({ type: CLEAR_CART })
-    dispatch({ type: CLEAR_ORDER })
-    localStorage.removeItem('guest')
-    dispatch(generateCartId())
+    resetCartState(dispatch)
     history.push('/payment/success')
   } catch (err) {
     const errorMessage = err.response.data.message
@@ -199,10 +198,7 @@ export const chargeBitcoin = chargeCode => async (dispatch, getState) => {
       userId = getState().auth.user._id
     else userId = getState().auth.guest._id
     await Axios.post('/api/payments/coinbase/charge', { userId, chargeCode })
-    dispatch({ type: CLEAR_CART })
-    dispatch({ type: CLEAR_ORDER })
-    localStorage.removeItem('guest')
-    dispatch(generateCartId())
+    resetCartState(dispatch)
     history.push('/payment/success')
   } catch (err) {
     const errorMessage = err.response.data.message
