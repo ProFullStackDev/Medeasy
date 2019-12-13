@@ -21,6 +21,7 @@ const {
   SET_CURRENCY_RATE,
   CLEAR_ORDER,
   CLEAR_CART,
+  CLEAR_ORDERS,
   SET_INVENTORY_LOADING,
   SET_PROFILE_LOADING
 } = actionTypes
@@ -225,6 +226,7 @@ export const chargeWesternUnion = (
       moneyReceived: isMoneyReceived
     })
     history.push('/admin/dashboard/orders')
+    dispatch({ type: CLEAR_ORDERS })
     dispatch(alertUser('Order processed successfully', 'success'))
   } catch (err) {
     const errorMessage = err.response.data.message

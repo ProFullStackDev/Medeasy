@@ -1,10 +1,12 @@
 const { validationResult } = require('express-validator')
+const moment = require('moment')
 const crypto = require('crypto')
 const Axios = require('axios')
 const {
   orders: { OrdersCreateRequest, OrdersCaptureRequest }
 } = require('@paypal/checkout-server-sdk')
 const incrementProductSales = require('../utils/incrementPrdouctSales')
+const createTransporter = require('../utils/mailTransporter')
 
 const {
   resources: { Charge },
@@ -16,6 +18,63 @@ const Coinbase = require('../models/Coinbase')
 const instance = require('../utils/razorPay')
 const { client } = require('../utils/paypal')
 require('../utils/coinbase')
+
+const sendInvoice = async (email, order) => {
+  try {
+    const transporter = createTransporter(email)
+    const productsMarkUp = order.products
+      .map(
+        (product, index) => `<tr>
+      <td>${index + 1}</td>
+      <td>${product.name}</td>
+      <td>${product.attributes.dosage}</td>
+      <td>${product.attributes.quantity}</td>
+      <td>$${product.subTotal}</td>
+    </tr>`
+      )
+      .join('')
+
+    const message = {
+      from: email,
+      to: order.user.email,
+      envelope: {
+        from: `MEDEASY <${email}>`,
+        to: order.user.email
+      },
+      subject: `Medeasy - Order Placed Successfully.`,
+      html: `
+      <h1>Dear ${order.user.name}</h1>
+      <p>
+        Your Order ID - <strong>${order._id}</strong>, placed at ${moment(
+        order.paidAt
+      ).format(
+        'L'
+      )} has been confirmed. Your invoice details are as follows<br/>
+      <p>
+      <table>
+        <tr>
+          <th>S.No</th>
+          <th>Product name</th>
+          <th>Product Dosage</th>
+          <th>Product quantity</th>
+          <th>Price</th>
+        </tr>
+        ${productsMarkUp}
+      </table>
+      <p>Order Total Amount - ${order.totalAmount}</p>
+      <p>We thank you for believing in our service.</p>
+      <br/><br/>
+      <h4>With Regards</h4>
+      <h3>Medeasy @ <a href='https://${
+        process.env.MEDEASY_WEBSITE
+      }'>Medeasyonline.com</a></h3>
+    `
+    }
+    await transporter.sendMail(message)
+  } catch (err) {
+    throw err
+  }
+}
 
 module.exports = {
   createRazorpayOrder: async (req, res) => {
@@ -145,10 +204,7 @@ module.exports = {
         currencyRate: USDINR
       })
     } catch (err) {
-      
-      res
-        .status(500)
-        .send({ statusCode: 500, message: JSON.p })
+      res.status(500).send({ statusCode: 500, message: JSON.p })
     }
   },
 
@@ -211,7 +267,8 @@ module.exports = {
         _id: medEasyOrderId,
         razorpay_order_id: orderId,
         status: 'Pending'
-      })
+      }).populate('user', ['name', 'email'])
+
       if (!order)
         return res.status(404).send({
           statusCode: 404,
@@ -230,6 +287,7 @@ module.exports = {
         order.paidAt = new Date()
         await order.save()
         incrementProductSales(...order.products.map(product => product.product))
+        await sendInvoice(process.env.ORDER_EMAIL_ID, { ...order._doc })
         return res.status(203).send({
           statusCode: 203,
           order: {
@@ -267,7 +325,8 @@ module.exports = {
         _id: orderId,
         paypal_order_id: paypalOrderId,
         status: 'Pending'
-      })
+      }).populate('user', ['name', 'email'])
+
       if (!order)
         return res.status(400).send({
           statusCode: 400,
@@ -299,6 +358,7 @@ module.exports = {
         order.paidAt = new Date()
         await order.save()
         incrementProductSales(...order.products.map(product => product.product))
+        await sendInvoice(process.env.ORDER_EMAIL_ID, { ...order._doc })
         return res.status(203).send({
           statusCode: 203,
           order: {
@@ -373,7 +433,8 @@ module.exports = {
         user: userId,
         coinbase_order_code: chargeCode,
         status: 'Pending'
-      })
+      }).populate('user', ['name', 'email'])
+
       if (!order)
         return res.status(403).send({
           statusCode: 403,
@@ -387,9 +448,10 @@ module.exports = {
       order.paidAt = new Date()
       await order.save()
       incrementProductSales(...order.products.map(product => product.product))
+      await sendInvoice(process.env.ORDER_EMAIL_ID, { ...order._doc })
       // Everything goes well. Hence release the order
-      res.status(202).send({
-        statusCode: 202,
+      res.status(203).send({
+        statusCode: 203,
         order: {
           _id: order._id,
           method: order.method,
@@ -412,7 +474,11 @@ module.exports = {
           .status(400)
           .send({ statusCode: 400, message: errors.array() })
       const { orderId, senderName, paymentNumber, moneyReceived } = req.body
-      const order = await Order.findById(orderId)
+      const order = await Order.findById(orderId).populate('user', [
+        'name',
+        'email'
+      ])
+
       if (!order)
         return res
           .status(404)
@@ -427,7 +493,8 @@ module.exports = {
       order.paidAt = new Date()
       await order.save()
       incrementProductSales(...order.products.map(product => product.product))
-      res.status(202).send({ statusCode: 202, order })
+      await sendInvoice(process.env.ORDER_EMAIL_ID, { ...order._doc })
+      res.status(203).send({ statusCode: 203, order })
     } catch (err) {
       res.status(500).send({ statusCode: 500, message: 'Server Error' })
     }

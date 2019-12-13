@@ -168,7 +168,6 @@ module.exports = {
           .status(404)
           .send({ statusCode: 404, message: 'Cart not found' })
       const { mode, value } = req.body
-      console.log(mode, value)
       if (mode !== 'dosage' && mode !== 'quantity')
         return res.status(400).send({ statusCode: 400, message: 'Bad Request' })
       // Find the cartProduct

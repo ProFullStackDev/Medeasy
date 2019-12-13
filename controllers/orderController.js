@@ -109,6 +109,7 @@ module.exports = {
       order.paypal_capture_id = undefined
       order.razorpay_payment_id = undefined
       order.paypal_capture_id = undefined
+
       const message = {
         from: process.env.ORDER_EMAIL_ID,
         to: order.user.email,
@@ -148,6 +149,7 @@ module.exports = {
           }'>Medeasyonline.com</a></h3>
         `
       }
+      await order.save()
       const transporter = createTransporter(process.env.ORDER_EMAIL_ID)
       await transporter.sendMail(message)
       res.status(202).send({ statusCode: 202, message: 'Accepted' })

@@ -35,13 +35,6 @@ const PaymentConfimedPage = ({ user, guest }) => {
         </p>
         <p>Thank you for being a part of Medeasy!</p>
         <div style={{ marginTop: '1rem' }}>
-          {user ? (
-            <Link to='/profile/orders'>
-              <CustomButton extraStyle={{ background: '#F8931A' }}>
-                Check Status
-              </CustomButton>
-            </Link>
-          ) : null}
           <Link to='/' style={{ marginLeft: '2rem' }}>
             <CustomButton>Return to main page</CustomButton>
           </Link>

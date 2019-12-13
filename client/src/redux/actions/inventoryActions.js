@@ -15,10 +15,11 @@ const {
   SET_CATEGORY,
   CLEAR_PRODUCTS,
   CLEAR_PRODUCT,
+  CLEAR_ORDERS,
   CLEAR_ADMIN_ORDER,
   CLEAR_CATEGORIES,
   CLEAR_COUPONS,
-	SET_INVENTORY_LOADING
+  SET_INVENTORY_LOADING
 } = actionTypes
 
 export const fetchInventory = () => async dispatch => {
@@ -160,7 +161,9 @@ export const fetchOrderByUserId = (orderId, userId) => async dispatch => {
 export const addTrackingId = (trackingId, orderId) => async dispatch => {
   try {
     await axios.patch(`/api/orders/track/${orderId}`, { trackingId })
+    alert('Tracking Id added successfully')
     history.push('/admin/dashboard/orders')
+    dispatch({ type: CLEAR_ORDERS })
   } catch (err) {
     const errorMessage = err.response.data.message
     if (Array.isArray(errorMessage))
