@@ -1,0 +1,44 @@
+@import '../colors';
+
+.PaymentSuccessPage {
+  min-height: calc(100vh - 17rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__message {
+    width: 80%;
+    text-align: center;
+    margin: 1.5rem 0;
+  }
+
+  &__card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 3rem;
+    box-shadow: 0 0 5rem 1rem rgba($medeasy-green-color, 0.7);
+    min-height: 50vh;
+    overflow: hidden;
+    border-radius: 1rem;
+    width: 50vw;
+    &-success {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 8rem;
+      height: 8rem;
+      padding: 1rem;
+      border-radius: 50%;
+      border: 5px solid $medeasy-green-color;
+      & tspan {
+        fill: $medeasy-green-color;
+      }
+      & svg {
+        width: 10rem;
+        height: 10rem;
+      }
+    }
+  }
+}

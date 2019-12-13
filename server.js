@@ -19,6 +19,9 @@ require('./db')
 // require('./models/Cart')
 //   .deleteMany()
 //   .then(() => console.log('Done'))
+// require('./models/Guest')
+//   .deleteMany()
+//   .then(() => console.log('Done'))
 
 const app = express()
 const port = process.env.PORT || 9998

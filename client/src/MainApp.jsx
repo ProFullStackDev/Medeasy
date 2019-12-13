@@ -24,7 +24,8 @@ const MainApp = ({
   products,
   loadHomePage,
   generateCartId,
-  fetchItemsFromCart
+  fetchItemsFromCart,
+  location: { pathname }
 }) => {
   useEffect(() => {
     loadHomePage()
@@ -45,7 +46,9 @@ const MainApp = ({
       <NavBar />
       <div
         className='container fullScreen'
-        style={{ padding: '1.5rem 2.2rem' }}>
+        style={{
+          padding: '1.5rem 2.2rem'
+        }}>
         {/* All Routes */}
         {!categories || !products ? (
           <Spinner />
@@ -53,9 +56,12 @@ const MainApp = ({
           <MainRoutes decideOverlayState={decideOverlayState} />
         )}
       </div>
-      <div className='App__secure'>
-        <NortonIcon />
-      </div>
+      {(!pathname.includes('/payment/success') &&
+        !pathname.includes('/payment/confirmed')) && (
+        <div className='App__secure'>
+          <NortonIcon />
+        </div>
+      )}
       <Footer />
     </Fragment>
   )

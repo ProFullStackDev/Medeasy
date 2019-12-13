@@ -16,6 +16,7 @@ import FaqPage from './pages/FaqPage'
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage'
 import DeliveryReturnsPage from './pages/DeliveryReturnsPage'
 import BitcoinTutorialPage from './pages/BitcoinTutorialPage'
+import PaymentSuccessPage from './pages/PaymentSuccessPage'
 
 const MainRoutes = ({ decideOverlayState }) => {
   return (
@@ -26,7 +27,7 @@ const MainRoutes = ({ decideOverlayState }) => {
       <Route
         exact
         path='/payment/success'
-        render={() => <h1>Success page</h1>}
+        component={PaymentSuccessPage}
       />
       <Route exact path='/payment/confirmed' component={PaymentConfirmedPage} />
       <Route

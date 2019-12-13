@@ -6,19 +6,6 @@
   &__welcome {
     display: flex;
     justify-content: space-between;
-    &--carousel {
-      display: flex;
-      justify-content: space-between;
-      padding: 0 15px;
-      align-items: center;
-      flex-basis: 65%;
-      background-size: cover;
-      background-position: center center;
-      height: 40rem;
-      & img {
-        cursor: pointer;
-      }
-    }
   }
 
   &__helpform {

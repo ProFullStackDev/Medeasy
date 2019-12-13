@@ -5,14 +5,10 @@ import CustomFormElement from '../CustomFormElement'
 import PhoneFormElement from '../PhoneFormElement'
 import AlertMessage from '../AlertMessage'
 
-// Images
-import { ReactComponent as LeftArrow } from '../../images/larrow.svg'
-import { ReactComponent as RightArrow } from '../../images/rarrow.svg'
-import carouselImg from '../../images/carouselimg.png'
-
 // Redux
 import { connect } from 'react-redux'
 import { addQuery } from '../../redux/actions/queryActions'
+import LandingPageCarousel from '../LandingPageCarousel'
 
 const WelcomeSection = ({ addQuery }) => {
 	const [formState, setFormState] = useState({
@@ -37,16 +33,7 @@ const WelcomeSection = ({ addQuery }) => {
 	const { name, phoneNumber, message, email } = formState
 	return (
 		<div className="LandingPage__welcome">
-			<div
-				className="LandingPage__welcome--carousel"
-				style={{ backgroundImage: `url(${carouselImg})` }}
-			>
-				<LeftArrow className="LandingPage__welcome--carousel-left" alt="left" />
-				<RightArrow
-					className="LandingPage__welcome--carousel-left"
-					alt="right"
-				/>
-			</div>
+			<LandingPageCarousel />
 			<div className="LandingPage__helpform">
 				<AlertMessage />
 				<h2 className="LandingPage__helpform-title">
