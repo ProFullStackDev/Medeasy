@@ -28,7 +28,7 @@ const PaymentSuccessPage = ({ user, guest }) => {
           Hey {user ? user.name : guest.name}
         </p>
         <h1 className='PaymentSuccessPage__message'>
-          Your Order is Confirmed!
+          Your order is Confirmed!
         </h1>
         <p style={{ textAlign: 'center', lineHeight: 1.7, width: '60%' }}>
           We'll send you a mail now regarding the order details and also after

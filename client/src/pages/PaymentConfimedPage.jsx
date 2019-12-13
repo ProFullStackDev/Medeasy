@@ -28,7 +28,7 @@ const PaymentConfimedPage = ({ user, guest }) => {
           Hey {user ? user.name : guest.name}
         </p>
         <h1 className='PaymentSuccessPage__message'>
-          Your Order is booked successfully!
+          Your order is placed successfully!
         </h1>
         <p style={{ textAlign: 'center', lineHeight: 1.7, width: '60%' }}>
           We'll send you a mail for further steps.
