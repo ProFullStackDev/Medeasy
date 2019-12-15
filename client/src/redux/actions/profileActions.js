@@ -31,6 +31,8 @@ export const fetchUserAddresses = () => async dispatch => {
         dispatch(alertUser(message.msg, 'danger'))
       )
     else dispatch(alertUser(errorMessage, 'danger'))
+  } finally {
+    dispatch({ type: SET_PROFILE_LOADING, payload: false })
   }
 }
 

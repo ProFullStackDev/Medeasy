@@ -14,7 +14,7 @@ import {
   selectAuthGuest,
   selectAuthCheckoutRole
 } from '../../redux/selectors/authSelectors'
-import { selectProfileAddresses } from '../../redux/selectors/profileSelectors'
+import { selectProfileAddresses, selectProfileLoading } from '../../redux/selectors/profileSelectors'
 import {
   selectCartBillingAddress,
   selectCartShippingAddress
@@ -57,6 +57,7 @@ const BillingPhase = ({
   billingAddress,
   shippingAddress,
   fetchUserAddresses,
+  loading,
   cacheAddress,
   alertUser,
   storeGuestDetails,
@@ -299,7 +300,7 @@ const BillingPhase = ({
           content='Fill in your shipping / billing address details'
         />
       </Helmet>
-      {checkoutRole === 'user' && user && !addresses.length ? (
+      {checkoutRole === 'user' && user && loading ? (
         <Spinner />
       ) : (
         <Fragment>
@@ -385,7 +386,8 @@ const mapStateToProps = createStructuredSelector({
   shippingAddress: selectCartShippingAddress,
   checkoutRole: selectAuthCheckoutRole,
   addresses: selectProfileAddresses,
-  alerts: selectAlertAlerts
+  alerts: selectAlertAlerts,
+  loading: selectProfileLoading
 })
 
 export default connect(mapStateToProps, {
