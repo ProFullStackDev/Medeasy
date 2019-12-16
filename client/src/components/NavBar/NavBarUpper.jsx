@@ -80,7 +80,7 @@ const NavBarUpper = ({ logout, user, products }) => {
 						)}
 					</span>
 					<FontAwesomeIcon style={{ margin: '0 1rem' }} icon={faPhoneAlt} />
-					<a href="tel:+15555777572" style={{ fontWeight: 'bold', fontSize: '1.7rem' }}>+1-555-5777-572</a>
+					<a href="tel:+18563299111" style={{ fontWeight: 'bold', fontSize: '1.7rem' }}>+1-856-3299-111</a>
 				</div>
 			</div>
 		</div>

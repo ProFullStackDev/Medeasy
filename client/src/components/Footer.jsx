@@ -20,8 +20,8 @@ const Footer = () => {
       <div className='Footer__info'>
         <div className='Footer__info-contact'>
           <p className='Footer__info-title'>CONTACT</p>
-          <a href='tel:+1-555-5777-572'>
-            <FontAwesomeIcon icon={faPhoneAlt} /> +1-555-5777-572
+          <a href='tel:+18563299111'>
+            <FontAwesomeIcon icon={faPhoneAlt} /> +1-856-3299-111
           </a>
           <a href='mailto:contact@medeasyonline.com'>
             <FontAwesomeIcon icon={faEnvelope} /> contact@medeasyonline.com
