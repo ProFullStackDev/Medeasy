@@ -13,33 +13,38 @@ import { selectAuthAccessToken } from './redux/selectors/authSelectors'
 
 const App = ({ logout, accessToken }) => {
   if (accessToken) axios.defaults.headers.common['Authorization'] = accessToken
-	// Logout if unathuorised access means
-	axios.interceptors.response.use(
-		res => res,
-		err => {
-			const statusCode = err.response.data.statusCode
-			const method = err.response.data.method
-			if ((statusCode === 401 || statusCode === 403) && method === undefined)
-				logout(true, 'Session Expired')
-			return Promise.reject(err)
-		}
-	)
+  // Logout if unathuorised access means
+  axios.interceptors.response.use(
+    res => res,
+    err => {
+      const statusCode = err.response.data.statusCode
+      const method = err.response.data.method
+      if ((statusCode === 401 || statusCode === 403) && method === undefined)
+        logout(true, 'Session Expired')
+      return Promise.reject(err)
+    }
+  )
 
-	return (
-		<div className="App">
-			<Switch>
-				<Route exact path='/password/reset/:resetToken' component={PasswordResetPage} />
-				{window.location.pathname.match(/\/admin/g) ? <AdminApp /> : <MainApp />}
-			</Switch>
-		</div>
-	)
+  return (
+    <div className='App'>
+      <Switch>
+        <Route
+          exact
+          path='/password/reset/:resetToken'
+          component={PasswordResetPage}
+        />
+        {window.location.pathname.match(/\/admin/g) ? (
+          <AdminApp />
+        ) : (
+          <MainApp />
+        )}
+      </Switch>
+    </div>
+  )
 }
 
 const mapStateToProps = createStructuredSelector({
   accessToken: selectAuthAccessToken
 })
 
-export default connect(
-	mapStateToProps,
-	{ logout }
-)(App)
+export default connect(mapStateToProps, { logout })(App)
