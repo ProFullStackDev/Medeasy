@@ -10,6 +10,9 @@ require('./db')
 // require('./models/Order')
 //   .deleteMany()
 //   .then(() => console.log('Done'))
+// require('./models/Query')
+//   .deleteMany()
+//   .then(() => console.log('Done'))
 // require('./models/Affliate')
 //   .deleteMany()
 //   .then(() => console.log('Done'))
@@ -49,6 +52,8 @@ if (process.env.NODE_ENV === 'production') {
   app.get('*', (_, res) => {
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
   })
+} else {
+  app.get('*', (_, res) => res.sendStatus(200))
 }
 
 app.listen(port, () => console.log('Server listening on port', port))

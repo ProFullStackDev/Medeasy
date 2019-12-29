@@ -14,7 +14,10 @@ import {
   selectAuthGuest,
   selectAuthCheckoutRole
 } from '../../redux/selectors/authSelectors'
-import { selectProfileAddresses, selectProfileLoading } from '../../redux/selectors/profileSelectors'
+import {
+  selectProfileAddresses,
+  selectProfileLoading
+} from '../../redux/selectors/profileSelectors'
 import {
   selectCartBillingAddress,
   selectCartShippingAddress
@@ -148,14 +151,14 @@ const BillingPhase = ({
   }
 
   useEffect(() => {
+    if (billingAddress) setAddress('billing')
+    if (shippingAddress) setAddress('shipping')
+  }, [])
+
+  useEffect(() => {
     setStepProgress(2)
     if (checkoutRole === 'user' && user) fetchUserAddresses()
   }, [setStepProgress, fetchUserAddresses, user, checkoutRole])
-
-  useEffect(() => {
-    if (billingAddress) setAddress('billing')
-    if (shippingAddress) setAddress('shipping')
-  })
 
   if (user && !checkoutRole) setCheckoutRole('user')
   if (guest && !checkoutRole) setCheckoutRole('guest')

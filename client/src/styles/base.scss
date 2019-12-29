@@ -51,7 +51,7 @@ body {
   }
   .container {
     max-width: 144rem;
-    @include desktop { max-width: 1250px; }
+    @include desktop { max-width: 1200px; }
     margin: 0 auto;
     height: 100%;
   }
